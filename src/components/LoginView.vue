@@ -1,10 +1,10 @@
 <template>
-<router-view/>
+<div class="login-view">Login View</div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'LoginView'
 }
 </script>
 
