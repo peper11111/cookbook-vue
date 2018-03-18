@@ -1,6 +1,11 @@
 {
   "app": "Cookbook",
-  "login": "Login",
+  "email": "Email",
+  "username": "Nazwa użytkownika",
   "password": "Hasło",
-  "log-in": "Zaloguj się"
+  "login": "Zaloguj się",
+  "register": "Zarejestruj się",
+  "forgot-password": "Nie pamiętasz hasła?",
+  "have-account": "Masz konto?",
+  "not-have-account": "Nie masz konta?"
 }
