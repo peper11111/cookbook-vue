@@ -1,6 +1,6 @@
 <template>
 <div class="app-intro">
-  <form class="form" v-if="isActiveForm('register')">
+  <form class="form" v-if="isActiveForm('register')" @submit="registerUser">
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="email" :placeholder="$t('email')" v-model="email"/>
     <input class="form__input" type="text" :placeholder="$t('username')" v-model="username"/>
@@ -11,7 +11,7 @@
       <span class="form__text--action" v-text="$t('log-in')" @click="setActiveForm('login')"></span>
     </p>
   </form>
-  <form class="form" v-if="isActiveForm('login')">
+  <form class="form" v-if="isActiveForm('login')" @submit="loginUser">
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="text" :placeholder="$t('login')" v-model="username"/>
     <input class="form__input" type="password" :placeholder="$t('password')" v-model="password"/>
@@ -24,7 +24,7 @@
       <span class="form__text--action" v-text="$t('sign-up')" @click="setActiveForm('register')"></span>
     </p>
   </form>
-  <form class="form" v-if="isActiveForm('reset')">
+  <form class="form" v-if="isActiveForm('reset')" @submit="resetPassword">
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="email" :placeholder="$t('login')" v-model="username"/>
     <input class="form__button" type="submit" :value="$t('reset')"/>
@@ -56,6 +56,16 @@ export default {
       this.username = ''
       this.password = ''
       this.email = ''
+    },
+    registerUser (event) {
+      event.preventDefault()
+    },
+    loginUser (event) {
+      event.preventDefault()
+      this.$store.dispatch('loginUser', { username: this.username, password: this.password })
+    },
+    resetPassword (event) {
+      event.preventDefault()
     }
   }
 }
