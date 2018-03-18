@@ -4,7 +4,10 @@
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="email" :placeholder="$t('email')" v-model="email"/>
     <input class="form__input" type="text" :placeholder="$t('username')" v-model="username"/>
-    <input class="form__input" type="password" :placeholder="$t('password')" v-model="password"/>
+    <div class="form__wrapper">
+      <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('password')" v-model="password"/>
+      <i class="material-icons form__icon" :class="{ 'active': passwordVisible }" @click="togglePassword">remove_red_eye</i>
+    </div>
     <input class="form__button" type="submit" :value="$t('sign-up')"/>
     <p class="form__text">
       <span v-text="$t('have-account')"></span>
@@ -14,7 +17,10 @@
   <form class="form" v-if="isActiveForm('login')" @submit="loginUser">
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="text" :placeholder="$t('login')" v-model="username"/>
-    <input class="form__input" type="password" :placeholder="$t('password')" v-model="password"/>
+    <div class="form__wrapper">
+      <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('password')" v-model="password"/>
+      <i class="material-icons form__icon" :class="{ 'active': passwordVisible }" @click="togglePassword">remove_red_eye</i>
+    </div>
     <p class="form__text form__text--right form__text--dense">
       <span class="form__text--hint" v-text="$t('forgot-password')" @click="setActiveForm('reset')"></span>
     </p>
@@ -44,7 +50,8 @@ export default {
       form: 'login',
       username: '',
       password: '',
-      email: ''
+      email: '',
+      passwordVisible: false
     }
   },
   methods: {
@@ -56,6 +63,13 @@ export default {
       this.username = ''
       this.password = ''
       this.email = ''
+      this.passwordVisible = false
+    },
+    togglePassword () {
+      this.passwordVisible = !this.passwordVisible
+    },
+    getPasswordFieldType () {
+      return this.passwordVisible ? 'text' : 'password'
     },
     registerUser (event) {
       event.preventDefault()
@@ -99,7 +113,11 @@ export default {
       margin-bottom: 24px;
     }
 
-    &__input, &__button {
+    &__wrapper {
+      position: relative;
+    }
+
+    &__input, &__password, &__button {
       font-family: 'Roboto', sans-serif;
       font-size: 14px;
       height: 32px;
@@ -108,9 +126,10 @@ export default {
       box-sizing: border-box;
       padding: 8px 16px;
       margin-top: 8px;
+      width: 100%;
     }
 
-    &__input {
+    &__input, &__password {
       border: 1px solid $color-grey-300;
 
       &::placeholder {
@@ -124,11 +143,29 @@ export default {
       }
     }
 
+    &__password {
+      padding-right: 32px;
+    }
+
     &__button {
       border: none;
       background-color: $color-primary;
       cursor: pointer;
       color: $color-white;
+    }
+
+    &__icon {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      cursor: pointer;
+      color: $color-grey-400;
+      user-select: none;
+      font-size: 18px;
+
+      &.active {
+        color: $color-grey-900;
+      }
     }
 
     &__text {
