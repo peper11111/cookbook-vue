@@ -5,23 +5,32 @@
     <input class="form__input" type="email" :placeholder="$t('email')"/>
     <input class="form__input" type="text" :placeholder="$t('username')"/>
     <input class="form__input" type="password" :placeholder="$t('password')"/>
-    <input class="form__button" type="submit" :value="$t('register')"/>
-    <p class="form__text form__text--center">
+    <input class="form__button" type="submit" :value="$t('sign-up')"/>
+    <p class="form__text">
       <span v-text="$t('have-account')"></span>
-      <span class="form__text--action" v-text="$t('login')" @click="form = 'login'"></span>
+      <span class="form__text--action" v-text="$t('log-in')" @click="form = 'login'"></span>
     </p>
   </form>
   <form class="form" v-if="form === 'login'">
     <h1 class="form__header" v-text="$t('app')"></h1>
-    <input class="form__input" type="text" :placeholder="$t('username')"/>
+    <input class="form__input" type="text" :placeholder="$t('login')"/>
     <input class="form__input" type="password" :placeholder="$t('password')"/>
     <p class="form__text form__text--right form__text--dense">
-      <span class="form__text--hint" v-text="$t('forgot-password')"></span>
+      <span class="form__text--hint" v-text="$t('forgot-password')" @click="form = 'reset'"></span>
     </p>
-    <input class="form__button" type="submit" :value="$t('login')"/>
-    <p class="form__text form__text--center">
+    <input class="form__button" type="submit" :value="$t('log-in')"/>
+    <p class="form__text">
       <span v-text="$t('not-have-account')"></span>
-      <span class="form__text--action" v-text="$t('register')" @click="form = 'register'"></span>
+      <span class="form__text--action" v-text="$t('sign-up')" @click="form = 'register'"></span>
+    </p>
+  </form>
+  <form class="form" v-if="form === 'reset'">
+    <h1 class="form__header" v-text="$t('app')"></h1>
+    <input class="form__input" type="email" :placeholder="$t('login')"/>
+    <input class="form__button" type="submit" :value="$t('reset')"/>
+    <p class="form__text">
+      <span v-text="$t('have-account')"></span>
+      <span class="form__text--action" v-text="$t('log-in')" @click="form = 'login'"></span>
     </p>
   </form>
 </div>
@@ -102,10 +111,7 @@ export default {
       font-family: 'Roboto', sans-serif;
       font-size: 12px;
       margin-top: 32px;
-
-      &--center {
-        text-align: center;
-      }
+      text-align: center;
 
       &--right {
         text-align: right;

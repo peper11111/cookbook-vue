@@ -2,9 +2,11 @@
   "app": "Cookbook",
   "email": "Email",
   "username": "Nazwa użytkownika",
+  "login": "Nazwa użytkownika lub email",
   "password": "Hasło",
-  "login": "Zaloguj się",
-  "register": "Zarejestruj się",
+  "log-in": "Zaloguj się",
+  "sign-up": "Zarejestruj się",
+  "reset": "Resetuj hasło",
   "forgot-password": "Nie pamiętasz hasła?",
   "have-account": "Masz konto?",
   "not-have-account": "Nie masz konta?"
