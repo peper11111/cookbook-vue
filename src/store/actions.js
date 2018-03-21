@@ -1,12 +1,15 @@
 import axios from 'axios'
+import querystring from 'querystring'
 
 const http = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'http://localhost:8000/api',
   withCredentials: true
 })
 
 export default {
   loginUser (injectee, payload) {
-    console.log('loginUser', http, injectee, payload)
+    return http.post('/login', querystring.stringify(payload), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    })
   }
 }
