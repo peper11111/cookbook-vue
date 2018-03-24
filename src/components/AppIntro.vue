@@ -14,7 +14,7 @@
       <span class="form__text--action" v-text="$t('log-in')" @click="setActiveForm('login')"></span>
     </p>
   </form>
-  <form class="form" v-if="isActiveForm('login')" @submit="loginUser">
+  <form class="form" v-if="isActiveForm('login')" @submit="login">
     <h1 class="form__header" v-text="$t('app')"></h1>
     <input class="form__input" type="text" :placeholder="$t('login')" v-model="username"/>
     <div class="form__wrapper">
@@ -71,15 +71,17 @@ export default {
     getPasswordFieldType () {
       return this.passwordVisible ? 'text' : 'password'
     },
+    login (event) {
+      event.preventDefault()
+      this.$store.dispatch('login', { username: this.username, password: this.password })
+    },
     registerUser (event) {
       event.preventDefault()
-    },
-    loginUser (event) {
-      event.preventDefault()
-      this.$store.dispatch('loginUser', { username: this.username, password: this.password })
+      this.$store.dispatch('registerUser', { email: this.email, username: this.username, password: this.password })
     },
     resetPassword (event) {
       event.preventDefault()
+      this.$store.dispatch('resetPassword', { username: this.username })
     }
   }
 }

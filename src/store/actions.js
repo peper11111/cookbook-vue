@@ -7,9 +7,18 @@ const http = axios.create({
 })
 
 export default {
-  loginUser (injectee, payload) {
+  login (injectee, payload) {
     return http.post('/login', querystring.stringify(payload), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
+  },
+  logout (injectee) {
+    return http.post('/logout')
+  },
+  registerUser (injectee, payload) {
+    return http.post('/user/register', payload)
+  },
+  resetPassword (injectee, payload) {
+    return http.post('/user/reset', payload)
   }
 }
