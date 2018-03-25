@@ -9,5 +9,11 @@
   "reset": "Resetuj hasło",
   "forgot-password": "Nie pamiętasz hasła?",
   "have-account": "Masz konto?",
-  "not-have-account": "Nie masz konta?"
+  "not-have-account": "Nie masz konta?",
+  "error": {
+    "login": "BŁĄD! Niepoprawny login lub hasło"
+  },
+  "info": {
+    "password-reset": "Na twój adres email wysłaliśmy wiadomość. Postępuj zgodnie z instrukcją."
+  }
 }

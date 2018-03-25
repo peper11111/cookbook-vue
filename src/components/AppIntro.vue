@@ -73,7 +73,9 @@ export default {
     },
     login (event) {
       event.preventDefault()
-      this.$store.dispatch('login', { username: this.username, password: this.password })
+      this.$store.dispatch('login', { username: this.username, password: this.password }).catch(() => {
+        this.$store.commit('showError', this.$t('error.login'))
+      })
     },
     registerUser (event) {
       event.preventDefault()
@@ -81,7 +83,9 @@ export default {
     },
     resetPassword (event) {
       event.preventDefault()
-      this.$store.dispatch('resetPassword', { username: this.username })
+      this.$store.dispatch('resetPassword', { username: this.username }).then(() => {
+        this.$store.commit('showInfo', this.$t('info.password-reset'))
+      })
     }
   }
 }
