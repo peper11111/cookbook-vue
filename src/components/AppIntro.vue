@@ -32,7 +32,7 @@
   </form>
   <form class="form" v-if="isActiveForm('reset')" @submit="resetPassword">
     <h1 class="form__header" v-text="$t('app')"></h1>
-    <input class="form__input" type="email" :placeholder="$t('login')" v-model="username"/>
+    <input class="form__input" type="text" :placeholder="$t('login')" v-model="username"/>
     <input class="form__button" type="submit" :value="$t('reset')"/>
     <p class="form__text">
       <span v-text="$t('have-account')"></span>
@@ -73,18 +73,35 @@ export default {
     },
     login (event) {
       event.preventDefault()
-      this.$store.dispatch('login', { username: this.username, password: this.password }).catch(() => {
-        this.$store.commit('showError', this.$t('error.login'))
+      this.$store.dispatch('login', {
+        username: this.username,
+        password: this.password
+      }).then(() => {
+        this.$store.commit('showInfo', this.$t('info.login-successful'))
+      }).catch(() => {
+        this.$store.commit('showError', this.$t('error.login-incorrect'))
       })
     },
     registerUser (event) {
       event.preventDefault()
-      this.$store.dispatch('registerUser', { email: this.email, username: this.username, password: this.password })
+      this.$store.dispatch('registerUser', {
+        email: this.email,
+        username: this.username,
+        password: this.password
+      }).then((value) => {
+        this.$store.commit('showInfo', this.$t(value.data))
+      }).catch((error) => {
+        this.$store.commit('showError', this.$t(error.response.data))
+      })
     },
     resetPassword (event) {
       event.preventDefault()
-      this.$store.dispatch('resetPassword', { username: this.username }).then(() => {
-        this.$store.commit('showInfo', this.$t('info.password-reset'))
+      this.$store.dispatch('resetPassword', {
+        username: this.username
+      }).then((value) => {
+        this.$store.commit('showInfo', this.$t(value.data))
+      }).catch((error) => {
+        this.$store.commit('showError', this.$t(error.response.data))
       })
     }
   }
