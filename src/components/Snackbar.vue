@@ -9,6 +9,7 @@ export default {
     return {
       index: 0,
       message: undefined,
+      displayTime: 3000,
       pending: false,
       visible: false
     }
@@ -28,7 +29,7 @@ export default {
       return this.message !== undefined ? this.message.text : ''
     },
     type () {
-      return this.message !== undefined ? this.message.type : 'info'
+      return this.message !== undefined ? this.message.type : ''
     }
   },
   methods: {
@@ -38,14 +39,14 @@ export default {
       this.visible = true
       setTimeout(() => {
         this.visible = false
-      }, 300 + 2000)
+      }, 300 + this.displayTime)
       setTimeout(() => {
         if (this.$store.state.messages.length > this.index) {
           this.showMessage()
         } else {
           this.pending = false
         }
-      }, 300 + 2000 + 300)
+      }, 300 + this.displayTime + 300)
     }
   }
 }
@@ -68,14 +69,11 @@ export default {
   transition: transform 0.3s, opacity 0.3s;
   max-width: 568px;
   opacity: 0;
+  color: $color-white;
 
   &.active {
     opacity: 1;
     transform: translateY(0);
-  }
-
-  &.info {
-    color: $color-white;
   }
 
   &.error {
