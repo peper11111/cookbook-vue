@@ -15,7 +15,11 @@ export default {
       this.passwordVisible = !this.passwordVisible
     },
     setActiveAction (action) {
-      this.$router.push({ path: '/', query: { action } })
+      if (action === 'login') {
+        this.$router.push({ path: '/' })
+      } else {
+        this.$router.push({ path: '/', query: { action } })
+      }
     },
     processValue (value) {
       this.$store.commit('showInfo', value.data.message)
