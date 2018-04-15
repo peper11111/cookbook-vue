@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     text () {
-      return this.message !== undefined ? this.message.text : ''
+      return this.message !== undefined ? this.$t(this.message.text) : ''
     },
     type () {
       return this.message !== undefined ? this.message.type : ''
@@ -69,11 +69,14 @@ export default {
   transition: transform 0.3s, opacity 0.3s;
   max-width: 568px;
   opacity: 0;
-  color: $color-white;
 
   &.active {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  &.info {
+    color: $color-white;
   }
 
   &.error {

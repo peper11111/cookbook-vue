@@ -2,7 +2,7 @@ import axios from 'axios'
 import querystring from 'querystring'
 
 const http = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'http://localhost:8000/api/v1',
   withCredentials: true
 })
 
@@ -12,13 +12,19 @@ export default {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
   },
-  logout (injectee) {
+  logout () {
     return http.post('/logout')
   },
-  registerUser (injectee, payload) {
-    return http.post('/user/register', payload)
+  register (injectee, payload) {
+    return http.post('/register', payload)
   },
-  resetPassword (injectee, payload) {
-    return http.post('/user/reset', payload)
+  verify (injectee, payload) {
+    return http.post('/verify', payload)
+  },
+  reset (injectee, payload) {
+    return http.post('/reset', payload)
+  },
+  confirm (injectee, payload) {
+    return http.post('/confirm', payload)
   }
 }

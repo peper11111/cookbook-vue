@@ -1,19 +1,37 @@
 {
   "app": "Cookbook",
-  "email": "Email",
-  "username": "Nazwa użytkownika",
-  "login": "Nazwa użytkownika lub email",
-  "password": "Hasło",
-  "log-in": "Zaloguj się",
-  "sign-up": "Zarejestruj się",
-  "reset": "Resetuj hasło",
-  "forgot-password": "Nie pamiętasz hasła?",
-  "have-account": "Masz konto?",
-  "not-have-account": "Nie masz konta?",
+  "form": {
+    "email": "Email",
+    "username": "Nazwa użytkownika",
+    "username-or-email": "Nazwa użytkownika lub email",
+    "password": "Hasło",
+    "new-password": "Nowe hasło",
+    "have-account": "Masz konto?",
+    "not-have-account": "Nie masz konta?",
+    "forgot-password": "Nie pamiętasz hasła?",
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "reset-password": "Resetuj hasło",
+    "generate-password": "Wygeneruj hasło",
+    "change-password": "Zmień hasło"
+  },
   "error": {
-    "login": "BŁĄD! Niepoprawny login lub hasło"
+    "missing-email": "Email nie może być pusty",
+    "missing-username": "Nazwa użytkownika nie może być pusta",
+    "missing-password": "Hasło nie może być puste",
+    "missing-token": "Token nie został podany",
+    "token-not-found": "Token nie został znaleziony",
+    "token-expired": "Podany token już wygasł",
+    "email-occupied": "Podany adres email jest już zajęty",
+    "username-occupied": "Podana nazwa użytkownika jest już zajęta",
+    "user-not-found": "Użytkownik nie istnieje",
+    "login-incorrect": "Niepoprawna nazwa uzytkownika lub hasło"
   },
   "info": {
-    "password-reset": "Na twój adres email wysłaliśmy wiadomość. Postępuj zgodnie z instrukcją."
+    "login-successful": "Zostałeś pomyślnie zalogowany",
+    "user-verified": "Aktywacja przebiegła pomyślnie",
+    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
+    "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
+    "password-reset": "Twoje hasło zostało zmienione"
   }
 }
