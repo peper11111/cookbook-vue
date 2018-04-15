@@ -1,7 +1,7 @@
 <template>
-<div class="form">
+<form class="form">
   <div class="form__spinner"></div>
-</div>
+</form>
 </template>
 
 <script>
