@@ -1,12 +1,15 @@
 <template>
 <nav class="app-navbar">
-  <router-link class="app-navbar__logo" to="/" v-text="$t('app')"></router-link>
-  <div class="app-navbar__list">
+  <router-link class="app-navbar__row" to="/">
+    <img class="app-navbar__logo" src="static/favicon.png"/>
+    <span class="app-navbar__header" v-text="$t('app')"></span>
+  </router-link>
+  <div class="app-navbar__row">
     <router-link class="app-navbar__item" to="/explore"><i class="material-icons">explore</i></router-link>
     <router-link class="app-navbar__item" to="/favorite"><i class="material-icons">favorite</i></router-link>
     <router-link class="app-navbar__item" to="/profile"><i class="material-icons">person</i></router-link>
     <router-link class="app-navbar__item" to="/settings"><i class="material-icons">settings</i></router-link>
-    <a class="app-navbar__item" @click="logout"><i class="material-icons">power_settings_new</i></a>
+    <a class="app-navbar__item" @click="logout"><i class="material-icons">exit_to_app</i></a>
   </div>
 </nav>
 </template>
@@ -37,20 +40,27 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 80px;
   background-color: $color-white;
   z-index: 1000;
 
   &__logo {
-    font-family: 'Dancing Script', cursive;
-    color: $color-black;
-    text-decoration: none;
-    font-size: 24px;
+    width: 32px;
+    height: 32px;
   }
 
-  &__list {
+  &__header {
+    font-family: 'Dancing Script', cursive;
+    color: $color-black;
+    font-size: 24px;
+    padding: 0 4px;
+  }
+
+  &__row {
     display: flex;
     flex-direction: row;
+    text-decoration: none;
+    align-items: center;
   }
 
   &__item {
