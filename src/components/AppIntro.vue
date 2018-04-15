@@ -60,6 +60,7 @@ export default {
     font-family: 'Dancing Script', cursive;
     text-align: center;
     margin-bottom: 24px;
+    color: $color-black;
   }
 }
 </style>

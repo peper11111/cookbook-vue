@@ -69,6 +69,7 @@ export default {
   transition: transform 0.3s, opacity 0.3s;
   max-width: 568px;
   opacity: 0;
+  z-index: 1000;
 
   &.active {
     opacity: 1;

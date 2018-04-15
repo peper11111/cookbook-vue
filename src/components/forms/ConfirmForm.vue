@@ -3,7 +3,7 @@
   <div class="form__wrapper">
     <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('form.new-password')" v-model="password"/>
     <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
-       @click="togglePassword">remove_red_eye</i>
+      @click="togglePassword" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
   </div>
   <p class="form__text form__text--right form__text--dense">
     <span class="form__text--hint" v-text="$t('form.generate-password')" @click="generatePassword"></span>

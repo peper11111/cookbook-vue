@@ -4,7 +4,8 @@
   <input class="form__input" type="text" :placeholder="$t('form.username')" v-model="username"/>
   <div class="form__wrapper">
     <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('form.password')" v-model="password"/>
-    <i class="material-icons form__icon" :class="{ 'active': passwordVisible }" @click="togglePassword">remove_red_eye</i>
+    <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
+      @click="togglePassword" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
   </div>
   <input class="form__button" type="submit" :value="$t('form.register')"/>
   <p class="form__text">
