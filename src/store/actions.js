@@ -6,14 +6,30 @@ const http = axios.create({
   withCredentials: true
 })
 
+http.interceptors.response.use((value) => Promise.resolve(value), (error) => {
+  if (error.response.status === 401) {
+    window.location.replace('/')
+  }
+  return Promise.reject(error)
+})
+
 export default {
+  fetchCurrentUser (injectee) {
+    return http.get('/current').then((value) => {
+      injectee.commit('setCurrentUser', value.data.username)
+    })
+  },
   login (injectee, payload) {
     return http.post('/login', querystring.stringify(payload), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).then(() => {
+      return injectee.dispatch('fetchCurrentUser')
     })
   },
-  logout () {
-    return http.post('/logout')
+  logout (injectee) {
+    return http.post('/logout').then(() => {
+      return injectee.dispatch('fetchCurrentUser')
+    })
   },
   register (injectee, payload) {
     return http.post('/register', payload)

@@ -7,5 +7,8 @@ export default {
   },
   showInfo (state, payload) {
     state.messages.push({ text: payload, type: 'info' })
+  },
+  setCurrentUser (state, payload) {
+    state.currentUser = payload
   }
 }

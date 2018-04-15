@@ -28,7 +28,7 @@
     "login-incorrect": "Niepoprawna nazwa uzytkownika lub hasło"
   },
   "info": {
-    "login-successful": "Zostałeś pomyślnie zalogowany",
+    "login-successful": "Logowanie przebiegło pomyślnie",
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",

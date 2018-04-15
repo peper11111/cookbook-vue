@@ -1,7 +1,7 @@
 <template>
-<div class="index-view">
-  <div class="index-view__card">
-    <h1 class="index-view__header" v-text="$t('app')"></h1>
+<div class="app-intro">
+  <div class="app-intro__card">
+    <h1 class="app-intro__header" v-text="$t('app')"></h1>
     <confirm-form v-if="action === 'confirm'"></confirm-form>
     <login-form v-if="action === 'login'"></login-form>
     <register-form v-if="action === 'register'"></register-form>
@@ -19,7 +19,7 @@ import ResetForm from '@/components/forms/ResetForm'
 import VerifyForm from '@/components/forms/VerifyForm'
 
 export default {
-  name: 'IndexView',
+  name: 'AppIntro',
   components: {
     ConfirmForm,
     LoginForm,
@@ -38,7 +38,7 @@ export default {
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.index-view {
+.app-intro {
   display: flex;
   align-items: center;
   justify-content: center;

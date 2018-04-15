@@ -1,10 +1,10 @@
 <template>
-<div class="snackbar" v-text="text" :class="[ type, visible ? 'active' : '' ]"></div>
+<div class="app-snackbar" v-text="text" :class="[ type, visible ? 'active' : '' ]"></div>
 </template>
 
 <script>
 export default {
-  name: 'Snackbar',
+  name: 'AppSnackbar',
   data () {
     return {
       index: 0,
@@ -55,7 +55,7 @@ export default {
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.snackbar {
+.app-snackbar {
   position: fixed;
   left: 24px;
   bottom: 24px;

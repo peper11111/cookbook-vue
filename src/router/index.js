@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import IndexView from '@/components/IndexView'
+import HomeView from '@/components/views/HomeView'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
   mode: 'history',
   routes: [
-    { path: '/', component: IndexView }
+    { path: '/', component: HomeView }
   ]
 })
