@@ -1,37 +1,43 @@
 <template>
-<div class="app" v-if="initialized">
+<div class="app">
   <app-intro v-if="currentUser === null"></app-intro>
-  <app-navbar v-if="currentUser !== null"></app-navbar>
   <router-view class="app__wrapper" v-if="currentUser !== null"></router-view>
+  <app-topbar v-if="currentUser !== null"></app-topbar>
   <app-snackbar></app-snackbar>
 </div>
 </template>
 
 <script>
 import AppIntro from '@/components/AppIntro'
-import AppNavbar from '@/components/AppNavbar'
+import AppTopbar from '@/components/AppTopbar'
 import AppSnackbar from '@/components/AppSnackbar'
 
 export default {
   name: 'App',
   components: {
     AppIntro,
-    AppNavbar,
+    AppTopbar,
     AppSnackbar
   },
   data () {
     return {
-      initialized: false
+      loading: false
     }
   },
-  mounted () {
-    this.$store.dispatch('fetchCurrentUser').then(() => {
-      this.initialized = true
-    })
+  created () {
+    this.fetchData()
   },
   computed: {
     currentUser () {
       return this.$store.state.currentUser
+    }
+  },
+  methods: {
+    fetchData () {
+      this.loading = true
+      this.$store.dispatch('fetchCurrentUser').then(() => {
+        this.loading = false
+      })
     }
   }
 }
@@ -43,7 +49,7 @@ export default {
 .app {
   &__wrapper {
     box-sizing: border-box;
-    padding-top: $navbar-height;
+    padding-top: $toolbar-height;
     background: $color-white;
   }
 }

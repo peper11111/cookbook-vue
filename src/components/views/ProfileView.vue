@@ -1,14 +1,13 @@
 <template>
-<div class="home-view">
-Home View
-<button @click="logout">Logout</button>
+<div class="profile-view">
+  Profile View
+  <button @click="logout">Logout</button>
 </div>
 </template>
 
 <script>
-
 export default {
-  name: 'HomeView',
+  name: 'ProfileView',
   methods: {
     logout () {
       this.$store.dispatch('logout')
