@@ -11,6 +11,7 @@
 import AppIntro from './components/AppIntro'
 import AppTopbar from './components/AppTopbar'
 import AppSnackbar from './components/AppSnackbar'
+import auth from './services/auth'
 
 export default {
   name: 'App',
@@ -35,7 +36,7 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      this.$store.dispatch('fetchCurrentUser').then(() => {
+      auth.fetchCurrentUser().then(() => {
         this.loading = false
       })
     }
@@ -44,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/styles/variables';
+@import './assets/styles/variables';
 
 .app {
   &__wrapper {

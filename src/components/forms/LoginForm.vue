@@ -1,5 +1,5 @@
 <template>
-<form class="form" @submit="login">
+<form class="form" @submit.prevent="login">
   <input class="form__input" type="text" :placeholder="$t('form.username-or-email')" v-model="username"/>
   <div class="form__wrapper">
     <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('form.password')" v-model="password"/>
@@ -19,20 +19,18 @@
 
 <script>
 import form from '../../mixins/form'
+import auth from '../../services/auth'
+import { SHOW_INFO, SHOW_ERROR } from '../../plugins/store/mutation-types'
 
 export default {
   name: 'LoginForm',
   mixins: [ form ],
   methods: {
-    login (event) {
-      event.preventDefault()
-      this.$store.dispatch('login', {
-        username: this.username,
-        password: this.password
-      }).then(() => {
-        this.$store.commit('showInfo', 'info.login-successful')
+    login () {
+      auth.login(this.username, this.password).then(() => {
+        this.$store.commit(SHOW_INFO, 'info.login-successful')
       }).catch(() => {
-        this.$store.commit('showError', 'error.login-incorrect')
+        this.$store.commit(SHOW_ERROR, 'error.login-incorrect')
       })
     }
   }

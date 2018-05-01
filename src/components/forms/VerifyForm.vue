@@ -6,14 +6,13 @@
 
 <script>
 import form from '../../mixins/form'
+import auth from '../../services/auth'
 
 export default {
   name: 'VerifyForm',
   mixins: [ form ],
-  mounted () {
-    this.$store.dispatch('verify', {
-      token: this.$route.query.token
-    }).then(this.processValue).catch(this.processError)
+  created () {
+    auth.verify(this.$route.query.token).then(this.processValue).catch(this.processError)
   }
 }
 </script>

@@ -1,14 +1,13 @@
+import * as types from './mutation-types'
+
 export default {
-  showMessage (state, payload) {
-    state.messages.push(payload)
-  },
-  showError (state, payload) {
+  [types.SHOW_ERROR] (state, payload) {
     state.messages.push({ text: payload, type: 'error' })
   },
-  showInfo (state, payload) {
+  [types.SHOW_INFO] (state, payload) {
     state.messages.push({ text: payload, type: 'info' })
   },
-  setCurrentUser (state, payload) {
+  [types.SET_CURRENT_USER] (state, payload) {
     state.currentUser = payload
   }
 }

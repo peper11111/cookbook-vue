@@ -1,5 +1,5 @@
 <template>
-<form class="form" @submit="register">
+<form class="form" @submit.prevent="register">
   <input class="form__input" type="email" :placeholder="$t('form.email')" v-model="email"/>
   <input class="form__input" type="text" :placeholder="$t('form.username')" v-model="username"/>
   <div class="form__wrapper">
@@ -17,18 +17,14 @@
 
 <script>
 import form from '../../mixins/form'
+import auth from '../../services/auth'
 
 export default {
   name: 'RegisterForm',
   mixins: [ form ],
   methods: {
-    register (event) {
-      event.preventDefault()
-      this.$store.dispatch('register', {
-        email: this.email,
-        username: this.username,
-        password: this.password
-      }).then(this.processValue).catch(this.processError)
+    register () {
+      auth.register(this.email, this.username, this.password).then(this.processValue).catch(this.processError)
     }
   }
 }

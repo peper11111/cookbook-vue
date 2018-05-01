@@ -1,5 +1,5 @@
 <template>
-<form class="form" @submit="confirm">
+<form class="form" @submit.prevent="confirm">
   <div class="form__wrapper">
     <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('form.new-password')" v-model="password"/>
     <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
@@ -14,17 +14,14 @@
 
 <script>
 import form from '../../mixins/form'
+import auth from '../../services/auth'
 
 export default {
   name: 'ConfirmForm',
   mixins: [ form ],
   methods: {
-    confirm (event) {
-      event.preventDefault()
-      this.$store.dispatch('confirm', {
-        password: this.password,
-        token: this.$route.query.token
-      }).then(this.processValue).catch(this.processError)
+    confirm () {
+      auth.confirm(this.password, this.$route.query.token).then(this.processValue).catch(this.processError)
     },
     generatePassword () {
       const chars = 'abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPGRSTUVWXYZ1234567890!@#$%^&*()'

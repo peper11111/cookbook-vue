@@ -1,3 +1,5 @@
+import { SHOW_INFO, SHOW_ERROR } from '../plugins/store/mutation-types'
+
 export default {
   data () {
     return {
@@ -22,11 +24,11 @@ export default {
       }
     },
     processValue (value) {
-      this.$store.commit('showInfo', value.data.message)
+      this.$store.commit(SHOW_INFO, value.data.message)
       this.setActiveAction('login')
     },
     processError (error) {
-      this.$store.commit('showError', error.response.data.message)
+      this.$store.commit(SHOW_ERROR, error.response.data.message)
     }
   }
 }

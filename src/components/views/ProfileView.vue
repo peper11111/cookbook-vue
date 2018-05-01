@@ -6,11 +6,16 @@
 </template>
 
 <script>
+import { SHOW_INFO } from '../../plugins/store/mutation-types'
+import auth from '../../services/auth'
+
 export default {
   name: 'ProfileView',
   methods: {
     logout () {
-      this.$store.dispatch('logout')
+      auth.logout().then(() => {
+        this.$store.commit(SHOW_INFO, 'info.logout-successful')
+      })
     }
   }
 }
