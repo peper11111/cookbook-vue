@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import ConfirmForm from '@/components/forms/ConfirmForm'
-import LoginForm from '@/components/forms/LoginForm'
-import RegisterForm from '@/components/forms/RegisterForm'
-import ResetForm from '@/components/forms/ResetForm'
-import VerifyForm from '@/components/forms/VerifyForm'
+import ConfirmForm from './forms/ConfirmForm'
+import LoginForm from './forms/LoginForm'
+import RegisterForm from './forms/RegisterForm'
+import ResetForm from './forms/ResetForm'
+import VerifyForm from './forms/VerifyForm'
 
 export default {
   name: 'AppIntro',

@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import AppIntro from '@/components/AppIntro'
-import AppTopbar from '@/components/AppTopbar'
-import AppSnackbar from '@/components/AppSnackbar'
+import AppIntro from './components/AppIntro'
+import AppTopbar from './components/AppTopbar'
+import AppSnackbar from './components/AppSnackbar'
 
 export default {
   name: 'App',

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import form from '@/mixins/form'
+import form from '../../mixins/form'
 
 export default {
   name: 'LoginForm',
