@@ -1,5 +1,5 @@
 import querystring from 'querystring'
-import http from '../http'
+import http from '../../services/http/index'
 
 export default {
   fetchCurrentUser (injectee) {
