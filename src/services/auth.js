@@ -1,7 +1,7 @@
 import querystring from 'querystring'
-import http from '../http'
-import store from '../../store'
-import { SET_CURRENT_USER } from '../../store/mutation-types'
+import http from './http'
+import store from '../store'
+import { SET_CURRENT_USER } from '../store/mutation-types'
 
 class AuthService {
   fetchCurrentUser () {
