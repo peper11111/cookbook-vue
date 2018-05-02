@@ -13,18 +13,19 @@ class AuthService {
     return http.post('/auth/login', querystring.stringify({ username, password }), {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     }).then(value => {
-      store.commit(types.SHOW_INFO, 'info.login-successful')
+      store.commit(types.SHOW_INFO, value.data)
       store.commit(types.SET_AUTH, { loggedIn: true })
       router.push(redirect || '/')
       return value
     }).catch(error => {
-      store.commit(types.SHOW_ERROR, 'error.login-incorrect')
+      store.commit(types.SHOW_ERROR, error.response.data)
       return Promise.reject(error)
     })
   }
 
   logout () {
     return http.post('/auth/logout').then(value => {
+      store.commit(types.SHOW_INFO, value.data)
       store.commit(types.SET_AUTH, { loggedIn: false })
       router.push('/login')
       return value
@@ -43,22 +44,22 @@ class AuthService {
 
   register (email, username, password) {
     return http.post('/auth/register', { email, username, password }).then(value => {
-      store.commit(types.SHOW_INFO, value.data.message)
+      store.commit(types.SHOW_INFO, value.data)
       router.push('/login')
       return value
     }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data.message)
+      store.commit(types.SHOW_ERROR, error.response.data)
       return Promise.reject(error)
     })
   }
 
   verify (token) {
     return http.post('/auth/verify', { token }).then(value => {
-      store.commit(types.SHOW_INFO, value.data.message)
+      store.commit(types.SHOW_INFO, value.data)
       router.push('/login')
       return value
     }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data.message)
+      store.commit(types.SHOW_ERROR, error.response.data)
       router.push('/login')
       return Promise.reject(error)
     })
@@ -66,22 +67,22 @@ class AuthService {
 
   reset (username) {
     return http.post('/auth/reset', { username }).then(value => {
-      store.commit(types.SHOW_INFO, value.data.message)
+      store.commit(types.SHOW_INFO, value.data)
       router.push('/login')
       return value
     }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data.message)
+      store.commit(types.SHOW_ERROR, error.response.data)
       return Promise.reject(error)
     })
   }
 
   confirm (password, token) {
     return http.post('/auth/confirm', { password, token }).then(value => {
-      store.commit(types.SHOW_INFO, value.data.message)
+      store.commit(types.SHOW_INFO, value.data)
       router.push('/login')
       return value
     }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data.message)
+      store.commit(types.SHOW_ERROR, error.response.data)
       return Promise.reject(error)
     })
   }

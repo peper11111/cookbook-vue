@@ -26,8 +26,8 @@
     "email-occupied": "Podany adres email jest już zajęty",
     "username-occupied": "Podana nazwa użytkownika jest już zajęta",
     "user-not-found": "Użytkownik nie istnieje",
-    "login-incorrect": "Niepoprawna nazwa uzytkownika lub hasło",
-    "logout-error": "Wystąpil problem podczas wylogowania"
+    "bad-credentials": "Niepoprawna nazwa uzytkownika lub hasło",
+    "user-is-disabled": "Użytkownik nie został aktywowany"
   },
   "info": {
     "login-successful": "Logowanie przebiegło pomyślnie",
