@@ -13,13 +13,6 @@ export default {
     },
     togglePassword () {
       this.passwordVisible = !this.passwordVisible
-    },
-    setActiveAction (action) {
-      if (action === 'login') {
-        this.$router.push({ path: '/login' })
-      } else {
-        this.$router.push({ path: '/login', query: { action } })
-      }
     }
   }
 }

@@ -1,4 +1,4 @@
-@import 'variables';
+@import './variables';
 
 .form {
   display: flex;
@@ -79,32 +79,14 @@
     &--action {
       color: $color-primary;
       cursor: pointer;
+      text-decoration: none;
     }
 
     &--hint {
       color: $color-grey-600;
       cursor: pointer;
       user-select: none;
+      text-decoration: none;
     }
-  }
-
-  &__spinner {
-    border: 0 solid transparent;
-    border-top: 3px solid $color-primary;
-    border-right-width: 3px;
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
-    animation: spin 1s linear infinite;
-  }
-}
-
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

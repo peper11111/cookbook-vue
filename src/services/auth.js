@@ -59,6 +59,7 @@ class AuthService {
       return value
     }).catch(error => {
       store.commit(types.SHOW_ERROR, error.response.data.message)
+      router.push('/login')
       return Promise.reject(error)
     })
   }

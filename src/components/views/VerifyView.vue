@@ -1,16 +1,12 @@
 <template>
-<form class="form">
-  <div class="form__spinner"></div>
-</form>
+<div class="verify-view"></div>
 </template>
 
 <script>
-import form from '../../mixins/form'
 import auth from '../../services/auth'
 
 export default {
-  name: 'VerifyForm',
-  mixins: [ form ],
+  name: 'VerifyView',
   created () {
     auth.verify(this.$route.query.token)
   }
