@@ -1,4 +1,4 @@
-import { SHOW_INFO, SHOW_ERROR } from '../plugins/store/mutation-types'
+import { SHOW_INFO, SHOW_ERROR } from '../store/mutation-types'
 
 export default {
   data () {

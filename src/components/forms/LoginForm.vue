@@ -20,7 +20,7 @@
 <script>
 import form from '../../mixins/form'
 import auth from '../../services/auth'
-import { SHOW_INFO, SHOW_ERROR } from '../../plugins/store/mutation-types'
+import { SHOW_INFO, SHOW_ERROR } from '../../store/mutation-types'
 
 export default {
   name: 'LoginForm',

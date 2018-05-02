@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { SHOW_INFO } from '../../plugins/store/mutation-types'
+import { SHOW_INFO } from '../../store/mutation-types'
 import auth from '../../services/auth'
 
 export default {
