@@ -1,14 +1,12 @@
 <template>
 <div class="app">
-  <app-intro v-if="currentUser === null"></app-intro>
-  <router-view class="app__wrapper" v-if="currentUser !== null"></router-view>
-  <app-topbar v-if="currentUser !== null"></app-topbar>
+  <app-topbar v-if="isLoggedIn"></app-topbar>
+  <router-view></router-view>
   <app-snackbar></app-snackbar>
 </div>
 </template>
 
 <script>
-import AppIntro from './components/AppIntro'
 import AppTopbar from './components/AppTopbar'
 import AppSnackbar from './components/AppSnackbar'
 import auth from './services/auth'
@@ -16,42 +14,13 @@ import auth from './services/auth'
 export default {
   name: 'App',
   components: {
-    AppIntro,
     AppTopbar,
     AppSnackbar
   },
-  data () {
-    return {
-      loading: false
-    }
-  },
-  created () {
-    this.fetchData()
-  },
   computed: {
-    currentUser () {
-      return this.$store.state.currentUser
-    }
-  },
-  methods: {
-    fetchData () {
-      this.loading = true
-      auth.fetchCurrentUser().then(() => {
-        this.loading = false
-      })
+    isLoggedIn () {
+      return auth.isLoggedIn()
     }
   }
 }
 </script>
-
-<style lang="scss">
-@import './assets/styles/variables';
-
-.app {
-  &__wrapper {
-    box-sizing: border-box;
-    padding-top: $toolbar-height;
-    background: $color-white;
-  }
-}
-</style>

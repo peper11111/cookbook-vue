@@ -14,7 +14,7 @@ export default {
   mixins: [ form ],
   methods: {
     reset () {
-      auth.reset(this.username).then(this.processValue).catch(this.processError)
+      auth.reset(this.username)
     }
   }
 }

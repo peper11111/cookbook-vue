@@ -20,18 +20,13 @@
 <script>
 import form from '../../mixins/form'
 import auth from '../../services/auth'
-import { SHOW_INFO, SHOW_ERROR } from '../../store/mutation-types'
 
 export default {
   name: 'LoginForm',
   mixins: [ form ],
   methods: {
     login () {
-      auth.login(this.username, this.password).then(() => {
-        this.$store.commit(SHOW_INFO, 'info.login-successful')
-      }).catch(() => {
-        this.$store.commit(SHOW_ERROR, 'error.login-incorrect')
-      })
+      auth.login(this.username, this.password, this.$route.query.redirect)
     }
   }
 }

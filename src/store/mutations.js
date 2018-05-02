@@ -7,7 +7,7 @@ export default {
   [types.SHOW_INFO] (state, payload) {
     state.messages.push({ text: payload, type: 'info' })
   },
-  [types.SET_CURRENT_USER] (state, payload) {
-    state.currentUser = payload
+  [types.SET_AUTH] (state, payload) {
+    state.auth.loggedIn = payload.loggedIn
   }
 }

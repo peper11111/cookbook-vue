@@ -24,7 +24,7 @@ export default {
   mixins: [ form ],
   methods: {
     register () {
-      auth.register(this.email, this.username, this.password).then(this.processValue).catch(this.processError)
+      auth.register(this.email, this.username, this.password)
     }
   }
 }

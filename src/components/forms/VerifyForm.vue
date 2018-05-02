@@ -12,7 +12,7 @@ export default {
   name: 'VerifyForm',
   mixins: [ form ],
   created () {
-    auth.verify(this.$route.query.token).then(this.processValue).catch(this.processError)
+    auth.verify(this.$route.query.token)
   }
 }
 </script>

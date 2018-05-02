@@ -21,7 +21,7 @@ export default {
   mixins: [ form ],
   methods: {
     confirm () {
-      auth.confirm(this.password, this.$route.query.token).then(this.processValue).catch(this.processError)
+      auth.confirm(this.password, this.$route.query.token)
     },
     generatePassword () {
       const chars = 'abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPGRSTUVWXYZ1234567890!@#$%^&*()'

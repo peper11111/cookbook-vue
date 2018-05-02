@@ -1,5 +1,3 @@
-import { SHOW_INFO, SHOW_ERROR } from '../store/mutation-types'
-
 export default {
   data () {
     return {
@@ -18,17 +16,10 @@ export default {
     },
     setActiveAction (action) {
       if (action === 'login') {
-        this.$router.push({ path: '/' })
+        this.$router.push({ path: '/login' })
       } else {
-        this.$router.push({ path: '/', query: { action } })
+        this.$router.push({ path: '/login', query: { action } })
       }
-    },
-    processValue (value) {
-      this.$store.commit(SHOW_INFO, value.data.message)
-      this.setActiveAction('login')
-    },
-    processError (error) {
-      this.$store.commit(SHOW_ERROR, error.response.data.message)
     }
   }
 }
