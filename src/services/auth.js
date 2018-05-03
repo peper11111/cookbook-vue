@@ -1,4 +1,3 @@
-import querystring from 'querystring'
 import http from './http'
 import router from '../router'
 import store from '../store'
@@ -10,9 +9,11 @@ class AuthService {
   }
 
   login (username, password, redirect) {
-    return http.post('/auth/login', querystring.stringify({ username, password }), {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    }).then(value => {
+    const formData = new FormData()
+    formData.append('username', username)
+    formData.append('password', password)
+
+    return http.post('/auth/login', formData).then(value => {
       store.commit(types.SHOW_INFO, value.data)
       store.commit(types.SET_AUTH, { loggedIn: true })
       router.push(redirect || '/')
