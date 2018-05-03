@@ -1,7 +1,7 @@
 <template>
 <div class="profile-view view">
   Profile View
-  <button @click="logout">Logout</button>
+  <button @click="logout()">Logout</button>
 </div>
 </template>
 

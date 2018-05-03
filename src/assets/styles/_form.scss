@@ -5,12 +5,20 @@
   flex-direction: column;
   align-items: center;
 
+  &__margin {
+    margin-bottom: 8px;
+  }
+
   &__wrapper {
     width: 100%;
     position: relative;
+
+    .form__input {
+      padding-right: 32px;
+    }
   }
 
-  &__input, &__password, &__button {
+  &__input, &__button {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     height: 32px;
@@ -18,11 +26,10 @@
     outline: none;
     box-sizing: border-box;
     padding: 8px 16px;
-    margin-top: 8px;
     width: 100%;
   }
 
-  &__input, &__password {
+  &__input {
     border: 1px solid $color-grey-300;
 
     &::placeholder {
@@ -36,10 +43,6 @@
     }
   }
 
-  &__password {
-    padding-right: 32px;
-  }
-
   &__button {
     border: none;
     background-color: $color-primary;
@@ -49,7 +52,7 @@
 
   &__icon {
     position: absolute;
-    bottom: 8px;
+    top: 7px;
     right: 8px;
     cursor: pointer;
     color: $color-grey-400;
@@ -58,35 +61,6 @@
 
     &.active {
       color: $color-grey-900;
-    }
-  }
-
-  &__text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 12px;
-    margin-top: 32px;
-    text-align: center;
-    width: 100%;
-
-    &--right {
-      text-align: right;
-    }
-
-    &--dense {
-      margin-top: 8px;
-    }
-
-    &--action {
-      color: $color-primary;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    &--hint {
-      color: $color-grey-600;
-      cursor: pointer;
-      user-select: none;
-      text-decoration: none;
     }
   }
 }

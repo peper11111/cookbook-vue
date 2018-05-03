@@ -1,18 +1,22 @@
 <template>
 <div class="confirm-view view view--center">
-  <div class="view__card">
-    <h1 class="view__header" v-text="$t('app')"></h1>
-    <form class="form" @submit.prevent="confirm">
-      <div class="form__wrapper">
-        <input class="form__password" :type="getPasswordFieldType()" :placeholder="$t('form.new-password')" v-model="password"/>
+  <div class="card">
+    <h1 class="card__header" v-text="$t('app')"></h1>
+    <form class="card__form form" @submit.prevent="confirm()">
+      <div class="form__margin form__wrapper">
+        <input class="form__input" :type="getPasswordFieldType()" :placeholder="$t('form.new-password')" v-model="password"/>
         <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
-           @click="togglePassword" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
+          @click="togglePassword()" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
       </div>
-      <p class="form__text form__text--right form__text--dense">
-        <span class="form__text--hint" v-text="$t('form.generate-password')" @click="generatePassword"></span>
+      <p class="form__margin card__text card__text--right card__text--hint">
+        <a v-text="$t('form.generate-password')" @click="generatePassword()"></a>
       </p>
       <input class="form__button" type="submit" :value="$t('form.change-password')"/>
     </form>
+    <p class="card__text card__text--action">
+      <span v-text="$t('form.remember-password')"></span>
+      <router-link to="/login" v-text="$t('form.login')"></router-link>
+    </p>
   </div>
 </div>
 </template>
