@@ -1,6 +1,6 @@
 export default {
   messages: [],
   auth: {
-    loggedIn: false
+    loggedIn: null
   }
 }

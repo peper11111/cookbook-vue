@@ -3,10 +3,6 @@ import * as types from '../../store/mutation-types'
 import router from '../../router'
 
 export default {
-  isLoggedIn () {
-    return store.state.auth.loggedIn
-  },
-
   login (username, password, redirect) {
     const formData = new FormData()
     formData.append('username', username)
@@ -33,13 +29,7 @@ export default {
   },
 
   check () {
-    return this.$http.get('/auth/check').then(value => {
-      store.commit(types.SET_AUTH, { loggedIn: true })
-      return value
-    }).catch(error => {
-      store.commit(types.SET_AUTH, { loggedIn: false })
-      return Promise.reject(error)
-    })
+    return this.$http.get('/auth/check')
   },
 
   register (email, username, password) {

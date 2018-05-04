@@ -1,6 +1,6 @@
 <template>
 <div class="app">
-  <app-topbar v-if="isLoggedIn"></app-topbar>
+  <app-topbar v-if="loggedIn"></app-topbar>
   <router-view></router-view>
   <app-snackbar></app-snackbar>
 </div>
@@ -17,8 +17,8 @@ export default {
     AppSnackbar
   },
   computed: {
-    isLoggedIn () {
-      return this.$api.auth.isLoggedIn()
+    loggedIn () {
+      return this.$store.state.auth.loggedIn
     }
   }
 }
