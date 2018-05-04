@@ -1,7 +1,7 @@
 import axios from 'axios'
+import router from '../router'
 import store from '../store'
 import { SET_AUTH } from '../store/mutation-types'
-import router from '../router'
 
 const http = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
