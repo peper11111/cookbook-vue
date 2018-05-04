@@ -1,4 +1,8 @@
-import { assert } from '../utils'
+function assert (condition, msg) {
+  if (!condition) {
+    throw new Error(('[api] ' + msg))
+  }
+}
 
 export default class Api {
   constructor (options) {
