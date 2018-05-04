@@ -3,12 +3,10 @@
 </template>
 
 <script>
-import auth from '../../services/auth'
-
 export default {
   name: 'VerifyView',
   created () {
-    auth.verify(this.$route.query.token)
+    this.$api.auth.verify(this.$route.query.token)
   }
 }
 </script>

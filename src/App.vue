@@ -9,7 +9,6 @@
 <script>
 import AppTopbar from './components/AppTopbar'
 import AppSnackbar from './components/AppSnackbar'
-import auth from './services/auth'
 
 export default {
   name: 'App',
@@ -19,7 +18,7 @@ export default {
   },
   computed: {
     isLoggedIn () {
-      return auth.isLoggedIn()
+      return this.$api.auth.isLoggedIn()
     }
   }
 }

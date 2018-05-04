@@ -16,14 +16,13 @@
 
 <script>
 import form from '../../mixins/form'
-import auth from '../../services/auth'
 
 export default {
   name: 'ResetView',
   mixins: [ form ],
   methods: {
     reset () {
-      auth.reset(this.username)
+      this.$api.auth.reset(this.username)
     }
   }
 }

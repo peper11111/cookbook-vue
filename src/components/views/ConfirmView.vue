@@ -23,14 +23,13 @@
 
 <script>
 import form from '../../mixins/form'
-import auth from '../../services/auth'
 
 export default {
   name: 'ConfirmView',
   mixins: [ form ],
   methods: {
     confirm () {
-      auth.confirm(this.password, this.$route.query.token)
+      this.$api.auth.confirm(this.password, this.$route.query.token)
     },
     generatePassword () {
       const chars = 'abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPGRSTUVWXYZ1234567890!@#$%^&*()'

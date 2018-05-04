@@ -24,14 +24,13 @@
 
 <script>
 import form from '../../mixins/form'
-import auth from '../../services/auth'
 
 export default {
   name: 'LoginView',
   mixins: [ form ],
   methods: {
     login () {
-      auth.login(this.username, this.password, this.$route.query.redirect)
+      this.$api.auth.login(this.username, this.password, this.$route.query.redirect)
     }
   }
 }

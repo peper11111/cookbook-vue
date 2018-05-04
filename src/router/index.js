@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import auth from '../services/auth'
 import routes from './routes'
+import api from '../api'
 
 Vue.use(VueRouter)
 
@@ -12,7 +12,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    auth.check().then(() => {
+    api.auth.check().then(() => {
       next()
     }).catch(() => {
       next({

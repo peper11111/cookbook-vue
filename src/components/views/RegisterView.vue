@@ -22,14 +22,13 @@
 
 <script>
 import form from '../../mixins/form'
-import auth from '../../services/auth'
 
 export default {
   name: 'RegisterView',
   mixins: [ form ],
   methods: {
     register () {
-      auth.register(this.email, this.username, this.password)
+      this.$api.auth.register(this.email, this.username, this.password)
     }
   }
 }

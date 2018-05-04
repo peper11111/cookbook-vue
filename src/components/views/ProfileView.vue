@@ -19,18 +19,16 @@
 
 <script>
 import base from '../../mixins/base'
-import auth from '../../services/auth'
-import upload from '../../services/upload'
 
 export default {
   name: 'ProfileView',
   mixins: [ base ],
   methods: {
     logout () {
-      auth.logout()
+      this.$api.auth.logout()
     },
     create () {
-      upload.create(this.$refs.avatar.files[0])
+      this.$api.upload.create(this.$refs.avatar.files[0])
     },
     triggerAvatar () {
       this.$refs.avatar.click()
