@@ -57,7 +57,12 @@ export default {
         this.showError('error.file-exceeds-limit')
         this.$refs.avatar.value = ''
       } else {
-        this.$api.upload.create(file)
+        this.$api.upload.create(file).then(value => {
+          this.currentUser.avatar = value.data
+          return this.$api.user.update(this.currentUser.id, { avatar: value.data })
+        }).then(() => {
+          this.showInfo('info.avatar-update-successful')
+        })
       }
     },
     triggerAvatar () {

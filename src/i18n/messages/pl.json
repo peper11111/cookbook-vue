@@ -36,6 +36,8 @@
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "password-reset": "Twoje hasło zostało zmienione",
-    "logout-successful": "Zostałeś pomyślnie wylogowany"
+    "logout-successful": "Zostałeś pomyślnie wylogowany",
+    "user-update-successful": "Twoje dane zostały pomyślnie zaktualizowane",
+    "avatar-update-successful": "Twój avatar został pomyślnie zaktualizowany"
   }
 }
