@@ -62,7 +62,7 @@ export default {
     cursor: pointer;
 
     &:hover, &.router-link-active {
-      color: $color-grey-900;
+      color: $color-text;
     }
   }
 }

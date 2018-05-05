@@ -10,9 +10,21 @@
         </div>
       </div>
       <div class="profile__content">
-        <div class="profile__header">
-          <span v-text="currentUser.username"></span>
-          <i class="material-icons" @click="logout()">exit_to_app</i>
+        <div class="profile__row">
+          <span class="profile__text profile__text--header" v-text="currentUser.username"></span>
+          <button class="profile__button profile__button--bordered" v-text="$t('profile.edit')"></button>
+          <i class="material-icons profile__button" @click="logout()">exit_to_app</i>
+        </div>
+        <div class="profile__row">
+          <span class="profile__text profile__text--bold" v-text="currentUser.posts || 0"></span>
+          <span class="profile__text profile__text--label" v-text="$t('profile.posts')"></span>
+          <span class="profile__text profile__text--bold" v-text="currentUser.followers || 0"></span>
+          <span class="profile__text profile__text--label" v-text="$t('profile.followers')"></span>
+          <span class="profile__text profile__text--bold" v-text="currentUser.following || 0"></span>
+          <span class="profile__text profile__text--label" v-text="$t('profile.following')"></span>
+        </div>
+        <div class="profile__row">
+          <span class="profile__text"></span>
         </div>
       </div>
     </div>

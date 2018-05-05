@@ -16,6 +16,12 @@
     "generate-password": "Wygeneruj hasło",
     "change-password": "Zmień hasło"
   },
+  "profile": {
+    "posts": "posty",
+    "followers": "obserwujący",
+    "following": "obserwowanie",
+    "edit": "Edytuj profil"
+  },
   "error": {
     "missing-email": "Email nie może być pusty",
     "missing-username": "Nazwa użytkownika nie może być pusta",
