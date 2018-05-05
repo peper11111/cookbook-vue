@@ -11,7 +11,7 @@ export default class Api {
 
     for (const module in options.modules) {
       this[module] = options.modules[module]
-      this[module].$http = options.http
+      this[module].http = options.http
     }
   }
 

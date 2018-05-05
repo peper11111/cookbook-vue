@@ -25,7 +25,7 @@ router.beforeEach(async (to, from, next) => {
     if (!store.state.auth.loggedIn) {
       next({
         path: '/login',
-        query: { redirect: to.fullPath }
+        query: { redirect: to.fullPath !== '/' ? to.fullPath : undefined }
       })
     } else {
       next()
