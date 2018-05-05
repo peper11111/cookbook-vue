@@ -10,7 +10,10 @@
         </div>
       </div>
       <div class="profile__content">
-        <button @click="logout()">Logout</button>
+        <div class="profile__header">
+          <span v-text="currentUser.username"></span>
+          <i class="material-icons" @click="logout()">exit_to_app</i>
+        </div>
       </div>
     </div>
   </div>
@@ -24,11 +27,16 @@ import { SET_AUTH } from '../../store/mutation-types'
 export default {
   name: 'ProfileView',
   mixins: [ base ],
+  computed: {
+    currentUser () {
+      return this.$store.state.currentUser
+    }
+  },
   methods: {
     logout () {
-      this.$api.auth.logout().then(value => {
-        this.showInfo(value.data)
-        this.$store.commit(SET_AUTH, { loggedIn: false })
+      this.$api.auth.logout().then(() => {
+        this.showInfo('info.logout-successful')
+        this.$store.commit(SET_AUTH, { loggedIn: false, currentUser: null })
         this.$router.push('/login')
       })
     },

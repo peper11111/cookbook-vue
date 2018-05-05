@@ -10,7 +10,7 @@ const http = axios.create({
 
 http.interceptors.response.use(value => value, error => {
   if (error.response.status === 401) {
-    store.commit(SET_AUTH, { loggedIn: false })
+    store.commit(SET_AUTH, { loggedIn: false, currentUser: null })
     router.push('/login')
   }
   return Promise.reject(error)

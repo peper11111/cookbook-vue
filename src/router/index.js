@@ -13,16 +13,16 @@ const router = new VueRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  if (store.state.auth.loggedIn === null) {
-    await api.auth.check().then(() => {
-      store.commit(SET_AUTH, { loggedIn: true })
+  if (store.state.loggedIn === null) {
+    await api.auth.current().then(value => {
+      store.commit(SET_AUTH, { loggedIn: true, currentUser: value.data })
     }).catch(() => {
-      store.commit(SET_AUTH, { loggedIn: false })
+      store.commit(SET_AUTH, { loggedIn: false, currentUser: null })
     })
   }
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.state.auth.loggedIn) {
+    if (!store.state.loggedIn) {
       next({
         path: '/login',
         query: { redirect: to.fullPath !== '/' ? to.fullPath : undefined }

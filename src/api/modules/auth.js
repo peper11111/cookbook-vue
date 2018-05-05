@@ -10,8 +10,8 @@ export default {
     return this.http.post('/auth/logout')
   },
 
-  check () {
-    return this.http.get('/auth/check')
+  current () {
+    return this.http.get('/auth/current')
   },
 
   register (email, username, password) {
