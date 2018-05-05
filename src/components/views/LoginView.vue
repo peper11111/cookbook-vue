@@ -36,7 +36,7 @@ export default {
         return this.$api.auth.current()
       }).then(value => {
         this.showInfo('info.login-successful')
-        this.$store.commit(SET_AUTH, { loggedIn: true, currentUser: value.data })
+        this.$store.commit(SET_AUTH, { loggedIn: true, currentUserId: value.data })
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(error => {
         this.showError(error.response.data)

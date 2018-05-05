@@ -5,7 +5,7 @@ export default {
     state.messages.push({ text: payload.text, type: payload.type })
   },
   [SET_AUTH] (state, payload) {
-    state.loggedIn = payload.loggedIn
-    state.currentUser = payload.currentUser
+    state.auth.loggedIn = payload.loggedIn
+    state.auth.currentUserId = payload.currentUserId
   }
 }
