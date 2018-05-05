@@ -32,8 +32,8 @@ export default {
   methods: {
     login () {
       this.$api.auth.login(this.username, this.password).then(value => {
-        this.$store.commit(SET_AUTH, { loggedIn: true })
         this.$store.commit(SHOW_INFO, value.data)
+        this.$store.commit(SET_AUTH, { loggedIn: true })
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(error => {
         this.$store.commit(SHOW_ERROR, error.response.data)
