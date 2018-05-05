@@ -13,6 +13,7 @@ export default class Api {
       this[module] = options.modules[module]
       this[module].http = options.http
     }
+    this.http = options.http
   }
 
   static install (Vue) {

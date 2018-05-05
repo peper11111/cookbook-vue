@@ -11,12 +11,7 @@ export default {
   },
 
   logout () {
-    return this.http.post('/auth/logout').then(value => {
-      store.commit(types.SHOW_INFO, value.data)
-      store.commit(types.SET_AUTH, { loggedIn: false })
-      router.push('/login')
-      return value
-    })
+    return this.http.post('/auth/logout')
   },
 
   check () {
