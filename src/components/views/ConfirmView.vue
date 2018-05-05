@@ -22,14 +22,20 @@
 </template>
 
 <script>
+import base from '../../mixins/base'
 import form from '../../mixins/form'
 
 export default {
   name: 'ConfirmView',
-  mixins: [ form ],
+  mixins: [ base, form ],
   methods: {
     confirm () {
-      this.$api.auth.confirm(this.password, this.$route.query.token)
+      this.$api.auth.confirm(this.password, this.$route.query.token).then(value => {
+        this.showInfo(value.data)
+        this.$router.push('/login')
+      }).catch(error => {
+        this.showError(error.response.data)
+      })
     },
     generatePassword () {
       const chars = 'abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPGRSTUVWXYZ1234567890!@#$%^&*()'

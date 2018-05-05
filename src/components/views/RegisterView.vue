@@ -21,14 +21,20 @@
 </template>
 
 <script>
+import base from '../../mixins/base'
 import form from '../../mixins/form'
 
 export default {
   name: 'RegisterView',
-  mixins: [ form ],
+  mixins: [ base, form ],
   methods: {
     register () {
-      this.$api.auth.register(this.email, this.username, this.password)
+      this.$api.auth.register(this.email, this.username, this.password).then(value => {
+        this.showInfo(value.data)
+        this.$router.push('/login')
+      }).catch(error => {
+        this.showError(error.response.data)
+      })
     }
   }
 }

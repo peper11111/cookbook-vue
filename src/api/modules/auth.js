@@ -1,7 +1,3 @@
-import store from '../../store'
-import * as types from '../../store/mutation-types'
-import router from '../../router'
-
 export default {
   login (username, password) {
     const formData = new FormData()
@@ -19,47 +15,18 @@ export default {
   },
 
   register (email, username, password) {
-    return this.http.post('/auth/register', { email, username, password }).then(value => {
-      store.commit(types.SHOW_INFO, value.data)
-      router.push('/login')
-      return value
-    }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data)
-      return Promise.reject(error)
-    })
+    return this.http.post('/auth/register', { email, username, password })
   },
 
   verify (token) {
-    return this.http.post('/auth/verify', { token }).then(value => {
-      store.commit(types.SHOW_INFO, value.data)
-      router.push('/login')
-      return value
-    }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data)
-      router.push('/login')
-      return Promise.reject(error)
-    })
+    return this.http.post('/auth/verify', { token })
   },
 
   reset (username) {
-    return this.http.post('/auth/reset', { username }).then(value => {
-      store.commit(types.SHOW_INFO, value.data)
-      router.push('/login')
-      return value
-    }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data)
-      return Promise.reject(error)
-    })
+    return this.http.post('/auth/reset', { username })
   },
 
   confirm (password, token) {
-    return this.http.post('/auth/confirm', { password, token }).then(value => {
-      store.commit(types.SHOW_INFO, value.data)
-      router.push('/login')
-      return value
-    }).catch(error => {
-      store.commit(types.SHOW_ERROR, error.response.data)
-      return Promise.reject(error)
-    })
+    return this.http.post('/auth/confirm', { password, token })
   }
 }

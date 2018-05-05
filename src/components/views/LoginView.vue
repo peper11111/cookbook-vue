@@ -23,20 +23,21 @@
 </template>
 
 <script>
+import base from '../../mixins/base'
 import form from '../../mixins/form'
-import { SHOW_INFO, SHOW_ERROR, SET_AUTH } from '../../store/mutation-types'
+import { SET_AUTH } from '../../store/mutation-types'
 
 export default {
   name: 'LoginView',
-  mixins: [ form ],
+  mixins: [ base, form ],
   methods: {
     login () {
       this.$api.auth.login(this.username, this.password).then(value => {
-        this.$store.commit(SHOW_INFO, value.data)
+        this.showInfo(value.data)
         this.$store.commit(SET_AUTH, { loggedIn: true })
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(error => {
-        this.$store.commit(SHOW_ERROR, error.response.data)
+        this.showError(error.response.data)
       })
     }
   }

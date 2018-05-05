@@ -19,7 +19,7 @@
 
 <script>
 import base from '../../mixins/base'
-import { SHOW_INFO, SHOW_ERROR, SET_AUTH } from '../../store/mutation-types'
+import { SET_AUTH } from '../../store/mutation-types'
 
 export default {
   name: 'ProfileView',
@@ -27,7 +27,7 @@ export default {
   methods: {
     logout () {
       this.$api.auth.logout().then(value => {
-        this.$store.commit(SHOW_INFO, value.data)
+        this.showInfo(value.data)
         this.$store.commit(SET_AUTH, { loggedIn: false })
         this.$router.push('/login')
       })
@@ -35,7 +35,7 @@ export default {
     upload () {
       const file = this.$refs.avatar.files[0]
       if (file.size > 10485760) { // 10MB
-        this.$store.commit(SHOW_ERROR, 'error.file-exceeds-limit')
+        this.showError('error.file-exceeds-limit')
         this.$refs.avatar.value = ''
       } else {
         this.$api.upload.create(file)

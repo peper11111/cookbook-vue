@@ -1,13 +1,10 @@
-import * as types from './mutation-types'
+import { SHOW_MESSAGE, SET_AUTH } from './mutation-types'
 
 export default {
-  [types.SHOW_ERROR] (state, payload) {
-    state.messages.push({ text: payload, type: 'error' })
+  [SHOW_MESSAGE] (state, payload) {
+    state.messages.push({ text: payload.text, type: payload.type })
   },
-  [types.SHOW_INFO] (state, payload) {
-    state.messages.push({ text: payload, type: 'info' })
-  },
-  [types.SET_AUTH] (state, payload) {
+  [SET_AUTH] (state, payload) {
     state.auth.loggedIn = payload.loggedIn
   }
 }

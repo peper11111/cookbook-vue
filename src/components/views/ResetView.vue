@@ -15,14 +15,20 @@
 </template>
 
 <script>
+import base from '../../mixins/base'
 import form from '../../mixins/form'
 
 export default {
   name: 'ResetView',
-  mixins: [ form ],
+  mixins: [ base, form ],
   methods: {
     reset () {
-      this.$api.auth.reset(this.username)
+      this.$api.auth.reset(this.username).then(value => {
+        this.showInfo(value.data)
+        this.$router.push('/login')
+      }).catch(error => {
+        this.showError(error.response.data)
+      })
     }
   }
 }
