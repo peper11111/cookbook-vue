@@ -103,10 +103,8 @@ export default {
       }
     },
     deleteAvatar () {
-      this.$api.upload.delete(this.currentUser.avatar).then(() => {
+      this.$api.user.update(this.currentUser.id, { avatar: '' }).then(() => {
         this.currentUser.avatar = null
-        return this.$api.user.update(this.currentUser.id, { avatar: '' })
-      }).then(() => {
         this.showInfo('info.avatar-delete-successful')
       })
     },
