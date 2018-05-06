@@ -7,10 +7,11 @@
       <input class="form__margin form__input" type="text" :placeholder="$t('form.username')" v-model="username"/>
       <div class="form__margin form__wrapper">
         <input class="form__input" :type="getPasswordFieldType()" :placeholder="$t('form.password')" v-model="password"/>
-        <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
-           @click="togglePassword()" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
+        <div class="form__icon icon-button icon-button--toggle" :class="{ 'active': passwordVisible }" @click="togglePassword()">
+          <i class="material-icons" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
+        </div>
       </div>
-      <input class="form__button" type="submit" :value="$t('form.register')"/>
+      <input class="button button--primary" type="submit" :value="$t('form.register')"/>
     </form>
     <p class="typography__info typography--center">
       <span v-text="$t('form.have-account')"></span>

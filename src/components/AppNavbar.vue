@@ -5,9 +5,9 @@
     <span class="typography__logo typography__logo--small" v-text="$t('app')"></span>
   </router-link>
   <div class="app-navbar__row">
-    <router-link class="app-navbar__item" to="/" exact><i class="material-icons">explore</i></router-link>
-    <router-link class="app-navbar__item" to="/favorite"><i class="material-icons">favorite</i></router-link>
-    <router-link class="app-navbar__item" to="/profile"><i class="material-icons">person</i></router-link>
+    <router-link class="icon-button icon-button--toggle icon-button--hover" to="/" exact><i class="material-icons">explore</i></router-link>
+    <router-link class="icon-button icon-button--toggle icon-button--hover" to="/favorite"><i class="material-icons">favorite</i></router-link>
+    <router-link class="icon-button icon-button--toggle icon-button--hover" to="/profile"><i class="material-icons">person</i></router-link>
   </div>
 </nav>
 </template>
@@ -48,16 +48,6 @@ export default {
     flex-direction: row;
     text-decoration: none;
     align-items: center;
-  }
-
-  &__item {
-    color: $text-color-tertiary;
-    padding: 0 4px;
-    cursor: pointer;
-
-    &:hover, &.router-link-active {
-      color: $text-color-primary;
-    }
   }
 }
 </style>

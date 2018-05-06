@@ -4,7 +4,7 @@
     <h1 class="typography__logo typography--center" v-text="$t('app')"></h1>
     <form class="card__form form" @submit.prevent="reset()">
       <input class="form__margin form__input" type="text" :placeholder="$t('form.username-or-email')" v-model="username"/>
-      <input class="form__button" type="submit" :value="$t('form.reset-password')"/>
+      <input class="button button--primary" type="submit" :value="$t('form.reset-password')"/>
     </form>
     <p class="typography__info typography--center">
       <span v-text="$t('form.remember-password')"></span>

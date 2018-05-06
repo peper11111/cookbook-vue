@@ -17,16 +17,13 @@
     }
   }
 
-  &__input, &__button {
+  &__input {
     height: 32px;
     border-radius: 2px;
     outline: none;
     box-sizing: border-box;
     padding: 8px 16px;
     width: 100%;
-  }
-
-  &__input {
     border: 1px solid $color-grey-300;
 
     &:focus {
@@ -34,24 +31,9 @@
     }
   }
 
-  &__button {
-    border: none;
-    background-color: $color-primary;
-    cursor: pointer;
-    color: $color-white;
-  }
-
   &__icon {
     position: absolute;
-    top: 7px;
-    right: 8px;
-    cursor: pointer;
-    color: $text-color-tertiary;
-    user-select: none;
-    font-size: 18px;
-
-    &.active {
-      color: $text-color-primary;
-    }
+    top: 0;
+    right: 0;
   }
 }

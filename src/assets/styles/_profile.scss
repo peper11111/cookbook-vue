@@ -62,24 +62,6 @@
   }
 
   &__button {
-    background: none;
-    border: none;
-    box-sizing: border-box;
-    margin-left: 16px;
-    cursor: pointer;
-    outline: none;
-    user-select: none;
-
-    &--bordered {
-      border: 1px solid $color-grey-300;
-      border-radius: 2px;
-      padding: 8px 16px;
-      color: $text-color-secondary;
-
-      &:hover {
-        border-color: $color-primary;
-        color: $text-color-primary;
-      }
-    }
+    margin: 0 8px 0 16px;
   }
 }

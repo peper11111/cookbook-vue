@@ -12,8 +12,10 @@
       <div class="profile__content">
         <div class="profile__row">
           <span class="typography__header" v-text="currentUser.username"></span>
-          <button class="profile__button profile__button--bordered" v-text="$t('profile.edit')"></button>
-          <i class="material-icons profile__button" ref="toggle" @click.stop="toggleDropdown()">more_vert</i>
+          <div class="profile__button button button--border" v-text="$t('profile.edit')"></div>
+          <div class="icon-button" ref="toggle" @click.stop="toggleDropdown()">
+            <i class="material-icons" >more_vert</i>
+          </div>
           <ul class="dropdown dropdown--list" ref="dropdown">
             <li v-text="$t('profile.add-recipe')"></li>
             <li v-if="currentUser.avatar" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
