@@ -16,22 +16,17 @@
   input {
     font-family: inherit;
     font-size: inherit;
-    line-height: inherit;
-    color: inherit;
 
     &::placeholder {
       font-family: inherit;
       color: $text-color-secondary;
       font-size: 12px;
-      line-height: 18px;
     }
   }
 
   button {
     font-family: inherit;
     font-size: inherit;
-    line-height: inherit;
-    color: inherit;
   }
 
   &--mark {
@@ -40,6 +35,10 @@
 
   &--hint {
     color: $text-color-secondary;
+  }
+
+  &--invert {
+    color: $color-white;
   }
 
   &--pointer {
