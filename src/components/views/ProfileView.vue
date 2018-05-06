@@ -17,7 +17,7 @@
             <i class="material-icons" >more_vert</i>
           </div>
           <ul class="dropdown dropdown--list" ref="dropdown">
-            <li v-text="$t('profile.add-recipe')"></li>
+            <router-link tag="li" to="/new-recipe" v-text="$t('profile.add-recipe')"></router-link>
             <li v-if="currentUser.avatar" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
             <li v-text="$t('profile.logout')" @click="logout()"></li>
           </ul>
