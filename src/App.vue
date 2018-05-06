@@ -1,5 +1,5 @@
 <template>
-<div class="app">
+<div class="app typography">
   <app-navbar v-if="loggedIn"></app-navbar>
   <router-view></router-view>
   <app-snackbar></app-snackbar>

@@ -1,0 +1,83 @@
+@import './variables';
+
+.typography {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+  color: $text-color-primary;
+  text-decoration: none;
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+
+    &::placeholder {
+      font-family: inherit;
+      color: $text-color-secondary;
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+
+  button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  &--mark {
+    color: $color-primary;
+  }
+
+  &--hint {
+    color: $text-color-secondary;
+  }
+
+  &--pointer {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &--bold {
+    font-weight: bold;
+  }
+
+  &--center {
+    text-align: center;
+  }
+
+  &--right {
+    text-align: right;
+  }
+
+  &__logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 54px;
+    line-height: 60px;
+    color: $text-color-primary;
+
+    &--small {
+      font-size: 24px;
+      line-height: 30px;
+    }
+  }
+
+  &__header {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  &__info {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

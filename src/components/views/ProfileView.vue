@@ -11,7 +11,7 @@
       </div>
       <div class="profile__content">
         <div class="profile__row">
-          <span class="profile__text profile__text--header" v-text="currentUser.username"></span>
+          <span class="typography__header" v-text="currentUser.username"></span>
           <button class="profile__button profile__button--bordered" v-text="$t('profile.edit')"></button>
           <i class="material-icons profile__button" ref="toggle" @click.stop="toggleDropdown()">more_vert</i>
           <ul class="dropdown dropdown--list" ref="dropdown">
@@ -21,12 +21,12 @@
           </ul>
         </div>
         <div class="profile__row">
-          <span class="profile__text profile__text--bold" v-text="currentUser.recipes || 0"></span>
-          <span class="profile__text profile__text--label" v-text="$t('profile.recipes')"></span>
-          <span class="profile__text profile__text--bold" v-text="currentUser.followers || 0"></span>
-          <span class="profile__text profile__text--label" v-text="$t('profile.followers')"></span>
-          <span class="profile__text profile__text--bold" v-text="currentUser.following || 0"></span>
-          <span class="profile__text profile__text--label" v-text="$t('profile.following')"></span>
+          <span class="typography--bold" v-text="currentUser.recipes || 0"></span>
+          <span class="profile__label" v-text="$t('profile.recipes')"></span>
+          <span class="typography--bold" v-text="currentUser.followers || 0"></span>
+          <span class="profile__label" v-text="$t('profile.followers')"></span>
+          <span class="typography--bold" v-text="currentUser.following || 0"></span>
+          <span class="profile__label" v-text="$t('profile.following')"></span>
         </div>
         <div class="profile__row">
           <span class="profile__text"></span>
@@ -35,7 +35,7 @@
     </div>
     <div class="view__separator"></div>
     <div class="grid">
-      <p class="grid__text grid__text--info grid__text--center" v-text="$t('grid.no-data')"></p>
+      <p class="typography--center" v-text="$t('grid.no-data')"></p>
     </div>
   </div>
 </div>

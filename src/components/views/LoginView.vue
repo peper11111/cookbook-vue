@@ -1,7 +1,7 @@
 <template>
 <div class="login-view view view--center">
   <div class="card">
-    <h1 class="card__header" v-text="$t('app')"></h1>
+    <h1 class="typography__logo typography--center" v-text="$t('app')"></h1>
     <form class="card__form form" @submit.prevent="login()">
       <input class="form__margin form__input" type="text" :placeholder="$t('form.username-or-email')" v-model="username"/>
       <div class="form__margin form__wrapper">
@@ -9,14 +9,14 @@
         <i class="material-icons form__icon" :class="{ 'active': passwordVisible }"
           @click="togglePassword()" v-text="passwordVisible ? 'visibility' : 'visibility_off'"></i>
       </div>
-      <p class="form__margin card__text card__text--right card__text--hint">
-        <router-link to="/reset" v-text="$t('form.forgot-password')"></router-link>
+      <p class="form__margin typography__info typography--right">
+        <router-link class="typography--hint" to="/reset" v-text="$t('form.forgot-password')"></router-link>
       </p>
       <input class="form__button" type="submit" :value="$t('form.login')"/>
     </form>
-    <p class="card__text card__text--action">
+    <p class="typography__info typography--center">
       <span v-text="$t('form.not-have-account')"></span>
-      <router-link to="/register" v-text="$t('form.register')"></router-link>
+      <router-link class="typography--mark" to="/register" v-text="$t('form.register')"></router-link>
     </p>
   </div>
 </div>

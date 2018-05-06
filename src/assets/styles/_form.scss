@@ -3,7 +3,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   &__margin {
     margin-bottom: 8px;
@@ -19,25 +18,16 @@
   }
 
   &__input, &__button {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
     height: 32px;
     border-radius: 2px;
     outline: none;
     box-sizing: border-box;
     padding: 8px 16px;
     width: 100%;
-    color: $color-text;
   }
 
   &__input {
     border: 1px solid $color-grey-300;
-
-    &::placeholder {
-      font-size: 12px;
-      font-family: 'Roboto', sans-serif;
-      color: $color-grey-600;
-    }
 
     &:focus {
       border-color: $color-primary;
@@ -56,12 +46,12 @@
     top: 7px;
     right: 8px;
     cursor: pointer;
-    color: $color-grey-400;
+    color: $text-color-tertiary;
     user-select: none;
     font-size: 18px;
 
     &.active {
-      color: $color-grey-900;
+      color: $text-color-primary;
     }
   }
 }

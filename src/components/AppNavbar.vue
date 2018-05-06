@@ -2,7 +2,7 @@
 <nav class="app-navbar">
   <router-link class="app-navbar__row" to="/">
     <img class="app-navbar__logo" src="static/favicon.png"/>
-    <span class="app-navbar__header" v-text="$t('app')"></span>
+    <span class="typography__logo typography__logo--small" v-text="$t('app')"></span>
   </router-link>
   <div class="app-navbar__row">
     <router-link class="app-navbar__item" to="/" exact><i class="material-icons">explore</i></router-link>
@@ -40,13 +40,7 @@ export default {
   &__logo {
     width: 32px;
     height: 32px;
-  }
-
-  &__header {
-    font-family: 'Dancing Script', cursive;
-    color: $color-black;
-    font-size: 24px;
-    padding: 0 4px;
+    margin-right: 4px;
   }
 
   &__row {
@@ -57,12 +51,12 @@ export default {
   }
 
   &__item {
-    color: $color-grey-300;
+    color: $text-color-tertiary;
     padding: 0 4px;
     cursor: pointer;
 
     &:hover, &.router-link-active {
-      color: $color-text;
+      color: $text-color-primary;
     }
   }
 }

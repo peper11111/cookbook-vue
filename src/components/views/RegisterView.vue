@@ -1,7 +1,7 @@
 <template>
 <div class="register-view view view--center">
   <div class="card">
-    <h1 class="card__header" v-text="$t('app')"></h1>
+    <h1 class="typography__logo typography--center" v-text="$t('app')"></h1>
     <form class="card__form form" @submit.prevent="register()">
       <input class="form__margin form__input" type="email" :placeholder="$t('form.email')" v-model="email"/>
       <input class="form__margin form__input" type="text" :placeholder="$t('form.username')" v-model="username"/>
@@ -12,9 +12,9 @@
       </div>
       <input class="form__button" type="submit" :value="$t('form.register')"/>
     </form>
-    <p class="card__text card__text--action">
+    <p class="typography__info typography--center">
       <span v-text="$t('form.have-account')"></span>
-      <router-link to="/login" v-text="$t('form.login')"></router-link>
+      <router-link class="typography--mark" to="/login" v-text="$t('form.login')"></router-link>
     </p>
   </div>
 </div>
