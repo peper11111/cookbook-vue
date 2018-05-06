@@ -22,7 +22,11 @@
     "following": "obserwowanie",
     "edit": "Edytuj profil",
     "delete-avatar": "Usuń awatar",
+    "add-recipe": "Dodaj przepis",
     "logout": "Wyloguj"
+  },
+  "grid": {
+    "no-data": "Brak wpisów do pokazania"
   },
   "error": {
     "missing-email": "Email nie może być pusty",

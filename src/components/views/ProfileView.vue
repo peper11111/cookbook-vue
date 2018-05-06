@@ -15,6 +15,7 @@
           <button class="profile__button profile__button--bordered" v-text="$t('profile.edit')"></button>
           <i class="material-icons profile__button" ref="toggle" @click.stop="toggleDropdown()">more_vert</i>
           <ul class="dropdown dropdown--list" ref="dropdown">
+            <li v-text="$t('profile.add-recipe')"></li>
             <li v-if="currentUser.avatar" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
             <li v-text="$t('profile.logout')" @click="logout()"></li>
           </ul>
@@ -31,6 +32,10 @@
           <span class="profile__text"></span>
         </div>
       </div>
+    </div>
+    <div class="view__separator"></div>
+    <div class="grid">
+      <p class="grid__text grid__text--info grid__text--center" v-text="$t('grid.no-data')"></p>
     </div>
   </div>
 </div>

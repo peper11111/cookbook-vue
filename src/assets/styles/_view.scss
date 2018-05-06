@@ -24,4 +24,11 @@
     width: 100%;
     padding: 64px;
   }
+
+  &__separator {
+    margin: 32px;
+    background-color: $color-grey-300;
+    border: none;
+    height: 1px;
+  }
 }
