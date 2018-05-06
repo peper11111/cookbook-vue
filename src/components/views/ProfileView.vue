@@ -3,8 +3,8 @@
   <div class="view__wrapper">
     <div class="profile">
       <div class="profile__image" @click="triggerAvatar()">
-        <img :src="url(currentUser.avatar)">
-        <input type="file" accept="image/*" style="display: none" ref="avatar" @change="upload()"/>
+        <img :src="currentUser.avatar ? url(currentUser.avatar) : '/static/blank-profile.jpg'">
+        <input type="file" accept="image/*" style="display: none" ref="avatar" @change="uploadAvatar()"/>
         <div class="profile__overlay">
           <i class="material-icons">camera_alt</i>
         </div>
@@ -13,11 +13,15 @@
         <div class="profile__row">
           <span class="profile__text profile__text--header" v-text="currentUser.username"></span>
           <button class="profile__button profile__button--bordered" v-text="$t('profile.edit')"></button>
-          <i class="material-icons profile__button" @click="logout()">exit_to_app</i>
+          <i class="material-icons profile__button" ref="toggle" @click.stop="toggleDropdown()">more_vert</i>
+          <ul class="dropdown dropdown--list" ref="dropdown">
+            <li v-if="currentUser.avatar" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
+            <li v-text="$t('profile.logout')" @click="logout()"></li>
+          </ul>
         </div>
         <div class="profile__row">
-          <span class="profile__text profile__text--bold" v-text="currentUser.posts || 0"></span>
-          <span class="profile__text profile__text--label" v-text="$t('profile.posts')"></span>
+          <span class="profile__text profile__text--bold" v-text="currentUser.recipes || 0"></span>
+          <span class="profile__text profile__text--label" v-text="$t('profile.recipes')"></span>
           <span class="profile__text profile__text--bold" v-text="currentUser.followers || 0"></span>
           <span class="profile__text profile__text--label" v-text="$t('profile.followers')"></span>
           <span class="profile__text profile__text--bold" v-text="currentUser.following || 0"></span>
@@ -48,7 +52,21 @@ export default {
   created () {
     this.fetchData()
   },
+  mounted () {
+    window.addEventListener('click', this.closeDropdown)
+  },
+  beforeDestroy () {
+    window.removeEventListener('click', this.closeDropdown)
+  },
   methods: {
+    toggleDropdown () {
+      this.$refs.dropdown.style.top = `${this.$refs.toggle.offsetTop + this.$refs.toggle.offsetHeight + 8}px`
+      this.$refs.dropdown.style.left = `${this.$refs.toggle.offsetLeft}px`
+      this.$refs.dropdown.classList.toggle('active')
+    },
+    closeDropdown () {
+      this.$refs.dropdown.classList.remove('active')
+    },
     fetchData () {
       this.loading = true
       this.$api.user.get(this.$store.state.auth.currentUserId).then(value => {
@@ -63,7 +81,7 @@ export default {
         this.$router.push('/login')
       })
     },
-    upload () {
+    uploadAvatar () {
       const file = this.$refs.avatar.files[0]
       if (file.size > 10485760) { // 10MB
         this.showError('error.file-exceeds-limit')
@@ -76,6 +94,14 @@ export default {
           this.showInfo('info.avatar-update-successful')
         })
       }
+    },
+    deleteAvatar () {
+      this.$api.upload.delete(this.currentUser.avatar).then(() => {
+        this.currentUser.avatar = null
+        return this.$api.user.update(this.currentUser.id, { avatar: '' })
+      }).then(() => {
+        this.showInfo('info.avatar-delete-successful')
+      })
     },
     triggerAvatar () {
       this.$refs.avatar.click()

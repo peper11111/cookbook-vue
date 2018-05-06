@@ -17,10 +17,12 @@
     "change-password": "Zmień hasło"
   },
   "profile": {
-    "posts": "posty",
+    "recipes": "przepisy",
     "followers": "obserwujący",
     "following": "obserwowanie",
-    "edit": "Edytuj profil"
+    "edit": "Edytuj profil",
+    "delete-avatar": "Usuń awatar",
+    "logout": "Wyloguj"
   },
   "error": {
     "missing-email": "Email nie może być pusty",
@@ -44,6 +46,7 @@
     "password-reset": "Twoje hasło zostało zmienione",
     "logout-successful": "Zostałeś pomyślnie wylogowany",
     "user-update-successful": "Twoje dane zostały pomyślnie zaktualizowane",
-    "avatar-update-successful": "Twój avatar został pomyślnie zaktualizowany"
+    "avatar-update-successful": "Twój awatar został pomyślnie zaktualizowany",
+    "avatar-delete-successful": "Twój awatar został pomyślnie usunięty"
   }
 }
