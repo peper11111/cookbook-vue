@@ -1,27 +1,27 @@
 <template>
-<nav class="app-topbar">
-  <router-link class="app-topbar__row" to="/">
-    <img class="app-topbar__logo" src="static/favicon.png"/>
-    <span class="app-topbar__header" v-text="$t('app')"></span>
+<nav class="app-navbar">
+  <router-link class="app-navbar__row" to="/">
+    <img class="app-navbar__logo" src="static/favicon.png"/>
+    <span class="app-navbar__header" v-text="$t('app')"></span>
   </router-link>
-  <div class="app-topbar__row">
-    <router-link class="app-topbar__item" to="/" exact><i class="material-icons">explore</i></router-link>
-    <router-link class="app-topbar__item" to="/favorite"><i class="material-icons">favorite</i></router-link>
-    <router-link class="app-topbar__item" to="/profile"><i class="material-icons">person</i></router-link>
+  <div class="app-navbar__row">
+    <router-link class="app-navbar__item" to="/" exact><i class="material-icons">explore</i></router-link>
+    <router-link class="app-navbar__item" to="/favorite"><i class="material-icons">favorite</i></router-link>
+    <router-link class="app-navbar__item" to="/profile"><i class="material-icons">person</i></router-link>
   </div>
 </nav>
 </template>
 
 <script>
 export default {
-  name: 'AppTopbar'
+  name: 'AppNavbar'
 }
 </script>
 
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.app-topbar {
+.app-navbar {
   position: fixed;
   top: 0;
   left: 0;

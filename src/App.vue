@@ -1,19 +1,19 @@
 <template>
 <div class="app">
-  <app-topbar v-if="loggedIn"></app-topbar>
+  <app-navbar v-if="loggedIn"></app-navbar>
   <router-view></router-view>
   <app-snackbar></app-snackbar>
 </div>
 </template>
 
 <script>
-import AppTopbar from './components/AppTopbar'
+import AppNavbar from './components/AppNavbar'
 import AppSnackbar from './components/AppSnackbar'
 
 export default {
   name: 'App',
   components: {
-    AppTopbar,
+    AppNavbar,
     AppSnackbar
   },
   computed: {
