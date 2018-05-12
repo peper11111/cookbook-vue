@@ -1,12 +1,12 @@
-const ConfirmView = () => import('@/components/views/ConfirmView')
-const FavoriteView = () => import('@/components/views/FavoriteView')
-const HomeView = () => import('@/components/views/HomeView')
-const LoginView = () => import('@/components/views/LoginView')
-const NewRecipeView = () => import('@/components/views/NewRecipeView')
-const ProfileView = () => import('@/components/views/ProfileView')
-const RegisterView = () => import('@/components/views/RegisterView')
-const ResetView = () => import('@/components/views/ResetView')
-const VerifyView = () => import('@/components/views/VerifyView')
+const ConfirmView = () => import('@/pages/ConfirmView')
+const FavoriteView = () => import('@/pages/FavoriteView')
+const HomeView = () => import('@/pages/HomeView')
+const LoginView = () => import('@/pages/LoginView')
+const NewRecipeView = () => import('@/pages/NewRecipeView')
+const ProfileView = () => import('@/pages/ProfileView')
+const RegisterView = () => import('@/pages/RegisterView')
+const ResetView = () => import('@/pages/ResetView')
+const VerifyView = () => import('@/pages/VerifyView')
 
 export default [
   { path: '/', component: HomeView, meta: { requiresAuth: true } },
