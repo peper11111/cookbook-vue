@@ -1,4 +1,4 @@
-import { SHOW_MESSAGE } from '../store/mutation-types'
+import { SHOW_MESSAGE } from '../plugins/store/mutation-types'
 
 export default {
   methods: {

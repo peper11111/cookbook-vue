@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import base from '../../mixins/base'
+import base from '@/mixins/base'
 
 export default {
   name: 'VerifyView',

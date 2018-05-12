@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import base from '../../mixins/base'
-import { SET_AUTH } from '../../store/mutation-types'
+import base from '@/mixins/base'
+import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 export default {
   name: 'ProfileView',

@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import base from '../../mixins/base'
-import form from '../../mixins/form'
-import { SET_AUTH } from '../../store/mutation-types'
+import base from '@/mixins/base'
+import form from '@/mixins/form'
+import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 export default {
   name: 'LoginView',

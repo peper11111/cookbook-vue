@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import api from '@/plugins/api'
+import store from '@/plugins/store'
+import { SET_AUTH } from '@/plugins/store/mutation-types'
 import routes from './routes'
-import api from '../api'
-import store from '../store'
-import { SET_AUTH } from '../store/mutation-types'
 
 Vue.use(VueRouter)
 

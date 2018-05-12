@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import base from '../../mixins/base'
-import form from '../../mixins/form'
+import base from '@/mixins/base'
+import form from '@/mixins/form'
 
 export default {
   name: 'RegisterView',
