@@ -7,14 +7,11 @@
 </template>
 
 <script>
-import AppNavbar from './components/AppNavbar'
-import AppSnackbar from './components/AppSnackbar'
-
 export default {
   name: 'App',
   components: {
-    AppNavbar,
-    AppSnackbar
+    AppNavbar: () => import('./components/AppNavbar'),
+    AppSnackbar: () => import('./components/AppSnackbar')
   },
   computed: {
     loggedIn () {

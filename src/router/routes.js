@@ -1,12 +1,12 @@
-import ConfirmView from '../components/views/ConfirmView'
-import FavoriteView from '../components/views/FavoriteView'
-import HomeView from '../components/views/HomeView'
-import LoginView from '../components/views/LoginView'
-import NewRecipeView from '../components/views/NewRecipeView'
-import ProfileView from '../components/views/ProfileView'
-import RegisterView from '../components/views/RegisterView'
-import ResetView from '../components/views/ResetView'
-import VerifyView from '../components/views/VerifyView'
+const ConfirmView = () => import('../components/views/ConfirmView')
+const FavoriteView = () => import('../components/views/FavoriteView')
+const HomeView = () => import('../components/views/HomeView')
+const LoginView = () => import('../components/views/LoginView')
+const NewRecipeView = () => import('../components/views/NewRecipeView')
+const ProfileView = () => import('../components/views/ProfileView')
+const RegisterView = () => import('../components/views/RegisterView')
+const ResetView = () => import('../components/views/ResetView')
+const VerifyView = () => import('../components/views/VerifyView')
 
 export default [
   { path: '/', component: HomeView, meta: { requiresAuth: true } },
