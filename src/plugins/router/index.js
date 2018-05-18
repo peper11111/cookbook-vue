@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import api from '@/plugins/api'
+
 import store from '@/plugins/store'
-import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 Vue.use(VueRouter)
 
@@ -33,11 +32,12 @@ const router = new VueRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.state.auth.loggedIn) {
+    if (!store.state.loggedIn) {
       next({
         path: '/login',
-        query: { redirect: to.fullPath !== '/' ? to.fullPath : undefined }
+        query: { redirect: to.fullPath }
       })
     } else {
       next()

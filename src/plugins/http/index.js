@@ -3,7 +3,6 @@ import Vue from 'vue'
 
 import router from '@/plugins/router'
 import store from '@/plugins/store'
-import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 axios.install = (_Vue) => {
   _Vue.mixin({
@@ -27,7 +26,7 @@ const http = axios.create({
 
 http.interceptors.response.use(value => value, error => {
   if (error.response.status === 401) {
-    store.commit(SET_AUTH, { loggedIn: false, currentUserId: null })
+    store.commit('logout')
     router.push('/login')
   }
   return Promise.reject(error)

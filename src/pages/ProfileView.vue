@@ -45,7 +45,6 @@
 
 <script>
 import base from '@/mixins/base'
-import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 export default {
   name: 'ProfileView',
@@ -76,15 +75,15 @@ export default {
     },
     fetchData () {
       this.loading = true
-      this.$api.user.get(this.$store.state.auth.currentUserId).then(value => {
+      this.$api.user.get(this.$store.state.currentUser.id).then(value => {
         this.currentUser = value.data
         this.loading = false
       })
     },
     logout () {
-      this.$api.auth.logout().then(() => {
+      this.$http.post('/auth/logout').then(() => {
         this.showInfo('info.logout-successful')
-        this.$store.commit(SET_AUTH, { loggedIn: false, currentUserId: null })
+        this.$store.commit('logout')
         this.$router.push('/login')
       })
     },

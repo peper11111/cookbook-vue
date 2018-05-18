@@ -1,7 +1,5 @@
 import axios from 'axios'
 import router from '@/plugins/router'
-import store from '@/plugins/store'
-import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 const http = axios.create({
   baseURL: 'http://localhost:8000/api/v1',
@@ -10,7 +8,6 @@ const http = axios.create({
 
 http.interceptors.response.use(value => value, error => {
   if (error.response.status === 401) {
-    store.commit(SET_AUTH, { loggedIn: false, currentUserId: null })
     router.push('/login')
   }
   return Promise.reject(error)

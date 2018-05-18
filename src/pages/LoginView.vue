@@ -26,18 +26,21 @@
 <script>
 import base from '@/mixins/base'
 import form from '@/mixins/form'
-import { SET_AUTH } from '@/plugins/store/mutation-types'
 
 export default {
   name: 'LoginView',
   mixins: [ base, form ],
   methods: {
     login () {
-      this.$api.auth.login(this.username, this.password).then(() => {
-        return this.$api.auth.current()
+      const formData = new FormData()
+      formData.set('username', this.username)
+      formData.set('password', this.password)
+
+      this.$http.post('/auth/login', formData).then(() => {
+        return this.$http.get('/users/current')
       }).then(value => {
         this.showInfo('info.login-successful')
-        this.$store.commit(SET_AUTH, { loggedIn: true, currentUserId: value.data })
+        this.$store.commit('login', value.data)
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(error => {
         this.showError(error.response.data)
