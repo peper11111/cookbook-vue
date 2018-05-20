@@ -2,13 +2,10 @@
 <div class="profile-view view" v-if="!loading">
   <div class="view__wrapper">
     <div class="profile">
-      <div class="profile__image" @click="triggerAvatar()">
-        <img :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-profile.jpg'">
-        <input type="file" accept="image/*" style="display: none" ref="avatar" @change="uploadAvatar()"/>
-        <div class="profile__overlay">
-          <i class="material-icons">camera_alt</i>
-        </div>
-      </div>
+      <uploader class="profile__image c-uploader--round"
+                :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-profile.jpg'"
+                @upload="updateAvatar">
+      </uploader>
       <div class="profile__content">
         <div class="profile__row">
           <span class="typography__header" v-text="userDetails.name"></span>
@@ -48,6 +45,9 @@ import base from '@/mixins/base'
 
 export default {
   name: 'ProfileView',
+  components: {
+    Uploader: () => import('@/components/Uploader')
+  },
   mixins: [ base ],
   data () {
     return {
@@ -92,24 +92,12 @@ export default {
         this.$router.push('/login')
       })
     },
-    uploadAvatar () {
-      const file = this.$refs.avatar.files[0]
-      if (file && file.size > 10485760) { // 10MB
-        this.showError('error.file-exceeds-limit')
-        this.$refs.avatar.value = ''
-      } else {
-        let user
-        const formData = new FormData()
-        formData.set('file', file)
-
-        this.$http.post('/uploads', formData).then(value => {
-          user = { ...this.userDetails, avatarId: value.data }
-          return this.$http.put(`/users/${this.currentUserId}/details`, user)
-        }).then(() => {
-          this.userDetails = user
-          this.showInfo('info.avatar-update-successful')
-        })
-      }
+    updateAvatar (avatarId) {
+      const userDetails = { ...this.userDetails, avatarId }
+      this.$http.put(`/users/${this.currentUserId}/details`, userDetails).then(() => {
+        this.userDetails = userDetails
+        this.showInfo('info.avatar-update-successful')
+      })
     },
     deleteAvatar () {
       const user = { ...this.userDetails, avatarId: null }
@@ -119,9 +107,6 @@ export default {
         this.userDetails = user
         this.showInfo('info.avatar-delete-successful')
       })
-    },
-    triggerAvatar () {
-      this.$refs.avatar.click()
     }
   }
 }
