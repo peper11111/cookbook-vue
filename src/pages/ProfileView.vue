@@ -3,7 +3,7 @@
   <div class="view__wrapper">
     <div class="profile">
       <div class="profile__image" @click="triggerAvatar()">
-        <img :src="currentUser.avatar ? url(currentUser.avatar) : '/static/blank-profile.jpg'">
+        <img :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-profile.jpg'">
         <input type="file" accept="image/*" style="display: none" ref="avatar" @change="uploadAvatar()"/>
         <div class="profile__overlay">
           <i class="material-icons">camera_alt</i>
@@ -11,23 +11,23 @@
       </div>
       <div class="profile__content">
         <div class="profile__row">
-          <span class="typography__header" v-text="currentUser.username"></span>
+          <span class="typography__header" v-text="userDetails.name"></span>
           <div class="profile__button button button--border" v-text="$t('profile.edit')"></div>
           <div class="icon-button" ref="toggle" @click.stop="toggleDropdown()">
             <i class="material-icons" >more_vert</i>
           </div>
           <ul class="dropdown dropdown--list" ref="dropdown">
             <router-link tag="li" to="/new-recipe" v-text="$t('profile.add-recipe')"></router-link>
-            <li v-if="currentUser.avatar" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
+            <li v-if="userDetails.avatarId" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
             <li v-text="$t('profile.logout')" @click="logout()"></li>
           </ul>
         </div>
         <div class="profile__row">
-          <span class="typography--bold" v-text="currentUser.recipes || 0"></span>
+          <span class="typography--bold" v-text="userDetails.recipes || 0"></span>
           <span class="profile__label" v-text="$t('profile.recipes')"></span>
-          <span class="typography--bold" v-text="currentUser.followers || 0"></span>
+          <span class="typography--bold" v-text="userDetails.followers || 0"></span>
           <span class="profile__label" v-text="$t('profile.followers')"></span>
-          <span class="typography--bold" v-text="currentUser.following || 0"></span>
+          <span class="typography--bold" v-text="userDetails.following || 0"></span>
           <span class="profile__label" v-text="$t('profile.following')"></span>
         </div>
         <div class="profile__row">
@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       loading: false,
-      currentUser: {}
+      userDetails: {}
     }
   },
   created () {
@@ -63,6 +63,11 @@ export default {
   },
   beforeDestroy () {
     window.removeEventListener('click', this.closeDropdown)
+  },
+  computed: {
+    currentUserId () {
+      return this.$store.state.currentUser.id
+    }
   },
   methods: {
     toggleDropdown () {
@@ -75,8 +80,8 @@ export default {
     },
     fetchData () {
       this.loading = true
-      this.$api.user.get(this.$store.state.currentUser.id).then(value => {
-        this.currentUser = value.data
+      this.$http.get(`/users/${this.currentUserId}/details`).then(value => {
+        this.userDetails = value.data
         this.loading = false
       })
     },
@@ -89,21 +94,29 @@ export default {
     },
     uploadAvatar () {
       const file = this.$refs.avatar.files[0]
-      if (file.size > 10485760) { // 10MB
+      if (file && file.size > 10485760) { // 10MB
         this.showError('error.file-exceeds-limit')
         this.$refs.avatar.value = ''
       } else {
-        this.$api.upload.create(file).then(value => {
-          this.currentUser.avatar = value.data
-          return this.$api.user.update(this.currentUser.id, { avatar: value.data })
+        let user
+        const formData = new FormData()
+        formData.set('file', file)
+
+        this.$http.post('/uploads', formData).then(value => {
+          user = { ...this.userDetails, avatarId: value.data }
+          return this.$http.put(`/users/${this.currentUserId}/details`, user)
         }).then(() => {
+          this.userDetails = user
           this.showInfo('info.avatar-update-successful')
         })
       }
     },
     deleteAvatar () {
-      this.$api.user.update(this.currentUser.id, { avatar: '' }).then(() => {
-        this.currentUser.avatar = null
+      const user = { ...this.userDetails, avatarId: null }
+      this.$http.put(`/users/${this.currentUserId}/details`, user).then(() => {
+        return this.$http.delete(`/uploads/${this.userDetails.avatarId}`)
+      }).then(() => {
+        this.userDetails = user
         this.showInfo('info.avatar-delete-successful')
       })
     },
