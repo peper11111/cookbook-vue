@@ -4,9 +4,11 @@
          class="u-hide"
          ref="input"
          type="file"
+         v-if="active"
          @change="upload"/>
   <img :src="src" class="c-uploader__image"/>
   <div class="c-uploader__overlay"
+       v-if="active"
        @click="click">
     <i class="material-icons">camera_alt</i>
   </div>
@@ -18,7 +20,7 @@ import base from '@/mixins/base'
 
 export default {
   name: 'Uploader',
-  props: [ 'src' ],
+  props: [ 'active', 'src' ],
   mixins: [ base ],
   methods: {
     click () {
@@ -49,7 +51,6 @@ export default {
 .c-uploader {
   position: relative;
   user-select: none;
-  cursor: pointer;
 
   &__image {
     width: 100%;
@@ -71,6 +72,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.25);
     opacity: 0;
     border-radius: inherit;
+    cursor: pointer;
 
     &:hover {
       opacity: 1;
