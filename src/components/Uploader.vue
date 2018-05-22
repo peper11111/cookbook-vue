@@ -49,19 +49,14 @@ export default {
 .c-uploader {
   position: relative;
   user-select: none;
-
-  &--round {
-    .c-uploader__image,
-    .c-uploader__overlay {
-      border-radius: 50%;
-    }
-  }
+  cursor: pointer;
 
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    border-radius: inherit;
   }
 
   &__overlay {
@@ -75,7 +70,7 @@ export default {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.25);
     opacity: 0;
-    cursor: pointer;
+    border-radius: inherit;
 
     &:hover {
       opacity: 1;

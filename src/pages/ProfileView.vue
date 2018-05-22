@@ -2,7 +2,7 @@
 <div class="profile-view view" v-if="!loading">
   <div class="view__wrapper">
     <div class="profile">
-      <uploader class="profile__image c-uploader--round"
+      <uploader class="profile__image"
                 :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-profile.jpg'"
                 @upload="updateAvatar">
       </uploader>
