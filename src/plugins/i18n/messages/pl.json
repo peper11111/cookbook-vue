@@ -14,7 +14,8 @@
     "register": "Zarejestruj się",
     "reset-password": "Resetuj hasło",
     "generate-password": "Wygeneruj hasło",
-    "change-password": "Zmień hasło"
+    "change-password": "Zmień hasło",
+    "search": "Wyszukaj..."
   },
   "profile": {
     "recipes": "przepisy",

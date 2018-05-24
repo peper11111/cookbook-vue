@@ -5,7 +5,7 @@ import store from '@/plugins/store'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  linkActiveClass: 'active',
+  linkActiveClass: 'is-active',
   mode: 'history',
   routes: [
     {
