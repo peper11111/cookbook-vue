@@ -1,7 +1,15 @@
+@import './variables';
+
 .o-page {
+  margin-top: $toolbar-height;
+  height: calc(100vh - #{$toolbar-height});
+  box-sizing: border-box;
+  overflow: auto;
+
   &__wrapper {
     width: 100%;
     max-width: 1000px;
     box-sizing: border-box;
+    margin: auto;
   }
 }

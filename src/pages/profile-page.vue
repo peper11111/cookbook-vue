@@ -1,5 +1,5 @@
 <template>
-<div class="profile-view view">
+<div class="o-page">
   <div class="o-page__wrapper">
     <user-profile :id="currentUserId">
     </user-profile>
