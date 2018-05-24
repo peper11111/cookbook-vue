@@ -2,7 +2,7 @@
 <div
   :class="[ type, visible ? 'active' : '' ]"
   v-text="text"
-  class="app-snackbar"
+  class="c-app-snackbar"
 >
 </div>
 </template>
@@ -60,7 +60,7 @@ export default {
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.app-snackbar {
+.c-app-snackbar {
   position: fixed;
   left: 24px;
   bottom: 24px;
