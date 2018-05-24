@@ -20,7 +20,7 @@ new Vue({
   router,
   store,
   components: {
-    App: () => import('./App')
+    App: () => import('./app')
   },
   template: '<App/>'
 })
