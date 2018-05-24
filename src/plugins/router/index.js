@@ -1,34 +1,57 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 import store from '@/plugins/store'
 
 Vue.use(VueRouter)
 
-const ConfirmView = () => import('@/pages/ConfirmView')
-const FavoriteView = () => import('@/pages/FavoriteView')
-const HomeView = () => import('@/pages/HomeView')
-const LoginView = () => import('@/pages/LoginView')
-const NewRecipeView = () => import('@/pages/NewRecipeView')
-const ProfilePage = () => import('@/pages/profile-page')
-const RegisterView = () => import('@/pages/RegisterView')
-const ResetView = () => import('@/pages/ResetView')
-const VerifyView = () => import('@/pages/VerifyView')
-
 const router = new VueRouter({
-  mode: 'history',
   linkActiveClass: 'active',
+  mode: 'history',
   routes: [
-    { path: '/', component: HomeView, meta: { requiresAuth: true } },
-    { path: '/favorite', component: FavoriteView, meta: { requiresAuth: true } },
-    { path: '/profile', component: ProfilePage, meta: { requiresAuth: true } },
-    { path: '/new-recipe', component: NewRecipeView, meta: { requiresAuth: true } },
-    { path: '/login', component: LoginView },
-    { path: '/register', component: RegisterView },
-    { path: '/reset', component: ResetView },
-    { path: '/confirm', component: ConfirmView },
-    { path: '/verify', component: VerifyView },
-    { path: '*', redirect: '/' }
+    {
+      path: '/',
+      component: () => import('@/pages/home-page'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/favorite',
+      component: () => import('@/pages/favorite-page'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/profile',
+      component: () => import('@/pages/profile-page'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/new-recipe',
+      component: () => import('@/pages/new-recipe-page'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/login',
+      component: () => import('@/pages/login-page')
+    },
+    {
+      path: '/register',
+      component: () => import('@/pages/register-page')
+    },
+    {
+      path: '/reset',
+      component: () => import('@/pages/reset-page')
+    },
+    {
+      path: '/confirm',
+      component: () => import('@/pages/confirm-page')
+    },
+    {
+      path: '/verify',
+      component: () => import('@/pages/verify-page')
+    },
+    {
+      path: '*',
+      redirect: '/'
+    }
   ]
 })
 
