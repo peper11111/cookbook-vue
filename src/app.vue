@@ -1,8 +1,14 @@
 <template>
-<div class="app typography" v-if="!loading">
-  <app-navbar v-if="loggedIn"></app-navbar>
-  <router-view></router-view>
-  <app-snackbar></app-snackbar>
+<div
+  v-if="!loading"
+  class="app typography"
+>
+  <app-navbar v-if="loggedIn">
+  </app-navbar>
+  <router-view>
+  </router-view>
+  <app-snackbar>
+  </app-snackbar>
 </div>
 </template>
 
@@ -10,22 +16,22 @@
 export default {
   name: 'App',
   components: {
-    AppNavbar: () => import('./components/AppNavbar'),
-    AppSnackbar: () => import('./components/AppSnackbar')
+    AppNavbar: () => import('@/components/app-navbar'),
+    AppSnackbar: () => import('@/components/app-snackbar')
   },
   data () {
     return {
       loading: false
     }
   },
-  created () {
-    if (this.loggedIn) {
-      this.fetchData()
-    }
-  },
   computed: {
     loggedIn () {
       return this.$store.state.loggedIn
+    }
+  },
+  created () {
+    if (this.loggedIn) {
+      this.fetchData()
     }
   },
   methods: {

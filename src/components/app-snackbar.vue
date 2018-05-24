@@ -1,5 +1,10 @@
 <template>
-<div class="app-snackbar" v-text="text" :class="[ type, visible ? 'active' : '' ]"></div>
+<div
+  :class="[ type, visible ? 'active' : '' ]"
+  v-text="text"
+  class="app-snackbar"
+>
+</div>
 </template>
 
 <script>
@@ -14,6 +19,14 @@ export default {
       visible: false
     }
   },
+  computed: {
+    text () {
+      return this.message !== undefined ? this.$t(this.message.text) : ''
+    },
+    type () {
+      return this.message !== undefined ? this.message.type : ''
+    }
+  },
   created () {
     this.$store.watch((state) => {
       return state.messages
@@ -23,14 +36,6 @@ export default {
         this.showMessage()
       }
     })
-  },
-  computed: {
-    text () {
-      return this.message !== undefined ? this.$t(this.message.text) : ''
-    },
-    type () {
-      return this.message !== undefined ? this.message.type : ''
-    }
   },
   methods: {
     showMessage () {

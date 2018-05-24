@@ -1,11 +1,9 @@
 <template>
-<div class="profile-view view" v-if="!loading">
-  <div class="view__wrapper">
+<div class="profile-view view">
+  <div class="o-page__wrapper">
+    <user-profile :id="currentUserId">
+    </user-profile>
     <div class="profile">
-      <uploader class="profile__image"
-                :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-profile.jpg'"
-                @upload="updateAvatar">
-      </uploader>
       <div class="profile__content">
         <div class="profile__row">
           <span class="typography__header" v-text="userDetails.name"></span>
@@ -18,17 +16,6 @@
             <li v-if="userDetails.avatarId" v-text="$t('profile.delete-avatar')" @click="deleteAvatar()"></li>
             <li v-text="$t('profile.logout')" @click="logout()"></li>
           </ul>
-        </div>
-        <div class="profile__row">
-          <span class="typography--bold" v-text="userDetails.recipes || 0"></span>
-          <span class="profile__label" v-text="$t('profile.recipes')"></span>
-          <span class="typography--bold" v-text="userDetails.followers || 0"></span>
-          <span class="profile__label" v-text="$t('profile.followers')"></span>
-          <span class="typography--bold" v-text="userDetails.following || 0"></span>
-          <span class="profile__label" v-text="$t('profile.following')"></span>
-        </div>
-        <div class="profile__row">
-          <span class="profile__text"></span>
         </div>
       </div>
     </div>
@@ -44,9 +31,9 @@
 import base from '@/mixins/base'
 
 export default {
-  name: 'ProfileView',
+  name: 'ProfilePage',
   components: {
-    Uploader: () => import('@/components/Uploader')
+    UserProfile: () => import('@/components/user-profile')
   },
   mixins: [ base ],
   data () {
@@ -55,19 +42,16 @@ export default {
       userDetails: {}
     }
   },
-  created () {
-    this.fetchData()
+  computed: {
+    currentUserId () {
+      return this.$store.state.currentUser.id
+    }
   },
   mounted () {
     window.addEventListener('click', this.closeDropdown)
   },
   beforeDestroy () {
     window.removeEventListener('click', this.closeDropdown)
-  },
-  computed: {
-    currentUserId () {
-      return this.$store.state.currentUser.id
-    }
   },
   methods: {
     toggleDropdown () {
@@ -78,25 +62,11 @@ export default {
     closeDropdown () {
       this.$refs.dropdown.classList.remove('active')
     },
-    fetchData () {
-      this.loading = true
-      this.$http.get(`/users/${this.currentUserId}/details`).then(value => {
-        this.userDetails = value.data
-        this.loading = false
-      })
-    },
     logout () {
       this.$http.post('/auth/logout').then(() => {
         this.showInfo('info.logout-successful')
         this.$store.commit('logout')
         this.$router.push('/login')
-      })
-    },
-    updateAvatar (avatarId) {
-      const userDetails = { ...this.userDetails, avatarId }
-      this.$http.put(`/users/${this.currentUserId}/details`, userDetails).then(() => {
-        this.userDetails = userDetails
-        this.showInfo('info.avatar-update-successful')
       })
     },
     deleteAvatar () {

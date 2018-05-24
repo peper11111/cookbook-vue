@@ -71,6 +71,7 @@
     "logout-successful": "Zostałeś pomyślnie wylogowany",
     "user-update-successful": "Twoje dane zostały pomyślnie zaktualizowane",
     "avatar-update-successful": "Twój awatar został pomyślnie zaktualizowany",
-    "avatar-delete-successful": "Twój awatar został pomyślnie usunięty"
+    "avatar-delete-successful": "Twój awatar został pomyślnie usunięty",
+    "banner-update-successful": "Twój obrazek w tle został pomyślnie zaktualizowany"
   }
 }
