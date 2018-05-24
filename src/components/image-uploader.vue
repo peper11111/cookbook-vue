@@ -1,16 +1,25 @@
 <template>
-<div class="c-uploader">
-  <input accept="image/*"
-         class="u-hide"
-         ref="input"
-         type="file"
-         v-if="active"
-         @change="upload"/>
-  <img :src="src" class="c-uploader__image"/>
-  <div class="c-uploader__overlay"
-       v-if="active"
-       @click="click">
-    <i class="material-icons">camera_alt</i>
+<div class="c-image-uploader">
+  <input
+    v-if="active"
+    ref="input"
+    @change="upload"
+    accept="image/*"
+    class="u-hide"
+    type="file"
+  />
+  <img
+    :src="src"
+    class="c-image-uploader__image"
+  />
+  <div
+    v-if="active"
+    @click="click"
+    class="c-image-uploader__overlay"
+  >
+    <i class="material-icons">
+      camera_alt
+    </i>
   </div>
 </div>
 </template>
@@ -19,9 +28,12 @@
 import base from '@/mixins/base'
 
 export default {
-  name: 'Uploader',
-  props: [ 'active', 'src' ],
+  name: 'ImageUploader',
   mixins: [ base ],
+  props: {
+    active: Boolean,
+    src: String
+  },
   methods: {
     click () {
       this.$refs.input.click()
@@ -48,7 +60,7 @@ export default {
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.c-uploader {
+.c-image-uploader {
   position: relative;
   user-select: none;
 
