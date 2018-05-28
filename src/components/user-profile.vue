@@ -5,16 +5,14 @@
     :src="userDetails.bannerId ? url(userDetails.bannerId) : '/static/blank-banner.jpg'"
     @upload="updateBanner"
     class="c-user-profile__banner"
-  >
-  </image-uploader>
+  ></image-uploader>
   <div class="c-user-profile__wrapper">
     <image-uploader
       :active="true"
       :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-avatar.jpg'"
       @upload="updateAvatar"
       class="c-user-profile__avatar"
-    >
-    </image-uploader>
+    ></image-uploader>
     <div class="c-user-profile__content">
       <div class="c-user-profile__row">
         <h1 class="c-user-profile__name">
@@ -75,23 +73,27 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      this.$http.get(`/users/${this.id}/details`).then(value => {
+      this.$api.users.readDetails(this.id).then(value => {
         this.userDetails = value.data
         this.loading = false
       })
     },
     updateBanner (bannerId) {
       const userDetails = { ...this.userDetails, bannerId }
-      this.$http.put(`/users/${this.id}/details`, userDetails).then(() => {
-        this.$http.delete(`/uploads/${this.userDetails.bannerId}`)
+      this.$api.users.updateDetails(this.id, userDetails).then(() => {
+        if (this.userDetails.bannerId) {
+          this.$api.uploads.delete(this.userDetails.bannerId)
+        }
         this.userDetails = userDetails
         this.showInfo('info.banner-update-successful')
       })
     },
     updateAvatar (avatarId) {
       const userDetails = { ...this.userDetails, avatarId }
-      this.$http.put(`/users/${this.id}/details`, userDetails).then(() => {
-        this.$http.delete(`/uploads/${this.userDetails.avatarId}`)
+      this.$api.users.updateDetails(this.id, userDetails).then(() => {
+        if (this.userDetails.avatarId) {
+          this.$api.uploads.delete(this.userDetails.avatarId)
+        }
         this.userDetails = userDetails
         this.showInfo('info.avatar-update-successful')
       })

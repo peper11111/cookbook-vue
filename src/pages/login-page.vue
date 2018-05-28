@@ -22,8 +22,8 @@
           class="o-form__input"
         />
         <div
-          @click="togglePassword"
           :class="{ 'is-active': passwordVisible }"
+          @click="togglePassword"
           class="o-form__icon o-form__icon--toggle"
         >
           <i class="material-icons">

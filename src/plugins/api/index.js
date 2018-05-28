@@ -13,6 +13,7 @@ const api = {
     confirm: (data) => http.post('/auth/confirm', data)
   },
   uploads: {
+    url: (id) => `${http.defaults.baseURL}/uploads/${id}`,
     create: (data) => http.post('/uploads', data),
     read: (id) => http.get(`/uploads/${id}`),
     delete: (id) => http.delete(`/uploads/${id}`)
@@ -20,7 +21,7 @@ const api = {
   users: {
     current: () => http.get('/users/current'),
     readDetails: (id) => http.get(`/users/${id}/details`),
-    updateDetails: (id, data) => http.put(`/users/${id}/details`)
+    updateDetails: (id, data) => http.put(`/users/${id}/details`, data)
   }
 }
 
