@@ -1,13 +1,29 @@
 import Vue from 'vue'
-import Api from './api'
 import http from './http'
-import auth from './modules/auth'
-import upload from './modules/upload'
-import user from './modules/user'
+import install from './install'
 
-Vue.use(Api)
+const api = {
+  install,
+  auth: {
+    login: (data) => http.post('/auth/login', data),
+    logout: () => http.post('/auth/logout'),
+    register: (data) => http.post('/auth/register', data),
+    verify: (data) => http.post('/auth/verify', data),
+    reset: (data) => http.post('/auth/reset', data),
+    confirm: (data) => http.post('/auth/confirm', data)
+  },
+  uploads: {
+    create: (data) => http.post('/uploads', data),
+    read: (id) => http.get(`/uploads/${id}`),
+    delete: (id) => http.delete(`/uploads/${id}`)
+  },
+  users: {
+    current: () => http.get('/users/current'),
+    readDetails: (id) => http.get(`/users/${id}/details`),
+    updateDetails: (id, data) => http.put(`/users/${id}/details`)
+  }
+}
 
-export default new Api({
-  http,
-  modules: { auth, upload, user }
-})
+Vue.use(api)
+
+export default api
