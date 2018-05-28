@@ -1,8 +1,5 @@
 <template>
-<div
-  v-if="!loading"
-  class="app typography"
->
+<div v-if="!loading">
   <app-navbar v-if="loggedIn">
   </app-navbar>
   <router-view>
@@ -37,7 +34,7 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      this.$http.get('/users/current').then(value => {
+      this.$api.users.current().then(value => {
         this.$store.commit('login', value.data)
         this.loading = false
       }).catch(() => {

@@ -1,5 +1,5 @@
 <template>
-<div class="verify-view"></div>
+<div></div>
 </template>
 
 <script>
@@ -9,7 +9,9 @@ export default {
   name: 'VerifyView',
   mixins: [ base ],
   created () {
-    this.$api.auth.verify(this.$route.query.token).then(value => {
+    this.$api.auth.verify({
+      token: this.$route.query.token
+    }).then(value => {
       this.showInfo(value.data)
       this.$router.push('/login')
     }).catch(error => {

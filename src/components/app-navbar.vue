@@ -1,6 +1,9 @@
 <template>
 <nav class="c-app-navbar">
-  <router-link class="c-app-navbar__row" to="/">
+  <router-link
+    to="/"
+    class="c-app-navbar__row"
+  >
     <img
       class="c-app-navbar__logo"
       src="/static/favicon.png"
@@ -19,12 +22,14 @@
         :placeholder="$t('form.search')"
         class="o-form__input"
       />
-      <i
+      <div
         @click="submit"
-        class="o-form__icon material-icons"
+        class="o-form__icon"
       >
-        search
-      </i>
+        <i class="material-icons">
+          search
+        </i>
+      </div>
     </div>
   </form>
   <div class="c-app-navbar__row">
@@ -88,8 +93,8 @@ export default {
   z-index: 1000;
   padding: 0 96px;
   box-sizing: border-box;
-  border-bottom: 1px solid $color-grey-300;
-  background-color: $color-white;
+  border-bottom: 1px solid $color-secondary;
+  background-color: $color-primary;
 
   &__row {
     display: flex;
@@ -105,7 +110,7 @@ export default {
   &__brand {
     font-size: 24px;
     font-family: 'Dancing Script', cursive;
-    color: $color-black;
+    color: $text-color-primary;
   }
 
   &__search {
@@ -113,11 +118,11 @@ export default {
   }
 
   &__item {
-    color: $color-grey-300;
+    color: $color-secondary;
     margin-left: 4px;
 
     &:hover, &.is-active {
-      color: $color-black;
+      color: $text-color-primary;
     }
   }
 }

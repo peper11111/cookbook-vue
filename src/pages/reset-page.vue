@@ -1,15 +1,34 @@
 <template>
-<div class="reset-view view view--center">
-  <div class="card">
-    <h1 class="typography__logo typography--center" v-text="$t('app')"></h1>
-    <form class="card__form form" @submit.prevent="reset()">
-      <input class="form__margin form__input" type="text" :placeholder="$t('form.username-or-email')" v-model="username"/>
-      <input class="button button--primary" type="submit" :value="$t('form.reset-password')"/>
+<div class="o-page o-page--intro">
+  <div class="o-page__card">
+    <form
+      @submit.prevent="reset"
+      class="o-form"
+    >
+      <h1 class="o-form__header">
+        {{ $t('app') }}
+      </h1>
+      <input
+        v-model="username"
+        :placeholder="$t('form.username-or-email')"
+        class="o-form__input"
+        type="text"
+      />
+      <input
+        :value="$t('form.reset-password')"
+        class="o-form__submit"
+        type="submit"
+      />
+      <p class="o-form__footer">
+        {{ $t('form.remember-password') }}
+        <router-link
+          to="/login"
+          class="o-form__action"
+        >
+          {{ $t('form.login') }}
+        </router-link>
+      </p>
     </form>
-    <p class="typography__info typography--center">
-      <span v-text="$t('form.remember-password')"></span>
-      <router-link class="typography--mark" to="/login" v-text="$t('form.login')"></router-link>
-    </p>
   </div>
 </div>
 </template>
@@ -23,7 +42,9 @@ export default {
   mixins: [ base, form ],
   methods: {
     reset () {
-      this.$api.auth.reset(this.username).then(value => {
+      this.$api.auth.reset({
+        username: this.username
+      }).then(value => {
         this.showInfo(value.data)
         this.$router.push('/login')
       }).catch(error => {
