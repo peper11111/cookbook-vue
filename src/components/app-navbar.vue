@@ -99,6 +99,7 @@ export default {
   &__row {
     display: flex;
     align-items: center;
+    text-decoration: none;
   }
 
   &__logo {
