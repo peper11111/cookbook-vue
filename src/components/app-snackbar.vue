@@ -1,9 +1,9 @@
 <template>
 <div
   :class="[ type, visible ? 'active' : '' ]"
-  v-text="text"
   class="c-app-snackbar"
 >
+  {{ text }}
 </div>
 </template>
 
