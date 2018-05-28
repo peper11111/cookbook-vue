@@ -1,12 +1,10 @@
-import { SHOW_MESSAGE } from '../plugins/store/mutation-types'
-
 export default {
   methods: {
     showInfo (message) {
-      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'info' })
+      this.$store.commit('showMessage', { text: message, type: 'info' })
     },
     showError (message) {
-      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'error' })
+      this.$store.commit('showMessage', { text: message, type: 'error' })
     },
     url (id) {
       return `${this.$api.http.defaults.baseURL}/uploads/${id}`

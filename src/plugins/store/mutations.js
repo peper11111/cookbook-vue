@@ -1,7 +1,5 @@
-import { SHOW_MESSAGE } from './mutation-types'
-
 export default {
-  [SHOW_MESSAGE] (state, payload) {
+  showMessage (state, payload) {
     state.messages.push({ text: payload.text, type: payload.type })
   },
   login (state, user) {
