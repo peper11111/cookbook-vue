@@ -49,7 +49,7 @@ export default {
 
       const formData = new FormData()
       formData.set('file', file)
-      this.$http.post('/uploads', formData).then(value => {
+      this.$api.uploads.create(formData).then(value => {
         this.$emit('upload', value.data)
       })
     }
