@@ -1,6 +1,6 @@
 <template>
-<div class="login-view view view--center">
-  <div class="card">
+<div class="o-page o-page--intro">
+  <div class="o-page__card">
     <h1 class="typography__logo typography--center" v-text="$t('app')"></h1>
     <form class="card__form form" @submit.prevent="login()">
       <input class="form__margin form__input" type="text" :placeholder="$t('form.username-or-email')" v-model="username"/>
@@ -36,8 +36,8 @@ export default {
       formData.set('username', this.username)
       formData.set('password', this.password)
 
-      this.$http.post('/auth/login', formData).then(() => {
-        return this.$http.get('/users/current')
+      this.$api.auth.login(formData).then(() => {
+        return this.$api.users.current()
       }).then(value => {
         this.showInfo('info.login-successful')
         this.$store.commit('login', value.data)

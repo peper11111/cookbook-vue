@@ -84,7 +84,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: $toolbar-height;
+  height: $navbar-height;
   z-index: 1000;
   padding: 0 96px;
   box-sizing: border-box;
