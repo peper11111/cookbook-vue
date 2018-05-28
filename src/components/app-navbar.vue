@@ -51,7 +51,7 @@
       </i>
     </router-link>
     <router-link
-      to="/profile"
+      :to="`/user/${currentUserId}`"
       class="c-app-navbar__item"
     >
       <i class="material-icons">
@@ -68,6 +68,11 @@ export default {
   data () {
     return {
       search: ''
+    }
+  },
+  computed: {
+    currentUserId () {
+      return this.$store.state.currentUser.id
     }
   },
   methods: {

@@ -1,11 +1,8 @@
 <template>
 <div v-if="!loading">
-  <app-navbar v-if="loggedIn">
-  </app-navbar>
-  <router-view>
-  </router-view>
-  <app-snackbar>
-  </app-snackbar>
+  <app-navbar v-if="loggedIn"></app-navbar>
+  <router-view :key="key"></router-view>
+  <app-snackbar></app-snackbar>
 </div>
 </template>
 
@@ -24,6 +21,9 @@ export default {
   computed: {
     loggedIn () {
       return this.$store.state.loggedIn
+    },
+    key () {
+      return this.$route.name + this.$route.params.id
     }
   },
   created () {

@@ -19,8 +19,8 @@ const router = new VueRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/profile',
-      component: () => import('@/pages/profile-page'),
+      path: '/user/:id',
+      component: () => import('@/pages/user-page'),
       meta: { requiresAuth: true }
     },
     {

@@ -1,14 +1,14 @@
 <template>
 <div class="c-user-profile">
   <image-uploader
-    :active="true"
+    :active="currentUser"
     :src="userDetails.bannerId ? url(userDetails.bannerId) : '/static/blank-banner.jpg'"
     @upload="updateBanner"
     class="c-user-profile__banner"
   ></image-uploader>
   <div class="c-user-profile__wrapper">
     <image-uploader
-      :active="true"
+      :active="currentUser"
       :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-avatar.jpg'"
       @upload="updateAvatar"
       class="c-user-profile__avatar"
@@ -65,6 +65,11 @@ export default {
     return {
       loading: false,
       userDetails: {}
+    }
+  },
+  computed: {
+    currentUser () {
+      return this.$store.state.currentUser.id === this.id
     }
   },
   created () {

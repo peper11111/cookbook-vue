@@ -1,8 +1,7 @@
 <template>
 <div class="o-page">
   <div class="o-page__wrapper">
-    <user-profile :id="currentUserId">
-    </user-profile>
+    <user-profile :id="userId"></user-profile>
     <div class="profile">
       <div class="profile__content">
         <div class="profile__row">
@@ -31,7 +30,7 @@
 import base from '@/mixins/base'
 
 export default {
-  name: 'ProfilePage',
+  name: 'UserPage',
   components: {
     UserProfile: () => import('@/components/user-profile')
   },
@@ -43,8 +42,8 @@ export default {
     }
   },
   computed: {
-    currentUserId () {
-      return this.$store.state.currentUser.id
+    userId () {
+      return Number(this.$route.params.id)
     }
   },
   mounted () {
