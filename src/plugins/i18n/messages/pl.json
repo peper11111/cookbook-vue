@@ -21,8 +21,10 @@
     "recipes": "przepisy",
     "followers": "obserwujący",
     "following": "obserwowanie",
-    "edit": "Edytuj profil",
+    "edit-profile": "Edytuj profil",
+    "follow-user": "Obserwuj",
     "delete-avatar": "Usuń awatar",
+    "delete-banner": "Usuń obrazek w tle",
     "add-recipe": "Dodaj przepis",
     "logout": "Wyloguj"
   },
@@ -45,9 +47,6 @@
       "medium": "Średni",
       "hard": "Trudny"
     }
-  },
-  "grid": {
-    "no-data": "Brak wpisów do pokazania"
   },
   "error": {
     "missing-email": "Email nie może być pusty",
@@ -73,6 +72,7 @@
     "user-update-successful": "Twoje dane zostały pomyślnie zaktualizowane",
     "avatar-update-successful": "Twój awatar został pomyślnie zaktualizowany",
     "avatar-delete-successful": "Twój awatar został pomyślnie usunięty",
-    "banner-update-successful": "Twój obrazek w tle został pomyślnie zaktualizowany"
+    "banner-update-successful": "Twój obrazek w tle został pomyślnie zaktualizowany",
+    "banner-delete-successful": "Twój obrazek w tle został pomyślnie usunięty"
   }
 }

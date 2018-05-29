@@ -1,15 +1,15 @@
 <template>
 <div class="c-user-profile">
   <image-uploader
-    :active="currentUser"
-    :src="userDetails.bannerId ? url(userDetails.bannerId) : '/static/blank-banner.jpg'"
+    :advanced="currentUserProfile"
+    :model="userDetails.bannerId ? url(userDetails.bannerId) : '/static/blank-banner.jpg'"
     @upload="updateBanner"
     class="c-user-profile__banner"
   ></image-uploader>
   <div class="c-user-profile__wrapper">
     <image-uploader
-      :active="currentUser"
-      :src="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-avatar.jpg'"
+      :advanced="currentUserProfile"
+      :model="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-avatar.jpg'"
       @upload="updateAvatar"
       class="c-user-profile__avatar"
     ></image-uploader>
@@ -18,6 +18,12 @@
         <h1 class="c-user-profile__name">
           {{ userDetails.name }}
         </h1>
+        <user-dropdown
+          :advanced="currentUserProfile"
+          :model="userDetails"
+          @deleteAvatar="deleteAvatar"
+          @deleteBanner="deleteBanner"
+        ></user-dropdown>
       </div>
       <div class="c-user-profile__row">
         <span class="c-user-profile__value">
@@ -55,7 +61,8 @@ import base from '@/mixins/base'
 export default {
   name: 'UserProfile',
   components: {
-    ImageUploader: () => import('@/components/image-uploader')
+    ImageUploader: () => import('@/components/image-uploader'),
+    UserDropdown: () => import('@/components/user-dropdown')
   },
   mixins: [ base ],
   props: {
@@ -68,7 +75,7 @@ export default {
     }
   },
   computed: {
-    currentUser () {
+    currentUserProfile () {
       return this.$store.state.currentUser.id === this.id
     }
   },
@@ -83,25 +90,33 @@ export default {
         this.loading = false
       })
     },
-    updateBanner (bannerId) {
-      const userDetails = { ...this.userDetails, bannerId }
+    updateDetails (userDetails, successMessage) {
       this.$api.users.updateDetails(this.id, userDetails).then(() => {
-        if (this.userDetails.bannerId) {
+        if (this.userDetails.bannerId && this.userDetails.bannerId !== userDetails.bannerId) {
           this.$api.uploads.delete(this.userDetails.bannerId)
         }
-        this.userDetails = userDetails
-        this.showInfo('info.banner-update-successful')
-      })
-    },
-    updateAvatar (avatarId) {
-      const userDetails = { ...this.userDetails, avatarId }
-      this.$api.users.updateDetails(this.id, userDetails).then(() => {
-        if (this.userDetails.avatarId) {
+        if (this.userDetails.avatarId && this.userDetails.avatarId !== userDetails.avatarId) {
           this.$api.uploads.delete(this.userDetails.avatarId)
         }
         this.userDetails = userDetails
-        this.showInfo('info.avatar-update-successful')
+        this.showInfo(successMessage)
       })
+    },
+    updateBanner (bannerId) {
+      const userDetails = { ...this.userDetails, bannerId }
+      this.updateDetails(userDetails, 'info.banner-update-successful')
+    },
+    updateAvatar (avatarId) {
+      const userDetails = { ...this.userDetails, avatarId }
+      this.updateDetails(userDetails, 'info.avatar-update-successful')
+    },
+    deleteAvatar () {
+      const userDetails = { ...this.userDetails, avatarId: null }
+      this.updateDetails(userDetails, 'info.avatar-delete-successful')
+    },
+    deleteBanner () {
+      const userDetails = { ...this.userDetails, bannerId: null }
+      this.updateDetails(userDetails, 'info.banner-delete-successful')
     }
   }
 }
@@ -151,6 +166,7 @@ export default {
 
   &__name {
     font-size: 24px;
+    margin-right: 8px;
   }
 
   &__value {
