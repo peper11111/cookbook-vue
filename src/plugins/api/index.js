@@ -20,8 +20,8 @@ const api = {
   },
   users: {
     current: () => http.get('/users/current'),
-    readDetails: (id) => http.get(`/users/${id}/details`),
-    updateDetails: (id, data) => http.put(`/users/${id}/details`, data)
+    read: (id) => http.get(`/users/${id}`),
+    update: (id, data) => http.put(`/users/${id}`, data)
   }
 }
 

@@ -66,6 +66,7 @@ export default {
   mixins: [ base ],
   props: {
     advanced: Boolean,
+    id: Number,
     model: Object
   },
   data () {

@@ -16,10 +16,11 @@
     <div class="c-user-profile__content">
       <div class="c-user-profile__row">
         <h1 class="c-user-profile__name">
-          {{ model.name }}
+          {{ model.username }}
         </h1>
         <user-dropdown
           :advanced="currentUserProfile"
+          :id="id"
           :model="model"
           @avatarDelete="deleteAvatar"
           @bannerDelete="deleteBanner"
@@ -76,20 +77,20 @@ export default {
   },
   methods: {
     updateBanner (bannerId) {
-      const userDetails = { ...this.model, bannerId }
-      this.$emit('profileUpdate', userDetails, 'info.banner-update-successful')
+      const user = { ...this.model, bannerId }
+      this.$emit('profileUpdate', user, 'info.banner-update-successful')
     },
     updateAvatar (avatarId) {
-      const userDetails = { ...this.model, avatarId }
-      this.$emit('profileUpdate', userDetails, 'info.avatar-update-successful')
+      const user = { ...this.model, avatarId }
+      this.$emit('profileUpdate', user, 'info.avatar-update-successful')
     },
     deleteAvatar () {
-      const userDetails = { ...this.model, avatarId: null }
-      this.$emit('profileUpdate', userDetails, 'info.avatar-delete-successful')
+      const user = { ...this.model, avatarId: null }
+      this.$emit('profileUpdate', user, 'info.avatar-delete-successful')
     },
     deleteBanner () {
-      const userDetails = { ...this.model, bannerId: null }
-      this.$emit('profileUpdate', userDetails, 'info.banner-delete-successful')
+      const user = { ...this.model, bannerId: null }
+      this.$emit('profileUpdate', user, 'info.banner-delete-successful')
     }
   }
 }

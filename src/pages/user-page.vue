@@ -3,8 +3,8 @@
   <div class="o-page__wrapper">
     <user-profile
       :id="userId"
-      :model="userDetails"
-      @profileUpdate="updateDetails"
+      :model="user"
+      @profileUpdate="updateUser"
     ></user-profile>
     <hr class="o-page__separator"/>
   </div>
@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       loading: false,
-      userDetails: {}
+      user: {}
     }
   },
   computed: {
@@ -37,8 +37,8 @@ export default {
   methods: {
     fetchData () {
       this.loading = true
-      this.$api.users.readDetails(this.userId).then(value => {
-        this.userDetails = value.data
+      this.$api.users.read(this.userId).then(value => {
+        this.user = value.data
         this.loading = false
       }).catch(error => {
         if (error.response.status === 404) {
@@ -47,15 +47,15 @@ export default {
         this.loading = false
       })
     },
-    updateDetails (userDetails, successMessage) {
-      this.$api.users.updateDetails(this.userId, userDetails).then(() => {
-        if (this.userDetails.bannerId && this.userDetails.bannerId !== userDetails.bannerId) {
-          this.$api.uploads.delete(this.userDetails.bannerId)
+    updateUser (user, successMessage) {
+      this.$api.users.update(this.userId, user).then(() => {
+        if (this.user.bannerId && this.user.bannerId !== user.bannerId) {
+          this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.userDetails.avatarId && this.userDetails.avatarId !== userDetails.avatarId) {
-          this.$api.uploads.delete(this.userDetails.avatarId)
+        if (this.user.avatarId && this.user.avatarId !== user.avatarId) {
+          this.$api.uploads.delete(this.user.avatarId)
         }
-        this.userDetails = userDetails
+        this.user = user
         this.showInfo(successMessage)
       })
     }
