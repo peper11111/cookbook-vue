@@ -37,6 +37,7 @@
     >
       {{ $t('profile.delete-avatar') }}
     </li>
+    <hr class="c-user-dropdown__separator"/>
     <li
       @click="logout"
       class="c-user-dropdown__item"
@@ -135,6 +136,12 @@ export default {
     &:hover {
       background-color: $color-secondary;
     }
+  }
+
+  &__separator {
+    margin: 0;
+    border: none;
+    border-top: 1px solid $color-secondary;
   }
 }
 </style>
