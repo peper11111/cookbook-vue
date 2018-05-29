@@ -10,6 +10,6 @@ export default {
   logout (state) {
     localStorage.setItem('loggedIn', 'false')
     state.loggedIn = false
-    state.currentUser = null
+    state.currentUser = {}
   }
 }
