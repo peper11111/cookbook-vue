@@ -23,7 +23,7 @@ export default {
       return this.$store.state.loggedIn
     },
     key () {
-      return this.$route.name + this.$route.params.id
+      return this.$route.path
     }
   },
   created () {
