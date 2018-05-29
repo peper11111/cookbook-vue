@@ -94,10 +94,10 @@ export default {
       })
     },
     deleteBanner () {
-      this.$emit('deleteBanner')
+      this.$emit('bannerDelete')
     },
     deleteAvatar () {
-      this.$emit('deleteAvatar')
+      this.$emit('avatarDelete')
     }
   }
 }

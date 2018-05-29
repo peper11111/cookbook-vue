@@ -2,44 +2,44 @@
 <div class="c-user-profile">
   <image-uploader
     :advanced="currentUserProfile"
-    :model="userDetails.bannerId ? url(userDetails.bannerId) : '/static/blank-banner.jpg'"
-    @upload="updateBanner"
+    :model="model.bannerId ? url(model.bannerId) : '/static/blank-banner.jpg'"
+    @imageUpload="updateBanner"
     class="c-user-profile__banner"
   ></image-uploader>
   <div class="c-user-profile__wrapper">
     <image-uploader
       :advanced="currentUserProfile"
-      :model="userDetails.avatarId ? url(userDetails.avatarId) : '/static/blank-avatar.jpg'"
-      @upload="updateAvatar"
+      :model="model.avatarId ? url(model.avatarId) : '/static/blank-avatar.jpg'"
+      @imageUpload="updateAvatar"
       class="c-user-profile__avatar"
     ></image-uploader>
     <div class="c-user-profile__content">
       <div class="c-user-profile__row">
         <h1 class="c-user-profile__name">
-          {{ userDetails.name }}
+          {{ model.name }}
         </h1>
         <user-dropdown
           :advanced="currentUserProfile"
-          :model="userDetails"
-          @deleteAvatar="deleteAvatar"
-          @deleteBanner="deleteBanner"
+          :model="model"
+          @avatarDelete="deleteAvatar"
+          @bannerDelete="deleteBanner"
         ></user-dropdown>
       </div>
       <div class="c-user-profile__row">
         <span class="c-user-profile__value">
-          {{ userDetails.recipes || 0 }}
+          {{ model.recipes || 0 }}
         </span>
         <span class="c-user-profile__label">
           {{ $t('profile.recipes') }}
         </span>
         <span class="c-user-profile__value">
-          {{ userDetails.followers || 0 }}
+          {{ model.followers || 0 }}
         </span>
         <span class="c-user-profile__label">
           {{ $t('profile.followers') }}
         </span>
         <span class="c-user-profile__value">
-          {{ userDetails.following || 0 }}
+          {{ model.following || 0 }}
         </span>
         <span class="c-user-profile__label">
           {{ $t('profile.following') }}
@@ -47,7 +47,7 @@
       </div>
       <div class="c-user-profile__row">
         <p class="c-user-profile__description">
-          {{ userDetails.description }}
+          {{ model.description }}
         </p>
       </div>
     </div>
@@ -66,57 +66,30 @@ export default {
   },
   mixins: [ base ],
   props: {
-    id: Number
-  },
-  data () {
-    return {
-      loading: false,
-      userDetails: {}
-    }
+    id: Number,
+    model: Object
   },
   computed: {
     currentUserProfile () {
       return this.$store.state.currentUser.id === this.id
     }
   },
-  created () {
-    this.fetchData()
-  },
   methods: {
-    fetchData () {
-      this.loading = true
-      this.$api.users.readDetails(this.id).then(value => {
-        this.userDetails = value.data
-        this.loading = false
-      })
-    },
-    updateDetails (userDetails, successMessage) {
-      this.$api.users.updateDetails(this.id, userDetails).then(() => {
-        if (this.userDetails.bannerId && this.userDetails.bannerId !== userDetails.bannerId) {
-          this.$api.uploads.delete(this.userDetails.bannerId)
-        }
-        if (this.userDetails.avatarId && this.userDetails.avatarId !== userDetails.avatarId) {
-          this.$api.uploads.delete(this.userDetails.avatarId)
-        }
-        this.userDetails = userDetails
-        this.showInfo(successMessage)
-      })
-    },
     updateBanner (bannerId) {
       const userDetails = { ...this.userDetails, bannerId }
-      this.updateDetails(userDetails, 'info.banner-update-successful')
+      this.$emit('profileUpdate', userDetails, 'info.banner-update-successful')
     },
     updateAvatar (avatarId) {
       const userDetails = { ...this.userDetails, avatarId }
-      this.updateDetails(userDetails, 'info.avatar-update-successful')
+      this.$emit('profileUpdate', userDetails, 'info.avatar-update-successful')
     },
     deleteAvatar () {
       const userDetails = { ...this.userDetails, avatarId: null }
-      this.updateDetails(userDetails, 'info.avatar-delete-successful')
+      this.$emit('profileUpdate', userDetails, 'info.avatar-delete-successful')
     },
     deleteBanner () {
       const userDetails = { ...this.userDetails, bannerId: null }
-      this.updateDetails(userDetails, 'info.banner-delete-successful')
+      this.$emit('profileUpdate', userDetails, 'info.banner-delete-successful')
     }
   }
 }
