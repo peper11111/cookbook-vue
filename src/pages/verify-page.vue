@@ -11,8 +11,8 @@ export default {
   created () {
     this.$api.auth.verify({
       token: this.$route.query.token
-    }).then(value => {
-      this.showInfo(value.data)
+    }).then(() => {
+      this.showInfo('info.user-verified')
       this.$router.push('/login')
     }).catch(error => {
       this.showError(error.response.data)

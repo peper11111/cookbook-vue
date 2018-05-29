@@ -62,8 +62,8 @@ export default {
       this.$api.auth.confirm({
         password: this.password,
         token: this.$route.query.token
-      }).then(value => {
-        this.showInfo(value.data)
+      }).then(() => {
+        this.showInfo('info.password-reset')
         this.$router.push('/login')
       }).catch(error => {
         this.showError(error.response.data)

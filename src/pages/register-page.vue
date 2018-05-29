@@ -75,8 +75,8 @@ export default {
         email: this.email,
         username: this.username,
         password: this.password
-      }).then(value => {
-        this.showInfo(value.data)
+      }).then(() => {
+        this.showInfo('info.account-activation-email-sent')
         this.$router.push('/login')
       }).catch(error => {
         this.showError(error.response.data)
