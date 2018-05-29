@@ -55,7 +55,7 @@ import base from '@/mixins/base'
 import form from '@/mixins/form'
 
 export default {
-  name: 'ConfirmView',
+  name: 'ConfirmPage',
   mixins: [ base, form ],
   methods: {
     confirm () {

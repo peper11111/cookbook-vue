@@ -61,7 +61,7 @@ import base from '@/mixins/base'
 import form from '@/mixins/form'
 
 export default {
-  name: 'LoginView',
+  name: 'LoginPage',
   mixins: [ base, form ],
   methods: {
     login () {

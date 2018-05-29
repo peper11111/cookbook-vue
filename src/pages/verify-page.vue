@@ -6,7 +6,7 @@
 import base from '@/mixins/base'
 
 export default {
-  name: 'VerifyView',
+  name: 'VerifyPage',
   mixins: [ base ],
   created () {
     this.$api.auth.verify({
