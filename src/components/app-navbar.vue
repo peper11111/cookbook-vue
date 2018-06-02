@@ -12,26 +12,7 @@
       {{ $t('app') }}
     </span>
   </router-link>
-  <form
-    @submit.prevent="submit"
-    class="c-app-navbar__search o-form"
-  >
-    <div class="o-form__wrapper">
-      <input
-        v-model="search"
-        :placeholder="$t('form.search')"
-        class="o-form__input"
-      />
-      <div
-        @click="submit"
-        class="o-form__icon"
-      >
-        <i class="material-icons">
-          search
-        </i>
-      </div>
-    </div>
-  </form>
+  <app-search></app-search>
   <div class="c-app-navbar__row">
     <router-link
       to="/"
@@ -51,33 +32,55 @@
       </i>
     </router-link>
     <router-link
-      :to="`/user/${currentUserId}`"
+      to="/new-recipe"
+      class="c-app-navbar__item"
+    >
+      <i class="material-icons">
+        note_add
+      </i>
+    </router-link>
+    <router-link
+      :to="`/user/${currentUser.id}`"
       class="c-app-navbar__item"
     >
       <i class="material-icons">
         person
       </i>
     </router-link>
+    <div class="c-app-navbar__separator"></div>
+    <div
+      @click="logout"
+      class="c-app-navbar__item"
+    >
+      <i class="material-icons">
+        exit_to_app
+      </i>
+    </div>
   </div>
 </nav>
 </template>
 
 <script>
+import base from '@/mixins/base'
+
 export default {
   name: 'AppNavbar',
-  data () {
-    return {
-      search: ''
-    }
+  components: {
+    AppSearch: () => import('@/components/app-search')
   },
+  mixins: [ base ],
   computed: {
-    currentUserId () {
-      return this.$store.state.currentUser.id
+    currentUser () {
+      return this.$store.state.currentUser
     }
   },
   methods: {
-    submit () {
-      console.log(this.search)
+    logout () {
+      this.$api.auth.logout().then(() => {
+        this.showInfo('info.logout-successful')
+        this.$store.commit('logout')
+        this.$router.push('/login')
+      })
     }
   }
 }
@@ -119,17 +122,23 @@ export default {
     color: $text-color-primary;
   }
 
-  &__search {
-    width: 300px;
-  }
-
   &__item {
+    margin: 0 2px;
+    font-size: 0;
     color: $color-secondary;
-    margin-left: 4px;
+    cursor: pointer;
+    user-select: none;
 
     &:hover, &.is-active {
       color: $text-color-primary;
     }
+  }
+
+  &__separator {
+    width: 1px;
+    height: 16px;
+    margin: 0 8px;
+    background-color: $color-secondary;
   }
 }
 </style>

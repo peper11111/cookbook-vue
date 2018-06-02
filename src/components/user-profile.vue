@@ -26,13 +26,6 @@
         >
           {{ model.following ? $t('profile.unfollow') : $t('profile.follow') }}
         </button>
-        <user-dropdown
-          :advanced="currentUserProfile"
-          :id="id"
-          :model="model"
-          @avatarDelete="deleteAvatar"
-          @bannerDelete="deleteBanner"
-        ></user-dropdown>
       </div>
       <div class="c-user-profile__row">
         <span class="c-user-profile__value">
@@ -70,8 +63,7 @@ import base from '@/mixins/base'
 export default {
   name: 'UserProfile',
   components: {
-    ImageUploader: () => import('@/components/image-uploader'),
-    UserDropdown: () => import('@/components/user-dropdown')
+    ImageUploader: () => import('@/components/image-uploader')
   },
   mixins: [ base ],
   props: {
