@@ -1,7 +1,7 @@
 <template>
 <div class="c-image-uploader">
   <input
-    v-if="advanced"
+    v-if="editMode"
     ref="input"
     @change="upload"
     accept="image/*"
@@ -9,11 +9,11 @@
     type="file"
   />
   <img
-    :src="model"
+    :src="imgSrc"
     class="c-image-uploader__image"
   />
   <div
-    v-if="advanced"
+    v-if="editMode"
     @click="click"
     class="c-image-uploader__overlay"
   >
@@ -31,8 +31,8 @@ export default {
   name: 'ImageUploader',
   mixins: [ base ],
   props: {
-    advanced: Boolean,
-    model: String
+    editMode: Boolean,
+    imgSrc: String
   },
   methods: {
     click () {

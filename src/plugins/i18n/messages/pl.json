@@ -17,20 +17,14 @@
     "change-password": "Zmień hasło",
     "search": "Wyszukaj..."
   },
-  "profile": {
-    "edit-profile": "Edytuj profil",
-    "follow-user": "Obserwuj",
-    "delete-avatar": "Usuń awatar",
-    "delete-banner": "Usuń obrazek w tle",
-    "add-recipe": "Dodaj przepis",
-    "logout": "Wyloguj",
-    "follow": "Obserwuj",
-    "unfollow": "Przestań obserwować"
-  },
   "user": {
     "recipes": "przepisy",
     "followers": "obserwujący",
-    "followed": "obserwowanie"
+    "followed": "obserwowanie",
+    "follow": "Obserwuj",
+    "unfollow": "Przestań obserwować",
+    "edit": "Edytuj profil",
+    "cancel": "Anuluj"
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",

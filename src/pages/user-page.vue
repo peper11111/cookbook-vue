@@ -2,7 +2,6 @@
 <div class="o-page">
   <div class="o-page__wrapper">
     <user-profile
-      :id="userId"
       :model="user"
       @profileUpdate="updateUser"
     ></user-profile>
@@ -49,10 +48,10 @@ export default {
     },
     updateUser (details, successMessage) {
       this.$api.users.modify(this.userId, details).then(() => {
-        if (details.bannerId && details.bannerId !== this.user.bannerId) {
+        if (details.bannerId && this.user.bannerId && details.bannerId !== this.user.bannerId) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (details.avatarId && details.avatarId !== this.user.avatarId) {
+        if (details.avatarId && this.user.avatarId && details.avatarId !== this.user.avatarId) {
           this.$api.uploads.delete(this.user.avatarId)
         }
         this.user = { ...this.user, ...details }

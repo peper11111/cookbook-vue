@@ -1,15 +1,15 @@
 <template>
 <div class="c-user-profile">
   <image-uploader
-    :advanced="currentUserProfile"
-    :model="model.bannerId ? url(model.bannerId) : '/static/blank-banner.jpg'"
+    :editMode="editMode"
+    :imgSrc="model.bannerId ? url(model.bannerId) : '/static/blank-banner.jpg'"
     @imageUpload="updateBanner"
     class="c-user-profile__banner"
   ></image-uploader>
   <div class="c-user-profile__wrapper">
     <image-uploader
-      :advanced="currentUserProfile"
-      :model="model.avatarId ? url(model.avatarId) : '/static/blank-avatar.jpg'"
+      :editMode="editMode"
+      :imgSrc="model.avatarId ? url(model.avatarId) : '/static/blank-avatar.jpg'"
       @imageUpload="updateAvatar"
       class="c-user-profile__avatar"
     ></image-uploader>
@@ -19,12 +19,20 @@
           {{ model.username }}
         </h1>
         <button
+          v-if="currentUserProfile"
+          :class="[ editMode ? 'o-button__secondary' : 'o-button__primary' ]"
+          @click="editMode = !editMode"
+          class="o-button"
+        >
+          {{ editMode ? $t('user.cancel') : $t('user.edit') }}
+        </button>
+        <button
           v-if="!currentUserProfile"
           :class="[ model.following ? 'o-button__secondary' : 'o-button__accent' ]"
           @click="follow"
           class="o-button"
         >
-          {{ model.following ? $t('profile.unfollow') : $t('profile.follow') }}
+          {{ model.following ? $t('user.unfollow') : $t('user.follow') }}
         </button>
       </div>
       <user-stats
@@ -52,12 +60,16 @@ export default {
   },
   mixins: [ base ],
   props: {
-    id: Number,
     model: Object
+  },
+  data () {
+    return {
+      editMode: false
+    }
   },
   computed: {
     currentUserProfile () {
-      return this.$store.state.currentUser.id === this.id
+      return this.$store.state.currentUser.id === this.model.id
     }
   },
   methods: {
@@ -72,12 +84,6 @@ export default {
     },
     updateAvatar (avatarId) {
       this.$emit('profileUpdate', { avatarId }, 'info.avatar-update-successful')
-    },
-    deleteAvatar () {
-      this.$emit('profileUpdate', { avatarId: null }, 'info.avatar-delete-successful')
-    },
-    deleteBanner () {
-      this.$emit('profileUpdate', { bannerId: null }, 'info.banner-delete-successful')
     }
   }
 }
@@ -126,6 +132,7 @@ export default {
   }
 
   &__username {
+    margin-right: 8px;
     font-size: 24px;
   }
 
