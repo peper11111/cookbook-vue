@@ -20,13 +20,15 @@
   "profile": {
     "recipes": "przepisy",
     "followers": "obserwujący",
-    "following": "obserwowanie",
+    "followed": "obserwowani",
     "edit-profile": "Edytuj profil",
     "follow-user": "Obserwuj",
     "delete-avatar": "Usuń awatar",
     "delete-banner": "Usuń obrazek w tle",
     "add-recipe": "Dodaj przepis",
-    "logout": "Wyloguj"
+    "logout": "Wyloguj",
+    "follow": "Obserwuj",
+    "unfollow": "Przestań obserwować"
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",

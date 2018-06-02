@@ -18,6 +18,14 @@
         <h1 class="c-user-profile__name">
           {{ model.username }}
         </h1>
+        <button
+          v-if="!currentUserProfile"
+          :class="[ model.following ? 'o-button__secondary' : 'o-button__accent' ]"
+          @click="follow"
+          class="o-button"
+        >
+          {{ model.following ? $t('profile.unfollow') : $t('profile.follow') }}
+        </button>
         <user-dropdown
           :advanced="currentUserProfile"
           :id="id"
@@ -40,10 +48,10 @@
           {{ $t('profile.followers') }}
         </span>
         <span class="c-user-profile__value">
-          {{ model.following || 0 }}
+          {{ model.followed || 0 }}
         </span>
         <span class="c-user-profile__label">
-          {{ $t('profile.following') }}
+          {{ $t('profile.followed') }}
         </span>
       </div>
       <div class="c-user-profile__row">
@@ -76,6 +84,12 @@ export default {
     }
   },
   methods: {
+    follow () {
+      this.$api.users.follow(this.id).then(() => {
+        this.model.following = !this.model.following
+        this.model.followers += this.model.following ? 1 : -1
+      })
+    },
     updateBanner (bannerId) {
       this.$emit('profileUpdate', { bannerId }, 'info.banner-update-successful')
     },
