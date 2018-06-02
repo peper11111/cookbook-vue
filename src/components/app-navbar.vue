@@ -139,6 +139,7 @@ export default {
     height: 16px;
     margin: 0 8px;
     background-color: $color-secondary;
+    box-sizing: border-box;
   }
 }
 </style>
