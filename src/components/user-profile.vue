@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     follow () {
-      this.$api.users.follow(this.id).then(() => {
+      this.$api.users.follow(this.model.id).then(() => {
         this.model.following = !this.model.following
         this.model.followers += this.model.following ? 1 : -1
       })
