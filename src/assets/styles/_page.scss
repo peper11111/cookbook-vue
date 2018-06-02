@@ -33,8 +33,9 @@
   }
 
   &__separator {
-    border: none;
-    border-top: 1px solid $color-secondary;
+    height: 1px;
+    background-color: $color-secondary;
     margin: 16px 32px;
+    box-sizing: border-box;
   }
 }

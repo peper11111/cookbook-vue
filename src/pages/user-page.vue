@@ -5,7 +5,7 @@
       :model="user"
       @profileUpdate="updateUser"
     ></user-profile>
-    <hr class="o-page__separator"/>
+    <div class="o-page__separator"></div>
   </div>
 </div>
 </template>
