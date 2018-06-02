@@ -15,7 +15,7 @@
     ></image-uploader>
     <div class="c-user-profile__content">
       <div class="c-user-profile__row">
-        <h1 class="c-user-profile__name">
+        <h1 class="c-user-profile__username">
           {{ model.username }}
         </h1>
         <button
@@ -27,26 +27,10 @@
           {{ model.following ? $t('profile.unfollow') : $t('profile.follow') }}
         </button>
       </div>
-      <div class="c-user-profile__row">
-        <span class="c-user-profile__value">
-          {{ model.recipes || 0 }}
-        </span>
-        <span class="c-user-profile__label">
-          {{ $t('profile.recipes') }}
-        </span>
-        <span class="c-user-profile__value">
-          {{ model.followers || 0 }}
-        </span>
-        <span class="c-user-profile__label">
-          {{ $t('profile.followers') }}
-        </span>
-        <span class="c-user-profile__value">
-          {{ model.followed || 0 }}
-        </span>
-        <span class="c-user-profile__label">
-          {{ $t('profile.followed') }}
-        </span>
-      </div>
+      <user-stats
+        :model="model"
+        class="c-user-profile__row"
+      ></user-stats>
       <div class="c-user-profile__row">
         <p class="c-user-profile__description">
           {{ model.description }}
@@ -63,7 +47,8 @@ import base from '@/mixins/base'
 export default {
   name: 'UserProfile',
   components: {
-    ImageUploader: () => import('@/components/image-uploader')
+    ImageUploader: () => import('@/components/image-uploader'),
+    UserStats: () => import('@/components/user-stats')
   },
   mixins: [ base ],
   props: {
@@ -140,21 +125,8 @@ export default {
     }
   }
 
-  &__name {
+  &__username {
     font-size: 24px;
-    margin-right: 8px;
-  }
-
-  &__value {
-    font-weight: bold;
-  }
-
-  &__label {
-    padding: 0 32px 0 4px;
-
-    &:last-child {
-      padding-right: 0;
-    }
   }
 
   &__description {

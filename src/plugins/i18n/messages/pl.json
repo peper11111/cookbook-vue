@@ -18,9 +18,6 @@
     "search": "Wyszukaj..."
   },
   "profile": {
-    "recipes": "przepisy",
-    "followers": "obserwujący",
-    "followed": "obserwowani",
     "edit-profile": "Edytuj profil",
     "follow-user": "Obserwuj",
     "delete-avatar": "Usuń awatar",
@@ -29,6 +26,11 @@
     "logout": "Wyloguj",
     "follow": "Obserwuj",
     "unfollow": "Przestań obserwować"
+  },
+  "user": {
+    "recipes": "przepisy",
+    "followers": "obserwujący",
+    "followed": "obserwowanie"
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",
