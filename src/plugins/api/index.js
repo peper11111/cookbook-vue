@@ -21,7 +21,7 @@ const api = {
   users: {
     current: () => http.get('/users/current'),
     read: (id) => http.get(`/users/${id}`),
-    update: (id, data) => http.put(`/users/${id}`, data)
+    modify: (id, data) => http.patch(`/users/${id}`, data)
   }
 }
 

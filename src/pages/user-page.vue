@@ -47,15 +47,15 @@ export default {
         this.loading = false
       })
     },
-    updateUser (user, successMessage) {
-      this.$api.users.update(this.userId, user).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== user.bannerId) {
+    updateUser (details, successMessage) {
+      this.$api.users.modify(this.userId, details).then(() => {
+        if (details.bannerId && details.bannerId !== this.user.bannerId) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.user.avatarId && this.user.avatarId !== user.avatarId) {
+        if (details.avatarId && details.avatarId !== this.user.avatarId) {
           this.$api.uploads.delete(this.user.avatarId)
         }
-        this.user = user
+        this.user = { ...this.user, ...details }
         this.showInfo(successMessage)
       })
     }

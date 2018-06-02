@@ -77,20 +77,16 @@ export default {
   },
   methods: {
     updateBanner (bannerId) {
-      const user = { ...this.model, bannerId }
-      this.$emit('profileUpdate', user, 'info.banner-update-successful')
+      this.$emit('profileUpdate', { bannerId }, 'info.banner-update-successful')
     },
     updateAvatar (avatarId) {
-      const user = { ...this.model, avatarId }
-      this.$emit('profileUpdate', user, 'info.avatar-update-successful')
+      this.$emit('profileUpdate', { avatarId }, 'info.avatar-update-successful')
     },
     deleteAvatar () {
-      const user = { ...this.model, avatarId: null }
-      this.$emit('profileUpdate', user, 'info.avatar-delete-successful')
+      this.$emit('profileUpdate', { avatarId: null }, 'info.avatar-delete-successful')
     },
     deleteBanner () {
-      const user = { ...this.model, bannerId: null }
-      this.$emit('profileUpdate', user, 'info.banner-delete-successful')
+      this.$emit('profileUpdate', { bannerId: null }, 'info.banner-delete-successful')
     }
   }
 }
