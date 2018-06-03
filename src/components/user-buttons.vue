@@ -33,8 +33,11 @@
 </template>
 
 <script>
+import base from '@/mixins/base'
+
 export default {
   name: 'UserButtons',
+  mixins: [ base ],
   props: {
     editMode: Boolean
   },

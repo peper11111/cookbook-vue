@@ -69,7 +69,7 @@
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "password-reset": "Twoje hasło zostało zmienione",
     "logout-successful": "Zostałeś pomyślnie wylogowany",
-    "profile-update-successful": "Twój profile został pomyślnie zaktualizowany",
+    "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   }
