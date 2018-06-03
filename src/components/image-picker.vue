@@ -9,7 +9,7 @@
     type="file"
   />
   <img
-    :src="model.src || model.blank"
+    :src="src"
     class="c-image-uploader__image"
   />
   <div
@@ -22,7 +22,7 @@
     </i>
   </div>
   <div
-    v-if="editMode && model.src"
+    v-if="editMode && imgSrc"
     @click="inputClear"
     class="c-image-uploader__clear"
   >
@@ -40,8 +40,16 @@ export default {
   name: 'ImageUploader',
   mixins: [ base ],
   props: {
+    blankSrc: String,
     editMode: Boolean,
-    model: Object
+    imgSrc: [ Number, String ]
+  },
+  computed: {
+    src () {
+      return (typeof this.imgSrc === 'number'
+        ? this.url(this.imgSrc)
+        : this.imgSrc) || this.blankSrc || '/static/blank-banner.jpg'
+    }
   },
   methods: {
     inputClick () {
@@ -55,21 +63,13 @@ export default {
         if (file.size > 10485760) { // 10MB
           this.showError('error.file-exceeds-limit')
         } else {
-          this.$emit('change', {
-            blank: this.model.blank,
-            file,
-            src: URL.createObjectURL(file)
-          })
+          this.$emit('change', URL.createObjectURL(file), file)
         }
       }
     },
     inputClear () {
       this.$refs.input.value = ''
-      this.$emit('change', {
-        blank: this.model.blank,
-        file: null,
-        src: null
-      })
+      this.$emit('change', null, null)
     }
   }
 }

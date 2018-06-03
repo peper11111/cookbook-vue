@@ -28,18 +28,6 @@ export default {
           this.$router.push('/')
         }
       })
-    },
-    updateUser (details, successMessage) {
-      this.$api.users.modify(this.userId, details).then(() => {
-        if (details.bannerId && this.user.bannerId && details.bannerId !== this.user.bannerId) {
-          this.$api.uploads.delete(this.user.bannerId)
-        }
-        if (details.avatarId && this.user.avatarId && details.avatarId !== this.user.avatarId) {
-          this.$api.uploads.delete(this.user.avatarId)
-        }
-        this.user = { ...this.user, ...details }
-        this.showInfo(successMessage)
-      })
     }
   }
 }

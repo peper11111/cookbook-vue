@@ -2,14 +2,15 @@
 <div class="c-user-profile">
   <image-picker
     :editMode="editMode"
-    :model="banner"
+    :imgSrc="banner"
     @change="changeBanner"
     class="c-user-profile__banner"
   ></image-picker>
   <div class="c-user-profile__wrapper">
     <image-picker
       :editMode="editMode"
-      :model="avatar"
+      :imgSrc="avatar"
+      :blankSrc="'/static/blank-avatar.jpg'"
       @change="changeAvatar"
       class="c-user-profile__avatar"
     ></image-picker>
@@ -53,11 +54,11 @@ export default {
   data () {
     return {
       editMode: false,
-      avatar: {},
-      banner: {},
-      description: null,
-      avatarId: null,
-      bannerId: null
+      avatar: null,
+      avatarFile: null,
+      banner: null,
+      bannerFile: null,
+      description: null
     }
   },
   computed: {
@@ -70,45 +71,36 @@ export default {
   },
   methods: {
     init () {
-      this.avatar = {
-        blank: '/static/blank-avatar.jpg',
-        src: this.url(this.user.avatarId),
-        file: null
-      }
-      this.banner = {
-        blank: '/static/blank-banner.jpg',
-        src: this.url(this.user.bannerId),
-        file: null
-      }
+      this.avatar = this.user.avatarId
+      this.avatarFile = null
+      this.banner = this.user.bannerId
+      this.bannerFile = null
       this.description = this.user.description
-      this.avatarId = this.user.avatarId
-      this.bannerId = this.user.bannerId
     },
-    async update () {
-      if (this.avatar.file) {
+    uploadImg (img, imgFile) {
+      if (imgFile) {
         const formData = new FormData()
-        formData.set('file', this.avatar.file)
-        await this.$api.uploads.create(formData).then(value => {
-          this.avatarId = value.data
-        })
+        formData.set('file', imgFile)
+        return this.$api.uploads.create(formData)
       }
-      if (this.banner.file) {
-        const formData = new FormData()
-        formData.set('file', this.banner.file)
-        await this.$api.uploads.create(formData).then(value => {
-          console.log(value.data)
-          this.bannerId = value.data
+      return Promise.resolve({ data: img })
+    },
+    update () {
+      this.uploadImg(this.avatar, this.avatarFile).then(value => {
+        this.avatar = value.data
+        return this.uploadImg(this.banner, this.bannerFile)
+      }).then(value => {
+        this.banner = value.data
+        return this.$api.users.modify(this.user.id, {
+          avatarId: this.avatar,
+          bannerId: this.banner,
+          description: this.description
         })
-      }
-      await this.$api.users.modify(this.user.id, {
-        avatarId: this.avatarId,
-        bannerId: this.bannerId,
-        description: this.description
       }).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== this.bannerId) {
+        if (this.user.bannerId && this.user.bannerId !== this.banner) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.user.avatarId && this.user.avatarId !== this.avatarId) {
+        if (this.user.avatarId && this.user.avatarId !== this.avatar) {
           this.$api.uploads.delete(this.user.avatarId)
         }
         return this.$api.users.read(this.user.id)
@@ -117,11 +109,13 @@ export default {
         this.showInfo('info.profile-update-successful')
       })
     },
-    changeBanner (banner) {
+    changeBanner (banner, bannerFile) {
       this.banner = banner
+      this.bannerFile = bannerFile
     },
-    changeAvatar (avatar) {
+    changeAvatar (avatar, avatarFile) {
       this.avatar = avatar
+      this.avatarFile = avatarFile
     },
     clickAction (action) {
       if (action === 'edit') {
@@ -150,7 +144,7 @@ export default {
   &__wrapper {
     display: flex;
     justify-content: space-evenly;
-    padding: 0 32px;
+    padding: 32px 32px 0 32px;
     box-sizing: border-box;
   }
 
@@ -166,7 +160,7 @@ export default {
     flex-direction: column;
     width: calc(100% - 150px);
     box-sizing: border-box;
-    padding: 32px 0 32px 32px;
+    padding-left: 32px;
   }
 
   &__row {

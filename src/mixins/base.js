@@ -12,7 +12,7 @@ export default {
       this.$store.commit('showMessage', { text: message, type: 'error' })
     },
     url (id) {
-      return id ? this.$api.uploads.url(id) : null
+      return this.$api.uploads.url(id)
     },
     fetch () {
       this.loading = true
