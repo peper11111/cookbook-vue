@@ -25,7 +25,8 @@
     "unfollow": "Przestań obserwować",
     "edit": "Edytuj profil",
     "cancel": "Anuluj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "description": "Napisz coś o sobie..."
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",
@@ -68,10 +69,8 @@
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "password-reset": "Twoje hasło zostało zmienione",
     "logout-successful": "Zostałeś pomyślnie wylogowany",
-    "user-update-successful": "Twoje dane zostały pomyślnie zaktualizowane",
-    "avatar-update-successful": "Twój awatar został pomyślnie zaktualizowany",
-    "avatar-delete-successful": "Twój awatar został pomyślnie usunięty",
-    "banner-update-successful": "Twój obrazek w tle został pomyślnie zaktualizowany",
-    "banner-delete-successful": "Twój obrazek w tle został pomyślnie usunięty"
+    "profile-update-successful": "Twój profile został pomyślnie zaktualizowany",
+    "user-follow": "Obserwujesz tego użytkownika",
+    "user-unfollow": "Już nie obserwujesz tego użytkownika"
   }
 }

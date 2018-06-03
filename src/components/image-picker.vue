@@ -3,22 +3,31 @@
   <input
     v-if="editMode"
     ref="input"
-    @change="upload"
+    @change="inputChange"
     accept="image/*"
     class="u-hide"
     type="file"
   />
   <img
-    :src="imgSrc"
+    :src="model.src || model.blank"
     class="c-image-uploader__image"
   />
   <div
     v-if="editMode"
-    @click="click"
+    @click="inputClick"
     class="c-image-uploader__overlay"
   >
     <i class="material-icons">
       camera_alt
+    </i>
+  </div>
+  <div
+    v-if="editMode && model.src"
+    @click="inputClear"
+    class="c-image-uploader__clear"
+  >
+    <i class="material-icons">
+      clear
     </i>
   </div>
 </div>
@@ -32,25 +41,34 @@ export default {
   mixins: [ base ],
   props: {
     editMode: Boolean,
-    imgSrc: String
+    model: Object
   },
   methods: {
-    click () {
+    inputClick () {
       this.$refs.input.click()
     },
-    upload () {
+    inputChange () {
       const file = this.$refs.input.files[0]
 
-      if (file && file.size > 10485760) { // 10MB
-        this.showError('error.file-exceeds-limit')
+      if (file) {
         this.$refs.input.value = ''
-        return
+        if (file.size > 10485760) { // 10MB
+          this.showError('error.file-exceeds-limit')
+        } else {
+          this.$emit('change', {
+            blank: this.model.blank,
+            file,
+            src: URL.createObjectURL(file)
+          })
+        }
       }
-
-      const formData = new FormData()
-      formData.set('file', file)
-      this.$api.uploads.create(formData).then(value => {
-        this.$emit('imageUpload', value.data)
+    },
+    inputClear () {
+      this.$refs.input.value = ''
+      this.$emit('change', {
+        blank: this.model.blank,
+        file: null,
+        src: null
       })
     }
   }
@@ -59,6 +77,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/styles/variables';
+@import '../assets/styles/mixins';
 
 .c-image-uploader {
   position: relative;
@@ -93,6 +112,22 @@ export default {
     .material-icons {
       font-size: 32px;
       color: $color-white;
+    }
+  }
+
+  &__clear {
+    @include elevation;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0;
+    cursor: pointer;
+    background-color: $color-white;
+    border-radius: 50%;
+    padding: 4px;
+
+    .material-icons {
+      font-size: 12px;
     }
   }
 }

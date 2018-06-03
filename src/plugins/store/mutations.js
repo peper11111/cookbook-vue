@@ -11,5 +11,8 @@ export default {
     localStorage.setItem('loggedIn', 'false')
     state.loggedIn = false
     state.currentUser = {}
+  },
+  setUser (state, payload) {
+    state.user = payload
   }
 }

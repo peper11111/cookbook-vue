@@ -1,48 +1,38 @@
 <template>
 <div class="c-user-profile">
-  <image-uploader
+  <image-picker
     :editMode="editMode"
-    :imgSrc="model.bannerId ? url(model.bannerId) : '/static/blank-banner.jpg'"
-    @imageUpload="updateBanner"
+    :model="banner"
+    @change="changeBanner"
     class="c-user-profile__banner"
-  ></image-uploader>
+  ></image-picker>
   <div class="c-user-profile__wrapper">
-    <image-uploader
+    <image-picker
       :editMode="editMode"
-      :imgSrc="model.avatarId ? url(model.avatarId) : '/static/blank-avatar.jpg'"
-      @imageUpload="updateAvatar"
+      :model="avatar"
+      @change="changeAvatar"
       class="c-user-profile__avatar"
-    ></image-uploader>
+    ></image-picker>
     <div class="c-user-profile__content">
       <div class="c-user-profile__row">
         <h1 class="c-user-profile__username">
-          {{ model.username }}
+          {{ user.username }}
         </h1>
-        <button
-          v-if="currentUserProfile"
-          :class="[ editMode ? 'o-button__secondary' : 'o-button__primary' ]"
-          @click="editMode = !editMode"
-          class="o-button"
-        >
-          {{ editMode ? $t('user.cancel') : $t('user.edit') }}
-        </button>
-        <button
-          v-if="!currentUserProfile"
-          :class="[ model.following ? 'o-button__secondary' : 'o-button__accent' ]"
-          @click="follow"
-          class="o-button"
-        >
-          {{ model.following ? $t('user.unfollow') : $t('user.follow') }}
-        </button>
+        <user-buttons
+          :editMode="editMode"
+          @click="clickAction"
+        ></user-buttons>
       </div>
-      <user-stats
-        :model="model"
-        class="c-user-profile__row"
-      ></user-stats>
+      <user-stats class="c-user-profile__row"></user-stats>
       <div class="c-user-profile__row">
-        <p class="c-user-profile__description">
-          {{ model.description }}
-        </p>
+        <textarea
+          v-model="description"
+          :disabled="!editMode"
+          :placeholder="editMode ? $t('user.description') : ''"
+          class="o-form__textarea c-user-profile__description"
+          rows="3"
+        >
+        </textarea>
       </div>
     </div>
   </div>
@@ -55,35 +45,94 @@ import base from '@/mixins/base'
 export default {
   name: 'UserProfile',
   components: {
-    ImageUploader: () => import('@/components/image-uploader'),
+    ImagePicker: () => import('@/components/image-picker'),
+    UserButtons: () => import('@/components/user-buttons'),
     UserStats: () => import('@/components/user-stats')
   },
   mixins: [ base ],
-  props: {
-    model: Object
-  },
   data () {
     return {
-      editMode: false
+      editMode: false,
+      avatar: {},
+      banner: {},
+      description: null,
+      avatarId: null,
+      bannerId: null
     }
   },
   computed: {
-    currentUserProfile () {
-      return this.$store.state.currentUser.id === this.model.id
+    user () {
+      return this.$store.state.user
     }
   },
+  created () {
+    this.init()
+  },
   methods: {
-    follow () {
-      this.$api.users.follow(this.model.id).then(() => {
-        this.model.following = !this.model.following
-        this.model.followers += this.model.following ? 1 : -1
+    init () {
+      this.avatar = {
+        blank: '/static/blank-avatar.jpg',
+        src: this.url(this.user.avatarId),
+        file: null
+      }
+      this.banner = {
+        blank: '/static/blank-banner.jpg',
+        src: this.url(this.user.bannerId),
+        file: null
+      }
+      this.description = this.user.description
+      this.avatarId = this.user.avatarId
+      this.bannerId = this.user.bannerId
+    },
+    async update () {
+      if (this.avatar.file) {
+        const formData = new FormData()
+        formData.set('file', this.avatar.file)
+        await this.$api.uploads.create(formData).then(value => {
+          this.avatarId = value.data
+        })
+      }
+      if (this.banner.file) {
+        const formData = new FormData()
+        formData.set('file', this.banner.file)
+        await this.$api.uploads.create(formData).then(value => {
+          console.log(value.data)
+          this.bannerId = value.data
+        })
+      }
+      await this.$api.users.modify(this.user.id, {
+        avatarId: this.avatarId,
+        bannerId: this.bannerId,
+        description: this.description
+      }).then(() => {
+        if (this.user.bannerId && this.user.bannerId !== this.bannerId) {
+          this.$api.uploads.delete(this.user.bannerId)
+        }
+        if (this.user.avatarId && this.user.avatarId !== this.avatarId) {
+          this.$api.uploads.delete(this.user.avatarId)
+        }
+        return this.$api.users.read(this.user.id)
+      }).then(value => {
+        this.$store.commit('setUser', value.data)
+        this.showInfo('info.profile-update-successful')
       })
     },
-    updateBanner (bannerId) {
-      this.$emit('profileUpdate', { bannerId }, 'info.banner-update-successful')
+    changeBanner (banner) {
+      this.banner = banner
     },
-    updateAvatar (avatarId) {
-      this.$emit('profileUpdate', { avatarId }, 'info.avatar-update-successful')
+    changeAvatar (avatar) {
+      this.avatar = avatar
+    },
+    clickAction (action) {
+      if (action === 'edit') {
+        this.editMode = true
+      } else if (action === 'cancel') {
+        this.init()
+        this.editMode = false
+      } else if (action === 'save') {
+        this.update()
+        this.editMode = false
+      }
     }
   }
 }
@@ -100,7 +149,6 @@ export default {
 
   &__wrapper {
     display: flex;
-    align-items: center;
     justify-content: space-evenly;
     padding: 0 32px;
     box-sizing: border-box;
@@ -136,8 +184,10 @@ export default {
     font-size: 24px;
   }
 
-  &__description {
-    text-align: justify;
+  &__description[disabled] {
+    background: none;
+    padding: 0;
+    border: none;
   }
 }
 </style>

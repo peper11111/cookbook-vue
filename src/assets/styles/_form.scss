@@ -38,8 +38,7 @@
     }
   }
 
-  &__input, &__submit {
-    height: 34px;
+  &__input, &__submit, &__textarea {
     padding: 8px 16px;
     width: 100%;
     border-radius: 2px;
@@ -49,7 +48,11 @@
     box-sizing: border-box;
   }
 
-  &__input {
+  &__input, &__submit {
+    height: 34px;
+  }
+
+  &__input, &__textarea {
     border: 1px solid $color-secondary;
     color: $text-color-primary;
 
@@ -69,6 +72,10 @@
     background-color: $color-accent;
     border: none;
     cursor: pointer;
+  }
+
+  &__textarea {
+    resize: none;
   }
 
   &__wrapper {

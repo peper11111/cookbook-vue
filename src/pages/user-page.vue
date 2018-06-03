@@ -1,10 +1,7 @@
 <template>
 <div class="o-page" v-if="!loading">
   <div class="o-page__wrapper">
-    <user-profile
-      :model="user"
-      @profileUpdate="updateUser"
-    ></user-profile>
+    <user-profile></user-profile>
     <div class="o-page__separator"></div>
   </div>
 </div>
@@ -19,31 +16,17 @@ export default {
     UserProfile: () => import('@/components/user-profile')
   },
   mixins: [ base ],
-  data () {
-    return {
-      loading: false,
-      user: {}
-    }
-  },
-  computed: {
-    userId () {
-      return Number(this.$route.params.id)
-    }
-  },
   created () {
-    this.fetchData()
+    this.fetch()
   },
   methods: {
-    fetchData () {
-      this.loading = true
-      this.$api.users.read(this.userId).then(value => {
-        this.user = value.data
+    request () {
+      return this.$api.users.read(this.$route.params.id).then(value => {
+        this.$store.commit('setUser', value.data)
       }).catch(reason => {
         if (reason.response.status === 404) {
           this.$router.push('/')
         }
-      }).finally(() => {
-        this.loading = false
       })
     },
     updateUser (details, successMessage) {
