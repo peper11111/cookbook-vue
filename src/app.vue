@@ -1,43 +1,35 @@
 <template>
 <div v-if="!loading">
   <app-navbar v-if="loggedIn"></app-navbar>
-  <router-view :key="key"></router-view>
+  <router-view :key="$route.path"></router-view>
   <app-snackbar></app-snackbar>
 </div>
 </template>
 
 <script>
+import base from '@/mixins/base'
+
 export default {
   name: 'App',
   components: {
     AppNavbar: () => import('@/components/app-navbar'),
     AppSnackbar: () => import('@/components/app-snackbar')
   },
-  data () {
-    return {
-      loading: false
-    }
-  },
+  mixins: [ base ],
   computed: {
     loggedIn () {
       return this.$store.state.loggedIn
-    },
-    key () {
-      return this.$route.path
     }
   },
   created () {
     if (this.loggedIn) {
-      this.fetchData()
+      this.fetch()
     }
   },
   methods: {
-    fetchData () {
-      this.loading = true
-      this.$api.users.current().then(value => {
+    request () {
+      return this.$api.users.current().then(value => {
         this.$store.commit('login', value.data)
-      }).finally(() => {
-        this.loading = false
       })
     }
   }
