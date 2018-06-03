@@ -24,7 +24,8 @@
     "follow": "Obserwuj",
     "unfollow": "Przestań obserwować",
     "edit": "Edytuj profil",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "save": "Zapisz"
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",

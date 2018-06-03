@@ -7,12 +7,12 @@ const http = axios.create({
   withCredentials: true
 })
 
-http.interceptors.response.use(value => value, error => {
-  if (error.response.status === 401) {
+http.interceptors.response.use(value => value, reason => {
+  if (reason.response.status === 401) {
     store.commit('logout')
     router.push('/login')
   }
-  return Promise.reject(error)
+  return Promise.reject(reason)
 })
 
 export default http

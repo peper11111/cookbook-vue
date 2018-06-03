@@ -1,5 +1,5 @@
 <template>
-<div class="o-page">
+<div class="o-page" v-if="!loading">
   <div class="o-page__wrapper">
     <user-profile
       :model="user"
@@ -38,11 +38,11 @@ export default {
       this.loading = true
       this.$api.users.read(this.userId).then(value => {
         this.user = value.data
-        this.loading = false
-      }).catch(error => {
-        if (error.response.status === 404) {
+      }).catch(reason => {
+        if (reason.response.status === 404) {
           this.$router.push('/')
         }
+      }).finally(() => {
         this.loading = false
       })
     },

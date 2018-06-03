@@ -75,8 +75,8 @@ export default {
         this.showInfo('info.login-successful')
         this.$store.commit('login', value.data)
         this.$router.push(this.$route.query.redirect || '/')
-      }).catch(error => {
-        this.showError(error.response.data)
+      }).catch(reason => {
+        this.showError(reason.response.data)
       })
     }
   }

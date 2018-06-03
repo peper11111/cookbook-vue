@@ -36,8 +36,7 @@ export default {
       this.loading = true
       this.$api.users.current().then(value => {
         this.$store.commit('login', value.data)
-        this.loading = false
-      }).catch(() => {
+      }).finally(() => {
         this.loading = false
       })
     }
