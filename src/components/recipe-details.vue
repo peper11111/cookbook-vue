@@ -55,6 +55,10 @@ export default {
   data () {
     return {
       editMode: true,
+      banner: {
+        src: null,
+        file: null
+      },
       difficulty: 3
     }
   },
@@ -80,6 +84,9 @@ export default {
       const hours = time / 60
       const minutes = time % 60
       return Math.trunc(hours) > 0 ? `${this.$n(hours)} h` : `${minutes} min`
+    },
+    changeBanner (banner) {
+      this.banner = banner
     },
     changeDifficulty (difficulty) {
       this.difficulty = difficulty

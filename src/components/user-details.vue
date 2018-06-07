@@ -54,6 +54,14 @@ export default {
   mixins: [ base, details ],
   data () {
     return {
+      avatar: {
+        src: null,
+        file: null
+      },
+      banner: {
+        src: null,
+        file: null
+      },
       description: null
     }
   },
@@ -95,6 +103,12 @@ export default {
         this.$store.commit('setUser', value.data)
         this.showInfo('info.profile-update-successful')
       })
+    },
+    changeAvatar (avatar) {
+      this.avatar = avatar
+    },
+    changeBanner (banner) {
+      this.banner = banner
     }
   }
 }
