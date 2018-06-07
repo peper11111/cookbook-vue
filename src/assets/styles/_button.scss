@@ -2,7 +2,7 @@
 @import './mixins';
 
 .o-button {
-  @include elevation;
+  @include box-elevation;
   padding: 8px 16px;
   border: 1px solid transparent;
   border-radius: 2px;

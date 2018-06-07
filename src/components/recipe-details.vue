@@ -21,6 +21,10 @@
         </select>
       </label>
     </div>
+    <rating-bar
+      :initialValue="3"
+      :stars="5"
+    ></rating-bar>
     <div>
       <label class="c-recipe-details__label" v-text="$t('recipe.difficulty-level')"></label>
       <select class="form__select">
@@ -43,7 +47,8 @@ import details from '@/mixins/details'
 export default {
   name: 'RecipeDetails',
   components: {
-    ImagePicker: () => import('@/components/image-picker')
+    ImagePicker: () => import('@/components/image-picker'),
+    RatingBar: () => import('@/components/rating-bar')
   },
   mixins: [ details ],
   data () {

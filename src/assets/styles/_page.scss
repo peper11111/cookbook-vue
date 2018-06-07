@@ -26,7 +26,7 @@
   }
 
   &__card {
-    @include elevation;
+    @include box-elevation;
     padding: 32px;
     background-color: $color-primary;
     border-radius: 2px;

@@ -3,7 +3,7 @@
   <input
     v-if="editMode"
     ref="input"
-    @change="inputChange"
+    @change="change"
     accept="image/*"
     class="u-hide"
     type="file"
@@ -14,7 +14,7 @@
   />
   <div
     v-if="editMode"
-    @click="inputClick"
+    @click="click"
     class="c-image-uploader__overlay"
   >
     <i class="material-icons">
@@ -23,7 +23,7 @@
   </div>
   <div
     v-if="editMode && imgSrc"
-    @click="inputClear"
+    @click="clear"
     class="c-image-uploader__clear"
   >
     <i class="material-icons">
@@ -52,10 +52,10 @@ export default {
     }
   },
   methods: {
-    inputClick () {
+    click () {
       this.$refs.input.click()
     },
-    inputChange () {
+    change () {
       const file = this.$refs.input.files[0]
 
       if (file) {
@@ -70,7 +70,7 @@ export default {
         }
       }
     },
-    inputClear () {
+    clear () {
       this.$refs.input.value = ''
       this.$emit('change', {
         src: null,
@@ -116,13 +116,14 @@ export default {
     }
 
     .material-icons {
+      @include text-elevation;
       font-size: 32px;
       color: $color-white;
     }
   }
 
   &__clear {
-    @include elevation;
+    @include box-elevation;
     position: absolute;
     top: 12px;
     right: 12px;
