@@ -6,7 +6,7 @@
     @change="changeBanner"
     class="c-recipe-details__banner"
   ></image-picker>
-  <div class="c-recipe-details__details">
+  <div class="c-recipe-details__wrapper">
     <div>
       <label>
         {{ $t('recipe.cuisine-type') }}
@@ -87,17 +87,11 @@ export default {
     height: 300px;
   }
 
-  &__details {
+  &__wrapper {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: $color-grey-300;
-    padding: 8px 16px;
-  }
-
-  &__label {
-    padding: 0 8px;
+    justify-content: space-between;
+    margin-top: -19px;
   }
 }
 </style>

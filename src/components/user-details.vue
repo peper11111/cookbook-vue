@@ -111,7 +111,7 @@ export default {
 
   &__wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 32px 32px 0 32px;
     box-sizing: border-box;
   }
@@ -120,7 +120,7 @@ export default {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    transform: translate(0, -50%);
+    margin-top: -75px;
   }
 
   &__content {
