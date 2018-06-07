@@ -4,13 +4,14 @@
   class="c-rating-bar"
 >
   <i
-    v-for="i in stars"
+    v-for="i in size"
     :key="i"
+    :class="{ 'is-active': visibleValue >= i }"
     @mouseover="visibleValue = i"
     @click="click"
     class="c-rating-bar__star material-icons"
   >
-    {{ visibleValue >= i ? 'star' : 'star_border' }}
+    {{ icon }}
   </i>
 </div>
 </template>
@@ -19,7 +20,11 @@
 export default {
   name: 'RatingBar',
   props: {
-    stars: Number,
+    icon: {
+      default: 'star',
+      type: String
+    },
+    size: Number,
     value: Number
   },
   data () {
@@ -47,8 +52,12 @@ export default {
 
   &__star {
     @include text-elevation;
-    color: $color-white;
+    color: $color-secondary;
     font-size: 24px;
+
+    &.is-active {
+      color: $text-color-primary;
+    }
   }
 }
 </style>

@@ -30,7 +30,8 @@
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",
-    "difficulty-level": "Poziom trudności",
+    "difficulty": "Poziom trudności",
+    "plates": "Ilość porcji",
     "prepare-time": "Czas przygotowania",
     "cuisine": {
       "CUISINE_AMERICAN": "Kuchnia amerykańska",

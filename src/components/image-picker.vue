@@ -40,7 +40,10 @@ export default {
   name: 'ImageUploader',
   mixins: [ base ],
   props: {
-    blankSrc: String,
+    blankSrc: {
+      default: '/static/blank-banner.jpg',
+      type: String
+    },
     editMode: Boolean,
     imgSrc: [ Number, String ]
   },
@@ -48,7 +51,7 @@ export default {
     src () {
       return (typeof this.imgSrc === 'number'
         ? this.url(this.imgSrc)
-        : this.imgSrc) || this.blankSrc || '/static/blank-banner.jpg'
+        : this.imgSrc) || this.blankSrc
     }
   },
   methods: {

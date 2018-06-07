@@ -7,37 +7,55 @@
     class="c-recipe-details__banner"
   ></image-picker>
   <div class="c-recipe-details__wrapper">
-    <div>
-      <label>
+    <label class="c-recipe-details__item">
+      <select class="form__select">
+        <option
+          v-for="cuisine in cuisines"
+          :key="cuisine.id"
+          :value="cuisine.id"
+        >
+          {{ $t(`recipe.cuisine.${cuisine.name}`) }}
+        </option>
+      </select>
+      <span class="c-recipe-details__label">
         {{ $t('recipe.cuisine-type') }}
-        <select class="form__select">
-          <option
-            v-for="cuisine in cuisines"
-            :key="cuisine.id"
-            :value="cuisine.id"
-          >
-            {{ $t(`recipe.cuisine.${cuisine.name}`) }}
-          </option>
-        </select>
-      </label>
-    </div>
-    <rating-bar
-      :value="difficulty"
-      :stars="5"
-      @change="changeDifficulty"
-    ></rating-bar>
-    <div>
-      <label class="c-recipe-details__label" v-text="$t('recipe.difficulty-level')"></label>
+      </span>
+    </label>
+    <label class="c-recipe-details__item">
+      <rating-bar
+        :size="5"
+        :value="difficulty"
+        @change="changeDifficulty"
+      ></rating-bar>
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.difficulty') }}
+      </span>
+    </label>
+    <label class="c-recipe-details__item">
+      <rating-bar
+        :icon="'restaurant'"
+        :size="4"
+        :value="plates"
+        @change="changePlates"
+      ></rating-bar>
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.plates') }}
+      </span>
+    </label>
+    <label class="c-recipe-details__item">
       <select class="form__select">
-        <option v-for="level in levels" :key="level" :value="level" v-text="$t(`recipe.level.${level}`)"></option>
+        <option
+          v-for="time in times"
+          :key="time"
+          :value="time"
+        >
+          {{ formatTime(time) }}
+        </option>
       </select>
-    </div>
-    <div>
-      <label class="c-recipe-details__label" v-text="$t('recipe.prepare-time')"></label>
-      <select class="form__select">
-        <option v-for="time in times" :key="time" :value="time" v-text="formatTime(time)"></option>
-      </select>
-    </div>
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.prepare-time') }}
+      </span>
+    </label>
   </div>
 </div>
 </template>
@@ -59,7 +77,8 @@ export default {
         src: null,
         file: null
       },
-      difficulty: 3
+      difficulty: 3,
+      plates: 1
     }
   },
   computed: {
@@ -90,6 +109,9 @@ export default {
     },
     changeDifficulty (difficulty) {
       this.difficulty = difficulty
+    },
+    changePlates (plates) {
+      this.plates = plates
     }
   }
 }
@@ -97,6 +119,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/styles/variables';
+@import '../assets/styles/mixins';
 
 .c-recipe-details {
   &__banner {
@@ -108,7 +131,23 @@ export default {
     position: relative;
     display: flex;
     justify-content: space-between;
-    margin-top: -19px;
+    box-sizing: border-box;
+    padding: 0 32px;
+  }
+
+  &__item {
+    height: 42px;
+    margin-top: -50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  &__label {
+    @include text-elevation;
+    color: $color-white;
+    text-align: center;
+    margin-top: 2px;
   }
 }
 </style>
