@@ -1,22 +1,22 @@
 <template>
-<div class="c-user-profile">
+<div class="c-user-details">
   <image-picker
     :editMode="editMode"
     :imgSrc="banner.src"
     @change="changeBanner"
-    class="c-user-profile__banner"
+    class="c-user-details__banner"
   ></image-picker>
-  <div class="c-user-profile__wrapper">
+  <div class="c-user-details__wrapper">
     <image-picker
       :editMode="editMode"
       :imgSrc="avatar.src"
       :blankSrc="'/static/blank-avatar.jpg'"
       @change="changeAvatar"
-      class="c-user-profile__avatar"
+      class="c-user-details__avatar"
     ></image-picker>
-    <div class="c-user-profile__content">
-      <div class="c-user-profile__row">
-        <h1 class="c-user-profile__username">
+    <div class="c-user-details__content">
+      <div class="c-user-details__row">
+        <h1 class="c-user-details__username">
           {{ user.username }}
         </h1>
         <user-buttons
@@ -24,13 +24,13 @@
           @click="clickAction"
         ></user-buttons>
       </div>
-      <user-stats class="c-user-profile__row"></user-stats>
-      <div class="c-user-profile__row">
+      <user-stats class="c-user-details__row"></user-stats>
+      <div class="c-user-details__row">
         <textarea
           v-model="description"
           :disabled="!editMode"
           :placeholder="editMode ? $t('user.description') : ''"
-          class="o-form__textarea c-user-profile__description"
+          class="o-form__textarea c-user-details__description"
           rows="3"
         >
         </textarea>
@@ -141,7 +141,7 @@ export default {
 <style lang="scss">
 @import '../assets/styles/variables';
 
-.c-user-profile {
+.c-user-details {
   &__banner {
     width: 100%;
     height: 300px;
