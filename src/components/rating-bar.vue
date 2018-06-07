@@ -3,16 +3,18 @@
   @mouseleave="clear"
   class="c-rating-bar"
 >
-  <i
+  <div
     v-for="i in size"
     :key="i"
     :class="{ 'is-active': visibleValue >= i }"
     @mouseover="visibleValue = i"
     @click="click"
-    class="c-rating-bar__star material-icons"
+    class="c-rating-bar__item"
   >
-    {{ icon }}
-  </i>
+    <i class="material-icons">
+      {{ icon }}
+    </i>
+  </div>
 </div>
 </template>
 
@@ -48,15 +50,28 @@ export default {
 @import '../assets/styles/mixins';
 
 .c-rating-bar {
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
 
-  &__star {
-    @include text-elevation;
-    color: $color-secondary;
-    font-size: 24px;
+  &__item {
+    @include box-elevation;
+    background-color: $color-secondary;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+    padding: 4px;
+
+    .material-icons {
+      font-size: 12px;
+      color: $text-color-secondary;
+    }
 
     &.is-active {
-      color: $text-color-primary;
+      background-color: $color-accent;
+
+      .material-icons {
+        color: $text-color-accent;
+      }
     }
   }
 }
