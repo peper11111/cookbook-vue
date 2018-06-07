@@ -85,9 +85,6 @@ export default {
     cuisines () {
       return this.$store.state.cuisines
     },
-    levels () {
-      return this.$store.state.recipe.levels
-    },
     times () {
       return this.$store.state.recipe.times
     }
