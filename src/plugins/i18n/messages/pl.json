@@ -33,14 +33,14 @@
     "difficulty-level": "Poziom trudności",
     "prepare-time": "Czas przygotowania",
     "cuisine": {
-      "american": "Kuchnia amerykańska",
-      "asian": "Kuchnia azjatycka",
-      "czech": "Kuchnia czeska",
-      "french": "Kuchnia francuska",
-      "greek": "Kuchnia grecka",
-      "polish": "Kuchnia polska",
-      "spanish": "Kuchnia hiszpańska",
-      "italian": "Kuchnia włoska"
+      "CUISINE_AMERICAN": "Kuchnia amerykańska",
+      "CUISINE_ASIAN": "Kuchnia azjatycka",
+      "CUISINE_CZECH": "Kuchnia czeska",
+      "CUISINE_FRENCH": "Kuchnia francuska",
+      "CUISINE_GREEK": "Kuchnia grecka",
+      "CUISINE_POLISH": "Kuchnia polska",
+      "CUISINE_SPANISH": "Kuchnia hiszpańska",
+      "CUISINE_ITALIAN": "Kuchnia włoska"
     },
     "level": {
       "easy": "Łatwy",

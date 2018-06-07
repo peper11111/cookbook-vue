@@ -14,5 +14,8 @@ export default {
   },
   setUser (state, payload) {
     state.user = payload
+  },
+  setCuisines (state, payload) {
+    state.cuisines = payload
   }
 }

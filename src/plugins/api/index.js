@@ -12,6 +12,9 @@ const api = {
     reset: (data) => http.post('/auth/reset', data),
     confirm: (data) => http.post('/auth/confirm', data)
   },
+  cuisines: {
+    readAll: () => http.get('/cuisines')
+  },
   uploads: {
     url: (id) => `${http.defaults.baseURL}/uploads/${id}`,
     create: (data) => http.post('/uploads', data),

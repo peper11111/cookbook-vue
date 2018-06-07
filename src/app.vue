@@ -30,6 +30,9 @@ export default {
     request () {
       return this.$api.users.current().then(value => {
         this.$store.commit('login', value.data)
+        return this.$api.cuisines.readAll()
+      }).then(value => {
+        this.$store.commit('setCuisines', value.data)
       })
     }
   }
