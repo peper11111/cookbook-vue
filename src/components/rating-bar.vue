@@ -20,18 +20,16 @@ export default {
   name: 'RatingBar',
   props: {
     stars: Number,
-    initialValue: Number
+    value: Number
   },
   data () {
     return {
-      visibleValue: this.initialValue,
-      value: this.initialValue
+      visibleValue: this.value
     }
   },
   methods: {
     click () {
-      this.value = this.visibleValue
-      this.$emit('change', this.value)
+      this.$emit('change', this.visibleValue)
     },
     clear () {
       this.visibleValue = this.value

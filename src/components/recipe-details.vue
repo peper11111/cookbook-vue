@@ -22,8 +22,9 @@
       </label>
     </div>
     <rating-bar
-      :initialValue="3"
+      :value="difficulty"
       :stars="5"
+      @change="changeDifficulty"
     ></rating-bar>
     <div>
       <label class="c-recipe-details__label" v-text="$t('recipe.difficulty-level')"></label>
@@ -53,7 +54,8 @@ export default {
   mixins: [ details ],
   data () {
     return {
-      editMode: true
+      editMode: true,
+      difficulty: 3
     }
   },
   computed: {
@@ -78,6 +80,9 @@ export default {
       const hours = time / 60
       const minutes = time % 60
       return Math.trunc(hours) > 0 ? `${this.$n(hours)} h` : `${minutes} min`
+    },
+    changeDifficulty (difficulty) {
+      this.difficulty = difficulty
     }
   }
 }
