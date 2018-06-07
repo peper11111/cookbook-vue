@@ -1,13 +1,27 @@
 export default {
   data () {
     return {
-      editMode: false
+      editMode: false,
+      avatar: {
+        src: null,
+        file: null
+      },
+      banner: {
+        src: null,
+        file: null
+      }
     }
   },
   created () {
     this.init()
   },
   methods: {
+    changeAvatar (avatar) {
+      this.avatar = avatar
+    },
+    changeBanner (banner) {
+      this.banner = banner
+    },
     uploadImg (img) {
       if (img.file) {
         const formData = new FormData()
