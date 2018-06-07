@@ -44,7 +44,7 @@
 import base from '@/mixins/base'
 
 export default {
-  name: 'UserProfile',
+  name: 'UserDetails',
   components: {
     ImagePicker: () => import('@/components/image-picker'),
     UserButtons: () => import('@/components/user-buttons'),

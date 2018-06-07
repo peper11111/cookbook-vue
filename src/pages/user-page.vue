@@ -1,7 +1,7 @@
 <template>
 <div class="o-page" v-if="!loading">
   <div class="o-page__wrapper">
-    <user-profile></user-profile>
+    <user-details></user-details>
     <div class="o-page__separator"></div>
   </div>
 </div>
@@ -13,7 +13,7 @@ import base from '@/mixins/base'
 export default {
   name: 'UserPage',
   components: {
-    UserProfile: () => import('@/components/user-profile')
+    UserDetails: () => import('@/components/user-details')
   },
   mixins: [ base ],
   created () {
