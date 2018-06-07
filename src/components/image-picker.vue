@@ -63,13 +63,19 @@ export default {
         if (file.size > 10485760) { // 10MB
           this.showError('error.file-exceeds-limit')
         } else {
-          this.$emit('change', URL.createObjectURL(file), file)
+          this.$emit('change', {
+            src: URL.createObjectURL(file),
+            file
+          })
         }
       }
     },
     inputClear () {
       this.$refs.input.value = ''
-      this.$emit('change', null, null)
+      this.$emit('change', {
+        src: null,
+        file: null
+      })
     }
   }
 }

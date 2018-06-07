@@ -2,14 +2,14 @@
 <div class="c-user-profile">
   <image-picker
     :editMode="editMode"
-    :imgSrc="banner"
+    :imgSrc="banner.src"
     @change="changeBanner"
     class="c-user-profile__banner"
   ></image-picker>
   <div class="c-user-profile__wrapper">
     <image-picker
       :editMode="editMode"
-      :imgSrc="avatar"
+      :imgSrc="avatar.src"
       :blankSrc="'/static/blank-avatar.jpg'"
       @change="changeAvatar"
       class="c-user-profile__avatar"
@@ -54,10 +54,14 @@ export default {
   data () {
     return {
       editMode: false,
-      avatar: null,
-      avatarFile: null,
-      banner: null,
-      bannerFile: null,
+      avatar: {
+        src: null,
+        file: null
+      },
+      banner: {
+        src: null,
+        file: null
+      },
       description: null
     }
   },
@@ -71,36 +75,40 @@ export default {
   },
   methods: {
     init () {
-      this.avatar = this.user.avatarId
-      this.avatarFile = null
-      this.banner = this.user.bannerId
-      this.bannerFile = null
+      this.avatar = {
+        src: this.user.avatarId,
+        file: null
+      }
+      this.banner = {
+        src: this.user.bannerId,
+        file: null
+      }
       this.description = this.user.description
     },
-    uploadImg (img, imgFile) {
-      if (imgFile) {
+    uploadImg (img) {
+      if (img.file) {
         const formData = new FormData()
-        formData.set('file', imgFile)
-        return this.$api.uploads.create(formData)
+        formData.set('file', img.file)
+        return this.$api.uploads.create(formData).then(value => {
+          img.src = value.data
+        })
       }
-      return Promise.resolve({ data: img })
+      return Promise.resolve()
     },
     update () {
-      this.uploadImg(this.avatar, this.avatarFile).then(value => {
-        this.avatar = value.data
-        return this.uploadImg(this.banner, this.bannerFile)
-      }).then(value => {
-        this.banner = value.data
+      this.uploadImg(this.avatar).then(() => {
+        return this.uploadImg(this.banner)
+      }).then(() => {
         return this.$api.users.modify(this.user.id, {
-          avatarId: this.avatar,
-          bannerId: this.banner,
+          avatarId: this.avatar.src,
+          bannerId: this.banner.src,
           description: this.description
         })
       }).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== this.banner) {
+        if (this.user.bannerId && this.user.bannerId !== this.banner.src) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.user.avatarId && this.user.avatarId !== this.avatar) {
+        if (this.user.avatarId && this.user.avatarId !== this.avatar.src) {
           this.$api.uploads.delete(this.user.avatarId)
         }
         return this.$api.users.read(this.user.id)
@@ -109,13 +117,11 @@ export default {
         this.showInfo('info.profile-update-successful')
       })
     },
-    changeBanner (banner, bannerFile) {
+    changeBanner (banner) {
       this.banner = banner
-      this.bannerFile = bannerFile
     },
-    changeAvatar (avatar, avatarFile) {
+    changeAvatar (avatar) {
       this.avatar = avatar
-      this.avatarFile = avatarFile
     },
     clickAction (action) {
       if (action === 'edit') {

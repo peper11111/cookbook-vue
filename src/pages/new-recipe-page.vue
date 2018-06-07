@@ -3,7 +3,8 @@
   <div class="o-page__wrapper">
     <image-picker
       :editMode="true"
-      :imgSrc="'https://d1doqjmisr497k.cloudfront.net/-/media/kamispl-2016/recipe/2000/paella_valencia_2000.ashx?vd=20160620T210802Z&ir=1&width=885&height=498&crop=auto&quality=75&speed=0&hash=567B2A8FB6FB9571966589138FC1807A33821135'"
+      :imgSrc="banner.src"
+      @change="changeBanner"
       class="recipe__banner"
     ></image-picker>
     <div class="recipe__details">
@@ -36,6 +37,14 @@ export default {
   components: {
     ImagePicker: () => import('@/components/image-picker')
   },
+  data () {
+    return {
+      banner: {
+        src: 'https://d1doqjmisr497k.cloudfront.net/-/media/kamispl-2016/recipe/2000/paella_valencia_2000.ashx?vd=20160620T210802Z&ir=1&width=885&height=498&crop=auto&quality=75&speed=0&hash=567B2A8FB6FB9571966589138FC1807A33821135',
+        file: null
+      }
+    }
+  },
   computed: {
     cuisines () {
       return this.$store.state.recipe.cuisines
@@ -52,6 +61,9 @@ export default {
       const hours = time / 60
       const minutes = time % 60
       return Math.trunc(hours) > 0 ? `${this.$n(hours)} h` : `${minutes} min`
+    },
+    changeBanner (banner) {
+      this.banner = banner
     }
   }
 }
