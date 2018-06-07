@@ -42,6 +42,7 @@
 
 <script>
 import base from '@/mixins/base'
+import details from '@/mixins/details'
 
 export default {
   name: 'UserDetails',
@@ -50,10 +51,9 @@ export default {
     UserButtons: () => import('@/components/user-buttons'),
     UserStats: () => import('@/components/user-stats')
   },
-  mixins: [ base ],
+  mixins: [ base, details ],
   data () {
     return {
-      editMode: false,
       avatar: {
         src: null,
         file: null
@@ -70,9 +70,6 @@ export default {
       return this.$store.state.user
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
     init () {
       this.avatar = {
@@ -84,16 +81,6 @@ export default {
         file: null
       }
       this.description = this.user.description
-    },
-    uploadImg (img) {
-      if (img.file) {
-        const formData = new FormData()
-        formData.set('file', img.file)
-        return this.$api.uploads.create(formData).then(value => {
-          img.src = value.data
-        })
-      }
-      return Promise.resolve()
     },
     update () {
       this.uploadImg(this.avatar).then(() => {
@@ -122,17 +109,6 @@ export default {
     },
     changeAvatar (avatar) {
       this.avatar = avatar
-    },
-    clickAction (action) {
-      if (action === 'edit') {
-        this.editMode = true
-      } else if (action === 'cancel') {
-        this.init()
-        this.editMode = false
-      } else if (action === 'save') {
-        this.update()
-        this.editMode = false
-      }
     }
   }
 }
