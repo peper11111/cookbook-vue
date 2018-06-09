@@ -8,6 +8,7 @@
 
   > * {
     margin-bottom: 8px;
+    width: 100%;
 
     &:last-child {
       margin-bottom: 0;
@@ -15,6 +16,7 @@
   }
 
   &__header {
+    width: auto;
     font-family: 'Dancing Script', cursive;
     font-size: 54px;
     margin-bottom: 24px;
@@ -22,6 +24,7 @@
   }
 
   &__footer {
+    width: auto;
     font-size: 12px;
     margin-top: 16px;
   }
@@ -34,6 +37,7 @@
     cursor: pointer;
 
     &--secondary {
+      width: auto;
       color: $color-text-secondary;
       align-self: flex-end;
     }
@@ -41,7 +45,6 @@
 
   &__input, &__submit, &__select, &__textarea {
     padding: 8px 0;
-    width: 100%;
     border-radius: 2px;
     border: none;
     outline: none;
@@ -97,10 +100,10 @@
 
   &__wrapper {
     position: relative;
-    width: 100%;
 
     .o-form__input {
       padding-right: 24px;
+      width: 100%;
     }
 
     .o-form__icon {

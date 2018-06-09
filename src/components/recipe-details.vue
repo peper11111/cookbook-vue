@@ -1,59 +1,65 @@
 <template>
 <div class="c-recipe-details">
-  <image-picker
-    :editMode="editMode"
-    :imgSrc="banner.src"
-    @change="changeBanner"
-    class="c-recipe-details__banner"
-  ></image-picker>
   <div class="c-recipe-details__wrapper">
-    <label class="c-recipe-details__item">
-      <select class="o-form__select">
-        <option
-          v-for="cuisine in cuisines"
-          :key="cuisine.id"
-          :value="cuisine.id"
-        >
-          {{ $t(`recipe.cuisine.${cuisine.name}`) }}
-        </option>
-      </select>
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.cuisine-type') }}
-      </span>
-    </label>
-    <label class="c-recipe-details__item">
-      <rating-bar
-        :value="difficulty"
-        @change="changeDifficulty"
-      ></rating-bar>
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.difficulty') }}
-      </span>
-    </label>
-    <label class="c-recipe-details__item">
-      <rating-bar
-        :icon="'restaurant'"
-        :value="plates"
-        @change="changePlates"
-      ></rating-bar>
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.plates') }}
-      </span>
-    </label>
-    <label class="c-recipe-details__item">
-      <select class="o-form__select">
-        <option
-          v-for="time in times"
-          :key="time"
-          :value="time"
-        >
-          {{ formatTime(time) }}
-        </option>
-      </select>
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.prepare-time') }}
-      </span>
-    </label>
+    <image-picker
+      :editMode="editMode"
+      :imgSrc="banner.src"
+      @change="changeBanner"
+      class="c-recipe-details__banner"
+    ></image-picker>
+    <div class="c-recipe-details__info">
+      <input
+        v-model="title"
+        class="c-recipe-details__title o-form__input"
+      />
+      <label class="c-recipe-details__item">
+        <span class="c-recipe-details__label">
+          {{ $t('recipe.cuisine-type') }}
+        </span>
+        <select class="o-form__select">
+          <option
+            v-for="cuisine in cuisines"
+            :key="cuisine.id"
+            :value="cuisine.id"
+          >
+            {{ $t(`recipe.cuisine.${cuisine.name}`) }}
+          </option>
+        </select>
+      </label>
+      <label class="c-recipe-details__item">
+        <span class="c-recipe-details__label">
+          {{ $t('recipe.difficulty') }}
+        </span>
+        <rating-bar
+          :value="difficulty"
+          @change="changeDifficulty"
+        ></rating-bar>
+      </label>
+      <label class="c-recipe-details__item">
+        <span class="c-recipe-details__label">
+          {{ $t('recipe.plates') }}
+        </span>
+        <rating-bar
+          :icon="'restaurant'"
+          :value="plates"
+          @change="changePlates"
+        ></rating-bar>
+      </label>
+      <label class="c-recipe-details__item">
+        <span class="c-recipe-details__label">
+          {{ $t('recipe.prepare-time') }}
+        </span>
+        <select class="o-form__select">
+          <option
+            v-for="time in times"
+            :key="time"
+            :value="time"
+          >
+            {{ formatTime(time) }}
+          </option>
+        </select>
+      </label>
+    </div>
   </div>
 </div>
 </template>
@@ -75,6 +81,7 @@ export default {
         src: null,
         file: null
       },
+      title: '',
       difficulty: 1,
       plates: 1
     }
@@ -113,32 +120,37 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/variables';
 @import '../assets/styles/mixins';
+@import '../assets/styles/variables';
 
 .c-recipe-details {
-  &__banner {
-    width: 100%;
-    height: 300px;
+  &__wrapper {
+    display: flex;
   }
 
-  &__wrapper {
-    position: relative;
+  &__banner {
+    width: 650px;
+    height: 400px;
+  }
+
+  &__info {
     display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 32px 32px 0 32px;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    padding: 16px;
   }
 
   &__item {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    align-items: center;
+    height: 40px;
   }
 
   &__label {
-    text-align: center;
-    margin-top: 4px;
+    text-align: left;
+    white-space: nowrap;
+    width: 140px;
   }
 }
 </style>
