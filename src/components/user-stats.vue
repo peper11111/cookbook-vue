@@ -38,11 +38,12 @@ export default {
   align-items: center;
 
   &__value {
+    padding-left: 16px;
     font-weight: bold;
   }
 
   &__label {
-    padding: 0 32px 0 4px;
+    padding: 0 16px 0 4px;
 
     &:last-child {
       padding-right: 0;

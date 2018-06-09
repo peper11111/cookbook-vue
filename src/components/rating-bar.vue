@@ -63,6 +63,7 @@ export default {
     cursor: pointer;
     font-size: 0;
     padding: 4px;
+    margin: 0 1px;
 
     .material-icons {
       font-size: 12px;

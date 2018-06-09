@@ -156,14 +156,14 @@ export default {
   }
 
   &__username {
+    margin-left: 16px;
     margin-right: 8px;
     font-size: 24px;
   }
 
   &__description[disabled] {
     background: none;
-    padding: 0;
-    border: none;
+    border-color: transparent;
   }
 }
 </style>
