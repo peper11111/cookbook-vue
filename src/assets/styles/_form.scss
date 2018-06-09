@@ -38,7 +38,7 @@
     }
   }
 
-  &__input, &__submit, &__textarea {
+  &__input, &__submit, &__select, &__textarea {
     padding: 8px 16px;
     width: 100%;
     border-radius: 2px;
@@ -46,9 +46,10 @@
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: $color-white;
   }
 
-  &__input, &__submit {
+  &__input, &__submit, &__select {
     height: 34px;
   }
 

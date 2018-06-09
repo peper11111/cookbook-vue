@@ -26,7 +26,10 @@ export default {
       default: 'star',
       type: String
     },
-    size: Number,
+    size: {
+      default: 5,
+      type: Number
+    },
     value: Number
   },
   data () {

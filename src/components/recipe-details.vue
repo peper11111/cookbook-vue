@@ -8,7 +8,7 @@
   ></image-picker>
   <div class="c-recipe-details__wrapper">
     <label class="c-recipe-details__item">
-      <select class="form__select">
+      <select class="o-form__select">
         <option
           v-for="cuisine in cuisines"
           :key="cuisine.id"
@@ -23,7 +23,6 @@
     </label>
     <label class="c-recipe-details__item">
       <rating-bar
-        :size="5"
         :value="difficulty"
         @change="changeDifficulty"
       ></rating-bar>
@@ -34,7 +33,6 @@
     <label class="c-recipe-details__item">
       <rating-bar
         :icon="'restaurant'"
-        :size="4"
         :value="plates"
         @change="changePlates"
       ></rating-bar>
@@ -43,7 +41,7 @@
       </span>
     </label>
     <label class="c-recipe-details__item">
-      <select class="form__select">
+      <select class="o-form__select">
         <option
           v-for="time in times"
           :key="time"
@@ -77,7 +75,7 @@ export default {
         src: null,
         file: null
       },
-      difficulty: 3,
+      difficulty: 1,
       plates: 1
     }
   },
@@ -129,22 +127,19 @@ export default {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
-    padding: 0 32px;
+    padding: 32px 32px 0 32px;
   }
 
   &__item {
-    height: 42px;
-    margin-top: -50px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
   }
 
   &__label {
-    @include text-elevation;
-    color: $color-white;
+    color: $text-color-primary;
     text-align: center;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 }
 </style>
