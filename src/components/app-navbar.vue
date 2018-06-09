@@ -6,7 +6,7 @@
   >
     <img
       class="c-app-navbar__logo"
-      src="/static/favicon.png"
+      src="/static/logo-light.png"
     />
     <span class="c-app-navbar__brand">
       {{ $t('app') }}
@@ -32,22 +32,20 @@
       </i>
     </router-link>
     <router-link
-      to="/new-recipe"
+      to="/cookbook"
       class="c-app-navbar__item"
     >
       <i class="material-icons">
-        note_add
-      </i>
-    </router-link>
-    <router-link
-      :to="`/user/${currentUser.id}`"
-      class="c-app-navbar__item"
-    >
-      <i class="material-icons">
-        person
+        book
       </i>
     </router-link>
     <div class="c-app-navbar__separator"></div>
+    <div
+      @click="logout"
+      class="c-app-navbar__item"
+    >
+      {{ currentUser.username }}
+    </div>
     <div
       @click="logout"
       class="c-app-navbar__item"
@@ -87,9 +85,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/mixins';
 @import '../assets/styles/variables';
 
 .c-app-navbar {
+  @include box-elevation;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -102,7 +102,6 @@ export default {
   z-index: 1000;
   padding: 0 96px;
   box-sizing: border-box;
-  border-bottom: 1px solid $color-secondary;
   background-color: $color-primary;
 
   &__row {
@@ -118,20 +117,21 @@ export default {
   }
 
   &__brand {
-    font-size: 24px;
+    font-size: 28px;
     font-family: 'Dancing Script', cursive;
-    color: $text-color-primary;
+    color: $color-text;
+    letter-spacing: 1px;
   }
 
   &__item {
     margin: 0 2px;
     font-size: 0;
-    color: $color-secondary;
+    color: $color-primary-light;
     cursor: pointer;
     user-select: none;
 
     &:hover, &.is-active {
-      color: $text-color-primary;
+      color: $color-text;
     }
   }
 
@@ -139,7 +139,7 @@ export default {
     width: 1px;
     height: 16px;
     margin: 0 8px;
-    background-color: $color-secondary;
+    background-color: $color-primary-light;
     box-sizing: border-box;
   }
 }

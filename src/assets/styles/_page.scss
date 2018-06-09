@@ -5,8 +5,8 @@
   overflow: auto;
   height: calc(100vh - #{$navbar-height});
   margin-top: $navbar-height;
-  color: $text-color-primary;
-  background-color: $window-background;
+  color: $color-text-primary;
+  background-color: $color-white;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
 
@@ -28,13 +28,13 @@
   &__card {
     @include box-elevation;
     padding: 32px;
-    background-color: $color-primary;
+    background-color: $color-white;
     border-radius: 2px;
   }
 
   &__separator {
     height: 1px;
-    background-color: $color-secondary;
+    background-color: $color-divider;
     margin: 16px 32px;
     box-sizing: border-box;
   }

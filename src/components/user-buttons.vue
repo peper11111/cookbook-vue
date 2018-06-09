@@ -10,7 +10,7 @@
   <button
     v-if="editMode"
     @click="cancel"
-    class="o-button o-button__secondary"
+    class="o-button o-button__primary"
   >
     {{ $t('user.cancel') }}
   </button>

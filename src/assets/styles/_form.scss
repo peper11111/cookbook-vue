@@ -18,6 +18,7 @@
     font-family: 'Dancing Script', cursive;
     font-size: 54px;
     margin-bottom: 24px;
+    letter-spacing: 1px;
   }
 
   &__footer {
@@ -33,43 +34,40 @@
     cursor: pointer;
 
     &--secondary {
-      color: $text-color-secondary;
+      color: $color-text-secondary;
       align-self: flex-end;
     }
   }
 
   &__input, &__submit, &__select, &__textarea {
-    padding: 8px 16px;
+    padding: 8px 0;
     width: 100%;
     border-radius: 2px;
+    border: none;
     outline: none;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     box-sizing: border-box;
-    background-color: $color-white;
-  }
-
-  &__input, &__submit, &__select {
+    background-color: transparent;
+    color: $color-text-primary;
+    border-bottom: 1px solid $color-primary-light;
     height: 34px;
   }
 
   &__input, &__textarea {
-    border: 1px solid $color-secondary;
-    color: $text-color-primary;
-
     &:focus {
       border-color: $color-accent;
     }
 
     &::placeholder {
       font-family: 'Roboto', sans-serif;
-      color: $text-color-secondary;
+      color: $color-text-secondary;
       font-size: 12px;
     }
   }
 
   &__submit {
-    color: $color-white;
+    color: $color-text;
     background-color: $color-accent;
     border: none;
     cursor: pointer;
@@ -77,6 +75,24 @@
 
   &__textarea {
     resize: none;
+    height: auto;
+  }
+
+  &__icon {
+    color: $color-text-primary;
+
+    .material-icons {
+      font-size: 18px;
+    }
+
+    &--toggle {
+      color: $color-text-secondary;
+      user-select: none;
+
+      &.is-active {
+        color: $color-text-primary;
+      }
+    }
   }
 
   &__wrapper {
@@ -84,29 +100,15 @@
     width: 100%;
 
     .o-form__input {
-      padding-right: 32px;
+      padding-right: 24px;
     }
 
     .o-form__icon {
-      color: $color-black;
       position: absolute;
       top: 8px;
-      right: 8px;
+      right: 0;
       cursor: pointer;
       user-select: none;
-
-      .material-icons {
-        font-size: 18px;
-      }
-
-      &--toggle {
-        color: $color-secondary;
-        user-select: none;
-
-        &.is-active {
-          color: $text-color-primary;
-        }
-      }
     }
   }
 }

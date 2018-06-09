@@ -58,7 +58,7 @@ export default {
 
   &__item {
     @include box-elevation;
-    background-color: $color-secondary;
+    background-color: $color-primary-light;
     border-radius: 50%;
     cursor: pointer;
     font-size: 0;
@@ -67,14 +67,14 @@ export default {
 
     .material-icons {
       font-size: 12px;
-      color: $text-color-secondary;
+      color: $color-text-secondary;
     }
 
     &.is-active {
       background-color: $color-accent;
 
       .material-icons {
-        color: $text-color-accent;
+        color: $color-text;
       }
     }
   }

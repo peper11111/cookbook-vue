@@ -14,17 +14,12 @@
   margin: 0 4px;
 
   &__primary {
-    background-color: $color-primary;
-    color: $text-color-primary;
-  }
-
-  &__secondary {
-    background-color: $color-secondary;
-    color: $text-color-primary;
+    background-color: transparent;
+    color: $color-text-primary;
   }
 
   &__accent {
     background-color: $color-accent;
-    color: $text-color-accent;
+    color: $color-text;
   }
 }

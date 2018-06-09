@@ -7,11 +7,11 @@
     <input
       v-model="search"
       :placeholder="$t('form.search')"
-      class="o-form__input"
+      class="c-app-search__input o-form__input"
     />
     <div
       @click="submit"
-      class="o-form__icon"
+      class="c-app-search__icon o-form__icon"
     >
       <i class="material-icons">
         search
@@ -38,7 +38,25 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/styles/variables';
+
 .c-app-search {
   width: 300px;
+
+  &__input {
+    color: $color-text;
+
+    &:focus {
+      border-bottom-color: $color-text;
+    }
+
+    &::placeholder {
+      color: $color-primary-light;
+    }
+  }
+
+  &__icon {
+    color: $color-text;
+  }
 }
 </style>

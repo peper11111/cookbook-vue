@@ -32,6 +32,7 @@
           :placeholder="editMode ? $t('user.description') : ''"
           class="o-form__textarea c-user-details__description"
           rows="3"
+          maxlength="255"
         >
         </textarea>
       </div>
@@ -156,7 +157,6 @@ export default {
   }
 
   &__username {
-    margin-left: 16px;
     margin-right: 8px;
     font-size: 24px;
   }

@@ -66,7 +66,7 @@ export default {
   bottom: 24px;
   padding: 16px 24px;
   box-sizing: border-box;
-  background-color: $color-grey-900;
+  background-color: $color-gray-900;
   border-radius: 2px;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
