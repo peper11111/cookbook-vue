@@ -40,46 +40,17 @@
       </i>
     </router-link>
     <div class="c-app-navbar__separator"></div>
-    <div
-      @click="logout"
-      class="c-app-navbar__item"
-    >
-      {{ currentUser.username }}
-    </div>
-    <div
-      @click="logout"
-      class="c-app-navbar__item"
-    >
-      <i class="material-icons">
-        exit_to_app
-      </i>
-    </div>
+    <app-dropdown></app-dropdown>
   </div>
 </nav>
 </template>
 
 <script>
-import base from '@/mixins/base'
-
 export default {
   name: 'AppNavbar',
   components: {
+    AppDropdown: () => import('@/components/app-dropdown'),
     AppSearch: () => import('@/components/app-search')
-  },
-  mixins: [ base ],
-  computed: {
-    currentUser () {
-      return this.$store.state.currentUser
-    }
-  },
-  methods: {
-    logout () {
-      this.$api.auth.logout().then(() => {
-        this.showInfo('info.logout-successful')
-        this.$store.commit('logout')
-        this.$router.push('/login')
-      })
-    }
   }
 }
 </script>

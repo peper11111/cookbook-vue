@@ -1,5 +1,10 @@
 {
   "app": "Cookbook",
+  "navbar": {
+    "profile": "Wyświetl profil",
+    "new-recipe": "Dodaj przepis",
+    "logout": "Wyloguj"
+  },
   "form": {
     "email": "Email",
     "username": "Nazwa użytkownika",
