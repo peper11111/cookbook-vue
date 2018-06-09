@@ -137,7 +137,6 @@ export default {
   }
 
   &__label {
-    color: $color-text-primary;
     text-align: center;
     margin-top: 4px;
   }

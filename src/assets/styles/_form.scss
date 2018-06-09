@@ -29,11 +29,12 @@
   &__action {
     font-size: 12px;
     text-decoration: none;
-    color: $color-primary;
+    color: $color-accent;
     user-select: none;
     cursor: pointer;
 
     &--secondary {
+      color: $color-text-secondary;
       align-self: flex-end;
     }
   }
@@ -55,7 +56,7 @@
 
   &__input, &__textarea {
     &:focus {
-      border-color: $color-primary;
+      border-color: $color-accent;
     }
 
     &::placeholder {
@@ -67,7 +68,7 @@
 
   &__submit {
     color: $color-text;
-    background-color: $color-primary;
+    background-color: $color-accent;
     border: none;
     cursor: pointer;
   }
