@@ -19,6 +19,11 @@ const router = new VueRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/cookbook',
+      component: () => import('@/pages/cookbook-page'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/user/:id',
       component: () => import('@/pages/user-page'),
       meta: { requiresAuth: true }

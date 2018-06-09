@@ -1,11 +1,11 @@
 <template>
 <div class="o-page">
-  Home Page
+  Cookbook Page
 </div>
 </template>
 
 <script>
 export default {
-  name: 'HomePage'
+  name: 'CookbookPage'
 }
 </script>
