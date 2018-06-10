@@ -1,17 +1,15 @@
 <template>
 <div class="c-user-details">
   <image-picker
-    :editMode="editMode"
-    :imgSrc="banner.src"
-    @change="changeBanner"
+    v-model="banner"
+    :disabled="!editMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
-      :editMode="editMode"
-      :imgSrc="avatar.src"
-      :blankSrc="'/static/blank-avatar.jpg'"
-      @change="changeAvatar"
+      v-model="avatar"
+      :blank="'/static/blank-avatar.jpg'"
+      :disabled="!editMode"
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
@@ -55,14 +53,8 @@ export default {
   mixins: [ base, details ],
   data () {
     return {
-      avatar: {
-        src: null,
-        file: null
-      },
-      banner: {
-        src: null,
-        file: null
-      },
+      avatar: {},
+      banner: {},
       description: null
     }
   },
@@ -104,12 +96,6 @@ export default {
         this.$store.commit('setUser', value.data)
         this.showInfo('info.profile-update-successful')
       })
-    },
-    changeAvatar (avatar) {
-      this.avatar = avatar
-    },
-    changeBanner (banner) {
-      this.banner = banner
     }
   }
 }

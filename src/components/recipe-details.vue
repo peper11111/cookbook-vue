@@ -2,9 +2,8 @@
 <div class="c-recipe-details">
   <div class="c-recipe-details__wrapper">
     <image-picker
-      :editMode="editMode"
-      :imgSrc="banner.src"
-      @change="changeBanner"
+      v-model="banner"
+      :disabled="!editMode"
       class="c-recipe-details__banner"
     ></image-picker>
     <div class="c-recipe-details__info">
@@ -73,10 +72,7 @@ export default {
   data () {
     return {
       editMode: true,
-      banner: {
-        src: null,
-        file: null
-      },
+      banner: {},
       title: '',
       difficulty: 1,
       plates: 1

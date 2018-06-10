@@ -1,7 +1,7 @@
 <template>
 <div class="c-image-uploader">
   <input
-    v-if="editMode"
+    v-if="!disabled"
     ref="input"
     @change="change"
     accept="image/*"
@@ -9,11 +9,11 @@
     type="file"
   />
   <img
-    :src="src"
+    :src="value.src || blank"
     class="c-image-uploader__image"
   />
   <div
-    v-if="editMode"
+    v-if="!disabled"
     @click="click"
     class="c-image-uploader__overlay"
   >
@@ -22,7 +22,7 @@
     </i>
   </div>
   <div
-    v-if="editMode && imgSrc"
+    v-if="!disabled && value.src"
     @click="clear"
     class="c-image-uploader__clear"
   >
@@ -40,19 +40,12 @@ export default {
   name: 'ImageUploader',
   mixins: [ base ],
   props: {
-    blankSrc: {
+    blank: {
       default: '/static/blank-banner.jpg',
       type: String
     },
-    editMode: Boolean,
-    imgSrc: [ Number, String ]
-  },
-  computed: {
-    src () {
-      return (typeof this.imgSrc === 'number'
-        ? this.url(this.imgSrc)
-        : this.imgSrc) || this.blankSrc
-    }
+    disabled: Boolean,
+    value: Object
   },
   methods: {
     click () {
@@ -66,7 +59,7 @@ export default {
         if (file.size > 10485760) { // 10MB
           this.showError('error.file-exceeds-limit')
         } else {
-          this.$emit('change', {
+          this.$emit('input', {
             src: URL.createObjectURL(file),
             file
           })
@@ -75,7 +68,7 @@ export default {
     },
     clear () {
       this.$refs.input.value = ''
-      this.$emit('change', {
+      this.$emit('input', {
         src: null,
         file: null
       })
