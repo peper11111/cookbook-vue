@@ -125,6 +125,9 @@ export default {
       if (hours > 0) {
         format += `${hours} h`
       }
+      if (format !== '') {
+        format += ' '
+      }
       if (minutes > 0) {
         format += `${minutes} min`
       }
