@@ -72,8 +72,11 @@ export default {
       this.$api.auth.login(formData).then(() => {
         return this.$api.users.current()
       }).then(value => {
-        this.showInfo('info.login-successful')
         this.$store.commit('login', value.data)
+        return this.$api.cuisines.readAll()
+      }).then(value => {
+        this.$store.commit('setCuisines', value.data)
+        this.showInfo('info.login-successful')
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(reason => {
         this.showError(reason.response.data)
