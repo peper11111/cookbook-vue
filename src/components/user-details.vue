@@ -84,12 +84,14 @@ export default {
   methods: {
     init () {
       this.avatar = {
-        src: this.user.avatarId,
-        file: null
+        id: this.user.avatarId,
+        file: null,
+        src: this.url(this.user.avatarId)
       }
       this.banner = {
-        src: this.user.bannerId,
-        file: null
+        id: this.user.bannerId,
+        file: null,
+        src: this.url(this.user.bannerId)
       }
       this.description = this.user.description
     },
@@ -98,15 +100,15 @@ export default {
         return this.uploadImg(this.banner)
       }).then(() => {
         return this.$api.users.modify(this.user.id, {
-          avatarId: this.avatar.src,
-          bannerId: this.banner.src,
+          avatarId: this.avatar.id,
+          bannerId: this.banner.id,
           description: this.description
         })
       }).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== this.banner.src) {
+        if (this.user.bannerId && this.user.bannerId !== this.banner.id) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.user.avatarId && this.user.avatarId !== this.avatar.src) {
+        if (this.user.avatarId && this.user.avatarId !== this.avatar.id) {
           this.$api.uploads.delete(this.user.avatarId)
         }
         return this.$api.users.read(this.user.id)

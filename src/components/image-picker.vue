@@ -3,7 +3,7 @@
   <input
     v-if="!disabled"
     ref="input"
-    @change="change"
+    @input="input"
     accept="image/*"
     class="u-hide"
     type="file"
@@ -51,7 +51,15 @@ export default {
     click () {
       this.$refs.input.click()
     },
-    change () {
+    clear () {
+      this.$refs.input.value = ''
+      this.$emit('input', {
+        id: null,
+        file: null,
+        src: null
+      })
+    },
+    input () {
       const file = this.$refs.input.files[0]
 
       if (file) {
@@ -60,18 +68,12 @@ export default {
           this.showError('error.file-exceeds-limit')
         } else {
           this.$emit('input', {
-            src: URL.createObjectURL(file),
-            file
+            id: null,
+            file,
+            src: URL.createObjectURL(file)
           })
         }
       }
-    },
-    clear () {
-      this.$refs.input.value = ''
-      this.$emit('input', {
-        src: null,
-        file: null
-      })
     }
   }
 }

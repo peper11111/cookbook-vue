@@ -13,7 +13,8 @@ export default {
         const formData = new FormData()
         formData.set('file', img.file)
         return this.$api.uploads.create(formData).then(value => {
-          img.src = value.data
+          img.id = value.data
+          img.src = this.url(value.data)
         })
       }
       return Promise.resolve()
