@@ -22,7 +22,26 @@
           @click="clickAction"
         ></user-buttons>
       </div>
-      <user-stats class="c-user-details__row"></user-stats>
+      <div class="c-user-details__row">
+          <span class="c-user-details__value">
+            {{ user.recipes || 0 }}
+          </span>
+          <span class="c-user-details__label">
+            {{ $t('user.recipes') }}
+          </span>
+          <span class="c-user-details__value">
+            {{ user.followers || 0 }}
+          </span>
+          <span class="c-user-details__label">
+            {{ $t('user.followers') }}
+          </span>
+          <span class="c-user-details__value">
+            {{ user.followed || 0 }}
+          </span>
+          <span class="c-user-details__label">
+            {{ $t('user.followed') }}
+          </span>
+      </div>
       <div class="c-user-details__row">
         <textarea
           v-model="description"
@@ -47,8 +66,7 @@ export default {
   name: 'UserDetails',
   components: {
     ImagePicker: () => import('@/components/image-picker'),
-    UserButtons: () => import('@/components/user-buttons'),
-    UserStats: () => import('@/components/user-stats')
+    UserButtons: () => import('@/components/user-buttons')
   },
   mixins: [ base, details ],
   data () {
@@ -145,6 +163,18 @@ export default {
   &__username {
     margin-right: 8px;
     font-size: 24px;
+  }
+
+  &__value {
+    font-weight: bold;
+  }
+
+  &__label {
+    padding: 0 32px 0 4px;
+
+    &:last-child {
+      padding-right: 0;
+    }
   }
 
   &__description[disabled] {
