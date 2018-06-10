@@ -30,19 +30,15 @@
         <span class="c-recipe-details__label">
           {{ $t('recipe.difficulty') }}
         </span>
-        <rating-bar
-          :value="difficulty"
-          @change="changeDifficulty"
-        ></rating-bar>
+        <rating-bar v-model="difficulty"></rating-bar>
       </label>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
           {{ $t('recipe.plates') }}
         </span>
         <rating-bar
+          v-model="plates"
           :icon="'restaurant'"
-          :value="plates"
-          @change="changePlates"
         ></rating-bar>
       </label>
       <label class="c-recipe-details__item">
@@ -108,12 +104,6 @@ export default {
     },
     changeBanner (banner) {
       this.banner = banner
-    },
-    changeDifficulty (difficulty) {
-      this.difficulty = difficulty
-    },
-    changePlates (plates) {
-      this.plates = plates
     }
   }
 }

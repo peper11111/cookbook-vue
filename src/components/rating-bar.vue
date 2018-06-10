@@ -6,8 +6,8 @@
   <div
     v-for="i in size"
     :key="i"
-    :class="{ 'is-active': visibleValue >= i }"
-    @mouseover="visibleValue = i"
+    :class="{ 'is-active': currentValue >= i }"
+    @mouseover="currentValue = i"
     @click="click"
     class="c-rating-bar__item"
   >
@@ -34,15 +34,15 @@ export default {
   },
   data () {
     return {
-      visibleValue: this.value
+      currentValue: this.value
     }
   },
   methods: {
     click () {
-      this.$emit('change', this.visibleValue)
+      this.$emit('input', this.currentValue)
     },
     clear () {
-      this.visibleValue = this.value
+      this.currentValue = this.value
     }
   }
 }
