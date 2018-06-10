@@ -15,13 +15,17 @@
         <span class="c-recipe-details__label">
           {{ $t('recipe.cuisine-type') }}
         </span>
-        <select class="o-form__select">
+        <select
+          v-model="cuisine"
+          class="c-recipe-details__value o-form__select"
+        >
           <option
-            v-for="cuisine in cuisines"
-            :key="cuisine.id"
-            :value="cuisine.id"
+            v-for="item in cuisines"
+            :key="item.id"
+            :value="item.id"
+            :selected="cuisine === item.id"
           >
-            {{ $t(`recipe.cuisine.${cuisine.name}`) }}
+            {{ $t(`recipe.cuisine.${item.name}`) }}
           </option>
         </select>
       </label>
@@ -44,13 +48,17 @@
         <span class="c-recipe-details__label">
           {{ $t('recipe.prepare-time') }}
         </span>
-        <select class="o-form__select">
+        <select
+          v-model=time
+          class="c-recipe-details__value o-form__select"
+        >
           <option
-            v-for="time in times"
-            :key="time"
-            :value="time"
+            v-for="item in times"
+            :key="item"
+            :value="item"
+            :selected="item === time"
           >
-            {{ formatTime(time) }}
+            {{ formatTime(item) }}
           </option>
         </select>
       </label>
@@ -60,6 +68,7 @@
 </template>
 
 <script>
+import base from '@/mixins/base'
 import details from '@/mixins/details'
 
 export default {
@@ -68,14 +77,17 @@ export default {
     ImagePicker: () => import('@/components/image-picker'),
     RatingBar: () => import('@/components/rating-bar')
   },
-  mixins: [ details ],
+  mixins: [ base, details ],
   data () {
     return {
       editMode: true,
       banner: {},
-      title: '',
-      difficulty: 1,
-      plates: 1
+      title: null,
+      cuisine: null,
+      description: null,
+      difficulty: null,
+      plates: null,
+      time: null
     }
   },
   computed: {
@@ -83,23 +95,40 @@ export default {
       return this.$store.state.cuisines
     },
     times () {
-      return this.$store.state.recipe.times
+      return this.$store.state.times
+    },
+    recipe () {
+      return this.$store.state.recipe
     }
   },
   methods: {
     init () {
-      // TODO init method
+      this.banner = {
+        id: this.recipe.bannerId,
+        file: null,
+        src: this.url(this.recipe.bannerId)
+      }
+      this.title = this.recipe.title
+      this.description = this.recipe.description
+      this.cuisine = this.recipe.cuisineId
+      this.difficulty = this.recipe.difficulty
+      this.plates = this.recipe.plates
+      this.time = this.recipe.time
     },
     update () {
       // TODO update mehod
     },
     formatTime (time) {
-      const hours = time / 60
-      const minutes = time % 60
-      return Math.trunc(hours) > 0 ? `${this.$n(hours)} h` : `${minutes} min`
-    },
-    changeBanner (banner) {
-      this.banner = banner
+      const hours = Math.trunc(time / 60)
+      const minutes = Math.trunc(time % 60)
+      let format = ''
+      if (hours > 0) {
+        format += `${hours} h`
+      }
+      if (minutes > 0) {
+        format += `${minutes} min`
+      }
+      return format
     }
   }
 }
@@ -122,7 +151,6 @@ export default {
   &__info {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 350px;
     padding: 16px;
   }
@@ -137,6 +165,10 @@ export default {
     text-align: left;
     white-space: nowrap;
     width: 140px;
+  }
+
+  &__value {
+    width: auto;
   }
 }
 </style>
