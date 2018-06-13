@@ -1,6 +1,6 @@
 <template>
 <div
-  @mouseleave="resetValue"
+  @mouseleave="setValue(value)"
   class="c-rating-bar"
 >
   <div
@@ -42,11 +42,6 @@ export default {
     emitValue () {
       if (!this.disabled) {
         this.$emit('input', this.model.value)
-      }
-    },
-    resetValue () {
-      if (!this.disabled) {
-        this.model.value = this.value
       }
     },
     setValue (val) {

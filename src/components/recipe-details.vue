@@ -33,7 +33,10 @@
         <span class="c-recipe-details__label">
           {{ $t('recipe.difficulty') }}
         </span>
-        <rating-bar v-model="difficulty"></rating-bar>
+        <rating-bar
+          v-model="difficulty"
+          :disabled="!editMode"
+        ></rating-bar>
       </label>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
@@ -41,27 +44,18 @@
         </span>
         <rating-bar
           v-model="plates"
-          :icon="'restaurant'"
         ></rating-bar>
       </label>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
           {{ $t('recipe.prepare-time') }}
         </span>
-        <select
-          v-model=time
-          class="c-recipe-details__value o-form__select"
-        >
-          <option
-            v-for="item in times"
-            :key="item"
-            :value="item"
-            :selected="item === time"
-          >
-            {{ formatTime(item) }}
-          </option>
-        </select>
+        <time-input
+          v-model="time"
+          :disabled="editMode"
+        ></time-input>
       </label>
+      <button @click="clickAction('cancel')">Cancel</button>
     </div>
   </div>
 </div>
@@ -75,7 +69,8 @@ export default {
   name: 'RecipeDetails',
   components: {
     ImagePicker: () => import('@/components/image-picker'),
-    RatingBar: () => import('@/components/rating-bar')
+    RatingBar: () => import('@/components/rating-bar'),
+    TimeInput: () => import('@/components/time-input')
   },
   mixins: [ base, details ],
   data () {
@@ -117,21 +112,6 @@ export default {
     },
     update () {
       // TODO update mehod
-    },
-    formatTime (time) {
-      const hours = Math.trunc(time / 60)
-      const minutes = Math.trunc(time % 60)
-      let format = ''
-      if (hours > 0) {
-        format += `${hours} h`
-      }
-      if (format !== '') {
-        format += ' '
-      }
-      if (minutes > 0) {
-        format += `${minutes} min`
-      }
-      return format
     }
   }
 }
