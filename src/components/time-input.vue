@@ -36,8 +36,8 @@ export default {
   data () {
     return {
       model: {
-        hours: Math.trunc(this.value / 60) || 0,
-        minutes: Math.trunc(this.value % 60) || 0
+        hours: Math.trunc(this.value / 60) || '',
+        minutes: Math.trunc(this.value % 60) || ''
       }
     }
   },
@@ -62,7 +62,7 @@ export default {
   methods: {
     emitValue () {
       if (/^[0-9]{0,2}$/.test(this.model.hours) &&
-        /^[0-9]{0,2}$/.test(this.model.minutes)) {
+        /^[0-5]?[0-9]?$/.test(this.model.minutes)) {
         const val = Number(this.model.hours) * 60 + Number(this.model.minutes)
         this.$emit('input', val)
       } else {
@@ -70,8 +70,8 @@ export default {
       }
     },
     setValue (val) {
-      this.model.hours = Math.trunc(val / 60) || 0
-      this.model.minutes = Math.trunc(val % 60) || 0
+      this.model.hours = Math.trunc(val / 60) || ''
+      this.model.minutes = Math.trunc(val % 60) || ''
     }
   }
 }
@@ -88,7 +88,7 @@ export default {
 
   &__value {
     width: 18px;
-    text-align: right;
+    text-align: center;
   }
 }
 </style>

@@ -42,9 +42,10 @@
         <span class="c-recipe-details__label">
           {{ $t('recipe.plates') }}
         </span>
-        <rating-bar
+        <input
           v-model="plates"
-        ></rating-bar>
+          class="c-recipe-details__value o-form__input"
+        />
       </label>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
@@ -52,7 +53,7 @@
         </span>
         <time-input
           v-model="time"
-          :disabled="editMode"
+          :disabled="!editMode"
         ></time-input>
       </label>
       <button @click="clickAction('cancel')">Cancel</button>
@@ -147,11 +148,11 @@ export default {
   &__label {
     text-align: left;
     white-space: nowrap;
-    width: 140px;
+    width: 134px;
   }
 
   &__value {
-    width: auto;
+    width: 184px;
   }
 }
 </style>

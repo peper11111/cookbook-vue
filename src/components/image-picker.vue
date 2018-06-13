@@ -3,7 +3,7 @@
   <input
     v-if="!disabled"
     ref="input"
-    @input="input"
+    @input="emitValue"
     accept="image/*"
     class="u-hide"
     type="file"
@@ -14,7 +14,7 @@
   />
   <div
     v-if="!disabled"
-    @click="click"
+    @click="inputClick"
     class="c-image-uploader__overlay"
   >
     <i class="material-icons">
@@ -23,7 +23,7 @@
   </div>
   <div
     v-if="!disabled && value.src"
-    @click="clear"
+    @click="clearValue"
     class="c-image-uploader__clear"
   >
     <i class="material-icons">
@@ -48,10 +48,10 @@ export default {
     value: Object
   },
   methods: {
-    click () {
+    inputClick () {
       this.$refs.input.click()
     },
-    clear () {
+    clearValue () {
       this.$refs.input.value = ''
       this.$emit('input', {
         id: null,
@@ -59,7 +59,7 @@ export default {
         src: null
       })
     },
-    input () {
+    emitValue () {
       const file = this.$refs.input.files[0]
 
       if (file) {
