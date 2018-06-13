@@ -1,18 +1,18 @@
 <template>
 <div
-  @mouseleave="clear"
+  @mouseleave="resetValue"
   class="c-rating-bar"
 >
   <div
-    v-for="i in size"
+    v-for="i in 5"
     :key="i"
-    :class="{ 'is-active': currentValue >= i }"
-    @mouseover="currentValue = i"
-    @click="click"
+    :class="{ 'is-active': isActive(i) }"
+    @mouseover="setValue(i)"
+    @click="emitValue"
     class="c-rating-bar__item"
   >
     <i class="material-icons">
-      {{ icon }}
+      star
     </i>
   </div>
 </div>
@@ -22,27 +22,30 @@
 export default {
   name: 'RatingBar',
   props: {
-    icon: {
-      default: 'star',
-      type: String
-    },
-    size: {
-      default: 5,
-      type: Number
-    },
     value: Number
   },
   data () {
     return {
-      currentValue: this.value
+      model: {
+        value: this.value
+      }
     }
   },
+  watch: {
+    value: 'setValue'
+  },
   methods: {
-    click () {
-      this.$emit('input', this.currentValue)
+    isActive (val) {
+      return this.model.value >= val
     },
-    clear () {
-      this.currentValue = this.value
+    emitValue () {
+      this.$emit('input', this.model.value)
+    },
+    resetValue () {
+      this.model.value = this.value
+    },
+    setValue (val) {
+      this.model.value = val
     }
   }
 }
