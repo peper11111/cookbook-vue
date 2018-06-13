@@ -22,6 +22,7 @@
 export default {
   name: 'RatingBar',
   props: {
+    disabled: Boolean,
     value: Number
   },
   data () {
@@ -39,13 +40,19 @@ export default {
       return this.model.value >= val
     },
     emitValue () {
-      this.$emit('input', this.model.value)
+      if (!this.disabled) {
+        this.$emit('input', this.model.value)
+      }
     },
     resetValue () {
-      this.model.value = this.value
+      if (!this.disabled) {
+        this.model.value = this.value
+      }
     },
     setValue (val) {
-      this.model.value = val
+      if (!this.disabled) {
+        this.model.value = val
+      }
     }
   }
 }
@@ -63,7 +70,6 @@ export default {
     @include box-elevation;
     background-color: $color-primary-light;
     border-radius: 50%;
-    cursor: pointer;
     font-size: 0;
     padding: 4px;
     margin: 0 1px;
@@ -75,6 +81,7 @@ export default {
 
     &.is-active {
       background-color: $color-accent;
+      cursor: pointer;
 
       .material-icons {
         color: $color-text;
