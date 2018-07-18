@@ -25,24 +25,34 @@
         ></user-buttons>
       </div>
       <div class="c-user-details__row">
-          <span class="c-user-details__value">
-            {{ user.recipes || 0 }}
-          </span>
-          <span class="c-user-details__label">
-            {{ $t('user.recipes') }}
-          </span>
-          <span class="c-user-details__value">
-            {{ user.followers || 0 }}
-          </span>
-          <span class="c-user-details__label">
-            {{ $t('user.followers') }}
-          </span>
-          <span class="c-user-details__value">
-            {{ user.followed || 0 }}
-          </span>
-          <span class="c-user-details__label">
-            {{ $t('user.followed') }}
-          </span>
+        <span class="c-user-details__value">
+          {{ user.recipes || 0 }}
+        </span>
+        <span class="c-user-details__label">
+          {{ $t('user.recipes') }}
+        </span>
+        <span class="c-user-details__value">
+          {{ user.followers || 0 }}
+        </span>
+        <span class="c-user-details__label">
+          {{ $t('user.followers') }}
+        </span>
+        <span class="c-user-details__value">
+          {{ user.followed || 0 }}
+        </span>
+        <span class="c-user-details__label">
+          {{ $t('user.followed') }}
+        </span>
+      </div>
+      <div
+        :class="{ 'c-user-details__row--no-margin': !editMode }"
+        class="c-user-details__row"
+      >
+        <input
+          v-model="name"
+          :disabled="!editMode"
+          class="o-form__input c-user-details__name"
+        >
       </div>
       <div class="c-user-details__row">
         <textarea
@@ -77,6 +87,7 @@ export default {
       avatarFile: null,
       banner: null,
       bannerFile: null,
+      name: null,
       biography: null
     }
   },
@@ -89,6 +100,7 @@ export default {
     init () {
       this.avatar = this.url(this.user.avatarId)
       this.banner = this.url(this.user.bannerId)
+      this.name = this.user.name
       this.biography = this.user.biography
     },
     uploadImg (imgId, imgUrl, imgFile) {
@@ -112,6 +124,7 @@ export default {
         return this.$api.users.modify(this.user.id, {
           avatarId: avatarId,
           bannerId: bannerId,
+          name: this.name,
           description: this.description
         })
       }).then(() => {
@@ -151,7 +164,6 @@ export default {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin-top: -75px;
   }
 
   &__content {
@@ -167,7 +179,7 @@ export default {
     align-items: center;
     margin-bottom: 16px;
 
-    &:last-child {
+    &--no-margin, &:last-child {
       margin-bottom: 0;
     }
   }
@@ -187,6 +199,11 @@ export default {
     &:last-child {
       padding-right: 0;
     }
+  }
+
+  &__name[disabled] {
+    font-weight: bold;
+    border-color: transparent;
   }
 
   &__biography[disabled] {
