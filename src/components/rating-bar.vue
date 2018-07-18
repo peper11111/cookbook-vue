@@ -1,14 +1,15 @@
 <template>
 <div
-  @mouseleave="setValue(value)"
+  :class="{ 'is-disabled': disabled }"
+  @mouseleave="setVisibleValue(localValue)"
   class="c-rating-bar"
 >
   <div
-    v-for="i in 5"
+    v-for="i in size"
     :key="i"
     :class="{ 'is-active': isActive(i) }"
-    @mouseover="setValue(i)"
-    @click="emitValue"
+    @mouseenter="setVisibleValue(i)"
+    @click="setLocalValue(i)"
     class="c-rating-bar__item"
   >
     <i class="material-icons">
@@ -22,31 +23,41 @@
 export default {
   name: 'RatingBar',
   props: {
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: Number,
+      default: 5
+    },
     value: Number
   },
   data () {
     return {
-      model: {
-        value: this.value
-      }
+      localValue: this.value,
+      visibleValue: this.value
     }
   },
   watch: {
-    value: 'setValue'
+    value (val) {
+      this.localValue = val
+      this.visibleValue = val
+    }
   },
   methods: {
     isActive (val) {
-      return this.model.value >= val
+      return val <= this.visibleValue
     },
-    emitValue () {
+    setLocalValue (val) {
       if (!this.disabled) {
-        this.$emit('input', this.model.value)
+        this.localValue = val
+        this.$emit('input', val)
       }
     },
-    setValue (val) {
+    setVisibleValue (val) {
       if (!this.disabled) {
-        this.model.value = val
+        this.visibleValue = val
       }
     }
   }
@@ -61,6 +72,12 @@ export default {
   display: flex;
   justify-content: center;
 
+  &.is-disabled {
+    .c-rating-bar__item {
+      cursor: default;
+    }
+  }
+
   &__item {
     @include box-elevation;
     background-color: $color-primary-light;
@@ -68,6 +85,8 @@ export default {
     font-size: 0;
     padding: 4px;
     margin: 0 1px;
+    user-select: none;
+    cursor: pointer;
 
     .material-icons {
       font-size: 12px;
@@ -76,7 +95,6 @@ export default {
 
     &.is-active {
       background-color: $color-accent;
-      cursor: pointer;
 
       .material-icons {
         color: $color-text;
