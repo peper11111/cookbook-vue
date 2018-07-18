@@ -50,15 +50,17 @@ export default {
       return val <= this.visibleValue
     },
     setLocalValue (val) {
-      if (!this.disabled) {
-        this.localValue = val
-        this.$emit('input', val)
+      if (this.disabled) {
+        return
       }
+      this.localValue = val
+      this.$emit('input', this.localValue)
     },
     setVisibleValue (val) {
-      if (!this.disabled) {
-        this.visibleValue = val
+      if (this.disabled) {
+        return
       }
+      this.visibleValue = val
     }
   }
 }
