@@ -3,18 +3,18 @@
   <input
     v-if="!disabled"
     ref="input"
-    @input="emitValue"
+    @input="setLocalValue($event.target.files[0])"
     accept="image/*"
     class="u-hide"
     type="file"
   />
   <img
-    :src="value.src || blank"
+    :src="localValue || blank"
     class="c-image-uploader__image"
   />
   <div
     v-if="!disabled"
-    @click="inputClick"
+    @click="triggerInput()"
     class="c-image-uploader__overlay"
   >
     <i class="material-icons">
@@ -22,8 +22,8 @@
     </i>
   </div>
   <div
-    v-if="!disabled && value.src"
-    @click="clearValue"
+    v-if="!disabled && localValue"
+    @click="setLocalValue(null)"
     class="c-image-uploader__clear"
   >
     <i class="material-icons">
@@ -36,44 +36,49 @@
 <script>
 import base from '@/mixins/base'
 
+const FILE_SIZE_LIMIT = 10485760 // 10MB
+
 export default {
-  name: 'ImageUploader',
+  name: 'ImagePicker',
   mixins: [ base ],
   props: {
     blank: {
-      default: '/static/blank-banner.jpg',
-      type: String
+      type: String,
+      default: '/static/blank-banner.jpg'
     },
-    disabled: Boolean,
-    value: Object
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    value: String
+  },
+  data () {
+    return {
+      localValue: this.value
+    }
+  },
+  watch: {
+    value (val) {
+      this.localValue = val
+    }
   },
   methods: {
-    inputClick () {
+    triggerInput () {
       this.$refs.input.click()
     },
-    clearValue () {
-      this.$refs.input.value = ''
-      this.$emit('input', {
-        id: null,
-        file: null,
-        src: null
-      })
-    },
-    emitValue () {
-      const file = this.$refs.input.files[0]
-
-      if (file) {
-        this.$refs.input.value = ''
-        if (file.size > 10485760) { // 10MB
-          this.showError('error.file-exceeds-limit')
-        } else {
-          this.$emit('input', {
-            id: null,
-            file,
-            src: URL.createObjectURL(file)
-          })
-        }
+    setLocalValue (file) {
+      if (this.disabled) {
+        return
       }
+      if (file && file.size > FILE_SIZE_LIMIT) {
+        this.showError('error.file-exceeds-limit')
+        return
+      }
+      this.localValue = file
+        ? URL.createObjectURL(file)
+        : null
+      this.$emit('input', this.localValue)
+      this.$emit('file', file)
     }
   }
 }

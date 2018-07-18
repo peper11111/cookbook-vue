@@ -3,13 +3,15 @@
   <image-picker
     v-model="banner"
     :disabled="!editMode"
+    @file="bannerFile = $event"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
       v-model="avatar"
-      :blank="'/static/blank-avatar.jpg'"
+      blank="/static/blank-avatar.jpg"
       :disabled="!editMode"
+      @file="avatarFile = $event"
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
@@ -44,10 +46,10 @@
       </div>
       <div class="c-user-details__row">
         <textarea
-          v-model="description"
+          v-model="biography"
           :disabled="!editMode"
-          :placeholder="editMode ? $t('user.description') : ''"
-          class="o-form__textarea c-user-details__description"
+          :placeholder="editMode ? $t('user.biography') : ''"
+          class="o-form__textarea c-user-details__biography"
           rows="3"
           maxlength="255"
         >
@@ -71,9 +73,11 @@ export default {
   mixins: [ base, details ],
   data () {
     return {
-      avatar: {},
-      banner: {},
-      description: null
+      avatar: null,
+      avatarFile: null,
+      banner: null,
+      bannerFile: null,
+      biography: null
     }
   },
   computed: {
@@ -83,32 +87,38 @@ export default {
   },
   methods: {
     init () {
-      this.avatar = {
-        id: this.user.avatarId,
-        file: null,
-        src: this.url(this.user.avatarId)
+      this.avatar = this.url(this.user.avatarId)
+      this.banner = this.url(this.user.bannerId)
+      this.biography = this.user.biography
+    },
+    uploadImg (imgId, imgUrl, imgFile) {
+      if (this.url(imgId) === imgUrl) {
+        return Promise.resolve(imgId)
       }
-      this.banner = {
-        id: this.user.bannerId,
-        file: null,
-        src: this.url(this.user.bannerId)
+      if (!imgFile) {
+        return Promise.resolve(null)
       }
-      this.description = this.user.description
+      const formData = new FormData()
+      formData.set('file', imgFile)
+      return this.$api.uploads.create(formData).then(value => value.data)
     },
     update () {
-      this.uploadImg(this.avatar).then(() => {
-        return this.uploadImg(this.banner)
-      }).then(() => {
+      let avatarId, bannerId
+      this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then(id => {
+        avatarId = id
+        return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
+      }).then(id => {
+        bannerId = id
         return this.$api.users.modify(this.user.id, {
-          avatarId: this.avatar.id,
-          bannerId: this.banner.id,
+          avatarId: avatarId,
+          bannerId: bannerId,
           description: this.description
         })
       }).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== this.banner.id) {
+        if (this.user.bannerId && this.user.bannerId !== bannerId) {
           this.$api.uploads.delete(this.user.bannerId)
         }
-        if (this.user.avatarId && this.user.avatarId !== this.avatar.id) {
+        if (this.user.avatarId && this.user.avatarId !== avatarId) {
           this.$api.uploads.delete(this.user.avatarId)
         }
         return this.$api.users.read(this.user.id)
@@ -179,7 +189,7 @@ export default {
     }
   }
 
-  &__description[disabled] {
+  &__biography[disabled] {
     background: none;
     border-color: transparent;
   }

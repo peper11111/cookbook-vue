@@ -8,17 +8,6 @@ export default {
     this.init()
   },
   methods: {
-    uploadImg (img) {
-      if (img.file) {
-        const formData = new FormData()
-        formData.set('file', img.file)
-        return this.$api.uploads.create(formData).then(value => {
-          img.id = value.data
-          img.src = this.url(value.data)
-        })
-      }
-      return Promise.resolve()
-    },
     clickAction (action) {
       if (action === 'edit') {
         this.editMode = true
