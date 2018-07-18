@@ -51,6 +51,7 @@
         <input
           v-model="name"
           :disabled="!editMode"
+          :placeholder="editMode ? $t('user.name') : ''"
           class="o-form__input c-user-details__name"
         >
       </div>

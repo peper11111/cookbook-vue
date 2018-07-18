@@ -4,6 +4,7 @@
     <image-picker
       v-model="banner"
       :disabled="!editMode"
+      @file="bannerFile = $event"
       class="c-recipe-details__banner"
     ></image-picker>
     <div class="c-recipe-details__info">
@@ -77,7 +78,8 @@ export default {
   data () {
     return {
       editMode: true,
-      banner: {},
+      banner: null,
+      bannerFile: null,
       title: null,
       cuisine: null,
       description: null,
@@ -99,11 +101,7 @@ export default {
   },
   methods: {
     init () {
-      this.banner = {
-        id: this.recipe.bannerId,
-        file: null,
-        src: this.url(this.recipe.bannerId)
-      }
+      this.banner = this.url(this.recipe.bannerId)
       this.title = this.recipe.title
       this.description = this.recipe.description
       this.cuisine = this.recipe.cuisineId

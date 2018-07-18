@@ -31,7 +31,8 @@
     "edit": "Edytuj profil",
     "cancel": "Anuluj",
     "save": "Zapisz",
-    "biography": "Napisz coś o sobie..."
+    "biography": "Napisz coś o sobie...",
+    "name": "Powiedz nam jak się nazywasz..."
   },
   "recipe": {
     "cuisine-type": "Typ kuchni",
