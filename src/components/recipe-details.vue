@@ -95,9 +95,6 @@ export default {
     cuisines () {
       return this.$store.state.cuisines
     },
-    times () {
-      return this.$store.state.times
-    },
     recipe () {
       return this.$store.state.recipe
     }

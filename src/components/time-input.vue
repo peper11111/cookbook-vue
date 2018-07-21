@@ -1,12 +1,12 @@
 <template>
-<div class="c-time-picker">
+<div class="c-time-input">
   <label v-if="!disabled">
     <input
       v-model="model.hours"
       @input="emitValue"
-      class="c-time-picker__value o-form__input"
+      class="c-time-input__value o-form__input"
     />
-    <span class="c-time-picker__label">
+    <span class="c-time-input__label">
       h
     </span>
   </label>
@@ -14,9 +14,9 @@
     <input
       v-model="model.minutes"
       @input="emitValue"
-      class="c-time-picker__value o-form__input"
+      class="c-time-input__value o-form__input"
     />
-    <span class="c-time-picker__label">
+    <span class="c-time-input__label">
       min
     </span>
   </label>
@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss">
-.c-time-picker {
+.c-time-input {
   display: flex;
   align-items: center;
 
