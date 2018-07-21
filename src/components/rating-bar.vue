@@ -72,7 +72,7 @@ export default {
 
 .c-rating-bar {
   display: flex;
-  justify-content: center;
+  align-items: center;
 
   &.is-disabled {
     .c-rating-bar__item {

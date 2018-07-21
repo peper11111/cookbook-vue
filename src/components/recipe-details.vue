@@ -10,6 +10,7 @@
     <div class="c-recipe-details__info">
       <input
         v-model="title"
+        :placeholder="editMode ? $t('recipe.placeholder.title') : ''"
         class="c-recipe-details__title o-form__input"
       />
       <label class="c-recipe-details__item">
@@ -18,6 +19,7 @@
         </span>
         <select
           v-model="cuisine"
+          :placeholder="'test'"
           class="c-recipe-details__value o-form__select"
         >
           <option
@@ -37,6 +39,7 @@
         <rating-bar
           v-model="difficulty"
           :disabled="!editMode"
+          class="c-recipe-details__value"
         ></rating-bar>
       </label>
       <label class="c-recipe-details__item">
@@ -146,11 +149,11 @@ export default {
   &__label {
     text-align: left;
     white-space: nowrap;
-    width: 134px;
+    width: 140px;
   }
 
   &__value {
-    width: 184px;
+    width: 178px;
   }
 }
 </style>

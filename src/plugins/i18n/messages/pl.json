@@ -23,6 +23,10 @@
     "search": "Wyszukaj..."
   },
   "user": {
+    "placeholder": {
+      "name": "Powiedz nam jak się nazywasz",
+      "biography": "Napisz coś o sobie"
+    },
     "recipes": "przepisy",
     "followers": "obserwujący",
     "followed": "obserwowanie",
@@ -30,11 +34,12 @@
     "unfollow": "Przestań obserwować",
     "edit": "Edytuj profil",
     "cancel": "Anuluj",
-    "save": "Zapisz",
-    "biography": "Napisz coś o sobie...",
-    "name": "Powiedz nam jak się nazywasz..."
+    "save": "Zapisz"
   },
   "recipe": {
+    "placeholder": {
+      "title": "Podaj nazwę twojego przepisu"
+    },
     "cuisine-type": "Typ kuchni",
     "difficulty": "Poziom trudności",
     "plates": "Ilość porcji",

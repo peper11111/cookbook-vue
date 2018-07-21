@@ -51,7 +51,7 @@
         <input
           v-model="name"
           :disabled="!editMode"
-          :placeholder="editMode ? $t('user.name') : ''"
+          :placeholder="editMode ? $t('user.placeholder.name') : ''"
           class="o-form__input c-user-details__name"
         >
       </div>
@@ -59,7 +59,7 @@
         <textarea
           v-model="biography"
           :disabled="!editMode"
-          :placeholder="editMode ? $t('user.biography') : ''"
+          :placeholder="editMode ? $t('user.placeholder.biography') : ''"
           class="o-form__textarea c-user-details__biography"
           rows="3"
           maxlength="255"
