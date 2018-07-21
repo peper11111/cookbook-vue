@@ -1,5 +1,8 @@
 {
   "app": "Cookbook",
+  "save": "Zapisz",
+  "cancel": "Anuluj",
+  "edit": "Edytuj",
   "navbar": {
     "profile": "Wyświetl profil",
     "new-recipe": "Dodaj przepis",
@@ -31,19 +34,17 @@
     "followers": "obserwujący",
     "followed": "obserwowanie",
     "follow": "Obserwuj",
-    "unfollow": "Przestań obserwować",
-    "edit": "Edytuj profil",
-    "cancel": "Anuluj",
-    "save": "Zapisz"
+    "unfollow": "Przestań obserwować"
   },
   "recipe": {
     "placeholder": {
-      "title": "Podaj nazwę twojego przepisu"
+      "title": "Podaj tytuł twojego przepisu",
+      "description": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
     "cuisine-type": "Typ kuchni",
     "difficulty": "Poziom trudności",
     "plates": "Ilość porcji",
-    "prepare-time": "Czas przygotowania",
+    "preparation-time": "Czas przygotowania",
     "cuisine": {
       "CUISINE_AMERICAN": "Kuchnia amerykańska",
       "CUISINE_ASIAN": "Kuchnia azjatycka",
@@ -53,11 +54,6 @@
       "CUISINE_POLISH": "Kuchnia polska",
       "CUISINE_SPANISH": "Kuchnia hiszpańska",
       "CUISINE_ITALIAN": "Kuchnia włoska"
-    },
-    "level": {
-      "easy": "Łatwy",
-      "medium": "Średni",
-      "hard": "Trudny"
     }
   },
   "error": {

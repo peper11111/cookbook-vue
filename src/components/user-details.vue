@@ -63,8 +63,7 @@
           class="o-form__textarea c-user-details__biography"
           rows="3"
           maxlength="255"
-        >
-        </textarea>
+        ></textarea>
       </div>
     </div>
   </div>

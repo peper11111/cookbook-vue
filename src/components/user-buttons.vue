@@ -5,24 +5,24 @@
     @click="save"
     class="o-button o-button__accent"
   >
-    {{ $t('user.save')}}
+    {{ $t('save')}}
   </button>
   <button
     v-if="editMode"
     @click="cancel"
     class="o-button o-button__primary"
   >
-    {{ $t('user.cancel') }}
+    {{ $t('cancel') }}
   </button>
   <button
-    v-if="isAuthUserProfile && !editMode"
+    v-if="canEdit && !editMode"
     @click="edit"
     class="o-button o-button__primary"
   >
-    {{ $t('user.edit') }}
+    {{ $t('edit') }}
   </button>
   <button
-    v-if="!isAuthUserProfile"
+    v-if="!canEdit"
     :class="[ user.following ? 'o-button__secondary' : 'o-button__accent' ]"
     @click="follow"
     class="o-button"
@@ -42,7 +42,7 @@ export default {
     editMode: Boolean
   },
   computed: {
-    isAuthUserProfile () {
+    canEdit () {
       return this.authUser.id === this.user.id
     },
     authUser () {

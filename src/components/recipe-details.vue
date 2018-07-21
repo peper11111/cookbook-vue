@@ -13,6 +13,14 @@
         :placeholder="editMode ? $t('recipe.placeholder.title') : ''"
         class="c-recipe-details__title o-form__input"
       />
+      <textarea
+        v-model="description"
+        :disabled="!editMode"
+        :placeholder="editMode ? $t('recipe.placeholder.description') : ''"
+        class="o-form__textarea c-recipe-details__description"
+        rows="3"
+        maxlength="255"
+      ></textarea>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
           {{ $t('recipe.cuisine-type') }}
@@ -53,14 +61,29 @@
       </label>
       <label class="c-recipe-details__item">
         <span class="c-recipe-details__label">
-          {{ $t('recipe.prepare-time') }}
+          {{ $t('recipe.preparation-time') }}
         </span>
         <time-input
-          v-model="time"
+          v-model="preparationTime"
           :disabled="!editMode"
         ></time-input>
       </label>
-      <button @click="clickAction('cancel')">Cancel</button>
+      <div class="c-recipe-details__buttons">
+        <button
+          v-if="editMode"
+          @click="clickAction('save')"
+          class="o-button o-button__accent"
+        >
+          {{ $t('save')}}
+        </button>
+        <button
+          v-if="editMode"
+          @click="clickAction('cancel')"
+          class="o-button o-button__primary"
+        >
+          {{ $t('cancel') }}
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -84,11 +107,11 @@ export default {
       banner: null,
       bannerFile: null,
       title: null,
-      cuisine: null,
       description: null,
+      cuisine: null,
       difficulty: null,
       plates: null,
-      time: null
+      preparationTime: null
     }
   },
   computed: {
@@ -107,7 +130,7 @@ export default {
       this.cuisine = this.recipe.cuisineId
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
-      this.time = this.recipe.time
+      this.preparationTime = this.recipe.preparationTime
     },
     update () {
       // TODO update mehod
@@ -137,6 +160,10 @@ export default {
     padding: 16px;
   }
 
+  &__title {
+    margin-bottom: 16px;
+  }
+
   &__item {
     display: flex;
     align-items: center;
@@ -151,6 +178,10 @@ export default {
 
   &__value {
     width: 178px;
+  }
+
+  &__buttons {
+    margin-top: 64px;
   }
 }
 </style>

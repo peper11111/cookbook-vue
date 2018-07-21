@@ -15,6 +15,10 @@ const api = {
   cuisines: {
     readAll: () => http.get('/cuisines')
   },
+  recipes: {
+    create: (data) => http.post('/recipes', data),
+    read: (id) => http.get(`/recipes/${id}`)
+  },
   uploads: {
     url: (id) => `${http.defaults.baseURL}/uploads/${id}`,
     create: (data) => http.post('/uploads', data),
