@@ -2,8 +2,8 @@
 <div class="c-time-input">
   <label v-if="!disabled">
     <input
-      v-model="model.hours"
-      @input="emitValue"
+      :value="hours"
+      @input="setHours($event)"
       class="c-time-input__value o-form__input"
     />
     <span class="c-time-input__label">
@@ -12,8 +12,8 @@
   </label>
   <label v-if="!disabled">
     <input
-      v-model="model.minutes"
-      @input="emitValue"
+      :value="minutes"
+      @input="setMinutes($event)"
       class="c-time-input__value o-form__input"
     />
     <span class="c-time-input__label">
@@ -30,48 +30,68 @@
 export default {
   name: 'TimeInput',
   props: {
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: false
+    },
     value: Number
   },
   data () {
     return {
-      model: {
-        hours: Math.trunc(this.value / 60) || '',
-        minutes: Math.trunc(this.value % 60) || ''
-      }
+      hours: Math.trunc(this.value / 60) || null,
+      minutes: Math.trunc(this.value % 60) || null
     }
   },
   computed: {
     text () {
+      debugger
       let text = ''
-      if (this.model.hours) {
-        text += `${this.model.hours} h`
+      if (this.hours) {
+        text += `${this.hours} h`
       }
       if (text) {
         text += ' '
       }
-      if (this.model.minutes) {
-        text += `${this.model.minutes} min`
+      if (this.minutes) {
+        text += `${this.minutes} min`
       }
       return text
     }
   },
   watch: {
-    value: 'setValue'
+    value (val) {
+      this.hours = Math.trunc(val / 60) || null
+      this.minutes = Math.trunc(val % 60) || null
+    }
   },
   methods: {
     emitValue () {
-      if (/^[0-9]{0,2}$/.test(this.model.hours) &&
-        /^[0-5]?[0-9]?$/.test(this.model.minutes)) {
-        const val = Number(this.model.hours) * 60 + Number(this.model.minutes)
-        this.$emit('input', val)
+      const val = Number(this.hours) * 60 + Number(this.minutes)
+      this.$emit('input', val)
+    },
+    setHours (event) {
+      if (this.disabled) {
+        return
+      }
+      const value = event.target.value ? Number(event.target.value) : null
+      if (value >= 0 && value <= 23) {
+        this.hours = value
+        this.emitValue()
       } else {
-        this.setValue(this.value)
+        event.target.value = this.hours
       }
     },
-    setValue (val) {
-      this.model.hours = Math.trunc(val / 60) || ''
-      this.model.minutes = Math.trunc(val % 60) || ''
+    setMinutes (event) {
+      if (this.disabled) {
+        return
+      }
+      const value = event.target.value ? Number(event.target.value) : null
+      if (value >= 0 && value <= 59) {
+        this.minutes = value
+        this.emitValue()
+      } else {
+        event.target.value = this.minutes
+      }
     }
   }
 }
@@ -87,7 +107,7 @@ export default {
   }
 
   &__value {
-    width: 18px;
+    width: 30px;
     text-align: center;
   }
 }
