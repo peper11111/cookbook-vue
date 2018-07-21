@@ -2,15 +2,15 @@ export default {
   showMessage (state, payload) {
     state.messages.push({ text: payload.text, type: payload.type })
   },
-  login (state, user) {
+  login (state, payload) {
     localStorage.setItem('loggedIn', 'true')
-    state.loggedIn = true
-    state.currentUser = user
+    state.auth.loggedIn = true
+    state.auth.user = payload
   },
   logout (state) {
     localStorage.setItem('loggedIn', 'false')
-    state.loggedIn = false
-    state.currentUser = {}
+    state.auth.loggedIn = false
+    state.auth.user = {}
   },
   setUser (state, payload) {
     state.user = payload

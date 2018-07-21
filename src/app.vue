@@ -18,7 +18,7 @@ export default {
   mixins: [ base ],
   computed: {
     loggedIn () {
-      return this.$store.state.loggedIn
+      return this.$store.state.auth.loggedIn
     }
   },
   created () {

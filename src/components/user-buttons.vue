@@ -15,14 +15,14 @@
     {{ $t('user.cancel') }}
   </button>
   <button
-    v-if="currentUserProfile && !editMode"
+    v-if="isAuthUserProfile && !editMode"
     @click="edit"
     class="o-button o-button__primary"
   >
     {{ $t('user.edit') }}
   </button>
   <button
-    v-if="!currentUserProfile"
+    v-if="!isAuthUserProfile"
     :class="[ user.following ? 'o-button__secondary' : 'o-button__accent' ]"
     @click="follow"
     class="o-button"
@@ -42,8 +42,11 @@ export default {
     editMode: Boolean
   },
   computed: {
-    currentUserProfile () {
-      return this.$store.state.currentUser.id === this.user.id
+    isAuthUserProfile () {
+      return this.authUser.id === this.user.id
+    },
+    authUser () {
+      return this.$store.state.auth.user
     },
     user () {
       return this.$store.state.user

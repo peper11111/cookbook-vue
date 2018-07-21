@@ -1,7 +1,9 @@
 export default {
   messages: [],
-  loggedIn: localStorage.getItem('loggedIn') === 'true',
-  currentUser: {},
+  auth: {
+    loggedIn: localStorage.getItem('loggedIn') === 'true',
+    user: {}
+  },
   user: {},
   recipe: {},
   cuisines: [],

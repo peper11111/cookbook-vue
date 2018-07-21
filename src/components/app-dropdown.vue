@@ -4,7 +4,7 @@
     @click.stop="toggle"
     class="c-app-dropdown__toggle"
   >
-    {{ currentUser.username }}
+    {{ authUser.username }}
   </div>
   <ul
     :class="{ 'is-visible': visible }"
@@ -12,7 +12,7 @@
   >
     <router-link
       tag="li"
-      :to="`/user/${currentUser.id}`"
+      :to="`/user/${authUser.id}`"
       class="c-app-dropdown__item"
     >
       {{ $t('navbar.profile') }}
@@ -47,8 +47,8 @@ export default {
     }
   },
   computed: {
-    currentUser () {
-      return this.$store.state.currentUser
+    authUser () {
+      return this.$store.state.auth.user
     }
   },
   mounted () {
