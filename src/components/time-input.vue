@@ -44,7 +44,6 @@ export default {
   },
   computed: {
     text () {
-      debugger
       let text = ''
       if (this.hours) {
         text += `${this.hours} h`

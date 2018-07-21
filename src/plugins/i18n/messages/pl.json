@@ -78,6 +78,7 @@
     "password-reset": "Twoje hasło zostało zmienione",
     "logout-successful": "Zostałeś pomyślnie wylogowany",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
+    "recipe-created": "Twój przepis został pomyślnie utworzony",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   }

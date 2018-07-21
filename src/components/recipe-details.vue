@@ -26,7 +26,7 @@
           {{ $t('recipe.cuisine-type') }}
         </span>
         <select
-          v-model="cuisine"
+          v-model="cuisineId"
           :placeholder="'test'"
           class="c-recipe-details__value o-form__select"
         >
@@ -34,7 +34,7 @@
             v-for="item in cuisines"
             :key="item.id"
             :value="item.id"
-            :selected="cuisine === item.id"
+            :selected="cuisineId === item.id"
           >
             {{ $t(`recipe.cuisine.${item.name}`) }}
           </option>
@@ -83,6 +83,13 @@
         >
           {{ $t('cancel') }}
         </button>
+        <button
+          v-if="!editMode"
+          @click="clickAction('edit')"
+          class="o-button o-button__primary"
+        >
+          {{ $t('edit') }}
+        </button>
       </div>
     </div>
   </div>
@@ -108,7 +115,7 @@ export default {
       bannerFile: null,
       title: null,
       description: null,
-      cuisine: null,
+      cuisineId: null,
       difficulty: null,
       plates: null,
       preparationTime: null
@@ -127,13 +134,27 @@ export default {
       this.banner = this.url(this.recipe.bannerId)
       this.title = this.recipe.title
       this.description = this.recipe.description
-      this.cuisine = this.recipe.cuisineId
+      this.cuisineId = this.recipe.cuisineId
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
       this.preparationTime = this.recipe.preparationTime
     },
     update () {
-      // TODO update mehod
+      let bannerId
+      this.uploadImg(this.recipe.bannerId, this.banner, this.bannerFile).then(id => {
+        bannerId = id
+        return this.$api.recipes.create({
+          bannerId: bannerId,
+          title: this.title,
+          description: this.description,
+          cuisineId: this.cuisineId,
+          difficulty: this.difficulty,
+          plates: this.plates,
+          preparationTime: this.preparationTime
+        })
+      }).then(value => {
+        this.showInfo('info.recipe-created')
+      })
     }
   }
 }

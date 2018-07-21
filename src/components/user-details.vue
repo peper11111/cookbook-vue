@@ -103,17 +103,6 @@ export default {
       this.name = this.user.name
       this.biography = this.user.biography
     },
-    uploadImg (imgId, imgUrl, imgFile) {
-      if (this.url(imgId) === imgUrl) {
-        return Promise.resolve(imgId)
-      }
-      if (!imgFile) {
-        return Promise.resolve(null)
-      }
-      const formData = new FormData()
-      formData.set('file', imgFile)
-      return this.$api.uploads.create(formData).then(value => value.data)
-    },
     update () {
       let avatarId, bannerId
       this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then(id => {
