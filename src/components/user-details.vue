@@ -126,7 +126,7 @@ export default {
           avatarId: avatarId,
           bannerId: bannerId,
           name: this.name,
-          description: this.description
+          biography: this.biography
         })
       }).then(() => {
         if (this.user.bannerId && this.user.bannerId !== bannerId) {
