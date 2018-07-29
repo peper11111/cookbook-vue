@@ -5,6 +5,7 @@ export default {
     user: {}
   },
   user: {},
+  recipes: [],
   recipe: {},
   cuisines: []
 }

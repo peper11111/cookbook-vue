@@ -42,6 +42,8 @@ export default {
 
 .c-app-search {
   width: 300px;
+  margin: 0 16px;
+  box-sizing: border-box;
 
   &__input {
     color: $color-text;

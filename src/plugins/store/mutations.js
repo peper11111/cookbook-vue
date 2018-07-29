@@ -1,6 +1,14 @@
+import * as MutationTypes from '@/plugins/store/mutation-types'
+
 export default {
+  [MutationTypes.SET_RECIPES] (state, payload) {
+    state.recipes = payload
+  },
   showMessage (state, payload) {
-    state.messages.push({ text: payload.text, type: payload.type })
+    state.messages.push({
+      text: payload.text,
+      type: payload.type
+    })
   },
   login (state, payload) {
     localStorage.setItem('loggedIn', 'true')

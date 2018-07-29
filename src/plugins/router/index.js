@@ -34,6 +34,11 @@ const router = new VueRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/recipe/:id',
+      component: () => import('@/pages/recipe-page'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/login',
       component: () => import('@/pages/login-page')
     },

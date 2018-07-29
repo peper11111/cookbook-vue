@@ -14,9 +14,9 @@
         class="c-recipe-details__title o-form__input"
       />
       <textarea
-        v-model="description"
+        v-model="lead"
         :disabled="!editMode"
-        :placeholder="editMode ? $t('recipe.placeholder.description') : ''"
+        :placeholder="editMode ? $t('recipe.placeholder.lead') : ''"
         class="o-form__textarea c-recipe-details__description"
         rows="3"
         maxlength="255"
@@ -114,7 +114,7 @@ export default {
       banner: null,
       bannerFile: null,
       title: null,
-      description: null,
+      lead: null,
       cuisineId: null,
       difficulty: null,
       plates: null,
@@ -133,7 +133,7 @@ export default {
     init () {
       this.banner = this.url(this.recipe.bannerId)
       this.title = this.recipe.title
-      this.description = this.recipe.description
+      this.lead = this.recipe.lead
       this.cuisineId = this.recipe.cuisineId
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
@@ -146,13 +146,14 @@ export default {
         return this.$api.recipes.create({
           bannerId: bannerId,
           title: this.title,
-          description: this.description,
+          lead: this.lead,
           cuisineId: this.cuisineId,
           difficulty: this.difficulty,
           plates: this.plates,
           preparationTime: this.preparationTime
         })
       }).then(value => {
+        // TODO Finish recipe creation
         this.showInfo('info.recipe-created')
       })
     }

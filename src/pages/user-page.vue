@@ -10,6 +10,7 @@
 
 <script>
 import base from '@/mixins/base'
+import { SET_RECIPES } from '@/plugins/store/mutation-types'
 
 export default {
   name: 'UserPage',
@@ -18,19 +19,27 @@ export default {
     UserDetails: () => import('@/components/user-details')
   },
   mixins: [ base ],
+  computed: {
+    userId () {
+      return this.$route.params.id
+    }
+  },
   created () {
     this.fetch()
   },
   methods: {
     request () {
-      return this.$api.users.read(this.$route.params.id).then(value => {
+      return this.$api.users.read(this.userId).then(value => {
         this.$store.commit('setUser', value.data)
+      }).then(() => {
+        return this.$api.users.recipes(this.userId)
+      }).then(value => {
+        this.$store.commit(SET_RECIPES, value.data)
       }).catch(reason => {
         if (reason.response.status === 404) {
           this.$router.push('/')
         }
-      }).then(() => {
-        return this.$api.users.recipes(this.$route.params.id)
+        return Promise.reject(reason)
       })
     }
   }

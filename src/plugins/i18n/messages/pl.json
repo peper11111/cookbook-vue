@@ -39,7 +39,7 @@
   "recipe": {
     "placeholder": {
       "title": "Podaj tytuł twojego przepisu",
-      "description": "Krótko podsumuj czego dotyczyć będzie przepis"
+      "lead": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
     "cuisine-type": "Typ kuchni",
     "difficulty": "Poziom trudności",
