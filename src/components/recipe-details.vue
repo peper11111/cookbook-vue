@@ -71,21 +71,21 @@
       <div class="c-recipe-details__buttons">
         <button
           v-if="editMode"
-          @click="clickAction('save')"
+          @click="update()"
           class="o-button o-button__accent"
         >
           {{ $t('save')}}
         </button>
         <button
           v-if="editMode"
-          @click="clickAction('cancel')"
+          @click="init()"
           class="o-button o-button__primary"
         >
           {{ $t('cancel') }}
         </button>
         <button
           v-if="!editMode"
-          @click="clickAction('edit')"
+          @click="editMode = true"
           class="o-button o-button__primary"
         >
           {{ $t('edit') }}
@@ -98,7 +98,6 @@
 
 <script>
 import base from '@/mixins/base'
-import details from '@/mixins/details'
 
 export default {
   name: 'RecipeDetails',
@@ -107,10 +106,10 @@ export default {
     RatingBar: () => import('@/components/form-elements/rating-bar'),
     TimeInput: () => import('@/components/form-elements/time-input')
   },
-  mixins: [ base, details ],
+  mixins: [ base ],
   data () {
     return {
-      editMode: true,
+      editMode: false,
       banner: null,
       bannerFile: null,
       title: null,
@@ -138,6 +137,7 @@ export default {
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
       this.preparationTime = this.recipe.preparationTime
+      this.editMode = false
     },
     update () {
       let bannerId
@@ -155,6 +155,7 @@ export default {
       }).then(value => {
         // TODO Finish recipe creation
         this.showInfo('info.recipe-created')
+        this.editMode = false
       })
     }
   }
