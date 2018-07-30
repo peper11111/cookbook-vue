@@ -44,26 +44,35 @@
           {{ $t('user.followed') }}
         </span>
       </div>
-      <div
-        :class="{ 'c-user-details__row--no-margin': !editMode }"
-        class="c-user-details__row"
-      >
+      <div class="c-user-details__row">
         <input
+          v-if="editMode"
           v-model="name"
-          :disabled="!editMode"
-          :placeholder="editMode ? $t('user.placeholder.name') : ''"
-          class="o-form__input c-user-details__name"
+          :placeholder="$t('user.placeholder.name')"
+          class="o-form__input"
         >
+        <h1
+          v-else
+          class="c-user-details__name"
+        >
+          {{ name }}
+        </h1>
       </div>
       <div class="c-user-details__row">
         <textarea
+          v-if="editMode"
           v-model="biography"
-          :disabled="!editMode"
-          :placeholder="editMode ? $t('user.placeholder.biography') : ''"
-          class="o-form__textarea c-user-details__biography"
+          :placeholder="$t('user.placeholder.biography')"
+          class="o-form__textarea"
           rows="3"
           maxlength="255"
         ></textarea>
+        <p
+          v-else
+          class="c-user-details__biography"
+        >
+          {{ biography }}
+        </p>
       </div>
     </div>
   </div>
@@ -168,7 +177,7 @@ export default {
     align-items: center;
     margin-bottom: 16px;
 
-    &--no-margin, &:last-child {
+    &:last-child {
       margin-bottom: 0;
     }
   }
@@ -190,9 +199,8 @@ export default {
     }
   }
 
-  &__name[disabled] {
+  &__name {
     font-weight: bold;
-    border-color: transparent;
   }
 
   &__biography[disabled] {

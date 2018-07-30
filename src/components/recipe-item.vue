@@ -30,7 +30,6 @@ export default {
   },
   computed: {
     backgroundSrc () {
-      console.log(this.recipe)
       return this.recipe.bannerId ? this.$api.uploads.url(this.recipe.bannerId) : '/static/blank-banner.jpg'
     },
     creationDate () {

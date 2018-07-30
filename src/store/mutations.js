@@ -1,4 +1,4 @@
-import * as MutationTypes from '@/plugins/store/mutation-types'
+import * as MutationTypes from '@/store/mutation-types'
 
 export default {
   [MutationTypes.SET_RECIPES] (state, payload) {

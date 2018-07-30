@@ -10,7 +10,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { SET_RECIPES } from '@/plugins/store/mutation-types'
+import { SET_RECIPES } from '@/store/mutation-types'
 
 export default {
   name: 'UserPage',

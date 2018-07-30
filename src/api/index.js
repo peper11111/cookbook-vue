@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import http from './http'
-import install from './install'
+import http from '@/api/http'
+import install from '@/api/install'
 
 const api = {
   install,

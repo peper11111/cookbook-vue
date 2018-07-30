@@ -1,6 +1,6 @@
 import axios from 'axios'
-import router from '@/plugins/router'
-import store from '@/plugins/store'
+import router from '@/router'
+import store from '@/store'
 
 const http = axios.create({
   baseURL: 'http://192.168.0.5:8000/api/v1',

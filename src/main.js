@@ -3,10 +3,10 @@
 import '@/assets/styles/main.scss'
 import moment from 'moment'
 import Vue from 'vue'
-import api from '@/plugins/api'
-import i18n from '@/plugins/i18n'
-import router from '@/plugins/router'
-import store from '@/plugins/store'
+import api from '@/api'
+import i18n from '@/i18n'
+import router from '@/router'
+import store from '@/store'
 
 moment.locale('pl')
 
