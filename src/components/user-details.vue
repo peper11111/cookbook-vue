@@ -87,7 +87,7 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserDetails',
   components: {
-    ImagePicker: () => import('@/components/image-picker'),
+    ImagePicker: () => import('@/components/form-elements/image-picker'),
     UserButtons: () => import('@/components/user-buttons')
   },
   mixins: [ base, details ],

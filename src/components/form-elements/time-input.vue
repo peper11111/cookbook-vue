@@ -48,13 +48,13 @@ export default {
       if (this.hours) {
         text += `${this.hours} h`
       }
-      if (text) {
-        text += ' '
-      }
       if (this.minutes) {
+        if (this.hours) {
+          text += ' '
+        }
         text += `${this.minutes} min`
       }
-      return text
+      return text || this.$t('no-info')
     }
   },
   watch: {

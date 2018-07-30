@@ -21,8 +21,10 @@
   }
 
   &__wrapper {
-    width: 720px;
-    margin: auto;
+    min-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   &__card {
