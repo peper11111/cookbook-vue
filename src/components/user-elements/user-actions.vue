@@ -1,5 +1,8 @@
 <template>
-<div>
+<div class="c-user-actions">
+  <h1 class="c-user-actions__username">
+    {{ user.username }}
+  </h1>
   <button
     v-if="editMode"
     @click="save"
@@ -37,7 +40,7 @@ import base from '@/mixins/base'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
-  name: 'UserButtons',
+  name: 'UserActions',
   mixins: [ base ],
   props: {
     editMode: Boolean
@@ -74,3 +77,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.c-user-actions {
+  &__username {
+    margin-right: 8px;
+    font-size: 24px;
+  }
+}
+</style>

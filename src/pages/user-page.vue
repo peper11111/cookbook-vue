@@ -16,7 +16,7 @@ export default {
   name: 'UserPage',
   components: {
     RecipeList: () => import('@/components/recipe-list'),
-    UserDetails: () => import('@/components/user-details')
+    UserDetails: () => import('@/components/user-elements/user-details')
   },
   mixins: [ base ],
   computed: {

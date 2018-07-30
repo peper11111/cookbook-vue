@@ -15,35 +15,12 @@
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
-      <div class="c-user-details__row">
-        <h1 class="c-user-details__username">
-          {{ user.username }}
-        </h1>
-        <user-buttons
-          :editMode="editMode"
-          @click="clickAction"
-        ></user-buttons>
-      </div>
-      <div class="c-user-details__row">
-        <span class="c-user-details__value">
-          {{ user.recipes || 0 }}
-        </span>
-        <span class="c-user-details__label">
-          {{ $t('user.recipes') }}
-        </span>
-        <span class="c-user-details__value">
-          {{ user.followers || 0 }}
-        </span>
-        <span class="c-user-details__label">
-          {{ $t('user.followers') }}
-        </span>
-        <span class="c-user-details__value">
-          {{ user.followed || 0 }}
-        </span>
-        <span class="c-user-details__label">
-          {{ $t('user.followed') }}
-        </span>
-      </div>
+      <user-actions
+        :editMode="editMode"
+        @click="clickAction"
+        class="c-user-details__row"
+      ></user-actions>
+      <user-summary class="c-user-details__row"></user-summary>
       <div class="c-user-details__row">
         <input
           v-if="editMode"
@@ -59,14 +36,14 @@
         </h1>
       </div>
       <div class="c-user-details__row">
-        <textarea
-          v-if="editMode"
-          v-model="biography"
-          :placeholder="$t('user.placeholder.biography')"
-          class="o-form__textarea"
-          rows="3"
-          maxlength="255"
-        ></textarea>
+      <textarea
+        v-if="editMode"
+        v-model="biography"
+        :placeholder="$t('user.placeholder.biography')"
+        class="o-form__textarea"
+        rows="3"
+        maxlength="255"
+      ></textarea>
         <p
           v-else
           class="c-user-details__biography"
@@ -88,7 +65,8 @@ export default {
   name: 'UserDetails',
   components: {
     ImagePicker: () => import('@/components/form-elements/image-picker'),
-    UserButtons: () => import('@/components/user-buttons')
+    UserActions: () => import('@/components/user-elements/user-actions'),
+    UserSummary: () => import('@/components/user-elements/user-summary')
   },
   mixins: [ base, details ],
   data () {
@@ -144,7 +122,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/variables';
+@import '../../assets/styles/variables';
 
 .c-user-details {
   &__banner {
@@ -183,30 +161,8 @@ export default {
     }
   }
 
-  &__username {
-    margin-right: 8px;
-    font-size: 24px;
-  }
-
-  &__value {
-    font-weight: bold;
-  }
-
-  &__label {
-    padding: 0 32px 0 4px;
-
-    &:last-child {
-      padding-right: 0;
-    }
-  }
-
   &__name {
     font-weight: bold;
-  }
-
-  &__biography[disabled] {
-    background: none;
-    border-color: transparent;
   }
 }
 </style>
