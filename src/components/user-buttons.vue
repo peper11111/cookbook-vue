@@ -34,6 +34,7 @@
 
 <script>
 import base from '@/mixins/base'
+import { SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserButtons',
@@ -57,7 +58,7 @@ export default {
       this.$api.users.follow(this.user.id).then(() => {
         return this.$api.users.read(this.user.id)
       }).then(value => {
-        this.$store.commit('setUser', value.data)
+        this.$store.commit(SET_USER, value.data)
         this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')
       })
     },

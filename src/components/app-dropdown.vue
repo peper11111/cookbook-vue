@@ -37,6 +37,7 @@
 
 <script>
 import base from '@/mixins/base'
+import { LOGOUT } from '@/store/mutation-types'
 
 export default {
   name: 'AppDropdown',
@@ -67,7 +68,7 @@ export default {
     logout () {
       this.$api.auth.logout().then(() => {
         this.showInfo('info.logout-successful')
-        this.$store.commit('logout')
+        this.$store.commit(LOGOUT)
         this.$router.push('/login')
       })
     }

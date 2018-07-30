@@ -9,6 +9,7 @@
 
 <script>
 import base from '@/mixins/base'
+import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
   name: 'NewRecipeView',
@@ -22,7 +23,7 @@ export default {
   methods: {
     request () {
       return new Promise(resolve => {
-        this.$store.commit('setRecipe', {})
+        this.$store.commit(SET_RECIPE, {})
         resolve()
       })
     }

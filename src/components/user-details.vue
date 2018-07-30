@@ -82,6 +82,7 @@
 <script>
 import base from '@/mixins/base'
 import details from '@/mixins/details'
+import { SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserDetails',
@@ -134,7 +135,7 @@ export default {
         }
         return this.$api.users.read(this.user.id)
       }).then(value => {
-        this.$store.commit('setUser', value.data)
+        this.$store.commit(SET_USER, value.data)
         this.showInfo('info.profile-update-successful')
       })
     }

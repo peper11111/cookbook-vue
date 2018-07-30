@@ -10,7 +10,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { SET_RECIPES } from '@/store/mutation-types'
+import { SET_RECIPES, SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserPage',
@@ -30,7 +30,7 @@ export default {
   methods: {
     request () {
       return this.$api.users.read(this.userId).then(value => {
-        this.$store.commit('setUser', value.data)
+        this.$store.commit(SET_USER, value.data)
       }).then(() => {
         return this.$api.users.recipes(this.userId)
       }).then(value => {

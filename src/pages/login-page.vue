@@ -59,6 +59,7 @@
 <script>
 import base from '@/mixins/base'
 import form from '@/mixins/form'
+import { LOGIN, SET_CUISINES } from '@/store/mutation-types'
 
 export default {
   name: 'LoginPage',
@@ -72,10 +73,10 @@ export default {
       this.$api.auth.login(formData).then(() => {
         return this.$api.users.current()
       }).then(value => {
-        this.$store.commit('login', value.data)
+        this.$store.commit(LOGIN, value.data)
         return this.$api.cuisines.readAll()
       }).then(value => {
-        this.$store.commit('setCuisines', value.data)
+        this.$store.commit(SET_CUISINES, value.data)
         this.showInfo('info.login-successful')
         this.$router.push(this.$route.query.redirect || '/')
       }).catch(reason => {

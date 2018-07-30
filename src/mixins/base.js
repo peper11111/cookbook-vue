@@ -1,3 +1,5 @@
+import { SHOW_MESSAGE } from '@/store/mutation-types'
+
 export default {
   data () {
     return {
@@ -6,10 +8,10 @@ export default {
   },
   methods: {
     showInfo (message) {
-      this.$store.commit('showMessage', { text: message, type: 'info' })
+      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'info' })
     },
     showError (message) {
-      this.$store.commit('showMessage', { text: message, type: 'error' })
+      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'error' })
     },
     url (id) {
       return id ? this.$api.uploads.url(id) : null
