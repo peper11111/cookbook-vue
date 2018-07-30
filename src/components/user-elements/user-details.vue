@@ -25,36 +25,20 @@
         class="c-user-details__row"
       ></user-actions>
       <user-summary class="c-user-details__row"></user-summary>
-      <div class="c-user-details__row">
-        <input
-          v-if="editMode"
-          v-model="name"
-          :placeholder="$t('user.placeholder.name')"
-          class="o-form__input"
-        >
-        <h1
-          v-else
-          class="c-user-details__name"
-        >
-          {{ name }}
-        </h1>
-      </div>
-      <div class="c-user-details__row">
-      <textarea
-        v-if="editMode"
+      <form-input
+        v-model="name"
+        :disabled="!editMode"
+        :placeholder="$t('user.placeholder.name')"
+        class="c-user-details__row"
+      ></form-input>
+      <form-textarea
         v-model="biography"
+        :disabled="!editMode"
         :placeholder="$t('user.placeholder.biography')"
-        class="o-form__textarea"
-        rows="3"
-        maxlength="255"
-      ></textarea>
-        <p
-          v-else
-          class="c-user-details__biography"
-        >
-          {{ biography }}
-        </p>
-      </div>
+        :maxlength="255"
+        :rows="3"
+        class="c-user-details__row"
+      ></form-textarea>
     </div>
   </div>
 </div>
@@ -67,6 +51,8 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserDetails',
   components: {
+    FormInput: () => import('@/components/form-elements/form-input'),
+    FormTextarea: () => import('@/components/form-elements/form-textarea'),
     ImagePicker: () => import('@/components/form-elements/image-picker'),
     UserActions: () => import('@/components/user-elements/user-actions'),
     UserSummary: () => import('@/components/user-elements/user-summary')
@@ -137,7 +123,7 @@ export default {
         this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')
         this.loading = false
       })
-    },
+    }
   }
 }
 </script>
@@ -180,10 +166,6 @@ export default {
     &:last-child {
       margin-bottom: 0;
     }
-  }
-
-  &__name {
-    font-weight: bold;
   }
 }
 </style>
