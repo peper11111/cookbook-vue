@@ -14,12 +14,22 @@
   margin: 0 4px;
 
   &__primary {
-    background-color: transparent;
-    color: $color-text-primary;
+    background-color: $color-white;
+    color: $color-black;
+
+    &.is-disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
   }
 
   &__accent {
     background-color: $color-accent;
     color: $color-text;
+
+    &.is-disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
   }
 }

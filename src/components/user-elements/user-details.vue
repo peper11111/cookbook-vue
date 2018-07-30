@@ -17,7 +17,11 @@
     <div class="c-user-details__content">
       <user-actions
         :editMode="editMode"
-        @click="clickAction"
+        :disabled="loading"
+        @cancel="init()"
+        @edit="editMode = true"
+        @follow="follow()"
+        @save="update()"
         class="c-user-details__row"
       ></user-actions>
       <user-summary class="c-user-details__row"></user-summary>
@@ -58,7 +62,6 @@
 
 <script>
 import base from '@/mixins/base'
-import details from '@/mixins/details'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
@@ -68,7 +71,7 @@ export default {
     UserActions: () => import('@/components/user-elements/user-actions'),
     UserSummary: () => import('@/components/user-elements/user-summary')
   },
-  mixins: [ base, details ],
+  mixins: [ base ],
   data () {
     return {
       avatar: null,
@@ -76,7 +79,8 @@ export default {
       banner: null,
       bannerFile: null,
       name: null,
-      biography: null
+      biography: null,
+      editMode: false
     }
   },
   computed: {
@@ -84,14 +88,19 @@ export default {
       return this.$store.state.user
     }
   },
+  created () {
+    this.init()
+  },
   methods: {
     init () {
       this.avatar = this.url(this.user.avatarId)
       this.banner = this.url(this.user.bannerId)
       this.name = this.user.name
       this.biography = this.user.biography
+      this.editMode = false
     },
     update () {
+      this.loading = true
       let avatarId, bannerId
       this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then(id => {
         avatarId = id
@@ -115,8 +124,20 @@ export default {
       }).then(value => {
         this.$store.commit(SET_USER, value.data)
         this.showInfo('info.profile-update-successful')
+        this.loading = false
+        this.editMode = false
       })
-    }
+    },
+    follow () {
+      this.loading = true
+      this.$api.users.follow(this.user.id).then(() => {
+        return this.$api.users.read(this.user.id)
+      }).then(value => {
+        this.$store.commit(SET_USER, value.data)
+        this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')
+        this.loading = false
+      })
+    },
   }
 }
 </script>
