@@ -22,9 +22,8 @@
 
   &__wrapper {
     min-width: 720px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 16px;
-    box-sizing: border-box;
   }
 
   &__card {
