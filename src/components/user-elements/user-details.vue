@@ -72,6 +72,9 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
+    },
+    userId () {
+      return Number(this.$route.params.id)
     }
   },
   created () {
@@ -93,7 +96,7 @@ export default {
         return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
       }).then(id => {
         bannerId = id
-        return this.$api.users.modify(this.user.id, {
+        return this.$api.users.modify(this.userId, {
           avatarId: avatarId,
           bannerId: bannerId,
           name: this.name,
@@ -106,7 +109,7 @@ export default {
         if (this.user.avatarId && this.user.avatarId !== avatarId) {
           this.$api.uploads.delete(this.user.avatarId)
         }
-        return this.$api.users.read(this.user.id)
+        return this.$api.users.read(this.userId)
       }).then(value => {
         this.$store.commit(SET_USER, value.data)
         this.showInfo('info.profile-update-successful')
@@ -116,8 +119,8 @@ export default {
     },
     follow () {
       this.loading = true
-      this.$api.users.follow(this.user.id).then(() => {
-        return this.$api.users.read(this.user.id)
+      this.$api.users.follow(this.userId).then(() => {
+        return this.$api.users.read(this.userId)
       }).then(value => {
         this.$store.commit(SET_USER, value.data)
         this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')

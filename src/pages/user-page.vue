@@ -21,7 +21,7 @@ export default {
   mixins: [ base ],
   computed: {
     userId () {
-      return this.$route.params.id
+      return Number(this.$route.params.id)
     }
   },
   created () {
