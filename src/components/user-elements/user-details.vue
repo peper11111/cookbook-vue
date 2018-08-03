@@ -46,7 +46,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { SET_USER } from '@/store/mutation-types'
+import { LOGIN, SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserDetails',
@@ -72,6 +72,9 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
+    },
+    authUser () {
+      return this.$store.state.auth.user
     },
     userId () {
       return Number(this.$route.params.id)
@@ -112,6 +115,14 @@ export default {
         return this.$api.users.read(this.userId)
       }).then(value => {
         this.$store.commit(SET_USER, value.data)
+        if (this.authUser.id === this.userId) {
+          return this.$api.users.current().then(value => {
+            this.$store.commit(LOGIN, value.data)
+          })
+        } else {
+          return Promise.resolve()
+        }
+      }).then(() => {
         this.showInfo('info.profile-update-successful')
         this.loading = false
         this.editMode = false

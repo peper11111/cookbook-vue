@@ -5,6 +5,10 @@
     class="c-app-dropdown__toggle"
   >
     {{ authUser.username }}
+    <img
+      class="c-app-dropdown__avatar"
+      :src="avatarSrc"
+    >
   </div>
   <ul
     :class="{ 'is-visible': visible }"
@@ -48,6 +52,9 @@ export default {
     }
   },
   computed: {
+    avatarSrc () {
+      return this.authUser.avatarId ? this.$api.uploads.url(this.authUser.avatarId) : '/static/blank-avatar.jpg'
+    },
     authUser () {
       return this.$store.state.auth.user
     }
@@ -85,6 +92,8 @@ export default {
   margin: 0 2px;
 
   &__toggle {
+    display: flex;
+    align-items: center;
     font-size: 14px;
     color: $color-text;
     font-family: 'Roboto', sans-serif;
@@ -92,12 +101,20 @@ export default {
     user-select: none;
   }
 
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-left: 8px;
+  }
+
   &__list {
     @include box-elevation;
     background-color: $color-white;
     border-radius: 2px;
     position: absolute;
-    top: 28px;
+    top: 38px;
     right: 0;
     display: none;
 
