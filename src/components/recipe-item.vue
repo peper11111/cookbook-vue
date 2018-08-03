@@ -102,7 +102,7 @@ export default {
     width: 100%;
     height: 50px;
     background-color: $color-primary;
-    padding: 8px;
+    padding: 8px 16px;
     transition: height 175ms;
     overflow: hidden;
 
