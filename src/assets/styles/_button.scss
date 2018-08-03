@@ -3,6 +3,7 @@
 
 .o-button {
   @include box-elevation;
+  @include box-elevation-hover;
   padding: 8px 16px;
   border: 1px solid transparent;
   border-radius: 2px;

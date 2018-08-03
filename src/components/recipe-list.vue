@@ -25,5 +25,6 @@ export default {
 <style lang="scss">
 .c-recipe-list {
   display: flex;
+  flex-wrap: wrap;
 }
 </style>

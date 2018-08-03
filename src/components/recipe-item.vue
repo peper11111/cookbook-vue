@@ -8,14 +8,42 @@
     class="c-recipe-item__background"
   />
   <div class="c-recipe-item__wrapper">
-    <h1 class="c-recipe-item__title">
-      {{ recipe.title }}
-    </h1>
-    <p class="c-recipe-item__date">
-      {{ creationDate }}
-    </p>
-    <span>
-    </span>
+    <div class="c-recipe-item__row">
+      <router-link
+        :to="`/user/${recipe.author.id}`"
+        class="c-recipe-item__author"
+      >
+        {{ recipe.author.username }}
+      </router-link>
+      <span class="c-recipe-item__time">
+        {{ creationTime }}
+      </span>
+    </div>
+    <div class="c-recipe-item__row">
+      <h1 class="c-recipe-item__title">
+        {{ recipe.title }}
+      </h1>
+    </div>
+    <div class="c-recipe-item__row">
+      <i class="material-icons">
+        chat_bubble
+      </i>
+      <span class="c-recipe-item__value">
+        {{ recipe.comments || 0 }}
+      </span>
+      <i class="material-icons">
+        thumb_up
+      </i>
+      <span class="c-recipe-item__value">
+        {{ recipe.likes || 0 }}
+      </span>
+      <i class="material-icons">
+        share
+      </i>
+      <span class="c-recipe-item__value">
+        {{ recipe.shares || 0 }}
+      </span>
+    </div>
   </div>
 </router-link>
 </template>
@@ -32,8 +60,8 @@ export default {
     backgroundSrc () {
       return this.recipe.bannerId ? this.$api.uploads.url(this.recipe.bannerId) : '/static/blank-banner.jpg'
     },
-    creationDate () {
-      return moment(this.recipe.creationDate).fromNow()
+    creationTime () {
+      return moment(this.recipe.creationTime).fromNow()
     }
   }
 }
@@ -45,11 +73,18 @@ export default {
 
 .c-recipe-item {
   @include box-elevation;
-  width: 250px;
+  @include box-elevation-hover;
+  width: 300px;
   height: 300px;
   box-sizing: border-box;
   margin: 16px;
   position: relative;
+
+  &:hover {
+    .c-recipe-item__wrapper {
+      height: 100px;
+    }
+  }
 
   &__background {
     position: absolute;
@@ -66,8 +101,52 @@ export default {
     left: 0;
     width: 100%;
     height: 50px;
-    background-color: $color-accent;
+    background-color: $color-primary;
     padding: 8px;
+    transition: height 175ms;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      display: block;
+      background-color: $color-primary;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 8px;
+      width: 100%;
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .material-icons {
+      font-size: 16px;
+      color: $color-text;
+    }
+  }
+
+  &__time {
+    font-size: 12px;
+    color: $color-primary-light;
+    margin-left: auto;
+  }
+
+  &__author {
+    font-size: 12px;
+    text-decoration: none;
+    color: $color-text;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__title {
@@ -76,10 +155,10 @@ export default {
     color: $color-text;
   }
 
-  &__date {
+  &__value {
     font-size: 12px;
+    margin: 0 12px 0 4px;
     color: $color-text;
-    margin: 2px 0;
   }
 }
 </style>
