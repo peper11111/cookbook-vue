@@ -1,96 +1,107 @@
 <template>
 <div class="c-recipe-details">
+  <image-picker
+    v-model="banner"
+    :disabled="!editMode"
+    @file="bannerFile = $event"
+    class="c-recipe-details__banner"
+  ></image-picker>
   <div class="c-recipe-details__wrapper">
-    <image-picker
-      v-model="banner"
-      :disabled="!editMode"
-      @file="bannerFile = $event"
-      class="c-recipe-details__banner"
-    ></image-picker>
-    <div class="c-recipe-details__info">
-      <input
-        v-model="title"
-        :placeholder="editMode ? $t('recipe.placeholder.title') : ''"
-        class="c-recipe-details__title o-form__input"
-      />
-      <textarea
-        v-model="lead"
+    <input
+      v-if="editMode"
+      v-model="title"
+      :placeholder="$t('recipe.placeholder.title')"
+      class="o-form__input"
+    />
+    <h1
+      v-if="!editMode"
+      class="c-recipe-details__title"
+    >
+      {{ title }}
+    </h1>
+    <textarea
+      v-if="editMode"
+      v-model="lead"
+      :placeholder="$t('recipe.placeholder.lead')"
+      class="o-form__textarea"
+      rows="3"
+      maxlength="255"
+    ></textarea>
+    <p
+      v-if="!editMode"
+      class="c-recipe-details__lead"
+    >
+      {{ lead }}
+    </p>
+    <label class="c-recipe-details__item">
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.cuisine-type') }}
+      </span>
+      <select
+        v-model="cuisineId"
+        :placeholder="'test'"
+        class="c-recipe-details__value o-form__select"
+      >
+        <option
+          v-for="item in cuisines"
+          :key="item.id"
+          :value="item.id"
+          :selected="cuisineId === item.id"
+        >
+          {{ $t(`recipe.cuisine.${item.name}`) }}
+        </option>
+      </select>
+    </label>
+    <label class="c-recipe-details__item">
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.difficulty') }}
+      </span>
+      <rating-bar
+        v-model="difficulty"
         :disabled="!editMode"
-        :placeholder="editMode ? $t('recipe.placeholder.lead') : ''"
-        class="o-form__textarea c-recipe-details__description"
-        rows="3"
-        maxlength="255"
-      ></textarea>
-      <label class="c-recipe-details__item">
-        <span class="c-recipe-details__label">
-          {{ $t('recipe.cuisine-type') }}
-        </span>
-        <select
-          v-model="cuisineId"
-          :placeholder="'test'"
-          class="c-recipe-details__value o-form__select"
-        >
-          <option
-            v-for="item in cuisines"
-            :key="item.id"
-            :value="item.id"
-            :selected="cuisineId === item.id"
-          >
-            {{ $t(`recipe.cuisine.${item.name}`) }}
-          </option>
-        </select>
-      </label>
-      <label class="c-recipe-details__item">
-        <span class="c-recipe-details__label">
-          {{ $t('recipe.difficulty') }}
-        </span>
-        <rating-bar
-          v-model="difficulty"
-          :disabled="!editMode"
-          class="c-recipe-details__value"
-        ></rating-bar>
-      </label>
-      <label class="c-recipe-details__item">
-        <span class="c-recipe-details__label">
-          {{ $t('recipe.plates') }}
-        </span>
-        <input
-          v-model="plates"
-          class="c-recipe-details__value o-form__input"
-        />
-      </label>
-      <label class="c-recipe-details__item">
-        <span class="c-recipe-details__label">
-          {{ $t('recipe.preparation-time') }}
-        </span>
-        <time-input
-          v-model="preparationTime"
-          :disabled="!editMode"
-        ></time-input>
-      </label>
-      <div class="c-recipe-details__buttons">
-        <button
-          v-if="editMode"
-          @click="update()"
-          class="o-button o-button__accent"
-        >
-          {{ $t('save')}}
-        </button>
-        <button
-          v-if="editMode"
-          @click="init()"
-          class="o-button o-button__primary"
-        >
-          {{ $t('cancel') }}
-        </button>
-        <button
-          v-if="!editMode"
-          @click="editMode = true"
-          class="o-button o-button__primary"
-        >
-          {{ $t('edit') }}
-        </button>
-      </div>
+        class="c-recipe-details__value"
+      ></rating-bar>
+    </label>
+    <label class="c-recipe-details__item">
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.plates') }}
+      </span>
+      <input
+        v-model="plates"
+        class="c-recipe-details__value o-form__input"
+      />
+    </label>
+    <label class="c-recipe-details__item">
+      <span class="c-recipe-details__label">
+        {{ $t('recipe.preparation-time') }}
+      </span>
+      <time-input
+        v-model="preparationTime"
+        :disabled="!editMode"
+      ></time-input>
+    </label>
+    <div class="c-recipe-details__buttons">
+      <button
+        v-if="editMode"
+        @click="update()"
+        class="o-button o-button__accent"
+      >
+        {{ $t('save')}}
+      </button>
+      <button
+        v-if="editMode"
+        @click="init()"
+        class="o-button o-button__primary"
+      >
+        {{ $t('cancel') }}
+      </button>
+      <button
+        v-if="!editMode"
+        @click="editMode = true"
+        class="o-button o-button__primary"
+      >
+        {{ $t('edit') }}
+      </button>
     </div>
   </div>
 </div>
@@ -167,16 +178,14 @@ export default {
 @import '../assets/styles/variables';
 
 .c-recipe-details {
-  &__wrapper {
-    display: flex;
-  }
+  display: flex;
 
   &__banner {
     width: 650px;
     height: 400px;
   }
 
-  &__info {
+  &__wrapper {
     display: flex;
     flex-direction: column;
     width: 350px;
