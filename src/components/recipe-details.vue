@@ -139,6 +139,9 @@ export default {
       return this.$store.state.recipe
     }
   },
+  created () {
+    this.init()
+  },
   methods: {
     init () {
       this.banner = this.url(this.recipe.bannerId)

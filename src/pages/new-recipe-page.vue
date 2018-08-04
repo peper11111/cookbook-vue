@@ -1,5 +1,8 @@
 <template>
-<div class="o-page" v-if="!loading">
+<div
+  v-if="!loading"
+  class="o-page"
+>
   <div class="o-page__wrapper">
     <recipe-details></recipe-details>
     <div class="o-page__separator"></div>
