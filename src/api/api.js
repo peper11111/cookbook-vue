@@ -13,11 +13,11 @@ export default class Api {
   }
 
   constructor (options) {
-    for (const module in options.modules) {
-      if (!options.modules.hasOwnProperty(module)) {
+    for (const endpoint in options.endpoints) {
+      if (!options.endpoints.hasOwnProperty(endpoint)) {
         continue
       }
-      this[module] = options.modules[module]
+      this[endpoint] = options.endpoints[endpoint]
     }
   }
 }

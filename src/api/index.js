@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Api from '@/api/api'
-import modules from '@/api/modules'
+import endpoints from '@/api/endpoints'
 
 Vue.use(Api)
 
 export default new Api({
-  modules
+  endpoints
 })
