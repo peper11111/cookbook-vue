@@ -4,11 +4,12 @@ import '@/assets/styles/main.scss'
 import moment from 'moment'
 import Vue from 'vue'
 import api from '@/api'
+import config from '@/config'
 import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 
-moment.locale('pl')
+moment.locale(config.locale)
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api
