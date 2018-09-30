@@ -8,29 +8,49 @@ const api = {
     login: (data) => http.post('/auth/login', data),
     logout: () => http.post('/auth/logout'),
     register: (data) => http.post('/auth/register', data),
-    verify: (data) => http.post('/auth/verify', data),
+    registerResend: (data) => http.post('/auth/register/resend', data),
+    registerVerify: (data) => http.post('/auth/register/verify', data),
     reset: (data) => http.post('/auth/reset', data),
-    confirm: (data) => http.post('/auth/confirm', data)
+    resetResend: (data) => http.post('/auth/reset/resend', data),
+    resetConfirm: (data) => http.post('/auth/reset/confirm', data)
+  },
+  comments: {
+    create: (data) => http.post('/comments', data),
+    read: (id) => http.get(`/comments/${id}`),
+    modify: (id, data) => http.patch(`/comments/${id}`, data),
+    delete: (id) => http.delete(`/comments/${id}`),
+    readComments: (id) => http.get(`/comments/${id}/comments`)
   },
   cuisines: {
     readAll: () => http.get('/cuisines')
   },
+  categories: {
+    readAll: () => http.get('/categories')
+  },
   recipes: {
+    readAll: (params) => http.get('/recipes', { params: params }),
     create: (data) => http.post('/recipes', data),
-    read: (id) => http.get(`/recipes/${id}`)
+    search: (params) => http.get('/recipes/search', { params: params }),
+    read: (id) => http.get(`/recipes/${id}`),
+    modify: (id, data) => http.patch(`/recipes/${id}`, data),
+    delete: (id) => http.delete(`/recipes/${id}`),
+    like: (id) => http.post(`/recipes/${id}`),
+    favourite: (id) => http.post(`/recipes/${id}`),
+    readComments: (id, params) => http.get(`/recipes/${id}/comments`, { params: params })
   },
   uploads: {
-    url: (id) => `${http.defaults.baseURL}/uploads/${id}`,
     create: (data) => http.post('/uploads', data),
     read: (id) => http.get(`/uploads/${id}`),
     delete: (id) => http.delete(`/uploads/${id}`)
   },
   users: {
     current: () => http.get('/users/current'),
+    search: (params) => http.get('/users/search', { params: params }),
     read: (id) => http.get(`/users/${id}`),
     modify: (id, data) => http.patch(`/users/${id}`, data),
     follow: (id) => http.post(`/users/${id}/follow`),
-    recipes: (id) => http.get(`/users/${id}/recipes`)
+    readRecipes: (id, params) => http.get(`/users/${id}/recipes`, { params: params }),
+    readFavourites: (id, params) => http.get(`/users/${id}/favourites`, { params: params })
   }
 }
 
