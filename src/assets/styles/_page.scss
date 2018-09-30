@@ -26,26 +26,6 @@
     margin: 0 auto;
   }
 
-  &__card {
-    @include box-elevation;
-    padding: 32px;
-    background-color: $color-white;
-    border-radius: 2px;
-    width: 350px;
-  }
-
-  &__header {
-    text-align: center;
-    font-family: 'Dancing Script', cursive;
-    font-size: 54px;
-    letter-spacing: 1px;
-  }
-
-  &__message {
-    text-align: justify;
-    margin-bottom: 16px;
-  }
-
   &__separator {
     height: 1px;
     background: linear-gradient(to right, transparent, $color-accent 20%, $color-accent 80%, transparent);

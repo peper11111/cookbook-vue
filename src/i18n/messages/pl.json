@@ -6,7 +6,6 @@
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
     "resource-not-found": "Strona której szukasz nie istnieje",
     "message-resend": "Wiadomość została wysłana ponownie. Sprawdź swoją skrzynkę pocztową.",
-    "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   },
@@ -22,6 +21,7 @@
   "error": {
     "100": "Wystąpił nieoczekiwany błąd",
     "102": "Niepoprawna nazwa uzytkownika lub hasło",
+    "200": "Użytkownik nie istnieje",
     "missing-email": "Email nie może być pusty",
     "missing-username": "Nazwa użytkownika nie może być pusta",
     "missing-password": "Hasło nie może być puste",
@@ -34,7 +34,6 @@
     "user-is-disabled": "Użytkownik nie został aktywowany",
     "file-exceeds-limit": "Plik nie może przekraczać 10MB"
   },
-  "app": "Cookbook",
   "save": "Zapisz",
   "cancel": "Anuluj",
   "edit": "Edytuj",
@@ -53,14 +52,15 @@
     "have-account": "Masz konto?",
     "not-have-account": "Nie masz konta?",
     "forgot-password": "Nie pamiętasz hasła?",
-    "remember-password": "Pamietasz hasło?",
+    "remember-password": "Pamiętasz hasło?",
     "sign-in": "Zaloguj się",
     "register": "Zarejestruj się",
     "reset-password": "Resetuj hasło",
     "generate-password": "Wygeneruj hasło",
     "change-password": "Zmień hasło",
     "search": "Wyszukaj...",
-    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym. Jeśli nie możesz znaleść wiadomości w folderze Odebarane sprawdź foler Spam.",
+    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym. Jeśli nie możesz znaleźć wiadomości w folderze Odebarane sprawdź foler Spam",
+    "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasła. Jeśli nie możesz znaleźć wiadomości w folderze Odebrane sprawdź folder Spam",
     "resend-email": "Wyślij ponownie"
   },
   "user": {

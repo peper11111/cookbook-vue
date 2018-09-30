@@ -43,7 +43,7 @@ export default [
   },
   {
     path: '/reset',
-    component: () => import('@/pages/reset-page')
+    component: () => import('@/pages/intro/reset-page')
   },
   {
     path: '/confirm',

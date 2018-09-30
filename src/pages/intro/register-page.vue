@@ -1,12 +1,12 @@
 <template>
 <div class="o-page o-page--intro">
-  <div class="o-page__card">
-    <h1 class="o-page__header">
+  <div class="o-card">
+    <h1 class="o-card__header">
       {{ $t('global.app') }}
     </h1>
     <div class="o-page__separator"></div>
     <form
-      v-if="!registered"
+      v-if="!done"
       @submit.prevent="wrap(register)"
       class="o-form"
     >
@@ -61,8 +61,11 @@
         </router-link>
       </p>
     </form>
-    <div v-if="registered">
-      <p class="o-page__message">
+    <div v-if="done">
+      <p class="o-card__message">
+        <i class="o-card__check material-icons">
+          check_circle_outline
+        </i>
         {{ $t('form.account-activation-email-sent') }}
       </p>
       <div
@@ -86,7 +89,7 @@ export default {
   mixins: [ form, requester ],
   data () {
     return {
-      registered: false
+      done: true
     }
   },
   methods: {
@@ -96,7 +99,7 @@ export default {
         username: this.username,
         password: this.password
       }).then(() => {
-        this.registered = true
+        this.done = true
       })
     },
     registerResend () {

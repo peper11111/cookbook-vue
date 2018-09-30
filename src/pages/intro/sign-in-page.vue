@@ -1,7 +1,7 @@
 <template>
 <div class="o-page o-page--intro">
-  <div class="o-page__card">
-    <h1 class="o-page__header">
+  <div class="o-card">
+    <h1 class="o-card__header">
       {{ $t('global.app') }}
     </h1>
     <div class="o-page__separator"></div>
