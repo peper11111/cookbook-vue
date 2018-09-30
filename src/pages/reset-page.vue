@@ -47,7 +47,7 @@ export default {
       }).then(() => {
         this.showInfo('info.password-reset-email-sent')
         this.$router.push('/login')
-      }).catch(reason => {
+      }).catch((reason) => {
         this.showError(reason.response.data)
       })
     }

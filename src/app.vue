@@ -29,10 +29,10 @@ export default {
   },
   methods: {
     request () {
-      return this.$api.users.current().then(value => {
+      return this.$api.users.current().then((value) => {
         this.$store.commit(LOGIN, value.data)
         return this.$api.cuisines.readAll()
-      }).then(value => {
+      }).then((value) => {
         this.$store.commit(SET_CUISINES, value.data)
       })
     }

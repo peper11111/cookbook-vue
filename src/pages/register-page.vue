@@ -78,7 +78,7 @@ export default {
       }).then(() => {
         this.showInfo('info.account-activation-email-sent')
         this.$router.push('/login')
-      }).catch(reason => {
+      }).catch((reason) => {
         this.showError(reason.response.data)
       })
     }

@@ -32,7 +32,7 @@ export default {
       }
       const formData = new FormData()
       formData.set('file', imgFile)
-      return this.$api.uploads.create(formData).then(value => value.data)
+      return this.$api.uploads.create(formData).then((value) => value.data)
     }
   }
 }

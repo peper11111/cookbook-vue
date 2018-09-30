@@ -14,7 +14,7 @@ export default {
     }).then(() => {
       this.showInfo('info.user-verified')
       this.$router.push('/login')
-    }).catch(reason => {
+    }).catch((reason) => {
       this.showError(reason.response.data)
       this.$router.push('/login')
     })

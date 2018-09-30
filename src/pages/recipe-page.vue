@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     request () {
-      return this.$api.recipes.read(this.recipeId).then(value => {
+      return this.$api.recipes.read(this.recipeId).then((value) => {
         this.$store.commit(SET_RECIPE, value.data)
       })
     }

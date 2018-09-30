@@ -94,10 +94,10 @@ export default {
     update () {
       this.loading = true
       let avatarId, bannerId
-      this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then(id => {
+      this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then((id) => {
         avatarId = id
         return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
-      }).then(id => {
+      }).then((id) => {
         bannerId = id
         return this.$api.users.modify(this.userId, {
           avatarId: avatarId,
@@ -113,10 +113,10 @@ export default {
           this.$api.uploads.delete(this.user.avatarId)
         }
         return this.$api.users.read(this.userId)
-      }).then(value => {
+      }).then((value) => {
         this.$store.commit(SET_USER, value.data)
         if (this.authUser.id === this.userId) {
-          return this.$api.users.current().then(value => {
+          return this.$api.users.current().then((value) => {
             this.$store.commit(LOGIN, value.data)
           })
         } else {
@@ -132,7 +132,7 @@ export default {
       this.loading = true
       this.$api.users.follow(this.userId).then(() => {
         return this.$api.users.read(this.userId)
-      }).then(value => {
+      }).then((value) => {
         this.$store.commit(SET_USER, value.data)
         this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')
         this.loading = false

@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     request () {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         this.$store.commit(SET_RECIPE, {})
         resolve()
       })

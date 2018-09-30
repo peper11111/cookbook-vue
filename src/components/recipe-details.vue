@@ -155,7 +155,7 @@ export default {
     },
     update () {
       let bannerId
-      this.uploadImg(this.recipe.bannerId, this.banner, this.bannerFile).then(id => {
+      this.uploadImg(this.recipe.bannerId, this.banner, this.bannerFile).then((id) => {
         bannerId = id
         return this.$api.recipes.create({
           bannerId: bannerId,
@@ -166,7 +166,7 @@ export default {
           plates: this.plates,
           preparationTime: this.preparationTime
         })
-      }).then(value => {
+      }).then((value) => {
         // TODO Finish recipe creation
         this.showInfo('info.recipe-created')
         this.editMode = false

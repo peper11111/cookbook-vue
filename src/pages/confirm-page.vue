@@ -65,7 +65,7 @@ export default {
       }).then(() => {
         this.showInfo('info.password-reset')
         this.$router.push('/login')
-      }).catch(reason => {
+      }).catch((reason) => {
         this.showError(reason.response.data)
       })
     }

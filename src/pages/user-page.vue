@@ -29,13 +29,13 @@ export default {
   },
   methods: {
     request () {
-      return this.$api.users.read(this.userId).then(value => {
+      return this.$api.users.read(this.userId).then((value) => {
         this.$store.commit(SET_USER, value.data)
       }).then(() => {
         return this.$api.users.recipes(this.userId)
-      }).then(value => {
+      }).then((value) => {
         this.$store.commit(SET_RECIPES, value.data)
-      }).catch(reason => {
+      }).catch((reason) => {
         if (reason.response.status === 404) {
           this.$router.push('/')
         }
