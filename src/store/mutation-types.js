@@ -1,6 +1,5 @@
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
-export const SHOW_MESSAGE = 'SHOW_MESSAGE'
 export const SET_CUISINES = 'SET_CUISINES'
 export const SET_RECIPE = 'SET_RECIPE'
 export const SET_RECIPES = 'SET_RECIPES'

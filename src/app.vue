@@ -2,7 +2,6 @@
 <div v-if="!loading">
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
-  <app-snackbar></app-snackbar>
 </div>
 </template>
 
@@ -13,8 +12,7 @@ import { LOGIN, SET_CUISINES } from '@/store/mutation-types'
 export default {
   name: 'App',
   components: {
-    AppNavbar: () => import('@/components/app-navbar'),
-    AppSnackbar: () => import('@/components/app-snackbar')
+    AppNavbar: () => import('@/components/app-navbar')
   },
   mixins: [ base ],
   computed: {

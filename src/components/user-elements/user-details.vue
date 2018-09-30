@@ -123,7 +123,7 @@ export default {
           return Promise.resolve()
         }
       }).then(() => {
-        this.showInfo('info.profile-update-successful')
+        this.$notify.success('profile-update-successful')
         this.loading = false
         this.editMode = false
       })
@@ -134,7 +134,7 @@ export default {
         return this.$api.users.read(this.userId)
       }).then((value) => {
         this.$store.commit(SET_USER, value.data)
-        this.showInfo(this.user.following ? 'info.user-follow' : 'info.user-unfollow')
+        this.$notify.info(this.user.following ? 'user-follow' : 'user-unfollow')
         this.loading = false
       })
     }

@@ -4,12 +4,6 @@ export default {
   [MutationTypes.SET_RECIPES] (state, payload) {
     state.recipes = payload
   },
-  [MutationTypes.SHOW_MESSAGE] (state, payload) {
-    state.messages.push({
-      text: payload.text,
-      type: payload.type
-    })
-  },
   [MutationTypes.LOGIN] (state, payload) {
     localStorage.setItem('loggedIn', 'true')
     state.auth.loggedIn = true

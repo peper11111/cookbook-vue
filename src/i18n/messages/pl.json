@@ -3,18 +3,18 @@
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
     "resource-not-found": "Strona której szukasz nie istnieje",
-    "user-verified": "Aktywacja przebiegła pomyślnie",
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
-    "password-reset": "Twoje hasło zostało zmienione",
-    "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
-    "recipe-created": "Twój przepis został pomyślnie utworzony",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   },
   "success": {
     "login-successful": "Zostałeś pomyślnie zalogowany",
-    "logout-successful": "Zostałeś pomyślnie wylogowany"
+    "logout-successful": "Zostałeś pomyślnie wylogowany",
+    "password-reset": "Twoje hasło zostało zmienione",
+    "user-verified": "Aktywacja przebiegła pomyślnie",
+    "recipe-created": "Twój przepis został pomyślnie utworzony",
+    "profile-update-successful": "Twój profil został pomyślnie zaktualizowany"
   },
   "warning": {},
   "error": {

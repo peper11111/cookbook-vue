@@ -168,7 +168,7 @@ export default {
         })
       }).then((value) => {
         // TODO Finish recipe creation
-        this.showInfo('info.recipe-created')
+        this.$notify.success('recipe-created')
         this.editMode = false
       })
     }

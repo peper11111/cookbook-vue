@@ -71,7 +71,7 @@ export default {
         return
       }
       if (file && file.size > FILE_SIZE_LIMIT) {
-        this.showError('error.file-exceeds-limit')
+        this.$notify.error('file-exceeds-limit')
         return
       }
       this.localValue = file

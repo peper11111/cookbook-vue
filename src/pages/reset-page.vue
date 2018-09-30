@@ -45,10 +45,8 @@ export default {
       this.$api.auth.reset({
         username: this.username
       }).then(() => {
-        this.showInfo('info.password-reset-email-sent')
+        this.$notify.info('password-reset-email-sent')
         this.$router.push('/login')
-      }).catch((reason) => {
-        this.showError(reason.response.data)
       })
     }
   }

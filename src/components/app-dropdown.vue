@@ -74,8 +74,8 @@ export default {
     },
     logout () {
       this.$api.auth.logout().then(() => {
-        this.showInfo('info.logout-successful')
         this.$store.commit(LOGOUT)
+        this.$notify.success('logout-successful')
         this.$router.push('/login')
       })
     }

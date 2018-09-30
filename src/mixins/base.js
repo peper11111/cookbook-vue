@@ -1,5 +1,4 @@
 import config from '@/config'
-import { SHOW_MESSAGE } from '@/store/mutation-types'
 
 export default {
   data () {
@@ -8,12 +7,6 @@ export default {
     }
   },
   methods: {
-    showInfo (message) {
-      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'info' })
-    },
-    showError (message) {
-      this.$store.commit(SHOW_MESSAGE, { text: message, type: 'error' })
-    },
     url (id) {
       return id ? config.baseURL + `/uploads/${id}` : null
     },

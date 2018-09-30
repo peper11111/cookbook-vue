@@ -63,10 +63,8 @@ export default {
         password: this.password,
         token: this.$route.query.token
       }).then(() => {
-        this.showInfo('info.password-reset')
+        this.$notify.success('password-reset')
         this.$router.push('/login')
-      }).catch((reason) => {
-        this.showError(reason.response.data)
       })
     }
   }
