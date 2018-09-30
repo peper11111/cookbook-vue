@@ -57,7 +57,11 @@
       "CUISINE_ITALIAN": "Kuchnia włoska"
     }
   },
+  "success": {
+    "login-successful": "Zostałeś pomyślnie zalogowany"
+  },
   "error": {
+    "login-error": "Niepoprawna nazwa uzytkownika lub hasło",
     "missing-email": "Email nie może być pusty",
     "missing-username": "Nazwa użytkownika nie może być pusta",
     "missing-password": "Hasło nie może być puste",
@@ -67,12 +71,10 @@
     "email-occupied": "Podany adres email jest już zajęty",
     "username-occupied": "Podana nazwa użytkownika jest już zajęta",
     "user-not-found": "Użytkownik nie istnieje",
-    "bad-credentials": "Niepoprawna nazwa uzytkownika lub hasło",
     "user-is-disabled": "Użytkownik nie został aktywowany",
     "file-exceeds-limit": "Plik nie może przekraczać 10MB"
   },
   "info": {
-    "login-successful": "Logowanie przebiegło pomyślnie",
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
