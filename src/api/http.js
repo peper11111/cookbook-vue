@@ -9,7 +9,7 @@ const http = axios.create({
   withCredentials: true
 })
 
-http.interceptors.response.use(value => value, reason => {
+http.interceptors.response.use((value) => value, (reason) => {
   if (reason.response.status === 401) {
     store.commit(LOGOUT)
     router.push('/login')
