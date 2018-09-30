@@ -46,7 +46,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { LOGIN, SET_USER } from '@/store/mutation-types'
+import { SET_USER, SIGN_IN } from '@/store/mutation-types'
 
 export default {
   name: 'UserDetails',
@@ -117,7 +117,7 @@ export default {
         this.$store.commit(SET_USER, value.data)
         if (this.authUser.id === this.userId) {
           return this.$api.users.current().then((value) => {
-            this.$store.commit(LOGIN, value.data)
+            this.$store.commit(SIGN_IN, value.data)
           })
         } else {
           return Promise.resolve()

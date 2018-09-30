@@ -13,7 +13,7 @@ export default {
       token: this.$route.query.token
     }).then(() => {
       this.$notify.success('user-verified')
-      this.$router.push('/login')
+      this.$router.push('/sign-in')
     })
   }
 }

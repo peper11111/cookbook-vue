@@ -30,10 +30,10 @@
     </router-link>
     <li class="c-app-dropdown__separator"></li>
     <li
-      @click="logout"
+      @click="signOut"
       class="c-app-dropdown__item"
     >
-      {{ $t('navbar.logout') }}
+      {{ $t('navbar.sign-out') }}
     </li>
   </ul>
 </div>
@@ -41,7 +41,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { LOGOUT } from '@/store/mutation-types'
+import { SIGN_OUT } from '@/store/mutation-types'
 
 export default {
   name: 'AppDropdown',
@@ -72,11 +72,11 @@ export default {
     hide () {
       this.visible = false
     },
-    logout () {
+    signOut () {
       this.$api.auth.logout().then(() => {
-        this.$store.commit(LOGOUT)
-        this.$notify.success('logout-successful')
-        this.$router.push('/login')
+        this.$store.commit(SIGN_OUT)
+        this.$notify.success('sign-out-successful')
+        this.$router.push('/sign-in')
       })
     }
   }

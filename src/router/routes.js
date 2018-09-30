@@ -30,8 +30,8 @@ export default [
     meta: { requiresAuth: true }
   },
   {
-    path: '/login',
-    component: () => import('@/pages/login-page')
+    path: '/sign-in',
+    component: () => import('@/pages/sign-in-page')
   },
   {
     path: '/register',

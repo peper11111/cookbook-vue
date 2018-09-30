@@ -3,7 +3,7 @@ import config from '@/config'
 import notify from '@/notify'
 import router from '@/router'
 import store from '@/store'
-import { LOGOUT } from '@/store/mutation-types'
+import { SIGN_OUT } from '@/store/mutation-types'
 
 const http = axios.create({
   baseURL: config.baseURL,
@@ -13,9 +13,9 @@ const http = axios.create({
 http.interceptors.response.use((value) => value, (reason) => {
   if (reason.response.status === 401) {
     if (router.currentRoute.meta.requiresAuth && store.state.auth.loggedIn) {
-      store.commit(LOGOUT)
+      store.commit(SIGN_OUT)
       notify.info('session-timeout')
-      router.push('/login')
+      router.push('/sign-in')
     }
   } else {
     notify.error(reason.response.data.code)

@@ -39,10 +39,10 @@
       <p class="o-form__footer">
         {{ $t('form.remember-password') }}
         <router-link
-          to="/login"
+          to="/sign-in"
           class="o-form__action"
         >
-          {{ $t('form.login') }}
+          {{ $t('form.sign-in') }}
         </router-link>
       </p>
     </form>
@@ -64,7 +64,7 @@ export default {
         token: this.$route.query.token
       }).then(() => {
         this.$notify.success('password-reset')
-        this.$router.push('/login')
+        this.$router.push('/sign-in')
       })
     }
   }

@@ -2,7 +2,7 @@
 <div class="o-page o-page--intro">
   <div class="o-page__card">
     <form
-      @submit.prevent="loginUser"
+      @submit.prevent="signIn"
       class="o-form"
     >
       <h1 class="o-form__header">
@@ -38,7 +38,7 @@
         {{ $t('form.forgot-password') }}
       </router-link>
       <input
-        :value="$t('form.login')"
+        :value="$t('form.sign-in')"
         class="o-form__submit"
         type="submit"
       />
@@ -58,13 +58,13 @@
 
 <script>
 import form from '@/mixins/form'
-import { LOGIN, SET_CATEGORIES, SET_CUISINES } from '@/store/mutation-types'
+import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
 export default {
-  name: 'LoginPage',
+  name: 'SignInPage',
   mixins: [ form ],
   methods: {
-    loginUser () {
+    signIn () {
       const formData = new FormData()
       formData.set('login', this.login)
       formData.set('password', this.password)
@@ -72,14 +72,14 @@ export default {
       this.$api.auth.login(formData).then(() => {
         return this.$api.users.current()
       }).then((value) => {
-        this.$store.commit(LOGIN, value.data)
+        this.$store.commit(SIGN_IN, value.data)
         return this.$api.categories.readAll()
       }).then((value) => {
         this.$store.commit(SET_CATEGORIES, value.data)
         return this.$api.cuisines.readAll()
       }).then((value) => {
         this.$store.commit(SET_CUISINES, value.data)
-        this.$notify.success('login-successful')
+        this.$notify.success('sign-in-successful')
         this.$router.push(this.$route.query.redirect || '/')
       })
     }

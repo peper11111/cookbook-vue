@@ -6,7 +6,7 @@
       class="o-form"
     >
       <h1 class="o-form__header">
-        {{ $t('app') }}
+        {{ $t('global.app') }}
       </h1>
       <input
         v-model="email"
@@ -51,10 +51,10 @@
       <p class="o-form__footer">
         {{ $t('form.have-account') }}
         <router-link
-          to="/login"
+          to="/sign-in"
           class="o-form__action"
         >
-          {{ $t('form.login') }}
+          {{ $t('form.sign-in') }}
         </router-link>
       </p>
     </form>
@@ -63,12 +63,11 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
 import form from '@/mixins/form'
 
 export default {
   name: 'RegisterPage',
-  mixins: [ base, form ],
+  mixins: [ form ],
   methods: {
     register () {
       this.$api.auth.register({
@@ -77,7 +76,7 @@ export default {
         password: this.password
       }).then(() => {
         this.$notify.info('account-activation-email-sent')
-        this.$router.push('/login')
+        this.$router.push('/sign-in')
       })
     }
   }

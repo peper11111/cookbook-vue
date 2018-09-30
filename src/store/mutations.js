@@ -4,12 +4,12 @@ export default {
   [MutationTypes.SET_RECIPES] (state, payload) {
     state.recipes = payload
   },
-  [MutationTypes.LOGIN] (state, payload) {
+  [MutationTypes.SIGN_IN] (state, payload) {
     localStorage.setItem('loggedIn', 'true')
     state.auth.loggedIn = true
     state.auth.user = payload
   },
-  [MutationTypes.LOGOUT] (state) {
+  [MutationTypes.SIGN_OUT] (state) {
     localStorage.setItem('loggedIn', 'false')
     state.auth.loggedIn = false
     state.auth.user = {}

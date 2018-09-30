@@ -11,8 +11,8 @@
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   },
   "success": {
-    "login-successful": "Zostałeś pomyślnie zalogowany",
-    "logout-successful": "Zostałeś pomyślnie wylogowany",
+    "sign-in-successful": "Zostałeś pomyślnie zalogowany",
+    "sign-out-successful": "Zostałeś pomyślnie wylogowany",
     "password-reset": "Twoje hasło zostało zmienione",
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "recipe-created": "Twój przepis został pomyślnie utworzony",
@@ -42,19 +42,19 @@
   "navbar": {
     "profile": "Wyświetl profil",
     "new-recipe": "Dodaj przepis",
-    "logout": "Wyloguj"
+    "sign-out": "Wyloguj się"
   },
   "form": {
     "email": "Email",
     "username": "Nazwa użytkownika",
-    "username-or-email": "Nazwa użytkownika lub email",
+    "login": "Nazwa użytkownika lub email",
     "password": "Hasło",
     "new-password": "Nowe hasło",
     "have-account": "Masz konto?",
     "not-have-account": "Nie masz konta?",
     "forgot-password": "Nie pamiętasz hasła?",
     "remember-password": "Pamietasz hasło?",
-    "login": "Zaloguj się",
+    "sign-in": "Zaloguj się",
     "register": "Zarejestruj się",
     "reset-password": "Resetuj hasło",
     "generate-password": "Wygeneruj hasło",
