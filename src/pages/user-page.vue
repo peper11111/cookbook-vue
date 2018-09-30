@@ -35,11 +35,6 @@ export default {
         return this.$api.users.recipes(this.userId)
       }).then((value) => {
         this.$store.commit(SET_RECIPES, value.data)
-      }).catch((reason) => {
-        if (reason.response.status === 404) {
-          this.$router.push('/')
-        }
-        return Promise.reject(reason)
       })
     }
   }

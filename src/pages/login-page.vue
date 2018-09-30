@@ -78,8 +78,6 @@ export default {
         this.$store.commit(SET_CUISINES, value.data)
         this.$router.push(this.$route.query.redirect || '/')
         this.$notify.success('login-successful')
-      }).catch(() => {
-        this.$notify.error('login-error')
       })
     }
   }

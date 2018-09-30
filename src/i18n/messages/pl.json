@@ -1,22 +1,25 @@
 {
   "global": {},
   "info": {
+    "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
+    "resource-not-found": "Strona której szukasz nie istnieje",
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "password-reset": "Twoje hasło zostało zmienione",
-    "logout-successful": "Zostałeś pomyślnie wylogowany",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "recipe-created": "Twój przepis został pomyślnie utworzony",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
   },
   "success": {
-    "login-successful": "Zostałeś pomyślnie zalogowany"
+    "login-successful": "Zostałeś pomyślnie zalogowany",
+    "logout-successful": "Zostałeś pomyślnie wylogowany"
   },
   "warning": {},
   "error": {
-    "login-error": "Niepoprawna nazwa uzytkownika lub hasło",
+    "100": "Wystąpił nieoczekiwany błąd",
+    "102": "Niepoprawna nazwa uzytkownika lub hasło",
     "missing-email": "Email nie może być pusty",
     "missing-username": "Nazwa użytkownika nie może być pusta",
     "missing-password": "Hasło nie może być puste",

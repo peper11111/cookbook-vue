@@ -1,6 +1,6 @@
 <template>
 <div v-if="!loading">
-  <app-navbar v-if="loggedIn"></app-navbar>
+  <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
   <app-snackbar></app-snackbar>
 </div>
@@ -20,6 +20,9 @@ export default {
   computed: {
     loggedIn () {
       return this.$store.state.auth.loggedIn
+    },
+    requiresAuth () {
+      return this.$route.meta.requiresAuth
     }
   },
   created () {
