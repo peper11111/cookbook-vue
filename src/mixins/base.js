@@ -1,3 +1,4 @@
+import config from '@/config'
 import { SHOW_MESSAGE } from '@/store/mutation-types'
 
 export default {
@@ -14,7 +15,7 @@ export default {
       this.$store.commit(SHOW_MESSAGE, { text: message, type: 'error' })
     },
     url (id) {
-      return id ? this.$api.uploads.url(id) : null
+      return id ? config.baseURL + `/uploads/${id}` : null
     },
     fetch () {
       this.loading = true

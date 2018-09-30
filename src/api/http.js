@@ -1,10 +1,11 @@
 import axios from 'axios'
+import config from '@/config'
 import router from '@/router'
 import store from '@/store'
 import { LOGOUT } from '@/store/mutation-types'
 
 const http = axios.create({
-  baseURL: 'http://192.168.0.5:9000/api/v1',
+  baseURL: config.baseURL,
   withCredentials: true
 })
 
