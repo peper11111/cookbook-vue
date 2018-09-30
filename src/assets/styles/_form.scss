@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 230px;
 
   > * {
     margin-bottom: 8px;
@@ -12,13 +11,6 @@
     &:last-child {
       margin-bottom: 0;
     }
-  }
-
-  &__header {
-    font-family: 'Dancing Script', cursive;
-    font-size: 54px;
-    margin-bottom: 24px;
-    letter-spacing: 1px;
   }
 
   &__footer {
@@ -63,17 +55,6 @@
       font-family: 'Roboto', sans-serif;
       color: $color-text-secondary;
       font-size: 12px;
-    }
-  }
-
-  &__submit {
-    color: $color-text;
-    background-color: $color-accent;
-    cursor: pointer;
-
-    &.is-disabled {
-      background-color: $color-accent-light;
-      cursor: default;
     }
   }
 

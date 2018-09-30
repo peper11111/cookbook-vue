@@ -10,9 +10,17 @@
   outline: none;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
+  text-align: center;
   font-size: 14px;
   box-sizing: border-box;
   margin: 0 4px;
+  display: inline-block;
+
+  &--full {
+    display: block;
+    margin: 0;
+    width: 100%;
+  }
 
   &__primary {
     background-color: $color-white;

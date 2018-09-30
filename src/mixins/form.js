@@ -1,7 +1,6 @@
 export default {
   data () {
     return {
-      submitting: false,
       email: '',
       username: '',
       login: '',
@@ -10,15 +9,6 @@ export default {
     }
   },
   methods: {
-    submit () {
-      if (this.submitting) {
-        return
-      }
-      this.submitting = true
-      this.request().finally(() => {
-        this.submitting = false
-      })
-    },
     getPasswordFieldType () {
       return this.passwordVisible ? 'text' : 'password'
     },

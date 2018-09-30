@@ -5,7 +5,7 @@
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
     "resource-not-found": "Strona której szukasz nie istnieje",
-    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
+    "message-resend": "Wiadomość została wysłana ponownie. Sprawdź swoją skrzynkę pocztową.",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
     "user-follow": "Obserwujesz tego użytkownika",
     "user-unfollow": "Już nie obserwujesz tego użytkownika"
@@ -59,7 +59,9 @@
     "reset-password": "Resetuj hasło",
     "generate-password": "Wygeneruj hasło",
     "change-password": "Zmień hasło",
-    "search": "Wyszukaj..."
+    "search": "Wyszukaj...",
+    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym. Jeśli nie możesz znaleść wiadomości w folderze Odebarane sprawdź foler Spam.",
+    "resend-email": "Wyślij ponownie"
   },
   "user": {
     "placeholder": {

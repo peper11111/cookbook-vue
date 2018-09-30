@@ -1,13 +1,15 @@
 <template>
 <div class="o-page o-page--intro">
   <div class="o-page__card">
+    <h1 class="o-page__header">
+      {{ $t('global.app') }}
+    </h1>
+    <div class="o-page__separator"></div>
     <form
-      @submit.prevent="register"
+      v-if="!registered"
+      @submit.prevent="wrap(register)"
       class="o-form"
     >
-      <h1 class="o-form__header">
-        {{ $t('global.app') }}
-      </h1>
       <input
         v-model="email"
         :placeholder="$t('form.email')"
@@ -44,8 +46,9 @@
         {{ $t('form.generate-password') }}
       </p>
       <input
+        :class="{ 'is-disabled': pending }"
         :value="$t('form.register')"
-        class="o-form__submit"
+        class="o-button o-button__accent o-button--full"
         type="submit"
       />
       <p class="o-form__footer">
@@ -58,25 +61,49 @@
         </router-link>
       </p>
     </form>
+    <div v-if="registered">
+      <p class="o-page__message">
+        {{ $t('form.account-activation-email-sent') }}
+      </p>
+      <div
+        :class="{ 'is-disabled': pending }"
+        @click="wrap(registerResend)"
+        class="o-button o-button__accent o-button--full"
+      >
+        {{ $t('form.resend-email') }}
+      </div>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
 import form from '@/mixins/form'
+import requester from '@/mixins/requester'
 
 export default {
   name: 'RegisterPage',
-  mixins: [ form ],
+  mixins: [ form, requester ],
+  data () {
+    return {
+      registered: false
+    }
+  },
   methods: {
     register () {
-      this.$api.auth.register({
+      return this.$api.auth.register({
         email: this.email,
         username: this.username,
         password: this.password
       }).then(() => {
-        this.$notify.info('account-activation-email-sent')
-        this.$router.push('/sign-in')
+        this.registered = true
+      })
+    },
+    registerResend () {
+      return this.$api.auth.registerResend({
+        login: this.username
+      }).then(() => {
+        this.$notify.info('message-resend')
       })
     }
   }

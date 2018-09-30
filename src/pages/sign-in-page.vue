@@ -1,13 +1,14 @@
 <template>
 <div class="o-page o-page--intro">
   <div class="o-page__card">
+    <h1 class="o-page__header">
+      {{ $t('global.app') }}
+    </h1>
+    <div class="o-page__separator"></div>
     <form
-      @submit.prevent="submit"
+      @submit.prevent="wrap(signIn)"
       class="o-form"
     >
-      <h1 class="o-form__header">
-        {{ $t('global.app') }}
-      </h1>
       <input
         v-model="login"
         :placeholder="$t('form.login')"
@@ -38,9 +39,9 @@
         {{ $t('form.forgot-password') }}
       </router-link>
       <input
-        :class="{ 'is-disabled': submitting }"
+        :class="{ 'is-disabled': pending }"
         :value="$t('form.sign-in')"
-        class="o-form__submit"
+        class="o-button o-button__accent o-button--full"
         type="submit"
       />
       <p class="o-form__footer">
@@ -59,13 +60,14 @@
 
 <script>
 import form from '@/mixins/form'
+import requester from '@/mixins/requester'
 import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
 export default {
   name: 'SignInPage',
-  mixins: [ form ],
+  mixins: [ form, requester ],
   methods: {
-    request () {
+    signIn () {
       const formData = new FormData()
       formData.set('login', this.login)
       formData.set('password', this.password)
