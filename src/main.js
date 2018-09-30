@@ -11,11 +11,11 @@ import store from '@/store'
 moment.locale('pl')
 
 Vue.config.productionTip = false
+Vue.prototype.$api = api
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  api,
   i18n,
   router,
   store,
