@@ -22,6 +22,7 @@
     "100": "Wystąpił nieoczekiwany błąd",
     "102": "Niepoprawna nazwa uzytkownika lub hasło",
     "200": "Użytkownik nie istnieje",
+    "402": "Hasło musi zawierać minimum 8 znaków",
     "missing-email": "Email nie może być pusty",
     "missing-username": "Nazwa użytkownika nie może być pusta",
     "missing-password": "Hasło nie może być puste",
