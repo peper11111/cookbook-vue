@@ -70,6 +70,11 @@
     color: $color-text;
     background-color: $color-accent;
     cursor: pointer;
+
+    &.is-disabled {
+      background-color: $color-accent-light;
+      cursor: default;
+    }
   }
 
   &__textarea {

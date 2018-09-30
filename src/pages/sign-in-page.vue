@@ -2,7 +2,7 @@
 <div class="o-page o-page--intro">
   <div class="o-page__card">
     <form
-      @submit.prevent="signIn"
+      @submit.prevent="submit"
       class="o-form"
     >
       <h1 class="o-form__header">
@@ -38,6 +38,7 @@
         {{ $t('form.forgot-password') }}
       </router-link>
       <input
+        :class="{ 'is-disabled': submitting }"
         :value="$t('form.sign-in')"
         class="o-form__submit"
         type="submit"
@@ -64,12 +65,12 @@ export default {
   name: 'SignInPage',
   mixins: [ form ],
   methods: {
-    signIn () {
+    request () {
       const formData = new FormData()
       formData.set('login', this.login)
       formData.set('password', this.password)
 
-      this.$api.auth.login(formData).then(() => {
+      return this.$api.auth.login(formData).then(() => {
         return this.$api.users.current()
       }).then((value) => {
         this.$store.commit(SIGN_IN, value.data)
