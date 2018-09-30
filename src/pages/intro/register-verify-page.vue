@@ -6,7 +6,7 @@
 import requester from '@/mixins/requester'
 
 export default {
-  name: 'VerifyPage',
+  name: 'RegisterVerifyPage',
   mixins: [ requester ],
   created () {
     this.wrap(this.registerVerify)

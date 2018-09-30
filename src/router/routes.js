@@ -46,8 +46,8 @@ export default [
     component: () => import('@/pages/intro/reset-page')
   },
   {
-    path: '/confirm',
-    component: () => import('@/pages/confirm-page')
+    path: '/reset/confirm',
+    component: () => import('@/pages/intro/reset-confirm-page')
   },
   {
     path: '*',

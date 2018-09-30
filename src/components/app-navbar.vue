@@ -9,7 +9,7 @@
       src="/static/logo-light.png"
     />
     <span class="c-app-navbar__brand">
-      {{ $t('app') }}
+      {{ $t('global.app') }}
     </span>
   </router-link>
   <app-search></app-search>

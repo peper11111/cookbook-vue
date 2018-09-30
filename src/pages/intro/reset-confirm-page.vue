@@ -1,13 +1,14 @@
 <template>
 <div class="o-page o-page--intro">
-  <div class="o-page__card">
+  <div class="o-card">
+    <h1 class="o-card__header">
+      {{ $t('global.app') }}
+    </h1>
+    <div class="o-page__separator"></div>
     <form
-      @submit.prevent="confirm"
+      @submit.prevent="wrap(resetConfirm)"
       class="o-form"
     >
-      <h1 class="o-form__header">
-        {{ $t('app') }}
-      </h1>
       <div class="o-form__wrapper">
         <input
           v-model="password"
@@ -32,8 +33,9 @@
         {{ $t('form.generate-password') }}
       </p>
       <input
+        :class="{ 'is-disabled': pending }"
         :value="$t('form.change-password')"
-        class="o-form__submit"
+        class="o-button o-button__accent o-button--full"
         type="submit"
       />
       <p class="o-form__footer">
@@ -51,17 +53,17 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
+import requester from '@/mixins/requester'
 import form from '@/mixins/form'
 
 export default {
-  name: 'ConfirmPage',
-  mixins: [ base, form ],
+  name: 'ResetConfirmPage',
+  mixins: [ form, requester ],
   methods: {
-    confirm () {
-      this.$api.auth.confirm({
+    resetConfirm () {
+      return this.$api.auth.resetConfirm({
         password: this.password,
-        token: this.$route.query.token
+        uuid: this.$route.query.uuid
       }).then(() => {
         this.$notify.success('password-reset')
         this.$router.push('/sign-in')

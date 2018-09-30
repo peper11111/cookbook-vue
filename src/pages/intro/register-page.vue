@@ -89,7 +89,7 @@ export default {
   mixins: [ form, requester ],
   data () {
     return {
-      done: true
+      done: false
     }
   },
   methods: {
