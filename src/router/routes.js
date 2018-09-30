@@ -31,11 +31,15 @@ export default [
   },
   {
     path: '/sign-in',
-    component: () => import('@/pages/sign-in-page')
+    component: () => import('@/pages/intro/sign-in-page')
   },
   {
     path: '/register',
-    component: () => import('@/pages/register-page')
+    component: () => import('@/pages/intro/register-page')
+  },
+  {
+    path: '/register/verify',
+    component: () => import('@/pages/intro/register-verify-page')
   },
   {
     path: '/reset',
@@ -44,10 +48,6 @@ export default [
   {
     path: '/confirm',
     component: () => import('@/pages/confirm-page')
-  },
-  {
-    path: '/verify',
-    component: () => import('@/pages/verify-page')
   },
   {
     path: '*',
