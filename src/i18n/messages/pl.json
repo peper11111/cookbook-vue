@@ -1,4 +1,5 @@
 {
+  "global": {},
   "app": "Cookbook",
   "save": "Zapisz",
   "cancel": "Anuluj",
@@ -57,9 +58,21 @@
       "CUISINE_ITALIAN": "Kuchnia włoska"
     }
   },
+  "info": {
+    "user-verified": "Aktywacja przebiegła pomyślnie",
+    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
+    "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
+    "password-reset": "Twoje hasło zostało zmienione",
+    "logout-successful": "Zostałeś pomyślnie wylogowany",
+    "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
+    "recipe-created": "Twój przepis został pomyślnie utworzony",
+    "user-follow": "Obserwujesz tego użytkownika",
+    "user-unfollow": "Już nie obserwujesz tego użytkownika"
+  },
   "success": {
     "login-successful": "Zostałeś pomyślnie zalogowany"
   },
+  "warning": {},
   "error": {
     "login-error": "Niepoprawna nazwa uzytkownika lub hasło",
     "missing-email": "Email nie może być pusty",
@@ -73,16 +86,5 @@
     "user-not-found": "Użytkownik nie istnieje",
     "user-is-disabled": "Użytkownik nie został aktywowany",
     "file-exceeds-limit": "Plik nie może przekraczać 10MB"
-  },
-  "info": {
-    "user-verified": "Aktywacja przebiegła pomyślnie",
-    "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym",
-    "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasłą",
-    "password-reset": "Twoje hasło zostało zmienione",
-    "logout-successful": "Zostałeś pomyślnie wylogowany",
-    "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
-    "recipe-created": "Twój przepis został pomyślnie utworzony",
-    "user-follow": "Obserwujesz tego użytkownika",
-    "user-unfollow": "Już nie obserwujesz tego użytkownika"
   }
 }
