@@ -1,13 +1,4 @@
 export default class Api {
-  constructor (options) {
-    for (const module in options.modules) {
-      if (!options.modules.hasOwnProperty(module)) {
-        continue
-      }
-      this[module] = options.modules[module]
-    }
-  }
-
   static install (Vue) {
     Vue.mixin({
       beforeCreate () {
@@ -19,5 +10,14 @@ export default class Api {
         }
       }
     })
+  }
+
+  constructor (options) {
+    for (const module in options.modules) {
+      if (!options.modules.hasOwnProperty(module)) {
+        continue
+      }
+      this[module] = options.modules[module]
+    }
   }
 }
