@@ -7,7 +7,7 @@
 
 <script>
 import base from '@/mixins/base'
-import { LOGIN, SET_CUISINES } from '@/store/mutation-types'
+import { LOGIN, SET_CATEGORIES, SET_CUISINES } from '@/store/mutation-types'
 
 export default {
   name: 'App',
@@ -32,6 +32,9 @@ export default {
     request () {
       return this.$api.users.current().then((value) => {
         this.$store.commit(LOGIN, value.data)
+        return this.$api.categories.readAll()
+      }).then((value) => {
+        this.$store.commit(SET_CATEGORIES, value.data)
         return this.$api.cuisines.readAll()
       }).then((value) => {
         this.$store.commit(SET_CUISINES, value.data)

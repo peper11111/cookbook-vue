@@ -20,7 +20,10 @@ export default {
   [MutationTypes.SET_RECIPE] (state, payload) {
     state.recipe = payload
   },
+  [MutationTypes.SET_CATEGORIES] (state, payload) {
+    state.types.categories = payload
+  },
   [MutationTypes.SET_CUISINES] (state, payload) {
-    state.cuisines = payload
+    state.types.cuisines = payload
   }
 }

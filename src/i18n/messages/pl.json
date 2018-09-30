@@ -1,5 +1,7 @@
 {
-  "global": {},
+  "global": {
+    "app": "Cookbook"
+  },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
     "resource-not-found": "Strona której szukasz nie istnieje",

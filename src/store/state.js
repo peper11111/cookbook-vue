@@ -3,8 +3,11 @@ export default {
     loggedIn: localStorage.getItem('loggedIn') === 'true',
     user: {}
   },
+  types: {
+    categories: [],
+    cuisines: []
+  },
   user: {},
   recipes: [],
-  recipe: {},
-  cuisines: []
+  recipe: {}
 }

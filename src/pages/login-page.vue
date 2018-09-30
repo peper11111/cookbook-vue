@@ -2,15 +2,15 @@
 <div class="o-page o-page--intro">
   <div class="o-page__card">
     <form
-      @submit.prevent="login"
+      @submit.prevent="loginUser"
       class="o-form"
     >
       <h1 class="o-form__header">
-        {{ $t('app') }}
+        {{ $t('global.app') }}
       </h1>
       <input
-        v-model="username"
-        :placeholder="$t('form.username-or-email')"
+        v-model="login"
+        :placeholder="$t('form.login')"
         class="o-form__input"
         type="text"
       />
@@ -58,26 +58,29 @@
 
 <script>
 import form from '@/mixins/form'
-import { LOGIN, SET_CUISINES } from '@/store/mutation-types'
+import { LOGIN, SET_CATEGORIES, SET_CUISINES } from '@/store/mutation-types'
 
 export default {
   name: 'LoginPage',
   mixins: [ form ],
   methods: {
-    login () {
+    loginUser () {
       const formData = new FormData()
-      formData.set('username', this.username)
+      formData.set('login', this.login)
       formData.set('password', this.password)
 
       this.$api.auth.login(formData).then(() => {
         return this.$api.users.current()
       }).then((value) => {
         this.$store.commit(LOGIN, value.data)
+        return this.$api.categories.readAll()
+      }).then((value) => {
+        this.$store.commit(SET_CATEGORIES, value.data)
         return this.$api.cuisines.readAll()
       }).then((value) => {
         this.$store.commit(SET_CUISINES, value.data)
-        this.$router.push(this.$route.query.redirect || '/')
         this.$notify.success('login-successful')
+        this.$router.push(this.$route.query.redirect || '/')
       })
     }
   }

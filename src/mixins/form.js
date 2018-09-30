@@ -3,6 +3,7 @@ export default {
     return {
       email: '',
       username: '',
+      login: '',
       password: '',
       passwordVisible: false
     }
