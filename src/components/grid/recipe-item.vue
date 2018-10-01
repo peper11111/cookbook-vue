@@ -50,6 +50,7 @@
 
 <script>
 import moment from 'moment'
+import config from '@/config'
 
 export default {
   name: 'RecipeItem',
@@ -58,7 +59,7 @@ export default {
   },
   computed: {
     backgroundSrc () {
-      return this.recipe.bannerId ? this.$api.uploads.url(this.recipe.bannerId) : '/static/blank-banner.jpg'
+      return this.recipe.bannerId ? `${config.baseURL}/uploads/${this.recipe.bannerId}` : '/static/blank-banner.jpg'
     },
     creationTime () {
       return moment(this.recipe.creationTime).fromNow()
