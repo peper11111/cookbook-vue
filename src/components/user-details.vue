@@ -51,11 +51,11 @@ import { SET_USER, SIGN_IN } from '@/store/mutation-types'
 export default {
   name: 'UserDetails',
   components: {
-    FormInput: () => import('@/components/form-elements/form-input'),
-    FormTextarea: () => import('@/components/form-elements/form-textarea'),
-    ImagePicker: () => import('@/components/form-elements/image-picker'),
-    UserActions: () => import('@/components/user-elements/user-actions'),
-    UserSummary: () => import('@/components/user-elements/user-summary')
+    FormInput: () => import('@/components/form/form-input'),
+    FormTextarea: () => import('@/components/form/form-textarea'),
+    ImagePicker: () => import('@/components/form/image-picker'),
+    UserActions: () => import('@/components/user-actions'),
+    UserSummary: () => import('@/components/user-summary')
   },
   mixins: [ base ],
   data () {
@@ -143,7 +143,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/styles/variables';
+@import '../assets/styles/variables';
 
 .c-user-details {
   &__banner {
@@ -154,7 +154,7 @@ export default {
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 32px 32px 0 32px;
+    padding: 32px 32px 16px;
     box-sizing: border-box;
   }
 

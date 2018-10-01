@@ -1,5 +1,5 @@
 <template>
-<div class="o-page" v-if="!loading">
+<div class="o-page" v-if="!pending">
   <div class="o-page__wrapper">
     <user-details></user-details>
     <div class="o-page__separator"></div>
@@ -9,30 +9,30 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
+import requester from '@/mixins/requester'
 import { SET_RECIPES, SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserPage',
   components: {
     RecipeList: () => import('@/components/recipe-list'),
-    UserDetails: () => import('@/components/user-elements/user-details')
+    UserDetails: () => import('@/components/user-details')
   },
-  mixins: [ base ],
+  mixins: [ requester ],
   computed: {
     userId () {
-      return Number(this.$route.params.id)
+      return this.$route.params.id
     }
   },
   created () {
-    this.fetch()
+    this.wrap(this.fetch)
   },
   methods: {
-    request () {
+    fetch () {
       return this.$api.users.read(this.userId).then((value) => {
         this.$store.commit(SET_USER, value.data)
       }).then(() => {
-        return this.$api.users.recipes(this.userId)
+        return this.$api.users.readRecipes(this.userId)
       }).then((value) => {
         this.$store.commit(SET_RECIPES, value.data)
       })
