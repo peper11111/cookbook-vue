@@ -113,9 +113,9 @@ import base from '@/mixins/base'
 export default {
   name: 'RecipeDetails',
   components: {
-    ImagePicker: () => import('@/components/form/image-picker'),
-    RatingBar: () => import('@/components/form/rating-bar'),
-    TimeInput: () => import('@/components/form/time-input')
+    ImagePicker: () => import('@/components/form-elements/image-picker'),
+    RatingBar: () => import('@/components/form-elements/rating-bar'),
+    TimeInput: () => import('@/components/form-elements/time-input')
   },
   mixins: [ base ],
   data () {
