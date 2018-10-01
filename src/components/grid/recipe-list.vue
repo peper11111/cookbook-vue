@@ -12,7 +12,7 @@
 export default {
   name: 'RecipeList',
   components: {
-    RecipeItem: () => import('@/components/grid-elements/recipe-item')
+    RecipeItem: () => import('@/components/grid/recipe-item')
   },
   computed: {
     recipes () {

@@ -51,9 +51,9 @@ import { SET_USER, SIGN_IN } from '@/store/mutation-types'
 export default {
   name: 'UserDetails',
   components: {
-    FormInput: () => import('@/components/form-elements/form-input'),
-    FormTextarea: () => import('@/components/form-elements/form-textarea'),
-    ImagePicker: () => import('@/components/form-elements/image-picker'),
+    FormInput: () => import('@/components/form/form-input'),
+    FormTextarea: () => import('@/components/form/form-textarea'),
+    ImagePicker: () => import('@/components/form/image-picker'),
     UserActions: () => import('@/components/user-profile/user-actions'),
     UserSummary: () => import('@/components/user-profile/user-summary')
   },
