@@ -54,8 +54,8 @@ export default {
     FormInput: () => import('@/components/form-elements/form-input'),
     FormTextarea: () => import('@/components/form-elements/form-textarea'),
     ImagePicker: () => import('@/components/form-elements/image-picker'),
-    UserActions: () => import('@/components/user-actions'),
-    UserSummary: () => import('@/components/user-summary')
+    UserActions: () => import('@/components/user-profile/user-actions'),
+    UserSummary: () => import('@/components/user-profile/user-summary')
   },
   mixins: [ base ],
   data () {
@@ -143,7 +143,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/variables';
+@import '../../assets/styles/variables';
 
 .c-user-details {
   &__banner {
