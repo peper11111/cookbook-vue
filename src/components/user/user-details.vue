@@ -54,8 +54,8 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
-    UserActions: () => import('@/components/user-profile/user-actions'),
-    UserSummary: () => import('@/components/user-profile/user-summary')
+    UserActions: () => import('@/components/user/user-actions'),
+    UserSummary: () => import('@/components/user/user-summary')
   },
   mixins: [ base ],
   data () {
