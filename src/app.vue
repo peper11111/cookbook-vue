@@ -1,12 +1,12 @@
 <template>
-<div v-if="!loading">
+<div v-if="!pending">
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>
 </template>
 
 <script>
-import base from '@/mixins/base'
+import requester from '@/mixins/requester'
 import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
 export default {
@@ -14,7 +14,7 @@ export default {
   components: {
     AppNavbar: () => import('@/components/app-navbar')
   },
-  mixins: [ base ],
+  mixins: [ requester ],
   computed: {
     loggedIn () {
       return this.$store.state.auth.loggedIn
@@ -25,11 +25,11 @@ export default {
   },
   created () {
     if (this.loggedIn) {
-      this.fetch()
+      this.wrap(this.fetch)
     }
   },
   methods: {
-    request () {
+    fetch () {
       return this.$api.users.current().then((value) => {
         this.$store.commit(SIGN_IN, value.data)
         return this.$api.categories.readAll()
