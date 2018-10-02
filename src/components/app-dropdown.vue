@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     avatarSrc () {
-      return this.authUser.avatarId ? this.$api.uploads.url(this.authUser.avatarId) : '/static/blank-avatar.jpg'
+      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || '/static/blank-avatar.jpg'
     },
     authUser () {
       return this.$store.state.auth.user

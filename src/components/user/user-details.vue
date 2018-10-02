@@ -85,8 +85,8 @@ export default {
   },
   methods: {
     init () {
-      this.avatar = this.url(this.user.avatarId)
-      this.banner = this.url(this.user.bannerId)
+      this.avatar = this.$helpers.thumbnailSrc(this.user.avatarId)
+      this.banner = this.$helpers.imageSrc(this.user.bannerId)
       this.name = this.user.name
       this.biography = this.user.biography
       this.editMode = false

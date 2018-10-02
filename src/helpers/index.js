@@ -2,10 +2,10 @@ import config from '@/config'
 
 export default {
   imageSrc (id) {
-    return `${config.baseURL}/uploads/${id}`
+    return id ? `${config.baseURL}/uploads/${id}` : null
   },
 
   thumbnailSrc (id) {
-    return `${config.baseURL}/uploads/${id}/thumbnail`
+    return id ? `${config.baseURL}/uploads/${id}/thumbnail` : null
   }
 }

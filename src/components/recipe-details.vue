@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     init () {
-      this.banner = this.url(this.recipe.bannerId)
+      this.banner = this.$helpers.imageSrc(this.recipe.bannerId)
       this.title = this.recipe.title
       this.lead = this.recipe.lead
       this.cuisineId = this.recipe.cuisineId

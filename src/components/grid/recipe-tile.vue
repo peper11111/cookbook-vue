@@ -4,7 +4,7 @@
   class="c-recipe-tile"
 >
   <img
-    :src="imageSrc"
+    :src="bannerSrc"
     class="c-recipe-tile__image"
   />
   <div class="c-recipe-tile__overlay">
@@ -25,16 +25,14 @@
 </template>
 
 <script>
-import config from '@/config'
-
 export default {
   name: 'RecipeTile',
   props: {
     recipe: Object
   },
   computed: {
-    imageSrc () {
-      return this.recipe.bannerId ? `${config.baseURL}/uploads/${this.recipe.bannerId}` : '/static/blank-banner.jpg'
+    bannerSrc () {
+      return this.$helpers.thumbnailSrc(this.recipe.bannerId) || '/static/blank-banner.jpg'
     }
   }
 }
