@@ -1,17 +1,19 @@
 export default {
   data () {
     return {
-      pending: false
+      fetching: false,
+      loading: false
     }
   },
   methods: {
-    wrap (request) {
-      if (this.pending) {
+    wrap (request, quick = false) {
+      const flag = quick ? 'fetching' : 'loading'
+      if (this[flag]) {
         return
       }
-      this.pending = true
+      this[flag] = true
       request().finally(() => {
-        this.pending = false
+        this[flag] = false
       })
     }
   }

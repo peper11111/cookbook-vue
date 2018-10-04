@@ -7,7 +7,7 @@
     <div class="o-page__separator"></div>
     <form
       v-if="!done"
-      @submit.prevent="wrap(register)"
+      @submit.prevent="wrap(register, true)"
       class="o-form"
     >
       <input
@@ -46,7 +46,7 @@
         {{ $t('form.generate-password') }}
       </p>
       <input
-        :class="{ 'is-disabled': pending }"
+        :class="{ 'is-disabled': fetching }"
         :value="$t('form.register')"
         class="o-button o-button__accent o-button--full"
         type="submit"
@@ -69,8 +69,8 @@
         {{ $t('form.account-activation-email-sent') }}
       </p>
       <div
-        :class="{ 'is-disabled': pending }"
-        @click="wrap(registerResend)"
+        :class="{ 'is-disabled': fetching }"
+        @click="wrap(registerResend, true)"
         class="o-button o-button__accent o-button--full"
       >
         {{ $t('form.resend-email') }}

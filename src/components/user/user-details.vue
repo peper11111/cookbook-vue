@@ -60,6 +60,7 @@ export default {
   mixins: [ base ],
   data () {
     return {
+      loading: null,
       avatar: null,
       avatarFile: null,
       banner: null,

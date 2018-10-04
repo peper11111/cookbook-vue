@@ -34,13 +34,10 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
-
 const FILE_SIZE_LIMIT = 10485760 // 10MB
 
 export default {
   name: 'ImagePicker',
-  mixins: [ base ],
   props: {
     blank: {
       type: String,

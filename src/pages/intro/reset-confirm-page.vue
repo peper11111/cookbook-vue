@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator"></div>
     <form
-      @submit.prevent="wrap(resetConfirm)"
+      @submit.prevent="wrap(resetConfirm, true)"
       class="o-form"
     >
       <div class="o-form__wrapper">
@@ -33,7 +33,7 @@
         {{ $t('form.generate-password') }}
       </p>
       <input
-        :class="{ 'is-disabled': pending }"
+        :class="{ 'is-disabled': fetching }"
         :value="$t('form.change-password')"
         class="o-button o-button__accent o-button--full"
         type="submit"

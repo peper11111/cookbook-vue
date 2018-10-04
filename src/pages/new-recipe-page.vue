@@ -11,17 +11,17 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
+import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
   name: 'NewRecipeView',
-  mixins: [ base ],
+  mixins: [ requester ],
   components: {
     RecipeDetails: () => import('@/components/recipe-details')
   },
   created () {
-    this.fetch()
+    this.wrap(this.request)
   },
   methods: {
     request () {

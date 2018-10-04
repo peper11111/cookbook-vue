@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator"></div>
     <form
-      @submit.prevent="wrap(signIn)"
+      @submit.prevent="wrap(signIn, true)"
       class="o-form"
     >
       <input
@@ -39,7 +39,7 @@
         {{ $t('form.forgot-password') }}
       </router-link>
       <input
-        :class="{ 'is-disabled': pending }"
+        :class="{ 'is-disabled': fetching }"
         :value="$t('form.sign-in')"
         class="o-button o-button__accent o-button--full"
         type="submit"

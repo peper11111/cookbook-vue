@@ -1,5 +1,5 @@
 <template>
-<div v-if="!pending">
+<div v-if="!loading">
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>
@@ -25,11 +25,11 @@ export default {
   },
   created () {
     if (this.loggedIn) {
-      this.wrap(this.fetch)
+      this.wrap(this.request)
     }
   },
   methods: {
-    fetch () {
+    request () {
       return this.$api.users.current().then((value) => {
         this.$store.commit(SIGN_IN, value.data)
         return this.$api.categories.readAll()

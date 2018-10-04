@@ -7,7 +7,7 @@
     <div class="o-page__separator"></div>
     <form
       v-if="!done"
-      @submit.prevent="wrap(reset)"
+      @submit.prevent="wrap(reset, true)"
       class="o-form"
     >
       <input
@@ -17,7 +17,7 @@
         type="text"
       />
       <input
-        :class="{ 'is-disabled': pending }"
+        :class="{ 'is-disabled': fetching }"
         :value="$t('form.reset-password')"
         class="o-button o-button__accent o-button--full"
         type="submit"
@@ -40,8 +40,8 @@
         {{ $t('form.password-reset-email-sent') }}
       </div>
       <div
-        :class="{ 'is-disabled': pending }"
-        @click="wrap(resetResend)"
+        :class="{ 'is-disabled': fetching }"
+        @click="wrap(resetResend, true)"
         class="o-button o-button__accent o-button--full"
       >
         {{ $t('form.resend-email') }}

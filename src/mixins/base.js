@@ -1,20 +1,9 @@
 import config from '@/config'
 
 export default {
-  data () {
-    return {
-      loading: false
-    }
-  },
   methods: {
     url (id) {
       return id ? config.baseURL + `/uploads/${id}` : null
-    },
-    fetch () {
-      this.loading = true
-      this.request().finally(() => {
-        this.loading = false
-      })
     },
     uploadImg (imgId, imgUrl, imgFile) {
       if (this.url(imgId) === imgUrl) {

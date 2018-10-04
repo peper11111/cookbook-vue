@@ -39,11 +39,8 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
-
 export default {
   name: 'UserActions',
-  mixins: [ base ],
   props: {
     disabled: Boolean,
     editMode: Boolean
