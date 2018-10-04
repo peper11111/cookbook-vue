@@ -40,12 +40,10 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
 import { SIGN_OUT } from '@/store/mutation-types'
 
 export default {
   name: 'AppDropdown',
-  mixins: [ base ],
   data () {
     return {
       visible: false
