@@ -49,8 +49,6 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-recipe-list {
-  margin-bottom: 32px;
-
   &__icons {
     display: flex;
     justify-content: flex-end;

@@ -89,7 +89,6 @@ export default {
 
 .c-app-dropdown {
   position: relative;
-  margin: 0 2px;
 
   &__toggle {
     display: flex;

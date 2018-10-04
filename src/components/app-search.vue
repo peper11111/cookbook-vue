@@ -41,7 +41,7 @@ export default {
 @import '../assets/styles/variables';
 
 .c-app-search {
-  width: 300px;
+  width: 360px;
   margin: 0 16px;
   box-sizing: border-box;
 

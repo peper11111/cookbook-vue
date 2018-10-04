@@ -8,6 +8,7 @@
       class="c-app-navbar__logo"
       src="/static/logo-light.png"
     />
+    <div class="c-app-navbar__separator"></div>
     <span class="c-app-navbar__brand">
       {{ $t('global.app') }}
     </span>
@@ -84,7 +85,6 @@ export default {
   &__logo {
     width: 32px;
     height: 32px;
-    margin-right: 4px;
   }
 
   &__brand {
@@ -95,11 +95,15 @@ export default {
   }
 
   &__item {
-    margin: 0 2px;
+    margin-left: 4px;
     font-size: 0;
     color: $color-primary-light;
     cursor: pointer;
     user-select: none;
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     &:hover, &.is-active {
       color: $color-text;
@@ -109,7 +113,7 @@ export default {
   &__separator {
     width: 1px;
     height: 16px;
-    margin: 0 8px;
+    margin: 0 10px;
     background-color: $color-primary-light;
     box-sizing: border-box;
   }
