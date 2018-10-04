@@ -10,7 +10,8 @@
 
 <script>
 import requester from '@/mixins/requester'
-import { SET_RECIPES, SET_USER } from '@/store/mutation-types'
+import scroll from '@/mixins/scroll'
+import { ADD_RECIPES, REMOVE_RECIPES, SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserPage',
@@ -18,7 +19,7 @@ export default {
     RecipeList: () => import('@/components/grid/recipe-list'),
     UserDetails: () => import('@/components/user/user-details')
   },
-  mixins: [ requester ],
+  mixins: [ requester, scroll ],
   computed: {
     userId () {
       return Number(this.$route.params.id)
@@ -31,10 +32,17 @@ export default {
     request () {
       return this.$api.users.read(this.userId).then((value) => {
         this.$store.commit(SET_USER, value.data)
+        this.$store.commit(REMOVE_RECIPES)
       }).then(() => {
-        return this.$api.users.readRecipes(this.userId)
-      }).then((value) => {
-        this.$store.commit(SET_RECIPES, value.data)
+        return this.fetchRecipes()
+      })
+    },
+    fetchRecipes () {
+      return this.$api.users.readRecipes(this.userId, { page: this.page++ }).then((value) => {
+        this.$store.commit(ADD_RECIPES, value.data)
+        if (value.data.length < 12) {
+          this.done = true
+        }
       })
     }
   }
