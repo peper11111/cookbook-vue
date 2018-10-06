@@ -1,7 +1,6 @@
 {
   "global": {
-    "app": "Cookbook",
-    "recipes": "Przepisy"
+    "app": "Cookbook"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
@@ -64,6 +63,10 @@
     "account-activation-email-sent": "Na podany adres email wysłana została wiadomość z linkiem aktywacyjnym. Jeśli nie możesz znaleźć wiadomości w folderze Odebarane sprawdź foler Spam",
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasła. Jeśli nie możesz znaleźć wiadomości w folderze Odebrane sprawdź folder Spam",
     "resend-email": "Wyślij ponownie"
+  },
+  "grid": {
+    "recipes": "Przepisy",
+    "no-recipes": "Brak przepisów do wyświetlenia"
   },
   "user": {
     "placeholder": {

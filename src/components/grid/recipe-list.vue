@@ -2,7 +2,7 @@
 <div class="c-recipe-list">
   <div class="c-recipe-list__row">
     <h1 class="c-recipe-list__title">
-      {{ $t('global.recipes') }}
+      {{ $t('grid.recipes') }}
     </h1>
     <div class="c-recipe-list__icons">
       <i
@@ -36,6 +36,12 @@
       :recipe="recipe"
     ></recipe-tile>
   </div>
+  <p
+    v-if="recipes.length === 0"
+    class="c-recipe-list__text"
+  >
+    {{ $t('grid.no-recipes') }}
+  </p>
 </div>
 </template>
 
@@ -125,6 +131,11 @@ export default {
 
   &__title {
     font-size: 24px;
+  }
+
+  &__text {
+    margin-top: 18px;
+    text-align: center;
   }
 
   &__icons {
