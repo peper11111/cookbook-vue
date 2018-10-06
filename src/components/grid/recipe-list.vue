@@ -69,7 +69,7 @@ export default {
       return this.mode === mode
     },
     setActiveMode (mode) {
-      this.mode = mode``
+      this.mode = mode
     },
     onScroll () {
       if (this.pending || this.done) {
