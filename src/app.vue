@@ -1,5 +1,5 @@
 <template>
-<div v-if="!loading">
+<div v-if="!pending">
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>
@@ -24,7 +24,7 @@ export default {
   },
   created () {
     if (this.loggedIn) {
-      this.wrap(this.$helpers.fetchGlobalData())
+      this.wrap(this.$helpers.fetchGlobalData)
     }
   }
 }

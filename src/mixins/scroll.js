@@ -13,11 +13,11 @@ export default {
   },
   methods: {
     onScroll () {
-      if (this.fetching || this.done) {
+      if (this.pending || this.done) {
         return
       }
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        this.wrap(this.fetchRecipes, true)
+        this.wrap(this.fetchRecipes)
       }
     }
   }

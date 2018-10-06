@@ -1,5 +1,5 @@
 <template>
-<div class="o-page" v-if="!loading">
+<div class="o-page" v-if="!pending">
   <div class="o-page__wrapper">
     <user-details></user-details>
     <div class="o-page__separator"></div>
@@ -26,10 +26,10 @@ export default {
     }
   },
   created () {
-    this.wrap(this.request)
+    this.wrap(this.fetchUser)
   },
   methods: {
-    request () {
+    fetchUser () {
       return this.$api.users.read(this.userId).then((value) => {
         this.$store.commit(SET_USER, value.data)
         this.$store.commit(REMOVE_RECIPES)

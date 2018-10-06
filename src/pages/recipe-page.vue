@@ -1,6 +1,6 @@
 <template>
 <div
-  v-if="!loading"
+  v-if="!pending"
   class="o-page"
 >
   <div class="o-page__wrapper">
@@ -26,10 +26,10 @@ export default {
     }
   },
   created () {
-    this.wrap(this.request)
+    this.wrap(this.fetchRecipe)
   },
   methods: {
-    request () {
+    fetchRecipe () {
       return this.$api.recipes.read(this.recipeId).then((value) => {
         this.$store.commit(SET_RECIPE, value.data)
       })

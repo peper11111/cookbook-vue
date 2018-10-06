@@ -9,7 +9,7 @@ export default {
   name: 'RegisterVerifyPage',
   mixins: [ requester ],
   created () {
-    this.wrap(this.registerVerify, true)
+    this.wrap(this.registerVerify)
   },
   methods: {
     registerVerify () {
