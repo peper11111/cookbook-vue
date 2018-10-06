@@ -25,6 +25,11 @@
     v-if="isActiveMode('list')"
     class="c-recipe-list__wrapper"
   >
+    <recipe-item
+      v-for="recipe in recipes"
+      :key="recipe.id"
+      :recipe="recipe"
+    ></recipe-item>
   </div>
   <div
     v-if="isActiveMode('grid')"
@@ -52,6 +57,7 @@ import { ADD_RECIPES, REMOVE_RECIPES } from '@/store/mutation-types'
 export default {
   name: 'RecipeList',
   components: {
+    RecipeItem: () => import('@/components/grid/recipe-item'),
     RecipeTile: () => import('@/components/grid/recipe-tile')
   },
   mixins: [ requester ],
