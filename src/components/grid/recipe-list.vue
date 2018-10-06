@@ -2,15 +2,15 @@
 <div class="c-recipe-list">
   <div class="c-recipe-list__icons">
     <i
-      :class="{ 'is-active': mode === 'list' }"
-      @click="mode = 'list'"
+      :class="{ 'is-active': isActiveMode('list') }"
+      @click="setActiveMode('list')"
       class="material-icons c-recipe-list__icon"
     >
       view_list
     </i>
     <i
-      :class="{ 'is-active': mode === 'grid' }"
-      @click="mode = 'grid'"
+      :class="{ 'is-active': isActiveMode('grid') }"
+      @click="setActiveMode('grid')"
       class="material-icons c-recipe-list__icon"
     >
       view_module
@@ -27,19 +27,73 @@
 </template>
 
 <script>
+import requester from '@/mixins/requester'
+import { ADD_RECIPES, REMOVE_RECIPES } from '@/store/mutation-types'
+
 export default {
   name: 'RecipeList',
   components: {
     RecipeTile: () => import('@/components/grid/recipe-tile')
   },
+  mixins: [ requester ],
+  props: {
+    type: String
+  },
   data () {
     return {
-      mode: 'grid'
+      done: false,
+      mode: 'grid',
+      page: 1
     }
   },
   computed: {
     recipes () {
       return this.$store.state.recipes
+    },
+    userId () {
+      return this.$route.params.id
+    }
+  },
+  created () {
+    this.$store.commit(REMOVE_RECIPES)
+    this.wrap(this.fetchRecipes)
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+  },
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.onScroll)
+  },
+  methods: {
+    isActiveMode (mode) {
+      return this.mode === mode
+    },
+    setActiveMode (mode) {
+      this.mode = mode``
+    },
+    onScroll () {
+      if (this.pending || this.done) {
+        return
+      }
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+        this.wrap(this.fetchRecipes)
+      }
+    },
+    fetchRecipes () {
+      return this.getRecipesMethod().then((value) => {
+        this.$store.commit(ADD_RECIPES, value.data)
+        if (value.data.length < 12) {
+          this.done = true
+        }
+      })
+    },
+    getRecipesMethod () {
+      switch (this.type) {
+        case 'user-recipes':
+          return this.$api.users.readRecipes(this.userId, { page: this.page++ })
+        default:
+          return Promise.resolve({ data: [] })
+      }
     }
   }
 }
