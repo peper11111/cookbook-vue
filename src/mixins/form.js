@@ -17,10 +17,11 @@ export default {
     },
     generatePassword () {
       const chars = 'abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPGRSTUVWXYZ1234567890!@#$%^&*()'
-      this.password = ''
+      let password = ''
       for (let i = 0; i < 10; i++) {
-        this.password += chars.charAt(Math.floor(Math.random() * chars.length))
+        password += chars.charAt(Math.floor(Math.random() * chars.length))
       }
+      this.password = password
       this.passwordVisible = true
     }
   }
