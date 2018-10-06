@@ -157,15 +157,15 @@ export default {
   }
 
   &__avatar {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 150px);
+    width: calc(100% - 200px);
     box-sizing: border-box;
     padding-left: 32px;
   }
