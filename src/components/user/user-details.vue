@@ -24,7 +24,6 @@
           :disabled="loading"
           @cancel="init()"
           @edit="editMode = true"
-          @follow="follow()"
           @save="update()"
         ></user-actions>
       </div>
@@ -134,16 +133,6 @@ export default {
         this.$notify.success('profile-update-successful')
         this.loading = false
         this.editMode = false
-      })
-    },
-    follow () {
-      this.loading = true
-      this.$api.users.follow(this.user.id).then(() => {
-        return this.$api.users.read(this.user.id)
-      }).then((value) => {
-        this.$store.commit(SET_USER, value.data)
-        this.$notify.info(this.user.following ? 'user-follow' : 'user-unfollow')
-        this.loading = false
       })
     }
   }

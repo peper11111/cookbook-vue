@@ -26,18 +26,22 @@
   </button>
   <button
     v-if="!canEdit"
-    :class="[ user.following ? 'o-button__primary' : 'o-button__accent', disabled ? 'is-disabled' : '' ]"
-    @click="emitEvent('follow')"
+    :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
+    @click="wrap(follow)"
     class="o-button"
   >
-    {{ user.following ? $t('user.unfollow') : $t('user.follow') }}
+    {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
   </button>
 </div>
 </template>
 
 <script>
+import requester from '@/mixins/requester'
+import { SET_USER } from '@/store/mutation-types'
+
 export default {
   name: 'UserActions',
+  mixins: [ requester ],
   props: {
     disabled: Boolean,
     editMode: Boolean
@@ -59,6 +63,14 @@ export default {
         return
       }
       this.$emit(eventName)
+    },
+    follow () {
+      return this.$api.users.follow(this.user.id).then(() => {
+        return this.$api.users.read(this.user.id)
+      }).then((value) => {
+        this.$store.commit(SET_USER, value.data)
+        this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
+      })
     }
   }
 }
