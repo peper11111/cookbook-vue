@@ -1,6 +1,7 @@
 {
   "global": {
-    "app": "Cookbook"
+    "app": "Cookbook",
+    "recipes": "Przepisy"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",

@@ -1,22 +1,35 @@
 <template>
 <div class="c-recipe-list">
-  <div class="c-recipe-list__icons">
-    <i
-      :class="{ 'is-active': isActiveMode('list') }"
-      @click="setActiveMode('list')"
-      class="material-icons c-recipe-list__icon"
-    >
-      view_list
-    </i>
-    <i
-      :class="{ 'is-active': isActiveMode('grid') }"
-      @click="setActiveMode('grid')"
-      class="material-icons c-recipe-list__icon"
-    >
-      view_module
-    </i>
+  <div class="c-recipe-list__row">
+    <h1 class="c-recipe-list__title">
+      {{ $t('global.recipes') }}
+    </h1>
+    <div class="c-recipe-list__icons">
+      <i
+        :class="{ 'is-active': isActiveMode('list') }"
+        @click="setActiveMode('list')"
+        class="material-icons c-recipe-list__icon"
+      >
+        view_list
+      </i>
+      <i
+        :class="{ 'is-active': isActiveMode('grid') }"
+        @click="setActiveMode('grid')"
+        class="material-icons c-recipe-list__icon"
+      >
+        view_module
+      </i>
+    </div>
   </div>
-  <div class="c-recipe-list__wrapper">
+  <div
+    v-if="isActiveMode('list')"
+    class="c-recipe-list__wrapper"
+  >
+  </div>
+  <div
+    v-if="isActiveMode('grid')"
+    class="c-recipe-list__wrapper"
+  >
     <recipe-tile
       v-for="recipe in recipes"
       :key="recipe.id"
@@ -103,17 +116,31 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-recipe-list {
+  &__row {
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+
   &__icons {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
   }
 
   &__icon {
     color: $color-gray-300;
-    margin-right: 16px;
+    margin-left: 8px;
     cursor: pointer;
     user-select: none;
+
+    &:first-child {
+      margin-left: 0;
+    }
 
     &.is-active {
       color: $color-black;
