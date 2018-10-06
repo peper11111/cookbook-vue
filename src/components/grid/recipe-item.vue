@@ -1,5 +1,6 @@
 <template>
 <router-link
+  :class="{ 'c-recipe-item--grid': grid }"
   :to="`/recipe/${recipe.id}`"
   class="c-recipe-item"
 >
@@ -26,13 +27,13 @@
       {{ recipe.description }}
     </p>
     <div class="c-recipe-item__icons">
-      <i class="material-icons">
+      <i class="material-icons c-recipe-tile__icon">
         thumb_up
       </i>
       <span class="c-recipe-item__value">
         {{ recipe.likesCount || 0 }}
       </span>
-      <i class="material-icons">
+      <i class="material-icons c-recipe-tile__icon">
         chat_bubble
       </i>
       <span class="c-recipe-item__value">
@@ -49,6 +50,7 @@ import moment from 'moment'
 export default {
   name: 'RecipeItem',
   props: {
+    grid: Boolean,
     recipe: Object
   },
   computed: {
@@ -76,6 +78,38 @@ export default {
   margin: 16px;
   text-decoration: none;
   color: $color-text-primary;
+
+  &--grid {
+    width: 300px;
+    position: relative;
+    color: $color-text;
+
+    .c-recipe-item__image {
+      width: 100%;
+    }
+
+    .c-recipe-item__wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .c-recipe-item__author {
+      color: $color-text;
+    }
+
+    .c-recipe-item__description {
+      color: $color-text;
+    }
+  }
 
   &__image {
     width: 50%;
@@ -123,10 +157,10 @@ export default {
     margin-top: auto;
     display: flex;
     align-items: center;
+  }
 
-    .material-icons {
-      font-size: 16px;
-    }
+  &__icon {
+    font-size: 16px;
   }
 
   &__value {
