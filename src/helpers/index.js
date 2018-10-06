@@ -1,7 +1,7 @@
 import api from '@/api'
 import config from '@/config'
 import store from '@/store'
-import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types';
+import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
 export default {
   imageSrc (id) {
