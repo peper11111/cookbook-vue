@@ -3,13 +3,13 @@
   <input
     v-if="!disabled"
     ref="input"
-    @input="setLocalValue($event.target.files[0])"
+    @input="emitInput($event.target.files[0])"
     accept="image/*"
     class="u-hide"
     type="file"
   />
   <img
-    :src="localValue || blank"
+    :src="value || blank"
     class="c-image-uploader__image"
   />
   <div
@@ -22,8 +22,8 @@
     </i>
   </div>
   <div
-    v-if="!disabled && localValue"
-    @click="setLocalValue(null)"
+    v-if="!disabled && value"
+    @click="emitInput(null)"
     class="c-image-uploader__clear"
   >
     <i class="material-icons">
@@ -49,32 +49,22 @@ export default {
     },
     value: String
   },
-  data () {
-    return {
-      localValue: this.value
-    }
-  },
-  watch: {
-    value (val) {
-      this.localValue = val
-    }
-  },
   methods: {
     triggerInput () {
       this.$refs.input.click()
     },
-    setLocalValue (file) {
+    emitInput (file) {
       if (this.disabled) {
         return
       }
+
       if (file && file.size > FILE_SIZE_LIMIT) {
         this.$notify.error('file-exceeds-limit')
         return
       }
-      this.localValue = file
-        ? URL.createObjectURL(file)
-        : null
-      this.$emit('input', this.localValue)
+
+      const value = file ? URL.createObjectURL(file) : null
+      this.$emit('input', value)
       this.$emit('file', file)
     }
   }
