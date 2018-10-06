@@ -1,37 +1,37 @@
 <template>
-<div class="c-app-dropdown">
+<div class="c-navbar-dropdown">
   <div
     @click.stop="toggle"
-    class="c-app-dropdown__toggle"
+    class="c-navbar-dropdown__toggle"
   >
     {{ authUser.username }}
     <img
-      class="c-app-dropdown__avatar"
+      class="c-navbar-dropdown__avatar"
       :src="avatarSrc"
     >
   </div>
   <ul
     :class="{ 'is-visible': visible }"
-    class="c-app-dropdown__list"
+    class="c-navbar-dropdown__list"
   >
     <router-link
       tag="li"
       :to="`/user/${authUser.id}`"
-      class="c-app-dropdown__item"
+      class="c-navbar-dropdown__item"
     >
       {{ $t('navbar.profile') }}
     </router-link>
     <router-link
       tag="li"
       to="/new-recipe"
-      class="c-app-dropdown__item"
+      class="c-navbar-dropdown__item"
     >
       {{ $t('navbar.new-recipe') }}
     </router-link>
-    <li class="c-app-dropdown__separator"></li>
+    <li class="c-navbar-dropdown__separator"></li>
     <li
       @click="signOut"
-      class="c-app-dropdown__item"
+      class="c-navbar-dropdown__item"
     >
       {{ $t('navbar.sign-out') }}
     </li>
@@ -43,7 +43,7 @@
 import { SIGN_OUT } from '@/store/mutation-types'
 
 export default {
-  name: 'AppDropdown',
+  name: 'NavbarDropdown',
   data () {
     return {
       visible: false
@@ -85,7 +85,7 @@ export default {
 @import '../assets/styles/mixins';
 @import '../assets/styles/variables';
 
-.c-app-dropdown {
+.c-navbar-dropdown {
   position: relative;
 
   &__toggle {

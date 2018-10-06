@@ -41,7 +41,7 @@
       </i>
     </router-link>
     <div class="c-app-navbar__separator"></div>
-    <app-dropdown></app-dropdown>
+    <navbar-dropdown></navbar-dropdown>
   </div>
 </nav>
 </template>
@@ -50,8 +50,8 @@
 export default {
   name: 'AppNavbar',
   components: {
-    AppDropdown: () => import('@/components/app-dropdown'),
-    AppSearch: () => import('@/components/app-search')
+    AppSearch: () => import('@/components/app-search'),
+    NavbarDropdown: () => import('@/components/navbar-dropdown')
   }
 }
 </script>
