@@ -1,8 +1,5 @@
 <template>
 <div class="c-user-actions">
-  <h1 class="c-user-actions__username">
-    {{ user.username }}
-  </h1>
   <button
     v-if="editMode"
     :class="{ 'is-disabled': disabled }"
@@ -69,9 +66,7 @@ export default {
 
 <style lang="scss">
 .c-user-actions {
-  &__username {
-    margin-right: 8px;
-    font-size: 24px;
-  }
+  display: flex;
+  align-items: center;
 }
 </style>

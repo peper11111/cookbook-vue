@@ -15,15 +15,19 @@
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
-      <user-actions
-        :editMode="editMode"
-        :disabled="loading"
-        @cancel="init()"
-        @edit="editMode = true"
-        @follow="follow()"
-        @save="update()"
-        class="c-user-details__row"
-      ></user-actions>
+      <div class="c-user-details__row">
+        <h1 class="c-user-details__username">
+          {{ user.username }}
+        </h1>
+        <user-actions
+          :editMode="editMode"
+          :disabled="loading"
+          @cancel="init()"
+          @edit="editMode = true"
+          @follow="follow()"
+          @save="update()"
+        ></user-actions>
+      </div>
       <user-summary class="c-user-details__row"></user-summary>
       <form-input
         v-model="name"
@@ -178,6 +182,11 @@ export default {
     &:last-child {
       margin-bottom: 0;
     }
+  }
+
+  &__username {
+    margin-right: 8px;
+    font-size: 24px;
   }
 }
 </style>
