@@ -27,13 +27,13 @@
       {{ recipe.description }}
     </p>
     <div class="c-recipe-item__icons">
-      <i class="material-icons c-recipe-tile__icon">
+      <i class="material-icons">
         thumb_up
       </i>
       <span class="c-recipe-item__value">
         {{ recipe.likesCount || 0 }}
       </span>
-      <i class="material-icons c-recipe-tile__icon">
+      <i class="material-icons">
         chat_bubble
       </i>
       <span class="c-recipe-item__value">
@@ -157,10 +157,10 @@ export default {
     margin-top: auto;
     display: flex;
     align-items: center;
-  }
 
-  &__icon {
-    font-size: 16px;
+    .material-icons {
+      font-size: 16px;
+    }
   }
 
   &__value {

@@ -8,14 +8,14 @@
       <i
         :class="{ 'is-active': isActiveMode('list') }"
         @click="setActiveMode('list')"
-        class="material-icons c-recipe-list__icon"
+        class="material-icons"
       >
         view_list
       </i>
       <i
         :class="{ 'is-active': isActiveMode('grid') }"
         @click="setActiveMode('grid')"
-        class="material-icons c-recipe-list__icon"
+        class="material-icons"
       >
         view_module
       </i>
@@ -134,20 +134,20 @@ export default {
   &__icons {
     display: flex;
     align-items: center;
-  }
 
-  &__icon {
-    color: $color-gray-300;
-    margin-left: 8px;
-    cursor: pointer;
-    user-select: none;
+    .material-icons {
+      color: $color-gray-300;
+      margin-left: 8px;
+      cursor: pointer;
+      user-select: none;
 
-    &:first-child {
-      margin-left: 0;
-    }
+      &:first-child {
+        margin-left: 0;
+      }
 
-    &.is-active {
-      color: $color-black;
+      &.is-active {
+        color: $color-black;
+      }
     }
   }
 
