@@ -72,9 +72,10 @@ export default {
       formData.set('password', this.password)
 
       return this.$api.auth.login(formData).then(() => {
+        return this.$helpers.fetchGlobalData()
+      }).then(() => {
         this.$notify.success('sign-in-successful')
         this.$router.push(this.$route.query.redirect || '/')
-        return this.$helpers.fetchGlobalData()
       })
     }
   }
