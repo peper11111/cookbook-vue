@@ -10,7 +10,7 @@ export default {
         return
       }
       this.pending = true
-      request().finally(() => {
+      return request().finally(() => {
         this.pending = false
       })
     }
