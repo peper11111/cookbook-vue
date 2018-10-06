@@ -3,7 +3,7 @@
   <input
     v-if="!disabled"
     ref="input"
-    @input="emitInput($event.target.files[0])"
+    @input="emitEvent($event.target.files[0])"
     accept="image/*"
     class="u-hide"
     type="file"
@@ -23,7 +23,7 @@
   </div>
   <div
     v-if="!disabled && value"
-    @click="emitInput(null)"
+    @click="emitEvent(null)"
     class="c-image-uploader__clear"
   >
     <i class="material-icons">
@@ -53,7 +53,7 @@ export default {
     triggerInput () {
       this.$refs.input.click()
     },
-    emitInput (file) {
+    emitEvent (file) {
       if (this.disabled) {
         return
       }

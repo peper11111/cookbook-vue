@@ -3,7 +3,7 @@
   <image-picker
     v-model="banner"
     :disabled="!editMode"
-    @file="bannerFile = $event"
+    @file="setBannerFile"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
@@ -11,7 +11,7 @@
       v-model="avatar"
       blank="/static/blank-avatar.jpg"
       :disabled="!editMode"
-      @file="avatarFile = $event"
+      @file="setAvatarFile"
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
@@ -86,6 +86,12 @@ export default {
     this.init()
   },
   methods: {
+    setBannerFile (file) {
+      this.bannerFile = file
+    },
+    setAvatarFile (file) {
+      this.avatarFile = file
+    },
     init () {
       this.avatar = this.$helpers.thumbnailSrc(this.user.avatarId)
       this.banner = this.$helpers.imageSrc(this.user.bannerId)
