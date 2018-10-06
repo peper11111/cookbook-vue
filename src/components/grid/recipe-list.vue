@@ -62,8 +62,8 @@ export default {
     recipes () {
       return this.$store.state.recipes
     },
-    userId () {
-      return this.$route.params.id
+    user () {
+      return this.$store.state.user
     }
   },
   created () {
@@ -102,7 +102,7 @@ export default {
     getRecipesMethod () {
       switch (this.type) {
         case 'user-recipes':
-          return this.$api.users.readRecipes(this.userId, { page: this.page++ })
+          return this.$api.users.readRecipes(this.user.id, { page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }

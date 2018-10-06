@@ -76,9 +76,6 @@ export default {
     },
     authUser () {
       return this.$store.state.auth.user
-    },
-    userId () {
-      return Number(this.$route.params.id)
     }
   },
   created () {
@@ -100,7 +97,7 @@ export default {
         return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
       }).then((id) => {
         bannerId = id
-        return this.$api.users.modify(this.userId, {
+        return this.$api.users.modify(this.user.id, {
           avatarId: avatarId,
           bannerId: bannerId,
           name: this.name,
@@ -113,10 +110,10 @@ export default {
         if (this.user.avatarId && this.user.avatarId !== avatarId) {
           this.$api.uploads.delete(this.user.avatarId)
         }
-        return this.$api.users.read(this.userId)
+        return this.$api.users.read(this.user.id)
       }).then((value) => {
         this.$store.commit(SET_USER, value.data)
-        if (this.authUser.id === this.userId) {
+        if (this.authUser.id === this.user.id) {
           return this.$api.users.current().then((value) => {
             this.$store.commit(SIGN_IN, value.data)
           })
@@ -131,8 +128,8 @@ export default {
     },
     follow () {
       this.loading = true
-      this.$api.users.follow(this.userId).then(() => {
-        return this.$api.users.read(this.userId)
+      this.$api.users.follow(this.user.id).then(() => {
+        return this.$api.users.read(this.user.id)
       }).then((value) => {
         this.$store.commit(SET_USER, value.data)
         this.$notify.info(this.user.following ? 'user-follow' : 'user-unfollow')

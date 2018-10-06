@@ -47,16 +47,13 @@ export default {
   },
   computed: {
     canEdit () {
-      return this.authUser.id === this.userId
+      return this.authUser.id === this.user.id
     },
     authUser () {
       return this.$store.state.auth.user
     },
     user () {
       return this.$store.state.user
-    },
-    userId () {
-      return Number(this.$route.params.id)
     }
   },
   methods: {
