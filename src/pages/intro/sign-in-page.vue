@@ -61,7 +61,6 @@
 <script>
 import form from '@/mixins/form'
 import requester from '@/mixins/requester'
-import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
 export default {
   name: 'SignInPage',
@@ -73,17 +72,9 @@ export default {
       formData.set('password', this.password)
 
       return this.$api.auth.login(formData).then(() => {
-        return this.$api.users.current()
-      }).then((value) => {
-        this.$store.commit(SIGN_IN, value.data)
-        return this.$api.categories.readAll()
-      }).then((value) => {
-        this.$store.commit(SET_CATEGORIES, value.data)
-        return this.$api.cuisines.readAll()
-      }).then((value) => {
-        this.$store.commit(SET_CUISINES, value.data)
         this.$notify.success('sign-in-successful')
         this.$router.push(this.$route.query.redirect || '/')
+        return this.$helpers.fetchGlobalData()
       })
     }
   }
