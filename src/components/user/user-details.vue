@@ -46,6 +46,7 @@
 
 <script>
 import base from '@/mixins/base'
+import detail from '@/mixins/detail'
 import { SET_USER, SIGN_IN } from '@/store/mutation-types'
 
 export default {
@@ -57,7 +58,7 @@ export default {
     UserActions: () => import('@/components/user/user-actions'),
     UserSummary: () => import('@/components/user/user-summary')
   },
-  mixins: [ base ],
+  mixins: [ base, detail ],
   data () {
     return {
       loading: null,
@@ -66,8 +67,7 @@ export default {
       banner: null,
       bannerFile: null,
       name: null,
-      biography: null,
-      editMode: false
+      biography: null
     }
   },
   computed: {
