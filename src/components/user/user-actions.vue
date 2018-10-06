@@ -58,11 +58,11 @@ export default {
     }
   },
   methods: {
-    emitEvent (eventName) {
+    emitEvent (action) {
       if (this.disabled) {
         return
       }
-      this.$emit(eventName)
+      this.$emit('click', action)
     },
     follow () {
       return this.$api.users.follow(this.user.id).then(() => {

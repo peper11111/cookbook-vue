@@ -21,10 +21,8 @@
         </h1>
         <user-actions
           :editMode="editMode"
-          :disabled="loading"
-          @cancel="init()"
-          @edit="editMode = true"
-          @save="update()"
+          :disabled="pending"
+          @click="handleAction"
         ></user-actions>
       </div>
       <user-summary class="c-user-details__row"></user-summary>
@@ -64,7 +62,6 @@ export default {
   mixins: [ base, detail ],
   data () {
     return {
-      loading: null,
       avatar: null,
       avatarFile: null,
       banner: null,
@@ -81,9 +78,6 @@ export default {
       return this.$store.state.auth.user
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
     setBannerFile (file) {
       this.bannerFile = file
@@ -96,12 +90,10 @@ export default {
       this.banner = this.$helpers.imageSrc(this.user.bannerId)
       this.name = this.user.name
       this.biography = this.user.biography
-      this.editMode = false
     },
-    update () {
-      this.loading = true
+    save () {
       let avatarId, bannerId
-      this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then((id) => {
+      return this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then((id) => {
         avatarId = id
         return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
       }).then((id) => {
@@ -131,8 +123,6 @@ export default {
         }
       }).then(() => {
         this.$notify.success('profile-update-successful')
-        this.loading = false
-        this.editMode = false
       })
     }
   }
