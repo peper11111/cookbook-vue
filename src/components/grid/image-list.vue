@@ -32,15 +32,15 @@
         v-for="image in images"
         :key="image.id"
         :image="image"
-        :selected="selected === image.id"
+        :selected="current === image.id"
         @delete="onDelete(image.id)"
         @select="onSelect(image.id)"
       ></image-item>
     </div>
     <div class="c-image-list__buttons">
       <div
-        :class="{ 'is-disabled': !selected }"
-        @click="$emit('select', selected)"
+        :class="{ 'is-disabled': isDisabled }"
+        @click="$emit('select', current)"
         class="o-button o-button__accent"
       >
         {{ $t('global.select') }}
@@ -67,11 +67,14 @@ export default {
     ImageItem: () => import('@/components/grid/image-item')
   },
   mixins: [ requester ],
+  props: {
+    selected: Number
+  },
   data () {
     return {
       done: false,
       page: 1,
-      selected: null
+      current: this.selected
     }
   },
   computed: {
@@ -80,6 +83,9 @@ export default {
     },
     images () {
       return this.$store.state.images
+    },
+    isDisabled () {
+      return !this.current || this.current === this.selected
     }
   },
   created () {
@@ -112,10 +118,13 @@ export default {
       })
     },
     onSelect (id) {
-      this.selected = id !== this.selected ? id : null
+      this.current = id !== this.current ? id : null
     },
     onDelete (id) {
       if (confirm(this.$t('grid.image-delete'))) {
+        if (this.current === id) {
+          this.current = null
+        }
         this.wrap(this.deleteImage, id)
       }
     },

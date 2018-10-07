@@ -24,6 +24,7 @@
   </div>
   <image-list
     v-if="modalVisible"
+    :selected="value"
     @close="hideModal"
     @select="onSelect"
   ></image-list>
