@@ -18,12 +18,6 @@
         <h1 class="c-user-details__username">
           {{ user.username }}
         </h1>
-        <detail-actions
-          :canEdit="canEdit"
-          :disabled="pending"
-          :editMode="editMode"
-          @click="handleAction"
-        ></detail-actions>
         <button
           v-if="!canEdit"
           :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
@@ -49,6 +43,13 @@
         class="c-user-details__row"
       ></form-textarea>
     </div>
+    <detail-actions
+      :canEdit="canEdit"
+      :disabled="pending"
+      :editMode="editMode"
+      @click="handleAction"
+      class="c-user-details__actions"
+    ></detail-actions>
   </div>
 </div>
 </template>
@@ -148,8 +149,9 @@ export default {
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 32px 32px 16px;
+    padding: 32px;
     box-sizing: border-box;
+    position: relative;
   }
 
   &__avatar {
@@ -179,6 +181,12 @@ export default {
   &__username {
     margin-right: 8px;
     font-size: 24px;
+  }
+
+  &__actions {
+    position: absolute;
+    bottom: 0;
+    right: 32px;
   }
 }
 </style>
