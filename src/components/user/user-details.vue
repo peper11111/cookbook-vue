@@ -45,9 +45,8 @@
 </template>
 
 <script>
-import base from '@/mixins/base'
 import detail from '@/mixins/detail'
-import { SET_USER, SIGN_IN } from '@/store/mutation-types'
+import { SET_USER } from '@/store/mutation-types'
 
 export default {
   name: 'UserDetails',
@@ -58,7 +57,7 @@ export default {
     UserActions: () => import('@/components/user/user-actions'),
     UserSummary: () => import('@/components/user/user-summary')
   },
-  mixins: [ base, detail ],
+  mixins: [ detail ],
   data () {
     return {
       avatarId: null,
@@ -83,25 +82,35 @@ export default {
       this.biography = this.user.biography
     },
     save () {
-      return this.$api.users.modify(this.user.id, {
-        avatarId: this.avatarId,
-        bannerId: this.bannerId,
-        name: this.name,
-        biography: this.biography
-      }).then(() => {
+      const params = this.getParams()
+      return this.$api.users.modify(this.user.id, params).then(() => {
         return this.$api.users.read(this.user.id)
       }).then((value) => {
         this.$store.commit(SET_USER, value.data)
-        if (this.authUser.id === this.user.id) {
-          return this.$api.users.current().then((value) => {
-            this.$store.commit(SIGN_IN, value.data)
-          })
-        } else {
-          return Promise.resolve()
-        }
+        return this.authUser.id === this.user.id
+          ? this.$helpers.fetchCurrentUser()
+          : Promise.resolve()
       }).then(() => {
         this.$notify.success('profile-update-successful')
       })
+    },
+    getParams () {
+      const params = {}
+
+      if (this.avatarId !== this.user.avatarId) {
+        params.avatarId = this.avatarId
+      }
+      if (this.bannerId !== this.user.bannerId) {
+        params.bannerId = this.bannerId
+      }
+      if (this.name !== this.user.name) {
+        params.name = this.name
+      }
+      if (this.biography !== this.user.biography) {
+        params.biography = this.biography
+      }
+
+      return params
     }
   }
 }

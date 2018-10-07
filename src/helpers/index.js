@@ -1,5 +1,6 @@
 import api from '@/api'
 import config from '@/config'
+import helpers from '@/helpers'
 import store from '@/store'
 import { SET_CATEGORIES, SET_CUISINES, SIGN_IN } from '@/store/mutation-types'
 
@@ -11,13 +12,24 @@ export default {
     return id ? `${config.baseURL}/uploads/${id}/thumbnail` : null
   },
   fetchGlobalData () {
+    return helpers.fetchCurrentUser().then(() => {
+      return helpers.fetchCategories()
+    }).then(() => {
+      return helpers.fetchCuisines()
+    })
+  },
+  fetchCurrentUser () {
     return api.users.current().then((value) => {
       store.commit(SIGN_IN, value.data)
-      return api.categories.readAll()
-    }).then((value) => {
+    })
+  },
+  fetchCategories () {
+    return api.categories.readAll().then((value) => {
       store.commit(SET_CATEGORIES, value.data)
-      return api.cuisines.readAll()
-    }).then((value) => {
+    })
+  },
+  fetchCuisines () {
+    return api.cuisines.readAll().then((value) => {
       store.commit(SET_CUISINES, value.data)
     })
   }
