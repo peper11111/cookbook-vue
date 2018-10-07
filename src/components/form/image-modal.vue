@@ -1,19 +1,26 @@
 <template>
 <div
-  @click.stop="emitEvent('close')"
+  @click.stop
   class="c-image-modal"
 >
+  <div
+    @click="$emit('close')"
+    class="c-image-modal__overlay"
+  ></div>
+  <div class="c-image-modal__body">
+    <i
+      @click="$emit('close')"
+      class="material-icons c-image-modal__close"
+    >
+      close
+    </i>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'ImageModal',
-  methods: {
-    emitEvent (type) {
-      this.$emit(type)
-    }
-  }
+  name: 'ImageModal'
 }
 </script>
 
@@ -22,14 +29,45 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-image-modal {
-  @include box-elevation;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 2px;
+  width: 100vw;
+  height: 100vh;
   z-index: 1001;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+  }
+
+  &__body {
+    @include box-elevation;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    bottom: 10%;
+    right: 10%;
+    background-color: $color-white;
+    border-radius: 2px;
+    padding: 16px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 16px;
+    color: $color-text-secondary;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
 }
 </style>
