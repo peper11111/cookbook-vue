@@ -56,7 +56,6 @@
   </div>
   <navbar-dropdown
     v-if="dropdownVisible"
-    @close="hideDropdown"
     class="c-app-navbar__dropdown"
   ></navbar-dropdown>
 </nav>
