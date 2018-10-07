@@ -1,7 +1,11 @@
 <template>
-<div class="c-image-item">
+<div
+  :class="{ 'is-selected': selected }"
+  class="c-image-item"
+>
   <img
     :src="bannerSrc"
+    @click="$emit('select')"
     class="c-image-item__image"
   />
   <div
@@ -20,7 +24,8 @@
 export default {
   name: 'ImageItem',
   props: {
-    image: Object
+    image: Object,
+    selected: Boolean
   },
   computed: {
     bannerSrc () {

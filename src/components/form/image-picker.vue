@@ -30,10 +30,10 @@
       clear
     </i>
   </div>
-  <image-modal
+  <image-list
     v-if="modalVisible"
     @close="hideModal"
-  ></image-modal>
+  ></image-list>
 </div>
 </template>
 
@@ -43,7 +43,7 @@ const FILE_SIZE_LIMIT = 10485760 // 10MB
 export default {
   name: 'ImagePicker',
   components: {
-    ImageModal: () => import('@/components/form/image-modal')
+    ImageList: () => import('@/components/grid/image-list')
   },
   props: {
     blank: {

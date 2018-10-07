@@ -1,6 +1,8 @@
 {
   "global": {
-    "app": "Cookbook"
+    "app": "Cookbook",
+    "select": "Wybierz",
+    "cancel": "Anuluj"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
