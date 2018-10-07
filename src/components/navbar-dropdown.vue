@@ -1,42 +1,27 @@
 <template>
-<div class="c-navbar-dropdown">
-  <div
-    @click.stop="toggle"
-    class="c-navbar-dropdown__toggle"
+<ul class="c-navbar-dropdown">
+  <router-link
+    tag="li"
+    :to="`/user/${authUser.id}`"
+    class="c-navbar-dropdown__item"
   >
-    {{ authUser.username }}
-    <img
-      class="c-navbar-dropdown__avatar"
-      :src="avatarSrc"
-    >
-  </div>
-  <ul
-    :class="{ 'is-visible': visible }"
-    class="c-navbar-dropdown__list"
+    {{ $t('navbar.profile') }}
+  </router-link>
+  <router-link
+    tag="li"
+    to="/new-recipe"
+    class="c-navbar-dropdown__item"
   >
-    <router-link
-      tag="li"
-      :to="`/user/${authUser.id}`"
-      class="c-navbar-dropdown__item"
-    >
-      {{ $t('navbar.profile') }}
-    </router-link>
-    <router-link
-      tag="li"
-      to="/new-recipe"
-      class="c-navbar-dropdown__item"
-    >
-      {{ $t('navbar.new-recipe') }}
-    </router-link>
-    <li class="c-navbar-dropdown__separator"></li>
-    <li
-      @click="wrap(signOut)"
-      class="c-navbar-dropdown__item"
-    >
-      {{ $t('navbar.sign-out') }}
-    </li>
-  </ul>
-</div>
+    {{ $t('navbar.new-recipe') }}
+  </router-link>
+  <li class="c-navbar-dropdown__separator"></li>
+  <li
+    @click="wrap(signOut)"
+    class="c-navbar-dropdown__item"
+  >
+    {{ $t('navbar.sign-out') }}
+  </li>
+</ul>
 </template>
 
 <script>
@@ -46,15 +31,7 @@ import { SIGN_OUT } from '@/store/mutation-types'
 export default {
   name: 'NavbarDropdown',
   mixins: [ requester ],
-  data () {
-    return {
-      visible: false
-    }
-  },
   computed: {
-    avatarSrc () {
-      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || '/static/blank-avatar.jpg'
-    },
     authUser () {
       return this.$store.state.auth.user
     }
@@ -66,12 +43,6 @@ export default {
     window.removeEventListener('click', this.hide)
   },
   methods: {
-    toggle () {
-      this.visible = !this.visible
-    },
-    hide () {
-      this.visible = false
-    },
     signOut () {
       return this.$api.auth.logout().then(() => {
         this.$store.commit(SIGN_OUT)
@@ -88,50 +59,20 @@ export default {
 @import '../assets/styles/variables';
 
 .c-navbar-dropdown {
-  position: relative;
+  @include box-elevation;
+  background-color: $color-white;
+  border-radius: 2px;
 
-  &__toggle {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: $color-text;
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  &__avatar {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    border-radius: 50%;
-    margin-left: 8px;
-  }
-
-  &__list {
-    @include box-elevation;
-    background-color: $color-white;
-    border-radius: 2px;
+  &::before {
+    content: '';
+    display: block;
     position: absolute;
-    top: 38px;
-    right: 0;
-    display: none;
+    top: -10px;
+    right: 10px;
 
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: -10px;
-      right: 10px;
-
-      border: 5px solid transparent;
-      border-bottom-color: $color-white;
-      box-sizing: border-box;
-    }
-
-    &.is-visible {
-      display: block;
-    }
+    border: 5px solid transparent;
+    border-bottom-color: $color-white;
+    box-sizing: border-box;
   }
 
   &__item {

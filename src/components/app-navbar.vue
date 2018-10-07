@@ -2,7 +2,7 @@
 <nav class="c-app-navbar">
   <router-link
     to="/"
-    class="c-app-navbar__row"
+    class="c-app-navbar__row c-app-navbar__row--clickable"
   >
     <img
       class="c-app-navbar__logo"
@@ -41,8 +41,23 @@
       </i>
     </router-link>
     <div class="c-app-navbar__separator"></div>
-    <navbar-dropdown></navbar-dropdown>
+    <div
+      @click.stop="toggleDropdown"
+      class="c-app-navbar__row c-app-navbar__row--clickable"
+    >
+      <span class="c-app-navbar__username">
+      {{ authUser.username }}
+      </span>
+      <img
+        class="c-app-navbar__avatar"
+        :src="avatarSrc"
+      >
+    </div>
   </div>
+  <navbar-dropdown
+    v-if="dropdownVisible"
+    class="c-app-navbar__dropdown"
+  ></navbar-dropdown>
 </nav>
 </template>
 
@@ -52,6 +67,33 @@ export default {
   components: {
     AppSearch: () => import('@/components/app-search'),
     NavbarDropdown: () => import('@/components/navbar-dropdown')
+  },
+  data () {
+    return {
+      dropdownVisible: false
+    }
+  },
+  computed: {
+    avatarSrc () {
+      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || '/static/blank-avatar.jpg'
+    },
+    authUser () {
+      return this.$store.state.auth.user
+    }
+  },
+  mounted () {
+    window.addEventListener('click', this.onClick)
+  },
+  beforeDestroy () {
+    window.removeEventListener('click', this.onClick)
+  },
+  methods: {
+    toggleDropdown () {
+      this.dropdownVisible = !this.dropdownVisible
+    },
+    onClick () {
+      this.dropdownVisible = false
+    }
   }
 }
 </script>
@@ -80,6 +122,11 @@ export default {
     display: flex;
     align-items: center;
     text-decoration: none;
+
+    &--clickable {
+      cursor: pointer;
+      user-select: none;
+    }
   }
 
   &__logo {
@@ -96,7 +143,6 @@ export default {
 
   &__item {
     margin-left: 4px;
-    font-size: 0;
     color: $color-primary-light;
     cursor: pointer;
     user-select: none;
@@ -116,6 +162,26 @@ export default {
     margin: 0 10px;
     background-color: $color-primary-light;
     box-sizing: border-box;
+  }
+
+  &__avatar {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    border-radius: 50%;
+    margin-left: 8px;
+  }
+
+  &__username {
+    font-family: 'Roboto', sans-serif;
+    color: $color-text;
+    font-size: 14px;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 50px;
+    right: 96px;
   }
 }
 </style>
