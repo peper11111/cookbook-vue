@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'FormInput',
+  name: 'FormTextarea',
   props: {
     disabled: Boolean,
     placeholder: String,

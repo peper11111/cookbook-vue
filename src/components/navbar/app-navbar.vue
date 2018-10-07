@@ -56,6 +56,7 @@
   </div>
   <navbar-dropdown
     v-if="dropdownVisible"
+    @click.native.stop
     class="c-app-navbar__dropdown"
   ></navbar-dropdown>
 </nav>
@@ -82,16 +83,16 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('click', this.onClick)
+    window.addEventListener('click', this.hideDropdown)
   },
   beforeDestroy () {
-    window.removeEventListener('click', this.onClick)
+    window.removeEventListener('click', this.hideDropdown)
   },
   methods: {
     toggleDropdown () {
       this.dropdownVisible = !this.dropdownVisible
     },
-    onClick () {
+    hideDropdown () {
       this.dropdownVisible = false
     }
   }

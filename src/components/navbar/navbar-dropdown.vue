@@ -36,12 +36,6 @@ export default {
       return this.$store.state.auth.user
     }
   },
-  mounted () {
-    window.addEventListener('click', this.hide)
-  },
-  beforeDestroy () {
-    window.removeEventListener('click', this.hide)
-  },
   methods: {
     signOut () {
       return this.$api.auth.logout().then(() => {
