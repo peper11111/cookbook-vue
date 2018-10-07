@@ -94,14 +94,26 @@
     "plates": "Ilość porcji",
     "preparation-time": "Czas przygotowania",
     "cuisine": {
-      "CUISINE_AMERICAN": "Kuchnia amerykańska",
-      "CUISINE_ASIAN": "Kuchnia azjatycka",
-      "CUISINE_CZECH": "Kuchnia czeska",
-      "CUISINE_FRENCH": "Kuchnia francuska",
-      "CUISINE_GREEK": "Kuchnia grecka",
       "CUISINE_POLISH": "Kuchnia polska",
+      "CUISINE_ASIAN": "Kuchnia azjatycka",
+      "CUISINE_ITALIAN": "Kuchnia włoska",
+      "CUISINE_HUNGARIAN": "Kuchnia węgierska",
+      "CUISINE_FRENCH": "Kuchnia francuska",
       "CUISINE_SPANISH": "Kuchnia hiszpańska",
-      "CUISINE_ITALIAN": "Kuchnia włoska"
+      "CUISINE_ENGLISH": "Kuchnia angielska",
+      "CUISINE_GREEK": "Kuchnia grecka",
+      "CUISINE_AMERICAN": "Kuchnia amerykańska",
+      "CUISINE_ORIENTAL": "Kuchnia orientalna",
+      "CUISINE_INDIAN": "Kuchnia indyjska",
+      "CUISINE_CHINESE": "Kuchnia chińska",
+      "CUISINE_JAPANESE": "Kuchnia japońska",
+      "CUISINE_THAI": "Kuchnia tajska",
+      "CUISINE_MEXICAN": "Kuchnia meksykańska",
+      "CUISINE_VIETNAMESE": "Kuchnia wietnamska"
+    },
+    "category": {
+      "CATEGORY_DRINK": "Napoje i alkohole",
+      "CATEGORY_SOUP": "Zupy"
     }
   }
 }
