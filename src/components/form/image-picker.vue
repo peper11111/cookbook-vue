@@ -14,7 +14,7 @@
   />
   <div
     v-if="!disabled"
-    @click="triggerInput()"
+    @click="showModal()"
     class="c-image-picker__overlay"
   >
     <i class="material-icons">
@@ -30,6 +30,10 @@
       clear
     </i>
   </div>
+  <image-modal
+    v-if="modalVisible"
+    @close="hideModal"
+  ></image-modal>
 </div>
 </template>
 
@@ -52,6 +56,11 @@ export default {
     },
     value: String
   },
+  data () {
+    return {
+      modalVisible: false
+    }
+  },
   methods: {
     triggerInput () {
       this.$refs.input.click()
@@ -69,6 +78,12 @@ export default {
       const value = file ? URL.createObjectURL(file) : null
       this.$emit('input', value)
       this.$emit('file', file)
+    },
+    showModal () {
+      this.modalVisible = true
+    },
+    hideModal () {
+      this.modalVisible = false
     }
   }
 }

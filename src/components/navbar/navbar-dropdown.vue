@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     emitEvent () {
-      this.$emit('click')
+      this.$emit('close')
     },
     signOut () {
       return this.$api.auth.logout().then(() => {
