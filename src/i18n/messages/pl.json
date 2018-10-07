@@ -113,7 +113,26 @@
     },
     "category": {
       "CATEGORY_DRINK": "Napoje i alkohole",
-      "CATEGORY_SOUP": "Zupy"
+      "CATEGORY_SOUP": "Zupy",
+      "CATEGORY_BREAKFAST": "Śniadanie",
+      "CATEGORY_DINNER": "Obiad",
+      "CATEGORY_SUPPER": "Kolacja",
+      "CATEGORY_PIZZA": "Pizza",
+      "CATEGORY_SNACK": "Przekąski",
+      "CATEGORY_PASTA": "Makarony",
+      "CATEGORY_MAIN_COURSE": "Danie główne",
+      "CATEGORY_APPETIZER": "Przystawki",
+      "CATEGORY_PANCAKE": "Naleśniki",
+      "CATEGORY_FIT": "Dania fit",
+      "CATEGORY_GRILL": "Dania z grilla",
+      "CATEGORY_CHICKEN": "Dania z kurczaka",
+      "CATEGORY_FISH": "Ryby",
+      "CATEGORY_SALAD": "Sałatki",
+      "CATEGORY_CAKE": "Ciasta",
+      "CATEGORY_DESSERT": "Desery",
+      "CATEGORY_BREAD": "Pieczywo",
+      "CATEGORY_SAUCE": "Sosy",
+      "CATEGORY_CASSEROLE": "Zapiekanki"
     }
   }
 }
