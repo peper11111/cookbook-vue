@@ -14,13 +14,17 @@
     >
       close
     </i>
+    <image-list></image-list>
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'ImageModal'
+  name: 'ImageModal',
+  components: {
+    ImageList: () => import('@/components/grid/image-list')
+  }
 }
 </script>
 
@@ -54,7 +58,7 @@ export default {
     right: 10%;
     background-color: $color-white;
     border-radius: 2px;
-    padding: 16px;
+    padding: 32px 16px;
   }
 
   &__close {

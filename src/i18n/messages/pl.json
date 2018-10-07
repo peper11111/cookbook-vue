@@ -66,7 +66,9 @@
   },
   "grid": {
     "recipes": "Przepisy",
-    "no-recipes": "Brak przepisów do wyświetlenia"
+    "no-recipes": "Brak przepisów do wyświetlenia",
+    "images": "Obrazy",
+    "image-delete": "Czy napewno chcesz usunąć ten obrazek?"
   },
   "user": {
     "placeholder": {
