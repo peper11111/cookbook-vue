@@ -1,5 +1,8 @@
 <template>
-<ul class="c-navbar-dropdown">
+<ul
+  @click.stop="emitEvent"
+  class="c-navbar-dropdown"
+>
   <router-link
     tag="li"
     :to="`/user/${authUser.id}`"
@@ -37,6 +40,9 @@ export default {
     }
   },
   methods: {
+    emitEvent () {
+      this.$emit('click')
+    },
     signOut () {
       return this.$api.auth.logout().then(() => {
         this.$store.commit(SIGN_OUT)
@@ -56,6 +62,7 @@ export default {
   @include box-elevation;
   background-color: $color-white;
   border-radius: 2px;
+  user-select: none;
 
   &::before {
     content: '';
