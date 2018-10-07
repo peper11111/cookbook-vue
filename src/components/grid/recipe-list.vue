@@ -155,7 +155,6 @@ export default {
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
 }
 </style>

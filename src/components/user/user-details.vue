@@ -1,17 +1,16 @@
 <template>
 <div class="c-user-details">
   <image-picker
-    v-model="banner"
+    v-model="bannerId"
+    blank="/static/blank-banner.jpg"
     :disabled="!editMode"
-    @file="setBannerFile"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
-      v-model="avatar"
+      v-model="avatarId"
       blank="/static/blank-avatar.jpg"
       :disabled="!editMode"
-      @file="setAvatarFile"
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
@@ -62,10 +61,8 @@ export default {
   mixins: [ base, detail ],
   data () {
     return {
-      avatar: null,
-      avatarFile: null,
-      banner: null,
-      bannerFile: null,
+      avatarId: null,
+      bannerId: null,
       name: null,
       biography: null
     }
@@ -79,38 +76,19 @@ export default {
     }
   },
   methods: {
-    setBannerFile (file) {
-      this.bannerFile = file
-    },
-    setAvatarFile (file) {
-      this.avatarFile = file
-    },
     init () {
-      this.avatar = this.$helpers.thumbnailSrc(this.user.avatarId)
-      this.banner = this.$helpers.imageSrc(this.user.bannerId)
+      this.avatarId = this.user.avatarId
+      this.bannerId = this.user.bannerId
       this.name = this.user.name
       this.biography = this.user.biography
     },
     save () {
-      let avatarId, bannerId
-      return this.uploadImg(this.user.avatarId, this.avatar, this.avatarFile).then((id) => {
-        avatarId = id
-        return this.uploadImg(this.user.bannerId, this.banner, this.bannerFile)
-      }).then((id) => {
-        bannerId = id
-        return this.$api.users.modify(this.user.id, {
-          avatarId: avatarId,
-          bannerId: bannerId,
-          name: this.name,
-          biography: this.biography
-        })
+      return this.$api.users.modify(this.user.id, {
+        avatarId: this.avatarId,
+        bannerId: this.bannerId,
+        name: this.name,
+        biography: this.biography
       }).then(() => {
-        if (this.user.bannerId && this.user.bannerId !== bannerId) {
-          this.$api.uploads.delete(this.user.bannerId)
-        }
-        if (this.user.avatarId && this.user.avatarId !== avatarId) {
-          this.$api.uploads.delete(this.user.avatarId)
-        }
         return this.$api.users.read(this.user.id)
       }).then((value) => {
         this.$store.commit(SET_USER, value.data)

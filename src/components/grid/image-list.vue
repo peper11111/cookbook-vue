@@ -40,6 +40,7 @@
     <div class="c-image-list__buttons">
       <div
         :class="{ 'is-disabled': !selected }"
+        @click="$emit('select', selected)"
         class="o-button o-button__accent"
       >
         {{ $t('global.select') }}

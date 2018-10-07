@@ -1,20 +1,12 @@
 <template>
 <div class="c-image-picker">
-  <input
-    v-if="!disabled"
-    ref="input"
-    @input="emitEvent($event.target.files[0])"
-    accept="image/*"
-    class="u-hide"
-    type="file"
-  />
   <img
-    :src="value || blank"
+    :src="bannerSrc"
     class="c-image-picker__image"
   />
   <div
     v-if="!disabled"
-    @click="showModal()"
+    @click="showModal"
     class="c-image-picker__overlay"
   >
     <i class="material-icons">
@@ -23,7 +15,7 @@
   </div>
   <div
     v-if="!disabled && value"
-    @click="emitEvent(null)"
+    @click="onSelect(null)"
     class="c-image-picker__clear"
   >
     <i class="material-icons">
@@ -33,51 +25,36 @@
   <image-list
     v-if="modalVisible"
     @close="hideModal"
+    @select="onSelect"
   ></image-list>
 </div>
 </template>
 
 <script>
-const FILE_SIZE_LIMIT = 10485760 // 10MB
-
 export default {
   name: 'ImagePicker',
   components: {
     ImageList: () => import('@/components/grid/image-list')
   },
   props: {
-    blank: {
-      type: String,
-      default: '/static/blank-banner.jpg'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    value: String
+    blank: String,
+    disabled: Boolean,
+    value: Number
   },
   data () {
     return {
       modalVisible: false
     }
   },
+  computed: {
+    bannerSrc () {
+      return this.$helpers.imageSrc(this.value) || this.blank
+    }
+  },
   methods: {
-    triggerInput () {
-      this.$refs.input.click()
-    },
-    emitEvent (file) {
-      if (this.disabled) {
-        return
-      }
-
-      if (file && file.size > FILE_SIZE_LIMIT) {
-        this.$notify.error('file-exceeds-limit')
-        return
-      }
-
-      const value = file ? URL.createObjectURL(file) : null
-      this.$emit('input', value)
-      this.$emit('file', file)
+    onSelect (id) {
+      this.hideModal()
+      this.$emit('input', id)
     },
     showModal () {
       this.modalVisible = true
