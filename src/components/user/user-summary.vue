@@ -1,19 +1,19 @@
 <template>
 <div class="c-user-summary">
   <span class="c-user-summary__value">
-    {{ user.recipes || 0 }}
+    {{ user.recipesCount || 0 }}
   </span>
   <span class="c-user-summary__label">
     {{ $t('user.recipes') }}
   </span>
   <span class="c-user-summary__value">
-    {{ user.followers || 0 }}
+    {{ user.followersCount || 0 }}
   </span>
   <span class="c-user-summary__label">
     {{ $t('user.followers') }}
   </span>
   <span class="c-user-summary__value">
-    {{ user.followed || 0 }}
+    {{ user.followedCount || 0 }}
   </span>
   <span class="c-user-summary__label">
     {{ $t('user.followed') }}
