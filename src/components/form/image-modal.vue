@@ -52,10 +52,12 @@ export default {
   &__body {
     @include box-elevation;
     position: absolute;
-    top: 10%;
-    left: 10%;
-    bottom: 10%;
-    right: 10%;
+    width: 1000px;
+    left: 0;
+    right: 0;
+    top: 5%;
+    bottom: 5%;
+    margin: auto;
     background-color: $color-white;
     border-radius: 2px;
     padding: 32px 16px;

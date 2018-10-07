@@ -37,8 +37,8 @@ export default {
 .c-image-item {
   @include box-elevation;
   @include box-elevation-hover;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   margin: 16px;
   cursor: pointer;
   position: relative;

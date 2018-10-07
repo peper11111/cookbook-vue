@@ -8,6 +8,21 @@
     ref="wrapper"
     class="c-image-list__wrapper"
   >
+    <input
+      ref="input"
+      @input="onInput($event.target.files[0])"
+      accept="image/*"
+      class="u-hide"
+      type="file"
+    />
+    <div
+      @click="triggerInput"
+      class="c-image-list__new"
+    >
+      <i class="material-icons">
+        add_circle_outline
+      </i>
+    </div>
     <image-item
       v-for="image in images"
       :key="image.id"
@@ -53,6 +68,9 @@ export default {
       this.$store.commit(REMOVE_IMAGES)
       return this.fetchImages()
     },
+    triggerInput () {
+      this.$refs.input.click()
+    },
     onScroll () {
       if (this.pending || this.done) {
         return
@@ -76,6 +94,23 @@ export default {
     },
     deleteImage (id) {
       return this.$api.uploads.delete(id).then(() => {
+        this.$notify.success('image-deleted')
+        return this.init()
+      })
+    },
+    onInput (file) {
+      if (file && file.size > config.maxFileSize) {
+        this.$notify.error('file-exceeds-limit')
+        return
+      }
+      this.$refs.input.value = null
+      this.wrap(this.uploadImage, file)
+    },
+    uploadImage (file) {
+      const formData = new FormData()
+      formData.set('file', file)
+      return this.$api.uploads.create(formData).then(() => {
+        this.$notify.success('image-created')
         return this.init()
       })
     }
@@ -84,6 +119,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
+
 .c-image-list {
   height: 100%;
 
@@ -97,6 +135,23 @@ export default {
     flex-wrap: wrap;
     height: calc(100% - 24px);
     overflow-y: auto;
+  }
+
+  &__new {
+    @include box-elevation;
+    @include box-elevation-hover;
+    width: 200px;
+    height: 200px;
+    margin: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .material-icons {
+      font-size: 64px;
+      color: $color-text-primary;
+    }
   }
 }
 </style>

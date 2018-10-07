@@ -111,7 +111,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  min-width: 720px;
+  min-width: 1000px;
   height: $navbar-height;
   z-index: 1000;
   padding: 0 96px;
