@@ -1,5 +1,5 @@
 <template>
-<div class="c-image-uploader">
+<div class="c-image-picker">
   <input
     v-if="!disabled"
     ref="input"
@@ -10,12 +10,12 @@
   />
   <img
     :src="value || blank"
-    class="c-image-uploader__image"
+    class="c-image-picker__image"
   />
   <div
     v-if="!disabled"
     @click="triggerInput()"
-    class="c-image-uploader__overlay"
+    class="c-image-picker__overlay"
   >
     <i class="material-icons">
       camera_alt
@@ -24,7 +24,7 @@
   <div
     v-if="!disabled && value"
     @click="emitEvent(null)"
-    class="c-image-uploader__clear"
+    class="c-image-picker__clear"
   >
     <i class="material-icons">
       clear
@@ -78,7 +78,7 @@ export default {
 @import '../../assets/styles/variables';
 @import '../../assets/styles/mixins';
 
-.c-image-uploader {
+.c-image-picker {
   position: relative;
   user-select: none;
 
