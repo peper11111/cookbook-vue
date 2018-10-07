@@ -2,6 +2,8 @@
   "global": {
     "app": "Cookbook",
     "select": "Wybierz",
+    "save": "Zapisz",
+    "edit": "Edytuj",
     "cancel": "Anuluj"
   },
   "info": {
@@ -39,10 +41,6 @@
     "user-is-disabled": "Użytkownik nie został aktywowany",
     "file-exceeds-limit": "Plik nie może przekraczać 10MB"
   },
-  "save": "Zapisz",
-  "cancel": "Anuluj",
-  "edit": "Edytuj",
-  "no-info": "Brak informacji",
   "navbar": {
     "profile": "Wyświetl profil",
     "new-recipe": "Dodaj przepis",

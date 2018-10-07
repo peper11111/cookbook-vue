@@ -1,5 +1,5 @@
 <template>
-<div class="c-user-actions">
+<div class="c-recipe-actions">
   <button
     v-if="editMode"
     :class="{ 'is-disabled': disabled }"
@@ -24,37 +24,25 @@
   >
     {{ $t('global.edit') }}
   </button>
-  <button
-    v-if="!canEdit"
-    :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
-    @click="wrap(follow)"
-    class="o-button"
-  >
-    {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
-  </button>
 </div>
 </template>
 
 <script>
-import requester from '@/mixins/requester'
-import { SET_USER } from '@/store/mutation-types'
-
 export default {
-  name: 'UserActions',
-  mixins: [ requester ],
+  name: 'RecipeActions',
   props: {
     disabled: Boolean,
     editMode: Boolean
   },
   computed: {
     canEdit () {
-      return this.authUser.id === this.user.id
+      return this.authUser.id === this.recipe.author.id
     },
     authUser () {
       return this.$store.state.auth.user
     },
-    user () {
-      return this.$store.state.user
+    recipe () {
+      return this.$store.state.recipe
     }
   },
   methods: {
@@ -63,21 +51,13 @@ export default {
         return
       }
       this.$emit('click', action)
-    },
-    follow () {
-      return this.$api.users.follow(this.user.id).then(() => {
-        return this.$api.users.read(this.user.id)
-      }).then((value) => {
-        this.$store.commit(SET_USER, value.data)
-        this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
-      })
     }
   }
 }
 </script>
 
 <style lang="scss">
-.c-user-actions {
+.c-recipe-actions {
   display: flex;
   align-items: center;
 }

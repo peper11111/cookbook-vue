@@ -80,45 +80,27 @@
         :disabled="!editMode"
       ></time-input>
     </label>
-    <div class="c-recipe-details__buttons">
-      <button
-        v-if="editMode"
-        @click="update()"
-        class="o-button o-button__accent"
-      >
-        {{ $t('save')}}
-      </button>
-      <button
-        v-if="editMode"
-        @click="init()"
-        class="o-button o-button__primary"
-      >
-        {{ $t('cancel') }}
-      </button>
-      <button
-        v-if="!editMode"
-        @click="editMode = true"
-        class="o-button o-button__primary"
-      >
-        {{ $t('edit') }}
-      </button>
-    </div>
+    <recipe-actions
+      :editMode="editMode"
+      :disabled="pending"
+      @click="handleAction"
+    ></recipe-actions>
   </div>
 </div>
 </template>
 
 <script>
-import base from '@/mixins/base'
 import detail from '@/mixins/detail'
 
 export default {
   name: 'RecipeDetails',
   components: {
+    RecipeActions: () => import('@/components/recipe/recipe-actions'),
     ImagePicker: () => import('@/components/form/image-picker'),
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
   },
-  mixins: [ base, detail ],
+  mixins: [ detail ],
   data () {
     return {
       bannerId: null,
@@ -147,9 +129,8 @@ export default {
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
       this.preparationTime = this.recipe.preparationTime
-      this.editMode = false
     },
-    update () {
+    save () {
       return this.$api.recipes.create({
         bannerId: this.bannerId,
         title: this.title,
@@ -205,10 +186,6 @@ export default {
 
   &__value {
     width: 178px;
-  }
-
-  &__buttons {
-    margin-top: 64px;
   }
 }
 </style>
