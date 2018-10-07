@@ -30,7 +30,7 @@
     </router-link>
     <li class="c-navbar-dropdown__separator"></li>
     <li
-      @click="signOut"
+      @click="wrap(signOut)"
       class="c-navbar-dropdown__item"
     >
       {{ $t('navbar.sign-out') }}
@@ -40,10 +40,12 @@
 </template>
 
 <script>
+import requester from '@/mixins/requester'
 import { SIGN_OUT } from '@/store/mutation-types'
 
 export default {
   name: 'NavbarDropdown',
+  mixins: [ requester ],
   data () {
     return {
       visible: false
@@ -71,7 +73,7 @@ export default {
       this.visible = false
     },
     signOut () {
-      this.$api.auth.logout().then(() => {
+      return this.$api.auth.logout().then(() => {
         this.$store.commit(SIGN_OUT)
         this.$notify.success('sign-out-successful')
         this.$router.push('/sign-in')

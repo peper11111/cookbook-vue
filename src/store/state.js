@@ -8,6 +8,7 @@ export default {
     cuisines: []
   },
   user: {},
+  recipe: {},
   recipes: [],
-  recipe: {}
+  images: []
 }
