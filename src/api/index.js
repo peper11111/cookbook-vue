@@ -46,6 +46,7 @@ export default {
     read: (id) => http.get(`/users/${id}`),
     modify: (id, data) => http.patch(`/users/${id}`, data),
     follow: (id) => http.post(`/users/${id}/follow`),
+    readImages: (id, params) => http.get(`/users/${id}/images`, { params: params }),
     readRecipes: (id, params) => http.get(`/users/${id}/recipes`, { params: params }),
     readFavourites: (id, params) => http.get(`/users/${id}/favourites`, { params: params })
   }
