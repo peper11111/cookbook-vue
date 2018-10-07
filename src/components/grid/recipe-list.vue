@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import config from '@/config'
 import requester from '@/mixins/requester'
 import { ADD_RECIPES, REMOVE_RECIPES } from '@/store/mutation-types'
 
@@ -94,7 +95,7 @@ export default {
     fetchRecipes () {
       return this.getRecipesMethod().then((value) => {
         this.$store.commit(ADD_RECIPES, value.data)
-        if (value.data.length < 12) {
+        if (value.data.length < config.pageSize) {
           this.done = true
         }
       })
