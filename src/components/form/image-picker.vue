@@ -38,6 +38,9 @@ const FILE_SIZE_LIMIT = 10485760 // 10MB
 
 export default {
   name: 'ImagePicker',
+  components: {
+    ImageModal: () => import('@/components/form/image-modal')
+  },
   props: {
     blank: {
       type: String,
