@@ -1,5 +1,5 @@
 <template>
-<div class="c-recipe-actions">
+<div class="c-detail-actions">
   <button
     v-if="editMode"
     :class="{ 'is-disabled': disabled }"
@@ -29,21 +29,11 @@
 
 <script>
 export default {
-  name: 'RecipeActions',
+  name: 'DetailActions',
   props: {
+    canEdit: Boolean,
     disabled: Boolean,
     editMode: Boolean
-  },
-  computed: {
-    canEdit () {
-      return this.authUser.id === this.recipe.author.id
-    },
-    authUser () {
-      return this.$store.state.auth.user
-    },
-    recipe () {
-      return this.$store.state.recipe
-    }
   },
   methods: {
     emitEvent (action) {
@@ -57,7 +47,7 @@ export default {
 </script>
 
 <style lang="scss">
-.c-recipe-actions {
+.c-detail-actions {
   display: flex;
   align-items: center;
 }

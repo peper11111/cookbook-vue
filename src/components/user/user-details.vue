@@ -18,11 +18,20 @@
         <h1 class="c-user-details__username">
           {{ user.username }}
         </h1>
-        <user-actions
-          :editMode="editMode"
+        <detail-actions
+          :canEdit="canEdit"
           :disabled="pending"
+          :editMode="editMode"
           @click="handleAction"
-        ></user-actions>
+        ></detail-actions>
+        <button
+          v-if="!canEdit"
+          :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
+          @click="wrap(follow)"
+          class="o-button"
+        >
+          {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
+        </button>
       </div>
       <user-summary class="c-user-details__row"></user-summary>
       <form-input
@@ -51,10 +60,10 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserDetails',
   components: {
+    DetailActions: () => import('@/components/detail-actions'),
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
-    UserActions: () => import('@/components/user/user-actions'),
     UserSummary: () => import('@/components/user/user-summary')
   },
   mixins: [ detail ],
@@ -67,11 +76,14 @@ export default {
     }
   },
   computed: {
-    user () {
-      return this.$store.state.user
+    canEdit () {
+      return this.authUser.id === this.user.id
     },
     authUser () {
       return this.$store.state.auth.user
+    },
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {
@@ -111,6 +123,14 @@ export default {
       }
 
       return params
+    },
+    follow () {
+      return this.$api.users.follow(this.user.id).then(() => {
+        return this.$api.users.read(this.user.id)
+      }).then((value) => {
+        this.$store.commit(SET_USER, value.data)
+        this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
+      })
     }
   }
 }

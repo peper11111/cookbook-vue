@@ -80,11 +80,12 @@
         :disabled="!editMode"
       ></time-input>
     </label>
-    <recipe-actions
-      :editMode="editMode"
+    <detail-actions
+      :canEdit="canEdit"
       :disabled="pending"
+      :editMode="editMode"
       @click="handleAction"
-    ></recipe-actions>
+    ></detail-actions>
   </div>
 </div>
 </template>
@@ -95,7 +96,7 @@ import detail from '@/mixins/detail'
 export default {
   name: 'RecipeDetails',
   components: {
-    RecipeActions: () => import('@/components/recipe/recipe-actions'),
+    DetailActions: () => import('@/components/detail-actions'),
     ImagePicker: () => import('@/components/form/image-picker'),
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
@@ -113,6 +114,12 @@ export default {
     }
   },
   computed: {
+    canEdit () {
+      return this.authUser.id === this.recipe.author.id
+    },
+    authUser () {
+      return this.$store.state.auth.user
+    },
     cuisines () {
       return this.$store.state.cuisines
     },
