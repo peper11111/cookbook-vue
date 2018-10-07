@@ -172,10 +172,6 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   &__username {

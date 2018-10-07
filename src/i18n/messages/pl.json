@@ -18,7 +18,7 @@
     "sign-out-successful": "Zostałeś pomyślnie wylogowany",
     "password-reset": "Twoje hasło zostało zmienione",
     "user-verified": "Aktywacja przebiegła pomyślnie",
-    "recipe-created": "Twój przepis został pomyślnie utworzony",
+    "recipe-update-successful": "Twój przepis został pomyślnie zaktualizowany",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "image-created": "Nowy obraz został pomyślnie dodany",
     "image-deleted": "Wybrany obraz został pomyślnie usunięty"
@@ -86,9 +86,10 @@
   "recipe": {
     "placeholder": {
       "title": "Podaj tytuł twojego przepisu",
-      "lead": "Krótko podsumuj czego dotyczyć będzie przepis"
+      "description": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
     "cuisine-type": "Typ kuchni",
+    "category-type": "Kategoria",
     "difficulty": "Poziom trudności",
     "plates": "Ilość porcji",
     "preparation-time": "Czas przygotowania",

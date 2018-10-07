@@ -12,10 +12,10 @@ export default {
     state.auth.user = {}
   },
   [MutationTypes.SET_CATEGORIES] (state, payload) {
-    state.types.categories = payload
+    state.categories = payload
   },
   [MutationTypes.SET_CUISINES] (state, payload) {
-    state.types.cuisines = payload
+    state.cuisines = payload
   },
   [MutationTypes.SET_USER] (state, payload) {
     state.user = payload

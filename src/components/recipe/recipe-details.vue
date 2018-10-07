@@ -7,107 +7,139 @@
     class="c-recipe-details__banner"
   ></image-picker>
   <div class="c-recipe-details__wrapper">
-    <input
-      v-if="editMode"
-      v-model="title"
-      :placeholder="$t('recipe.placeholder.title')"
-      class="o-form__input"
-    />
-    <h1
-      v-if="!editMode"
-      class="c-recipe-details__title"
-    >
-      {{ title }}
-    </h1>
-    <textarea
-      v-if="editMode"
-      v-model="lead"
-      :placeholder="$t('recipe.placeholder.lead')"
-      class="o-form__textarea"
-      rows="3"
-      maxlength="255"
-    ></textarea>
-    <p
-      v-if="!editMode"
-      class="c-recipe-details__lead"
-    >
-      {{ lead }}
-    </p>
-    <label class="c-recipe-details__item">
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.cuisine-type') }}
-      </span>
-      <select
-        v-model="cuisineId"
-        :placeholder="'test'"
-        class="c-recipe-details__value o-form__select"
+    <div class="c-recipe-details__row">
+      <router-link
+        :to="`/user/${recipe.author.id}`"
+        class="c-recipe-details__author"
       >
-        <option
-          v-for="item in cuisines"
-          :key="item.id"
-          :value="item.id"
-          :selected="cuisineId === item.id"
-        >
-          {{ $t(`recipe.cuisine.${item.name}`) }}
-        </option>
-      </select>
-    </label>
-    <label class="c-recipe-details__item">
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.difficulty') }}
+        {{ recipe.author.username }}
+      </router-link>
+      <span class="c-recipe-details__time">
+        {{ creationTime }}
       </span>
-      <rating-bar
-        v-model="difficulty"
-        :disabled="!editMode"
-        class="c-recipe-details__value"
-      ></rating-bar>
-    </label>
-    <label class="c-recipe-details__item">
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.plates') }}
-      </span>
-      <input
-        v-model="plates"
-        class="c-recipe-details__value o-form__input"
-      />
-    </label>
-    <label class="c-recipe-details__item">
-      <span class="c-recipe-details__label">
-        {{ $t('recipe.preparation-time') }}
-      </span>
-      <time-input
-        v-model="preparationTime"
-        :disabled="!editMode"
-      ></time-input>
-    </label>
+    </div>
+    <div class="c-recipe-details__row">
+      <div class="c-recipe-details__content">
+        <form-input
+          v-model="title"
+          :disabled="!editMode"
+          :placeholder="$t('recipe.placeholder.title')"
+          class="c-recipe-details__title"
+        ></form-input>
+        <form-textarea
+          v-model="description"
+          :disabled="!editMode"
+          :placeholder="$t('recipe.placeholder.description')"
+          :maxlength="255"
+          :rows="3"
+          class="c-recipe-details__description"
+        ></form-textarea>
+        <recipe-summary class="c-recipe-details__summary"></recipe-summary>
+      </div>
+      <div class="c-recipe-details__info">
+        <label class="c-recipe-details__item">
+          <span class="c-recipe-details__label">
+            {{ $t('recipe.cuisine-type') }}
+          </span>
+          <select
+            v-model="cuisineId"
+            :placeholder="'test'"
+            class="c-recipe-details__value o-form__select"
+          >
+            <option
+              v-for="item in cuisines"
+              :key="item.id"
+              :value="item.id"
+              :selected="cuisineId === item.id"
+            >
+              {{ $t(`recipe.cuisine.${item.name}`) }}
+            </option>
+          </select>
+        </label>
+        <label class="c-recipe-details__item">
+          <span class="c-recipe-details__label">
+            {{ $t('recipe.category-type') }}
+          </span>
+          <select
+            v-model="categoryId"
+            :placeholder="'test'"
+            class="c-recipe-details__value o-form__select"
+          >
+            <option
+              v-for="item in categories"
+              :key="item.id"
+              :value="item.id"
+              :selected="categoryId === item.id"
+            >
+              {{ $t(`recipe.category.${item.name}`) }}
+            </option>
+          </select>
+        </label>
+        <label class="c-recipe-details__item">
+          <span class="c-recipe-details__label">
+            {{ $t('recipe.difficulty') }}
+          </span>
+          <rating-bar
+            v-model="difficulty"
+            :disabled="!editMode"
+            class="c-recipe-details__value"
+          ></rating-bar>
+        </label>
+        <label class="c-recipe-details__item">
+          <span class="c-recipe-details__label">
+            {{ $t('recipe.plates') }}
+          </span>
+          <input
+            v-model="plates"
+            class="c-recipe-details__value o-form__input"
+          />
+        </label>
+        <label class="c-recipe-details__item">
+          <span class="c-recipe-details__label">
+            {{ $t('recipe.preparation-time') }}
+          </span>
+          <time-input
+            v-model="preparationTime"
+            :disabled="!editMode"
+          ></time-input>
+        </label>
+      </div>
+    </div>
     <detail-actions
       :canEdit="canEdit"
       :disabled="pending"
       :editMode="editMode"
       @click="handleAction"
+      class="c-recipe-details__actions"
     ></detail-actions>
   </div>
 </div>
 </template>
 
 <script>
+import moment from 'moment'
 import detail from '@/mixins/detail'
+import { SET_RECIPE } from '@/store/mutation-types';
 
 export default {
   name: 'RecipeDetails',
   components: {
     DetailActions: () => import('@/components/detail-actions'),
+    FormInput: () => import('@/components/form/form-input'),
+    FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
     RatingBar: () => import('@/components/form/rating-bar'),
-    TimeInput: () => import('@/components/form/time-input')
+    TimeInput: () => import('@/components/form/time-input'),
+    RecipeSummary: () => import('@/components/recipe/recipe-summary')
   },
   mixins: [ detail ],
   data () {
     return {
       bannerId: null,
       title: null,
-      lead: null,
+      description: null,
       cuisineId: null,
+      categoryId: null,
       difficulty: null,
       plates: null,
       preparationTime: null
@@ -123,34 +155,65 @@ export default {
     cuisines () {
       return this.$store.state.cuisines
     },
+    categories () {
+      return this.$store.state.categories
+    },
     recipe () {
       return this.$store.state.recipe
+    },
+    creationTime () {
+      return moment(this.recipe.creationTime).fromNow()
     }
   },
   methods: {
     init () {
       this.bannerId = this.recipe.bannerId
       this.title = this.recipe.title
-      this.lead = this.recipe.lead
+      this.description = this.recipe.description
       this.cuisineId = this.recipe.cuisineId
+      this.categoryId = this.recipe.categoryId
       this.difficulty = this.recipe.difficulty
       this.plates = this.recipe.plates
       this.preparationTime = this.recipe.preparationTime
     },
     save () {
-      return this.$api.recipes.create({
-        bannerId: this.bannerId,
-        title: this.title,
-        lead: this.lead,
-        cuisineId: this.cuisineId,
-        difficulty: this.difficulty,
-        plates: this.plates,
-        preparationTime: this.preparationTime
+      const params = this.getParams()
+      return this.$api.recipes.modify(this.recipe.id, params).then(() => {
+        return this.$api.recipes.read(this.recipe.id)
       }).then((value) => {
-        // TODO Finish recipe creation
-        this.$notify.success('recipe-created')
-        this.editMode = false
+        this.$store.commit(SET_RECIPE, value.data)
+        this.$notify.success('recipe-update-successful')
       })
+    },
+    getParams () {
+      const params = {}
+
+      if (this.bannerId !== this.recipe.bannerId) {
+        params.bannerId = this.bannerId
+      }
+      if (this.title !== this.recipe.title) {
+        params.title = this.title
+      }
+      if (this.description !== this.recipe.description) {
+        params.description = this.description
+      }
+      if (this.cuisineId !== this.recipe.cuisineId) {
+        params.cuisineId = this.cuisineId
+      }
+      if (this.categoryId !== this.recipe.categoryId) {
+        params.categoryId = this.categoryId
+      }
+      if (this.difficulty !== this.recipe.difficulty) {
+        params.difficulty = this.difficulty
+      }
+      if (this.plates !== this.recipe.plates) {
+        params.plates = this.plates
+      }
+      if (this.preparationTime !== this.recipe.preparationTime) {
+        params.preparationTime = this.plates
+      }
+
+      return params
     }
   }
 }
@@ -161,22 +224,59 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-recipe-details {
-  display: flex;
-
   &__banner {
-    width: 650px;
-    height: 400px;
+    width: 100%;
+    height: 300px;
   }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
-    width: 350px;
-    padding: 16px;
+    padding: 32px;
+    position: relative;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  &__author {
+    text-decoration: none;
+    font-size: 12px;
+    color: $color-text-primary;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__time {
+    font-size: 12px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 590px;
+  }
+
+  &__info {
+    width: 330px;
   }
 
   &__title {
-    margin-bottom: 16px;
+    margin-top: 16px;
+    font-size: 24px;
+  }
+
+  &__description {
+    margin-top: 16px;
+  }
+
+  &__summary {
+    margin-top: auto;
   }
 
   &__item {
@@ -193,6 +293,12 @@ export default {
 
   &__value {
     width: 178px;
+  }
+
+  &__actions {
+    position: absolute;
+    bottom: 0;
+    right: 32px;
   }
 }
 </style>
