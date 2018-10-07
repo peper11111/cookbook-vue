@@ -1,9 +1,9 @@
 <template>
 <div class="c-recipe-details">
   <image-picker
-    v-model="banner"
+    v-model="bannerId"
+    blank="/static/blank-banner.jpg"
     :disabled="!editMode"
-    @file="bannerFile = $event"
     class="c-recipe-details__banner"
   ></image-picker>
   <div class="c-recipe-details__wrapper">
@@ -109,6 +109,7 @@
 
 <script>
 import base from '@/mixins/base'
+import detail from '@/mixins/detail'
 
 export default {
   name: 'RecipeDetails',
@@ -117,12 +118,10 @@ export default {
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
   },
-  mixins: [ base ],
+  mixins: [ base, detail ],
   data () {
     return {
-      editMode: false,
-      banner: null,
-      bannerFile: null,
+      bannerId: null,
       title: null,
       lead: null,
       cuisineId: null,
@@ -139,12 +138,9 @@ export default {
       return this.$store.state.recipe
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
     init () {
-      this.banner = this.$helpers.imageSrc(this.recipe.bannerId)
+      this.bannerId = this.recipe.bannerId
       this.title = this.recipe.title
       this.lead = this.recipe.lead
       this.cuisineId = this.recipe.cuisineId
@@ -154,18 +150,14 @@ export default {
       this.editMode = false
     },
     update () {
-      let bannerId
-      this.uploadImg(this.recipe.bannerId, this.banner, this.bannerFile).then((id) => {
-        bannerId = id
-        return this.$api.recipes.create({
-          bannerId: bannerId,
-          title: this.title,
-          lead: this.lead,
-          cuisineId: this.cuisineId,
-          difficulty: this.difficulty,
-          plates: this.plates,
-          preparationTime: this.preparationTime
-        })
+      return this.$api.recipes.create({
+        bannerId: this.bannerId,
+        title: this.title,
+        lead: this.lead,
+        cuisineId: this.cuisineId,
+        difficulty: this.difficulty,
+        plates: this.plates,
+        preparationTime: this.preparationTime
       }).then((value) => {
         // TODO Finish recipe creation
         this.$notify.success('recipe-created')
@@ -177,8 +169,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/mixins';
-@import '../assets/styles/variables';
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
 
 .c-recipe-details {
   display: flex;

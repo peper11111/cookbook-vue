@@ -1,5 +1,8 @@
 <template>
-<div class="o-page" v-if="!pending">
+<div
+  v-if="!pending"
+  class="o-page"
+>
   <div class="o-page__wrapper">
     <user-details></user-details>
     <div class="o-page__separator"></div>

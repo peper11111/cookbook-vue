@@ -18,7 +18,7 @@ export default {
   name: 'RecipePage',
   mixins: [ requester ],
   components: {
-    RecipeDetails: () => import('@/components/recipe-details')
+    RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   computed: {
     recipeId () {

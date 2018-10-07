@@ -18,7 +18,7 @@ export default {
   name: 'NewRecipeView',
   mixins: [ requester ],
   components: {
-    RecipeDetails: () => import('@/components/recipe-details')
+    RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   created () {
     this.wrap(this.fetchRecipe)
