@@ -55,8 +55,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/mixins';
-@import '../assets/styles/variables';
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
 
 .c-navbar-dropdown {
   @include box-elevation;

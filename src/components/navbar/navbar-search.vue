@@ -1,17 +1,17 @@
 <template>
 <form
   @submit.prevent="submit"
-  class="c-app-search o-form"
+  class="c-navbar-search o-form"
 >
   <div class="o-form__wrapper">
     <input
       v-model="search"
       :placeholder="$t('form.search')"
-      class="c-app-search__input o-form__input"
+      class="c-navbar-search__input o-form__input"
     />
     <div
       @click="submit"
-      class="c-app-search__icon o-form__icon"
+      class="c-navbar-search__icon o-form__icon"
     >
       <i class="material-icons">
         search
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'AppSearch',
+  name: 'NavbarSearch',
   data () {
     return {
       search: ''
@@ -38,9 +38,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/variables';
+@import '../../assets/styles/variables';
 
-.c-app-search {
+.c-navbar-search {
   width: 360px;
   margin: 0 16px;
   box-sizing: border-box;

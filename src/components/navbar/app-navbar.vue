@@ -13,7 +13,7 @@
       {{ $t('global.app') }}
     </span>
   </router-link>
-  <app-search></app-search>
+  <navbar-search></navbar-search>
   <div class="c-app-navbar__row">
     <router-link
       to="/"
@@ -65,8 +65,8 @@
 export default {
   name: 'AppNavbar',
   components: {
-    AppSearch: () => import('@/components/app-search'),
-    NavbarDropdown: () => import('@/components/navbar-dropdown')
+    NavbarSearch: () => import('@/components/navbar/navbar-search'),
+    NavbarDropdown: () => import('@/components/navbar/navbar-dropdown')
   },
   data () {
     return {
@@ -99,8 +99,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/mixins';
-@import '../assets/styles/variables';
+@import '../../assets/styles/mixins';
+@import '../../assets/styles/variables';
 
 .c-app-navbar {
   @include box-elevation;
