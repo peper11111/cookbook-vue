@@ -200,6 +200,7 @@ export default {
     flex-wrap: wrap;
     height: calc(100% - 88px);
     overflow-y: auto;
+    align-content: flex-start;
   }
 
   &__new {
