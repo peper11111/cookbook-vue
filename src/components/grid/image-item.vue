@@ -9,7 +9,6 @@
     class="c-image-item__image"
   />
   <div
-    v-if="!image.isUsed"
     @click="$emit('delete')"
     class="c-image-item__delete"
   >

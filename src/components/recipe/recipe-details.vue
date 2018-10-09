@@ -119,7 +119,7 @@
 <script>
 import moment from 'moment'
 import detail from '@/mixins/detail'
-import { SET_RECIPE } from '@/store/mutation-types';
+import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
   name: 'RecipeDetails',
