@@ -1,7 +1,7 @@
 <template>
 <div
   :class="{ 'is-disabled': disabled }"
-  @mouseleave="setVisibleValue(localValue)"
+  @mouseleave="setVisibleValue(value)"
   class="c-rating-bar"
 >
   <div
@@ -9,7 +9,7 @@
     :key="i"
     :class="{ 'is-active': isActive(i) }"
     @mouseenter="setVisibleValue(i)"
-    @click="setLocalValue(i)"
+    @click="onClick(i)"
     class="c-rating-bar__item"
   >
     <i class="material-icons">
@@ -23,10 +23,7 @@
 export default {
   name: 'RatingBar',
   props: {
-    disabled: {
-      type: Boolean,
-      default: false
-    },
+    disabled: Boolean,
     size: {
       type: Number,
       default: 5
@@ -35,32 +32,24 @@ export default {
   },
   data () {
     return {
-      localValue: this.value,
       visibleValue: this.value
-    }
-  },
-  watch: {
-    value (val) {
-      this.localValue = val
-      this.visibleValue = val
     }
   },
   methods: {
     isActive (val) {
       return val <= this.visibleValue
     },
-    setLocalValue (val) {
-      if (this.disabled) {
-        return
-      }
-      this.localValue = val
-      this.$emit('input', this.localValue)
-    },
     setVisibleValue (val) {
       if (this.disabled) {
         return
       }
       this.visibleValue = val
+    },
+    onClick (val) {
+      if (this.disabled) {
+        return
+      }
+      this.$emit('input', val)
     }
   }
 }
