@@ -34,6 +34,12 @@
         {{ recipe.likesCount || 0 }}
       </span>
       <i class="material-icons">
+        book
+      </i>
+      <span class="c-recipe-item__value">
+        {{ recipe.favouritesCount || 0 }}
+      </span>
+      <i class="material-icons">
         chat_bubble
       </i>
       <span class="c-recipe-item__value">

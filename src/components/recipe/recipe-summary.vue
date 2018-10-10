@@ -4,14 +4,20 @@
     thumb_up
   </i>
   <span class="c-recipe-summary__value">
-        {{ recipe.likesCount || 0 }}
-      </span>
+    {{ recipe.likesCount || 0 }}
+  </span>
+  <i class="material-icons">
+    book
+  </i>
+  <span class="c-recipe-item__value">
+    {{ recipe.favouritesCount || 0 }}
+  </span>
   <i class="material-icons">
     chat_bubble
   </i>
   <span class="c-recipe-summary__value">
-        {{ recipe.commentsCount || 0 }}
-      </span>
+    {{ recipe.commentsCount || 0 }}
+  </span>
 </div>
 </template>
 
