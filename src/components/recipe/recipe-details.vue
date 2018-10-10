@@ -208,11 +208,12 @@ export default {
   &__content {
     display: flex;
     flex-direction: column;
-    width: 590px;
+    flex-grow: 1;
+    margin-right: 32px;
   }
 
   &__info {
-    width: 330px;
+    width: 300px;
   }
 
   &__title {
@@ -232,7 +233,7 @@ export default {
   &__item {
     display: flex;
     align-items: center;
-    height: 40px;
+    margin-bottom: 16px;
   }
 
   &__label {
@@ -242,7 +243,7 @@ export default {
   }
 
   &__value {
-    width: 178px;
+    width: 160px;
   }
 }
 </style>
