@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     onChange (event) {
-      this.$emit('input', event.target.value)
+      this.$emit('input', Number(event.target.value))
     }
   }
 }
