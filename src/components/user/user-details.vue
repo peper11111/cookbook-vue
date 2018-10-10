@@ -43,8 +43,6 @@
         v-model="model.biography"
         :disabled="displayMode || previewMode"
         :placeholder="$t('user.placeholder.biography')"
-        :maxlength="255"
-        :rows="3"
         class="c-user-details__row"
       ></form-textarea>
     </div>
