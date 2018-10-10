@@ -46,20 +46,12 @@
           <span class="c-recipe-details__label">
             {{ $t('recipe.cuisine-type') }}
           </span>
-          <select
+          <form-select
             v-model="model.cuisineId"
-            :placeholder="'test'"
-            class="c-recipe-details__value o-form__select"
-          >
-            <option
-              v-for="item in cuisines"
-              :key="item.id"
-              :value="item.id"
-              :selected="model.cuisineId === item.id"
-            >
-              {{ $t(`recipe.cuisine.${item.name}`) }}
-            </option>
-          </select>
+            :disabled="displayMode || previewMode"
+            :options="cuisines"
+            class="c-recipe-details__value"
+          ></form-select>
         </label>
         <label class="c-recipe-details__item">
           <span class="c-recipe-details__label">
@@ -124,6 +116,7 @@ export default {
   components: {
     DetailActions: () => import('@/components/detail-actions'),
     FormInput: () => import('@/components/form/form-input'),
+    FormSelect: () => import('@/components/form/form-select'),
     FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
     RatingBar: () => import('@/components/form/rating-bar'),
@@ -148,7 +141,12 @@ export default {
   },
   computed: {
     cuisines () {
-      return this.$store.state.cuisines
+      return this.$store.state.cuisines.map((cuisine) => {
+        return {
+          value: cuisine.id,
+          label: this.$t(`recipe.cuisine.${cuisine.name}`)
+        }
+      })
     },
     categories () {
       return this.$store.state.categories
