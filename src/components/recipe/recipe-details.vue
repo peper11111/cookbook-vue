@@ -87,13 +87,14 @@ export default {
   &__wrapper {
     display: flex;
     flex-direction: column;
-    padding: 32px 32px 0;
+    margin-top: 16px;
     position: relative;
   }
 
   &__row {
     display: flex;
-    margin-bottom: 16px;
+    margin: 16px 0;
+    padding: 0 32px;
   }
 
   &__content {

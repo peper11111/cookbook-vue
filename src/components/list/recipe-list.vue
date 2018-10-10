@@ -46,7 +46,7 @@ import { ADD_RECIPES, REMOVE_RECIPES } from '@/store/mutation-types'
 export default {
   name: 'RecipeList',
   components: {
-    RecipeItem: () => import('@/components/grid/recipe-item')
+    RecipeItem: () => import('@/components/list/recipe-item')
   },
   mixins: [ requester ],
   props: {

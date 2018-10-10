@@ -64,7 +64,7 @@ import { ADD_IMAGES, REMOVE_IMAGES } from '@/store/mutation-types'
 export default {
   name: 'ImageList',
   components: {
-    ImageItem: () => import('@/components/grid/image-item')
+    ImageItem: () => import('@/components/list/image-item')
   },
   mixins: [ requester ],
   props: {

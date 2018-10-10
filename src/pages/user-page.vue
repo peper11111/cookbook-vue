@@ -19,7 +19,7 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserPage',
   components: {
-    RecipeList: () => import('@/components/grid/recipe-list'),
+    RecipeList: () => import('@/components/list/recipe-list'),
     UserDetails: () => import('@/components/user/user-details')
   },
   mixins: [ requester ],

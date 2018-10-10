@@ -35,7 +35,7 @@
 export default {
   name: 'ImagePicker',
   components: {
-    ImageList: () => import('@/components/grid/image-list')
+    ImageList: () => import('@/components/list/image-list')
   },
   props: {
     blank: String,
