@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/modes'
+import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
 
 export default {
   name: 'RecipeInfo',

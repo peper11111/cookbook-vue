@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/modes'
+import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 

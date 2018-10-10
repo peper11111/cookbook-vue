@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import * as Modes from '@/mixins/detail/modes'
+import * as ModeTypes from '@/mixins/detail/mode-types'
 
 export default {
   name: 'DetailActions',
@@ -44,13 +44,13 @@ export default {
   },
   computed: {
     createMode () {
-      return this.mode === Modes.CREATE
+      return this.mode === ModeTypes.CREATE
     },
     editMode () {
-      return this.mode === Modes.EDIT
+      return this.mode === ModeTypes.EDIT
     },
     previewMode () {
-      return this.mode === Modes.PREVIEW
+      return this.mode === ModeTypes.PREVIEW
     }
   },
   methods: {

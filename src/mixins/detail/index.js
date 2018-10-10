@@ -1,5 +1,5 @@
 import requester from '@/mixins/requester'
-import * as Modes from '@/mixins/detail/modes'
+import * as ModeTypes from '@/mixins/detail/mode-types'
 
 export default {
   mixins: [ requester ],
@@ -8,18 +8,18 @@ export default {
   },
   data () {
     return {
-      localMode: this.mode || Modes.DISPLAY
+      localMode: this.mode || ModeTypes.DISPLAY
     }
   },
   computed: {
     createMode () {
-      return this.localMode === Modes.CREATE
+      return this.localMode === ModeTypes.CREATE
     },
     displayMode () {
-      return this.localMode === Modes.DISPLAY
+      return this.localMode === ModeTypes.DISPLAY
     },
     previewMode () {
-      return this.localMode === Modes.PREVIEW
+      return this.localMode === ModeTypes.PREVIEW
     }
   },
   created () {
@@ -49,15 +49,15 @@ export default {
     onAction (action) {
       switch (action) {
         case 'edit':
-          this.localMode = Modes.EDIT
+          this.localMode = ModeTypes.EDIT
           break
         case 'cancel':
           this.init()
-          this.localMode = Modes.PREVIEW
+          this.localMode = ModeTypes.PREVIEW
           break
         case 'save':
           this.wrap(this.createMode ? this.create : this.modify, this.getParams()).finally(() => {
-            this.localMode = Modes.PREVIEW
+            this.localMode = ModeTypes.PREVIEW
           })
       }
     }

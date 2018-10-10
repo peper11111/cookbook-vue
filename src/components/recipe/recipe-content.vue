@@ -48,7 +48,7 @@
 
 <script>
 import moment from 'moment'
-import {DISPLAY, PREVIEW} from '@/mixins/detail/modes'
+import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
 
 export default {
   name: 'RecipeContent',
