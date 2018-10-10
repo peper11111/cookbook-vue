@@ -70,7 +70,7 @@
     "password-reset-email-sent": "Na twój adres email wyłana została wiadomość z linkiem do ustawienia nowego hasła. Jeśli nie możesz znaleźć wiadomości w folderze Odebrane sprawdź folder Spam",
     "resend-email": "Wyślij ponownie"
   },
-  "grid": {
+  "list": {
     "recipes": "Przepisy",
     "no-recipes": "Brak przepisów do wyświetlenia",
     "images": "Obrazy",

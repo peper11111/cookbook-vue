@@ -6,7 +6,7 @@
   ></div>
   <div class="c-image-list__body">
     <h1 class="c-image-list__title">
-      {{ $t('grid.images') }}
+      {{ $t('list.images') }}
     </h1>
     <div
       @scroll="onScroll"
@@ -121,7 +121,7 @@ export default {
       this.current = id !== this.current ? id : null
     },
     onDelete (id) {
-      if (confirm(this.$t('grid.image-delete'))) {
+      if (confirm(this.$t('list.image-delete'))) {
         if (this.current === id) {
           this.current = null
         }

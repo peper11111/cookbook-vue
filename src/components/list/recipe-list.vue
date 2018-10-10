@@ -2,7 +2,7 @@
 <div class="c-recipe-list">
   <div class="c-recipe-list__row">
     <h1 class="c-recipe-list__title">
-      {{ $t('grid.recipes') }}
+      {{ $t('list.recipes') }}
     </h1>
     <div class="c-recipe-list__icons">
       <i
@@ -33,7 +33,7 @@
     v-if="recipes.length === 0"
     class="c-recipe-list__text"
   >
-    {{ $t('grid.no-recipes') }}
+    {{ $t('list.no-recipes') }}
   </p>
 </div>
 </template>
