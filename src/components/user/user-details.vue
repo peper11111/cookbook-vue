@@ -35,8 +35,6 @@ export default {
   name: 'UserDetails',
   components: {
     DetailActions: () => import('@/components/detail-actions'),
-    FormInput: () => import('@/components/form/form-input'),
-    FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
     UserContent: () => import('@/components/user/user-content')
   },
