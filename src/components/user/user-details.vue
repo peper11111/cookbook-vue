@@ -18,34 +18,11 @@
       :disabled="displayMode || previewMode"
       class="c-user-details__avatar"
     ></image-picker>
-    <div class="c-user-details__content">
-      <div class="c-user-details__row">
-        <h1 class="c-user-details__username">
-          {{ user.username }}
-        </h1>
-        <button
-          v-if="displayMode"
-          :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
-          @click="wrap(follow)"
-          class="o-button"
-        >
-          {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
-        </button>
-      </div>
-      <user-summary class="c-user-details__row"></user-summary>
-      <form-input
-        v-model="model.name"
-        :disabled="displayMode || previewMode"
-        :placeholder="$t('user.placeholder.name')"
-        class="c-user-details__row"
-      ></form-input>
-      <form-textarea
-        v-model="model.biography"
-        :disabled="displayMode || previewMode"
-        :placeholder="$t('user.placeholder.biography')"
-        class="c-user-details__row"
-      ></form-textarea>
-    </div>
+    <user-content
+      :mode="localMode"
+      :model="model"
+      class="c-user-details__content"
+    ></user-content>
   </div>
 </div>
 </template>
@@ -61,7 +38,7 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
-    UserSummary: () => import('@/components/user/user-summary')
+    UserContent: () => import('@/components/user/user-content')
   },
   mixins: [ detail ],
   data () {
@@ -95,14 +72,6 @@ export default {
       }).then(() => {
         this.$notify.success('profile-update-successful')
       })
-    },
-    follow () {
-      return this.$api.users.follow(this.user.id).then(() => {
-        return this.$api.users.read(this.user.id)
-      }).then((value) => {
-        this.$store.commit(SET_USER, value.data)
-        this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
-      })
     }
   }
 }
@@ -132,22 +101,8 @@ export default {
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 200px);
-    box-sizing: border-box;
-    padding-left: 32px;
-  }
-
-  &__row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  &__username {
-    margin-right: 8px;
-    font-size: 24px;
+    flex-grow: 1;
+    margin-left: 32px;
   }
 }
 </style>
