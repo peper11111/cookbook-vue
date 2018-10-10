@@ -13,32 +13,11 @@
   ></image-picker>
   <div class="c-recipe-details__wrapper">
     <div class="c-recipe-details__row">
-      <div class="c-recipe-details__content">
-        <div class="c-recipe-details__row">
-          <router-link
-            :to="`/user/${recipe.author.id}`"
-            class="c-recipe-details__author"
-          >
-            {{ recipe.author.username }}
-          </router-link>
-          <span class="c-recipe-details__time">
-            {{ creationTime }}
-          </span>
-        </div>
-        <form-input
-          v-model="model.title"
-          :disabled="displayMode || previewMode"
-          :placeholder="$t('recipe.placeholder.title')"
-          class="c-recipe-details__title"
-        ></form-input>
-        <form-textarea
-          v-model="model.description"
-          :disabled="displayMode || previewMode"
-          :placeholder="$t('recipe.placeholder.description')"
-          class="c-recipe-details__description"
-        ></form-textarea>
-        <recipe-summary class="c-recipe-details__summary"></recipe-summary>
-      </div>
+      <recipe-content
+        :mode="localMode"
+        :model="model"
+        class="c-recipe-details__content"
+      ></recipe-content>
       <div class="c-recipe-details__info">
         <label class="c-recipe-details__item">
           <span class="c-recipe-details__label">
@@ -98,7 +77,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import detail from '@/mixins/detail'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -112,7 +90,7 @@ export default {
     ImagePicker: () => import('@/components/form/image-picker'),
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input'),
-    RecipeSummary: () => import('@/components/recipe/recipe-summary')
+    RecipeContent: () => import('@/components/recipe/recipe-content')
   },
   mixins: [ detail ],
   data () {
@@ -149,9 +127,6 @@ export default {
     },
     recipe () {
       return this.$store.state.recipe
-    },
-    creationTime () {
-      return moment(this.recipe.creationTime).fromNow()
     }
   },
   methods: {
@@ -186,22 +161,7 @@ export default {
 
   &__row {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 16px;
-  }
-
-  &__author {
-    text-decoration: none;
-    font-size: 12px;
-    color: $color-text-primary;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  &__time {
-    font-size: 12px;
   }
 
   &__content {
@@ -213,20 +173,6 @@ export default {
 
   &__info {
     width: 300px;
-  }
-
-  &__title {
-    margin-bottom: 16px;
-    font-size: 24px;
-  }
-
-  &__description {
-    margin-bottom: 16px;
-    text-align: justify;
-  }
-
-  &__summary {
-    margin-top: auto;
   }
 
   &__item {

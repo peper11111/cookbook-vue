@@ -9,7 +9,7 @@
   <i class="material-icons">
     book
   </i>
-  <span class="c-recipe-item__value">
+  <span class="c-recipe-summary__value">
     {{ recipe.favouritesCount || 0 }}
   </span>
   <i class="material-icons">
