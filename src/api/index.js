@@ -31,8 +31,8 @@ export default {
     read: (id) => http.get(`/recipes/${id}`),
     modify: (id, data) => http.patch(`/recipes/${id}`, data),
     delete: (id) => http.delete(`/recipes/${id}`),
-    like: (id) => http.post(`/recipes/${id}`),
-    favourite: (id) => http.post(`/recipes/${id}`),
+    like: (id) => http.post(`/recipes/${id}/like`),
+    favourite: (id) => http.post(`/recipes/${id}/favourite`),
     readComments: (id, params) => http.get(`/recipes/${id}/comments`, { params: params })
   },
   uploads: {
