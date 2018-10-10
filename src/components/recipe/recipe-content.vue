@@ -24,13 +24,21 @@
     class="c-recipe-content__description"
   ></form-textarea>
   <div class="c-recipe-content__summary">
-    <i class="material-icons">
+    <i
+      :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': displayMode }"
+      @click="displayMode ? wrap(like) : null"
+      class="material-icons"
+    >
       thumb_up
     </i>
     <span class="c-recipe-content__value">
     {{ recipe.likesCount || 0 }}
   </span>
-    <i class="material-icons">
+    <i
+      :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': displayMode }"
+      @click="displayMode ? wrap(favourite) : null"
+      class="material-icons"
+    >
       book
     </i>
     <span class="c-recipe-content__value">
@@ -49,6 +57,8 @@
 <script>
 import moment from 'moment'
 import modeContext from '@/mixins/detail/mode-context'
+import requester from '@/mixins/requester'
+import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
   name: 'RecipeContent',
@@ -56,7 +66,7 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
   },
-  mixins: [ modeContext ],
+  mixins: [ modeContext, requester ],
   props: {
     model: Object
   },
@@ -66,6 +76,24 @@ export default {
     },
     creationTime () {
       return moment(this.recipe.creationTime).fromNow()
+    }
+  },
+  methods: {
+    like () {
+      return this.$api.recipes.like(this.recipe.id).then(() => {
+        return this.$api.recipes.read(this.recipe.id)
+      }).then((value) => {
+        this.$store.commit(SET_RECIPE, value.data)
+        this.$notify.info(this.recipe.isLiked ? 'recipe-like' : 'recipe-unlike')
+      })
+    },
+    favourite () {
+      return this.$api.recipes.favourite(this.recipe.id).then(() => {
+        return this.$api.recipes.read(this.recipe.id)
+      }).then((value) => {
+        this.$store.commit(SET_RECIPE, value.data)
+        this.$notify.info(this.recipe.isFavourite ? 'recipe-favourite' : 'recipe-unfavourite')
+      })
     }
   }
 }
@@ -113,6 +141,14 @@ export default {
     display: flex;
     align-items: center;
     margin-top: auto;
+  }
+
+  &__action {
+    cursor: pointer;
+
+    &.is-active {
+      color: $color-accent;
+    }
   }
 
   &__value {

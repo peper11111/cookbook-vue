@@ -11,7 +11,11 @@
     "resource-not-found": "Strona której szukasz nie istnieje",
     "message-resend": "Wiadomość została wysłana ponownie. Sprawdź swoją skrzynkę pocztową.",
     "user-follow": "Obserwujesz tego użytkownika",
-    "user-unfollow": "Już nie obserwujesz tego użytkownika"
+    "user-unfollow": "Już nie obserwujesz tego użytkownika",
+    "recipe-like": "Polubiłeś ten przepis",
+    "recipe-unlike": "Już nie lubisz tego przepisu",
+    "recipe-favourite": "Przepis został dodany do twojej książki kucharskiej",
+    "recipe-unfavourite": "Przepis został usunięty z twojej ksiązki kucharskiej"
   },
   "success": {
     "sign-in-successful": "Zostałeś pomyślnie zalogowany",
