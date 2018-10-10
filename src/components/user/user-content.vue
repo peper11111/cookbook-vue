@@ -1,7 +1,7 @@
 <template>
-<div class="c-user-info">
-  <div class="c-user-info__row">
-    <h1 class="c-user-info__username">
+<div class="c-user-content">
+  <div class="c-user-content__row">
+    <h1 class="c-user-content__username">
       {{ user.username }}
     </h1>
     <button
@@ -13,23 +13,23 @@
       {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
     </button>
   </div>
-  <div class="c-user-info__row">
-    <span class="c-user-info__value">
+  <div class="c-user-content__row">
+    <span class="c-user-content__value">
       {{ user.recipesCount || 0 }}
     </span>
-    <span class="c-user-info__label">
+    <span class="c-user-content__label">
       {{ $t('user.recipes') }}
     </span>
-    <span class="c-user-info__value">
+    <span class="c-user-content__value">
       {{ user.followersCount || 0 }}
     </span>
-    <span class="c-user-info__label">
+    <span class="c-user-content__label">
       {{ $t('user.followers') }}
     </span>
-    <span class="c-user-info__value">
+    <span class="c-user-content__value">
       {{ user.followedCount || 0 }}
     </span>
-    <span class="c-user-info__label">
+    <span class="c-user-content__label">
       {{ $t('user.followed') }}
     </span>
   </div>
@@ -37,13 +37,13 @@
     v-model="model.name"
     :disabled="displayMode || previewMode"
     :placeholder="$t('user.placeholder.name')"
-    class="c-user-info__row"
+    class="c-user-content__row"
   ></form-input>
   <form-textarea
     v-model="model.biography"
     :disabled="displayMode || previewMode"
     :placeholder="$t('user.placeholder.biography')"
-    class="c-user-info__row"
+    class="c-user-content__row"
   ></form-textarea>
 </div>
 </template>
@@ -54,7 +54,7 @@ import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
-  name: 'UserInfo',
+  name: 'UserContent',
   components: {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss">
-.c-user-info {
+.c-user-content {
   display: flex;
   flex-direction: column;
 

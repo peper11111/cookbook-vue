@@ -18,11 +18,11 @@
       :disabled="displayMode || previewMode"
       class="c-user-details__avatar"
     ></image-picker>
-    <user-info
+    <user-content
       :mode="localMode"
       :model="model"
-      class="c-user-details__info"
-    ></user-info>
+      class="c-user-details__content"
+    ></user-content>
   </div>
 </div>
 </template>
@@ -38,7 +38,7 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea'),
     ImagePicker: () => import('@/components/form/image-picker'),
-    UserInfo: () => import('@/components/user/user-info')
+    UserContent: () => import('@/components/user/user-content')
   },
   mixins: [ detail ],
   data () {
@@ -100,7 +100,7 @@ export default {
     border-radius: 50%;
   }
 
-  &__info {
+  &__content {
     flex-grow: 1;
     margin-left: 32px;
   }
