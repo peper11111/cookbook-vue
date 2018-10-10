@@ -13,18 +13,18 @@
   ></image-picker>
   <div class="c-recipe-details__wrapper">
     <div class="c-recipe-details__row">
-      <router-link
-        :to="`/user/${recipe.author.id}`"
-        class="c-recipe-details__author"
-      >
-        {{ recipe.author.username }}
-      </router-link>
-      <span class="c-recipe-details__time">
-        {{ creationTime }}
-      </span>
-    </div>
-    <div class="c-recipe-details__row">
       <div class="c-recipe-details__content">
+        <div class="c-recipe-details__row">
+          <router-link
+            :to="`/user/${recipe.author.id}`"
+            class="c-recipe-details__author"
+          >
+            {{ recipe.author.username }}
+          </router-link>
+          <span class="c-recipe-details__time">
+            {{ creationTime }}
+          </span>
+        </div>
         <form-input
           v-model="model.title"
           :disabled="displayMode || previewMode"
@@ -186,7 +186,7 @@ export default {
   &__wrapper {
     display: flex;
     flex-direction: column;
-    padding: 32px;
+    padding: 32px 32px 0;
     position: relative;
   }
 
@@ -221,12 +221,13 @@ export default {
   }
 
   &__title {
-    margin-top: 16px;
+    margin-bottom: 16px;
     font-size: 24px;
   }
 
   &__description {
-    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: justify;
   }
 
   &__summary {
