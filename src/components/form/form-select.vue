@@ -24,7 +24,7 @@ export default {
   props: {
     disabled: Boolean,
     options: Array,
-    value: Number
+    value: [ String, Number ]
   },
   computed: {
     label () {
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     onChange (event) {
-      this.$emit('input', Number(event.target.value))
+      this.$emit('input', event.target.value)
     }
   }
 }
