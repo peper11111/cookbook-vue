@@ -78,10 +78,11 @@
           <span class="c-recipe-details__label">
             {{ $t('recipe.plates') }}
           </span>
-          <input
+          <form-input
             v-model="model.plates"
-            class="c-recipe-details__value o-form__input"
-          />
+            :disabled="displayMode || previewMode"
+            class="c-recipe-details__value"
+          ></form-input>
         </label>
         <label class="c-recipe-details__item">
           <span class="c-recipe-details__label">
