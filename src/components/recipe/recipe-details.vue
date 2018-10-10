@@ -24,6 +24,13 @@
         class="c-recipe-details__info"
       ></recipe-info>
     </div>
+    <div class="o-page__separator"></div>
+    <div class="c-recipe-details__row">
+      <ingredient-list
+        :mode="localMode"
+        :model="model"
+      ></ingredient-list>
+    </div>
   </div>
 </div>
 </template>
@@ -37,6 +44,7 @@ export default {
   components: {
     DetailActions: () => import('@/components/detail-actions'),
     ImagePicker: () => import('@/components/form/image-picker'),
+    IngredientList: () => import('@/components/list/ingredient-list'),
     RecipeInfo: () => import('@/components/recipe/recipe-info'),
     RecipeContent: () => import('@/components/recipe/recipe-content')
   },
@@ -52,7 +60,8 @@ export default {
         categoryId: null,
         difficulty: null,
         plates: null,
-        preparationTime: null
+        preparationTime: null,
+        ingredients: null
       }
     }
   },

@@ -74,7 +74,8 @@
     "recipes": "Przepisy",
     "no-recipes": "Brak przepisów do wyświetlenia",
     "images": "Obrazy",
-    "image-delete": "Czy napewno chcesz usunąć ten obrazek?"
+    "image-delete": "Czy napewno chcesz usunąć ten obrazek?",
+    "ingredients": "Składniki"
   },
   "user": {
     "placeholder": {
