@@ -26,6 +26,26 @@ export default {
     this.init()
   },
   methods: {
+    init () {
+      for (const key in this.model) {
+        if (!this.model.hasOwnProperty(key)) {
+          continue
+        }
+        this.model[key] = this[this.modelSrc][key]
+      }
+    },
+    getParams () {
+      const params = {}
+      for (const key in this.model) {
+        if (!this.model.hasOwnProperty(key)) {
+          continue
+        }
+        if (this.model[key] !== this[this.modelSrc][key]) {
+          params[key] = this.model[key]
+        }
+      }
+      return params
+    },
     onAction (action) {
       switch (action) {
         case 'edit':
@@ -36,7 +56,7 @@ export default {
           this.localMode = Modes.PREVIEW
           break
         case 'save':
-          this.wrap(this.createMode ? this.create : this.modify).finally(() => {
+          this.wrap(this.createMode ? this.create : this.modify, this.getParams()).finally(() => {
             this.localMode = Modes.PREVIEW
           })
       }

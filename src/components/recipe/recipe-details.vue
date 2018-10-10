@@ -6,7 +6,7 @@
     @action="onAction"
   ></detail-actions>
   <image-picker
-    v-model="bannerId"
+    v-model="model.bannerId"
     blank="/static/blank-banner.jpg"
     :disabled="displayMode || previewMode"
     class="c-recipe-details__banner"
@@ -26,13 +26,13 @@
     <div class="c-recipe-details__row">
       <div class="c-recipe-details__content">
         <form-input
-          v-model="title"
+          v-model="model.title"
           :disabled="displayMode || previewMode"
           :placeholder="$t('recipe.placeholder.title')"
           class="c-recipe-details__title"
         ></form-input>
         <form-textarea
-          v-model="description"
+          v-model="model.description"
           :disabled="displayMode || previewMode"
           :placeholder="$t('recipe.placeholder.description')"
           :maxlength="255"
@@ -47,7 +47,7 @@
             {{ $t('recipe.cuisine-type') }}
           </span>
           <select
-            v-model="cuisineId"
+            v-model="model.cuisineId"
             :placeholder="'test'"
             class="c-recipe-details__value o-form__select"
           >
@@ -55,7 +55,7 @@
               v-for="item in cuisines"
               :key="item.id"
               :value="item.id"
-              :selected="cuisineId === item.id"
+              :selected="model.cuisineId === item.id"
             >
               {{ $t(`recipe.cuisine.${item.name}`) }}
             </option>
@@ -66,7 +66,7 @@
             {{ $t('recipe.category-type') }}
           </span>
           <select
-            v-model="categoryId"
+            v-model="model.categoryId"
             :placeholder="'test'"
             class="c-recipe-details__value o-form__select"
           >
@@ -74,7 +74,7 @@
               v-for="item in categories"
               :key="item.id"
               :value="item.id"
-              :selected="categoryId === item.id"
+              :selected="model.categoryId === item.id"
             >
               {{ $t(`recipe.category.${item.name}`) }}
             </option>
@@ -85,7 +85,7 @@
             {{ $t('recipe.difficulty') }}
           </span>
           <rating-bar
-            v-model="difficulty"
+            v-model="model.difficulty"
             :disabled="displayMode || previewMode"
             class="c-recipe-details__value"
           ></rating-bar>
@@ -95,7 +95,7 @@
             {{ $t('recipe.plates') }}
           </span>
           <input
-            v-model="plates"
+            v-model="model.plates"
             class="c-recipe-details__value o-form__input"
           />
         </label>
@@ -104,7 +104,7 @@
             {{ $t('recipe.preparation-time') }}
           </span>
           <time-input
-            v-model="preparationTime"
+            v-model="model.preparationTime"
             :disabled="displayMode || previewMode"
           ></time-input>
         </label>
@@ -133,14 +133,17 @@ export default {
   mixins: [ detail ],
   data () {
     return {
-      bannerId: null,
-      title: null,
-      description: null,
-      cuisineId: null,
-      categoryId: null,
-      difficulty: null,
-      plates: null,
-      preparationTime: null
+      modelSrc: 'recipe',
+      model: {
+        bannerId: null,
+        title: null,
+        description: null,
+        cuisineId: null,
+        categoryId: null,
+        difficulty: null,
+        plates: null,
+        preparationTime: null
+      }
     }
   },
   computed: {
@@ -158,54 +161,13 @@ export default {
     }
   },
   methods: {
-    init () {
-      this.bannerId = this.recipe.bannerId
-      this.title = this.recipe.title
-      this.description = this.recipe.description
-      this.cuisineId = this.recipe.cuisineId
-      this.categoryId = this.recipe.categoryId
-      this.difficulty = this.recipe.difficulty
-      this.plates = this.recipe.plates
-      this.preparationTime = this.recipe.preparationTime
-    },
-    modify () {
-      const params = this.getParams()
+    modify (params) {
       return this.$api.recipes.modify(this.recipe.id, params).then(() => {
         return this.$api.recipes.read(this.recipe.id)
       }).then((value) => {
         this.$store.commit(SET_RECIPE, value.data)
         this.$notify.success('recipe-update-successful')
       })
-    },
-    getParams () {
-      const params = {}
-
-      if (this.bannerId !== this.recipe.bannerId) {
-        params.bannerId = this.bannerId
-      }
-      if (this.title !== this.recipe.title) {
-        params.title = this.title
-      }
-      if (this.description !== this.recipe.description) {
-        params.description = this.description
-      }
-      if (this.cuisineId !== this.recipe.cuisineId) {
-        params.cuisineId = this.cuisineId
-      }
-      if (this.categoryId !== this.recipe.categoryId) {
-        params.categoryId = this.categoryId
-      }
-      if (this.difficulty !== this.recipe.difficulty) {
-        params.difficulty = this.difficulty
-      }
-      if (this.plates !== this.recipe.plates) {
-        params.plates = this.plates
-      }
-      if (this.preparationTime !== this.recipe.preparationTime) {
-        params.preparationTime = this.plates
-      }
-
-      return params
     }
   }
 }

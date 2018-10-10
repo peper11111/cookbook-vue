@@ -6,14 +6,14 @@
     @action="onAction"
   ></detail-actions>
   <image-picker
-    v-model="bannerId"
+    v-model="model.bannerId"
     blank="/static/blank-banner.jpg"
     :disabled="displayMode || previewMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
-      v-model="avatarId"
+      v-model="model.avatarId"
       blank="/static/blank-avatar.jpg"
       :disabled="displayMode || previewMode"
       class="c-user-details__avatar"
@@ -34,13 +34,13 @@
       </div>
       <user-summary class="c-user-details__row"></user-summary>
       <form-input
-        v-model="name"
+        v-model="model.name"
         :disabled="displayMode || previewMode"
         :placeholder="$t('user.placeholder.name')"
         class="c-user-details__row"
       ></form-input>
       <form-textarea
-        v-model="biography"
+        v-model="model.biography"
         :disabled="displayMode || previewMode"
         :placeholder="$t('user.placeholder.biography')"
         :maxlength="255"
@@ -68,10 +68,13 @@ export default {
   mixins: [ detail ],
   data () {
     return {
-      avatarId: null,
-      bannerId: null,
-      name: null,
-      biography: null
+      modelSrc: 'user',
+      model: {
+        avatarId: null,
+        bannerId: null,
+        name: null,
+        biography: null
+      }
     }
   },
   computed: {
@@ -83,14 +86,7 @@ export default {
     }
   },
   methods: {
-    init () {
-      this.avatarId = this.user.avatarId
-      this.bannerId = this.user.bannerId
-      this.name = this.user.name
-      this.biography = this.user.biography
-    },
-    modify () {
-      const params = this.getParams()
+    modify (params) {
       return this.$api.users.modify(this.user.id, params).then(() => {
         return this.$api.users.read(this.user.id)
       }).then((value) => {
@@ -101,24 +97,6 @@ export default {
       }).then(() => {
         this.$notify.success('profile-update-successful')
       })
-    },
-    getParams () {
-      const params = {}
-
-      if (this.avatarId !== this.user.avatarId) {
-        params.avatarId = this.avatarId
-      }
-      if (this.bannerId !== this.user.bannerId) {
-        params.bannerId = this.bannerId
-      }
-      if (this.name !== this.user.name) {
-        params.name = this.name
-      }
-      if (this.biography !== this.user.biography) {
-        params.biography = this.biography
-      }
-
-      return params
     },
     follow () {
       return this.$api.users.follow(this.user.id).then(() => {
