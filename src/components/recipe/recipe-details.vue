@@ -1,15 +1,14 @@
 <template>
 <div class="c-recipe-details">
   <detail-actions
-    :canEdit="canEdit"
     :disabled="pending"
-    :editMode="editMode"
-    @click="handleAction"
+    :mode="localMode"
+    @action="onAction"
   ></detail-actions>
   <image-picker
     v-model="bannerId"
     blank="/static/blank-banner.jpg"
-    :disabled="!editMode"
+    :disabled="displayMode || previewMode"
     class="c-recipe-details__banner"
   ></image-picker>
   <div class="c-recipe-details__wrapper">
@@ -28,13 +27,13 @@
       <div class="c-recipe-details__content">
         <form-input
           v-model="title"
-          :disabled="!editMode"
+          :disabled="displayMode || previewMode"
           :placeholder="$t('recipe.placeholder.title')"
           class="c-recipe-details__title"
         ></form-input>
         <form-textarea
           v-model="description"
-          :disabled="!editMode"
+          :disabled="displayMode || previewMode"
           :placeholder="$t('recipe.placeholder.description')"
           :maxlength="255"
           :rows="3"
@@ -87,7 +86,7 @@
           </span>
           <rating-bar
             v-model="difficulty"
-            :disabled="!editMode"
+            :disabled="displayMode || previewMode"
             class="c-recipe-details__value"
           ></rating-bar>
         </label>
@@ -106,7 +105,7 @@
           </span>
           <time-input
             v-model="preparationTime"
-            :disabled="!editMode"
+            :disabled="displayMode || previewMode"
           ></time-input>
         </label>
       </div>
@@ -145,12 +144,6 @@ export default {
     }
   },
   computed: {
-    canEdit () {
-      return this.authUser.id === this.recipe.author.id
-    },
-    authUser () {
-      return this.$store.state.auth.user
-    },
     cuisines () {
       return this.$store.state.cuisines
     },
@@ -175,7 +168,7 @@ export default {
       this.plates = this.recipe.plates
       this.preparationTime = this.recipe.preparationTime
     },
-    save () {
+    modify () {
       const params = this.getParams()
       return this.$api.recipes.modify(this.recipe.id, params).then(() => {
         return this.$api.recipes.read(this.recipe.id)
@@ -292,12 +285,6 @@ export default {
 
   &__value {
     width: 178px;
-  }
-
-  &__actions {
-    position: absolute;
-    bottom: 0;
-    right: 32px;
   }
 }
 </style>

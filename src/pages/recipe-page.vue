@@ -4,13 +4,14 @@
   class="o-page"
 >
   <div class="o-page__wrapper">
-    <recipe-details></recipe-details>
+    <recipe-details :mode="mode"></recipe-details>
     <div class="o-page__separator"></div>
   </div>
 </div>
 </template>
 
 <script>
+import { DISPLAY, PREVIEW } from '@/mixins/detail/modes'
 import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -21,8 +22,14 @@ export default {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   computed: {
-    recipeId () {
-      return this.$route.params.id
+    authUser () {
+      return this.$store.state.auth.user
+    },
+    recipe () {
+      return this.$store.state.recipe
+    },
+    mode () {
+      return this.recipe.author.id === this.authUser.id ? PREVIEW : DISPLAY
     }
   },
   created () {
@@ -30,7 +37,7 @@ export default {
   },
   methods: {
     fetchRecipe () {
-      return this.$api.recipes.read(this.recipeId).then((value) => {
+      return this.$api.recipes.read(this.$route.params.id).then((value) => {
         this.$store.commit(SET_RECIPE, value.data)
       })
     }

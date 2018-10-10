@@ -4,7 +4,7 @@
   class="o-page"
 >
   <div class="o-page__wrapper">
-    <user-details></user-details>
+    <user-details :mode="mode"></user-details>
     <div class="o-page__separator"></div>
     <recipe-list type="user-recipes"></recipe-list>
   </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { DISPLAY, PREVIEW } from '@/mixins/detail/modes'
 import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 
@@ -23,8 +24,14 @@ export default {
   },
   mixins: [ requester ],
   computed: {
-    userId () {
-      return this.$route.params.id
+    authUser () {
+      return this.$store.state.auth.user
+    },
+    user () {
+      return this.$store.state.user
+    },
+    mode () {
+      return this.user.id === this.authUser.id ? PREVIEW : DISPLAY
     }
   },
   created () {
@@ -32,7 +39,7 @@ export default {
   },
   methods: {
     fetchUser () {
-      return this.$api.users.read(this.userId).then((value) => {
+      return this.$api.users.read(this.$route.params.id).then((value) => {
         this.$store.commit(SET_USER, value.data)
       })
     }

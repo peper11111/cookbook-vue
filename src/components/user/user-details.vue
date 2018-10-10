@@ -1,16 +1,21 @@
 <template>
 <div class="c-user-details">
+  <detail-actions
+    :disabled="pending"
+    :mode="localMode"
+    @action="onAction"
+  ></detail-actions>
   <image-picker
     v-model="bannerId"
     blank="/static/blank-banner.jpg"
-    :disabled="!editMode"
+    :disabled="displayMode || previewMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
       v-model="avatarId"
       blank="/static/blank-avatar.jpg"
-      :disabled="!editMode"
+      :disabled="displayMode || previewMode"
       class="c-user-details__avatar"
     ></image-picker>
     <div class="c-user-details__content">
@@ -19,7 +24,7 @@
           {{ user.username }}
         </h1>
         <button
-          v-if="!canEdit"
+          v-if="displayMode"
           :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
           @click="wrap(follow)"
           class="o-button"
@@ -30,26 +35,19 @@
       <user-summary class="c-user-details__row"></user-summary>
       <form-input
         v-model="name"
-        :disabled="!editMode"
+        :disabled="displayMode || previewMode"
         :placeholder="$t('user.placeholder.name')"
         class="c-user-details__row"
       ></form-input>
       <form-textarea
         v-model="biography"
-        :disabled="!editMode"
+        :disabled="displayMode || previewMode"
         :placeholder="$t('user.placeholder.biography')"
         :maxlength="255"
         :rows="3"
         class="c-user-details__row"
       ></form-textarea>
     </div>
-    <detail-actions
-      :canEdit="canEdit"
-      :disabled="pending"
-      :editMode="editMode"
-      @click="handleAction"
-      class="c-user-details__actions"
-    ></detail-actions>
   </div>
 </div>
 </template>
@@ -77,9 +75,6 @@ export default {
     }
   },
   computed: {
-    canEdit () {
-      return this.authUser.id === this.user.id
-    },
     authUser () {
       return this.$store.state.auth.user
     },
@@ -94,7 +89,7 @@ export default {
       this.name = this.user.name
       this.biography = this.user.biography
     },
-    save () {
+    modify () {
       const params = this.getParams()
       return this.$api.users.modify(this.user.id, params).then(() => {
         return this.$api.users.read(this.user.id)
@@ -149,7 +144,7 @@ export default {
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 32px;
+    padding: 32px 32px 16px;
     box-sizing: border-box;
     position: relative;
   }
@@ -177,12 +172,6 @@ export default {
   &__username {
     margin-right: 8px;
     font-size: 24px;
-  }
-
-  &__actions {
-    position: absolute;
-    bottom: 0;
-    right: 32px;
   }
 }
 </style>
