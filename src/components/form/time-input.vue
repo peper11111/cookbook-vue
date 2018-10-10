@@ -1,28 +1,27 @@
 <template>
-<div class="c-time-input">
-  <label v-if="!disabled">
-    <input
-      :value="hours"
-      @input="setHours($event)"
-      class="c-time-input__value o-form__input"
-    />
-    <span class="c-time-input__label">
-      h
-    </span>
-  </label>
-  <label v-if="!disabled">
-    <input
-      :value="minutes"
-      @input="setMinutes($event)"
-      class="c-time-input__value o-form__input"
-    />
-    <span class="c-time-input__label">
-      min
-    </span>
-  </label>
-  <p v-if="disabled">
-    {{ text }}
-  </p>
+<div v-if="disabled">
+  {{ text }}
+</div>
+<div
+  v-else
+  class="c-time-input"
+>
+  <input
+    :value="hours"
+    @input="setHours"
+    class="c-time-input__value o-form__input"
+  />
+  <span class="c-time-input__label">
+    h
+  </span>
+  <input
+    :value="minutes"
+    @input="setMinutes"
+    class="c-time-input__value o-form__input"
+  />
+  <span class="c-time-input__label">
+    min
+  </span>
 </div>
 </template>
 
@@ -106,7 +105,7 @@ export default {
   }
 
   &__value {
-    width: 30px;
+    width: 42px;
     text-align: center;
   }
 }
