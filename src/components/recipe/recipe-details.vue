@@ -1,5 +1,11 @@
 <template>
 <div class="c-recipe-details">
+  <detail-actions
+    :canEdit="canEdit"
+    :disabled="pending"
+    :editMode="editMode"
+    @click="handleAction"
+  ></detail-actions>
   <image-picker
     v-model="bannerId"
     blank="/static/blank-banner.jpg"
@@ -105,13 +111,6 @@
         </label>
       </div>
     </div>
-    <detail-actions
-      :canEdit="canEdit"
-      :disabled="pending"
-      :editMode="editMode"
-      @click="handleAction"
-      class="c-recipe-details__actions"
-    ></detail-actions>
   </div>
 </div>
 </template>
