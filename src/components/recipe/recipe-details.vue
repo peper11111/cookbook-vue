@@ -57,20 +57,12 @@
           <span class="c-recipe-details__label">
             {{ $t('recipe.category-type') }}
           </span>
-          <select
+          <form-select
             v-model="model.categoryId"
-            :placeholder="'test'"
-            class="c-recipe-details__value o-form__select"
-          >
-            <option
-              v-for="item in categories"
-              :key="item.id"
-              :value="item.id"
-              :selected="model.categoryId === item.id"
-            >
-              {{ $t(`recipe.category.${item.name}`) }}
-            </option>
-          </select>
+            :disabled="displayMode || previewMode"
+            :options="categories"
+            class="c-recipe-details__value"
+          ></form-select>
         </label>
         <label class="c-recipe-details__item">
           <span class="c-recipe-details__label">
@@ -144,12 +136,17 @@ export default {
       return this.$store.state.cuisines.map((cuisine) => {
         return {
           value: cuisine.id,
-          label: this.$t(`recipe.cuisine.${cuisine.name}`)
+          label: cuisine.name
         }
       })
     },
     categories () {
-      return this.$store.state.categories
+      return this.$store.state.categories.map((category) => {
+        return {
+          value: category.id,
+          label: category.name
+        }
+      })
     },
     recipe () {
       return this.$store.state.recipe
