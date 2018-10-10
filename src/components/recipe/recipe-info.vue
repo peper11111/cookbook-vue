@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
+import modeContext from '@/mixins/detail/mode-context'
 
 export default {
   name: 'RecipeInfo',
@@ -66,17 +66,11 @@ export default {
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
   },
+  mixins: [ modeContext ],
   props: {
-    mode: String,
     model: Object
   },
   computed: {
-    displayMode () {
-      return this.mode === DISPLAY
-    },
-    previewMode () {
-      return this.mode === PREVIEW
-    },
     cuisines () {
       return this.$store.state.cuisines.map((cuisine) => {
         return {

@@ -34,24 +34,13 @@
 </template>
 
 <script>
-import * as ModeTypes from '@/mixins/detail/mode-types'
+import modeContext from '@/mixins/detail/mode-context'
 
 export default {
   name: 'DetailActions',
+  mixins: [ modeContext ],
   props: {
-    mode: String,
     disabled: Boolean
-  },
-  computed: {
-    createMode () {
-      return this.mode === ModeTypes.CREATE
-    },
-    editMode () {
-      return this.mode === ModeTypes.EDIT
-    },
-    previewMode () {
-      return this.mode === ModeTypes.PREVIEW
-    }
   },
   methods: {
     emitEvent (action) {

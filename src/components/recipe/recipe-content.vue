@@ -48,7 +48,7 @@
 
 <script>
 import moment from 'moment'
-import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
+import modeContext from '@/mixins/detail/mode-context'
 
 export default {
   name: 'RecipeContent',
@@ -56,19 +56,13 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
   },
+  mixins: [ modeContext ],
   props: {
-    mode: String,
     model: Object
   },
   computed: {
     recipe () {
       return this.$store.state.recipe
-    },
-    displayMode () {
-      return this.mode === DISPLAY
-    },
-    previewMode () {
-      return this.mode === PREVIEW
     },
     creationTime () {
       return moment(this.recipe.creationTime).fromNow()

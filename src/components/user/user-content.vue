@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
+import modeContext from '@/mixins/detail/mode-context'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
@@ -59,20 +59,13 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
   },
-  mixins: [ requester ],
+  mixins: [ modeContext, requester ],
   props: {
-    mode: String,
     model: Object
   },
   computed: {
     user () {
       return this.$store.state.user
-    },
-    displayMode () {
-      return this.mode === DISPLAY
-    },
-    previewMode () {
-      return this.mode === PREVIEW
     }
   },
   methods: {
