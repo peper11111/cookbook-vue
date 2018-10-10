@@ -17,7 +17,7 @@ export default {
   props: {
     disabled: Boolean,
     placeholder: String,
-    value: String
+    value: [ String, Number ]
   },
   methods: {
     onInput (event) {
