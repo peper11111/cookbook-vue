@@ -1,6 +1,10 @@
 import iziToast from 'izitoast'
 import i18n from '@/i18n'
 
+iziToast.settings({
+  position: 'bottomLeft'
+})
+
 export default {
   show (message, type) {
     if (['info', 'success', 'warning', 'error'].indexOf(type) === -1) {
