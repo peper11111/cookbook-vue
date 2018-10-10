@@ -1,7 +1,7 @@
 <template>
-<div class="c-user-content">
-  <div class="c-user-content__row">
-    <h1 class="c-user-content__username">
+<div class="c-user-info">
+  <div class="c-user-info__row">
+    <h1 class="c-user-info__username">
       {{ user.username }}
     </h1>
     <button
@@ -13,18 +13,18 @@
       {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
     </button>
   </div>
-  <user-summary class="c-user-content__row"></user-summary>
+  <user-summary class="c-user-info__row"></user-summary>
   <form-input
     v-model="model.name"
     :disabled="displayMode || previewMode"
     :placeholder="$t('user.placeholder.name')"
-    class="c-user-content__row"
+    class="c-user-info__row"
   ></form-input>
   <form-textarea
     v-model="model.biography"
     :disabled="displayMode || previewMode"
     :placeholder="$t('user.placeholder.biography')"
-    class="c-user-content__row"
+    class="c-user-info__row"
   ></form-textarea>
 </div>
 </template>
@@ -35,7 +35,7 @@ import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
-  name: 'UserContent',
+  name: 'UserInfo',
   components: {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea'),
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-.c-user-content {
+.c-user-info {
   display: flex;
   flex-direction: column;
 
