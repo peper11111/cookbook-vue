@@ -13,7 +13,26 @@
       {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
     </button>
   </div>
-  <user-summary class="c-user-info__row"></user-summary>
+  <div class="c-user-info__row">
+    <span class="c-user-info__value">
+      {{ user.recipesCount || 0 }}
+    </span>
+    <span class="c-user-info__label">
+      {{ $t('user.recipes') }}
+    </span>
+    <span class="c-user-info__value">
+      {{ user.followersCount || 0 }}
+    </span>
+    <span class="c-user-info__label">
+      {{ $t('user.followers') }}
+    </span>
+    <span class="c-user-info__value">
+      {{ user.followedCount || 0 }}
+    </span>
+    <span class="c-user-info__label">
+      {{ $t('user.followed') }}
+    </span>
+  </div>
   <form-input
     v-model="model.name"
     :disabled="displayMode || previewMode"
@@ -38,8 +57,7 @@ export default {
   name: 'UserInfo',
   components: {
     FormInput: () => import('@/components/form/form-input'),
-    FormTextarea: () => import('@/components/form/form-textarea'),
-    UserSummary: () => import('@/components/user/user-summary')
+    FormTextarea: () => import('@/components/form/form-textarea')
   },
   mixins: [ requester ],
   props: {
@@ -84,6 +102,14 @@ export default {
   &__username {
     margin-right: 8px;
     font-size: 24px;
+  }
+
+  &__value {
+    font-weight: bold;
+  }
+
+  &__label {
+    padding: 0 32px 0 4px;
   }
 }
 </style>

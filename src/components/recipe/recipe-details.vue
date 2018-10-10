@@ -35,8 +35,6 @@
           v-model="model.description"
           :disabled="displayMode || previewMode"
           :placeholder="$t('recipe.placeholder.description')"
-          :maxlength="255"
-          :rows="3"
           class="c-recipe-details__description"
         ></form-textarea>
         <recipe-summary class="c-recipe-details__summary"></recipe-summary>
