@@ -23,7 +23,26 @@
     :placeholder="$t('recipe.placeholder.description')"
     class="c-recipe-content__description"
   ></form-textarea>
-  <recipe-summary class="c-recipe-content__summary"></recipe-summary>
+  <div class="c-recipe-content__summary">
+    <i class="material-icons">
+      thumb_up
+    </i>
+    <span class="c-recipe-content__value">
+    {{ recipe.likesCount || 0 }}
+  </span>
+    <i class="material-icons">
+      book
+    </i>
+    <span class="c-recipe-content__value">
+    {{ recipe.favouritesCount || 0 }}
+  </span>
+    <i class="material-icons">
+      chat_bubble
+    </i>
+    <span class="c-recipe-content__value">
+    {{ recipe.commentsCount || 0 }}
+  </span>
+  </div>
 </div>
 </template>
 
@@ -35,8 +54,7 @@ export default {
   name: 'RecipeContent',
   components: {
     FormInput: () => import('@/components/form/form-input'),
-    FormTextarea: () => import('@/components/form/form-textarea'),
-    RecipeSummary: () => import('@/components/recipe/recipe-summary')
+    FormTextarea: () => import('@/components/form/form-textarea')
   },
   props: {
     mode: String,
@@ -98,7 +116,14 @@ export default {
   }
 
   &__summary {
+    display: flex;
+    align-items: center;
     margin-top: auto;
+  }
+
+  &__value {
+    font-size: 12px;
+    margin: 0 12px 0 4px;
   }
 }
 </style>
