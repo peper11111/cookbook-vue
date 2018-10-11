@@ -78,11 +78,8 @@ export default {
         ingredients: [ 'składnik' ],
         steps: [ 'krok' ]
       }).then((value) => {
-        return this.$api.recipes.read(value.data)
-      }).then((value) => {
-        this.$store.commit(SET_RECIPE, value.data)
         this.$notify.success('recipe-create-successful')
-        this.$router.push(`/recipe/${this.recipe.id}`)
+        this.$router.push(`/recipe/${value.data}`)
       })
     },
     modify (params) {
