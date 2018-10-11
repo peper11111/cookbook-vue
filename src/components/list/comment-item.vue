@@ -19,6 +19,29 @@
     <div class="c-comment-item__row c-comment-item__content">
       {{ comment.content }}
     </div>
+    <div class="c-comment-item__row">
+      <span
+        v-if="isAuthor"
+        class="c-comment-item__action"
+      >
+        {{ $t('global.edit') }}
+      </span>
+      <span
+        v-if="isAuthor"
+        class="c-comment-item__action"
+      >
+        {{ $t('global.delete') }}
+      </span>
+      <span class="c-comment-item__action">
+        {{ $t('global.reply') }}
+      </span>
+    </div>
+    <p
+      v-if="comment.commentsCount !== 0"
+      class="c-comment-item__response"
+    >
+      {{ $t('comment.response', [ comment.commentsCount ]) }}
+    </p>
   </div>
 </div>
 </template>
@@ -33,11 +56,17 @@ export default {
     comment: Object
   },
   computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    },
     imageSrc () {
       return this.$helpers.thumbnailSrc(this.comment.author.avatarId) || config.blankAvatar
     },
     creationTime () {
       return moment(this.comment.creationTime).fromNow()
+    },
+    isAuthor () {
+      return this.comment.author.id === this.authUser.id
     }
   }
 }
@@ -84,6 +113,23 @@ export default {
 
   &__content {
     text-align: justify;
+  }
+
+  &__action {
+    color: $color-text-secondary;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 8px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__response {
+    font-weight: bold;
+    margin-bottom: 8px;
+    cursor: pointer;
   }
 }
 </style>

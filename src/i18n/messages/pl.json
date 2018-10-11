@@ -4,7 +4,9 @@
     "select": "Wybierz",
     "save": "Zapisz",
     "edit": "Edytuj",
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "reply": "Odpowiedz"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
@@ -88,6 +90,9 @@
     "followed": "obserwowanie",
     "follow": "Obserwuj",
     "unfollow": "Przestań obserwować"
+  },
+  "comment": {
+    "response": "Wyświetl {0} odpowiedzi"
   },
   "recipe": {
     "placeholder": {
