@@ -6,6 +6,7 @@
   <div class="o-page__wrapper">
     <recipe-details :mode="mode"></recipe-details>
     <div class="o-page__separator"></div>
+    <recipe-comments></recipe-comments>
   </div>
 </div>
 </template>
@@ -19,6 +20,7 @@ export default {
   name: 'RecipePage',
   mixins: [ requester ],
   components: {
+    RecipeComments: () => import('@/components/recipe/recipe-comments'),
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   computed: {

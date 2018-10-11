@@ -99,6 +99,7 @@
     "difficulty": "Poziom trudności",
     "plates": "Ilość porcji",
     "preparation-time": "Czas przygotowania",
+    "comments": "Komentarze",
     "cuisine": {
       "CUISINE_POLISH": "Kuchnia polska",
       "CUISINE_ASIAN": "Kuchnia azjatycka",
