@@ -28,7 +28,8 @@
     "recipe-create-successful": "Nowy przepis został pomyślnie utworzony",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "image-created": "Nowy obraz został pomyślnie dodany",
-    "image-deleted": "Wybrany obraz został pomyślnie usunięty"
+    "image-deleted": "Wybrany obraz został pomyślnie usunięty",
+    "comment-delete-successful": "Twój komentarz został usunięty"
   },
   "warning": {},
   "error": {
@@ -92,7 +93,9 @@
     "unfollow": "Przestań obserwować"
   },
   "comment": {
-    "response": "Wyświetl {0} odpowiedzi"
+    "response": "Wyświetl {0} odpowiedzi",
+    "comment-delete": "Czy napewno chcesz usunąć ten komentarz?"
+
   },
   "recipe": {
     "placeholder": {

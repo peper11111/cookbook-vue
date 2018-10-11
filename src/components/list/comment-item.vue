@@ -28,6 +28,7 @@
       </span>
       <span
         v-if="isAuthor"
+        @click="onDelete"
         class="c-comment-item__action"
       >
         {{ $t('global.delete') }}
@@ -49,9 +50,11 @@
 <script>
 import moment from 'moment'
 import config from '@/config'
+import requester from '@/mixins/requester'
 
 export default {
   name: 'CommentItem',
+  mixins: [ requester ],
   props: {
     comment: Object
   },
@@ -67,6 +70,18 @@ export default {
     },
     isAuthor () {
       return this.comment.author.id === this.authUser.id
+    }
+  },
+  methods: {
+    onDelete () {
+      if (confirm(this.$t('comment.comment-delete'))) {
+        this.wrap(this.deleteComment)
+      }
+    },
+    deleteComment () {
+      return this.$api.comments.delete(this.comment.id).then(() => {
+        this.$notify.success('comment-delete-successful')
+      })
     }
   }
 }
