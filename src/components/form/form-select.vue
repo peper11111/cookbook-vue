@@ -11,7 +11,7 @@
     v-for="option in options"
     :key="option.value"
     :value="option.value"
-    :selected="option.value === value"
+    :selected="isSelected(option)"
   >
     {{ option.label }}
   </option>
@@ -29,13 +29,16 @@ export default {
   computed: {
     label () {
       return this.options.find((option) => {
-        return option.value === this.value
+        return this.isSelected(option)
       }).label
     }
   },
   methods: {
     onChange (event) {
       this.$emit('input', event.target.value)
+    },
+    isSelected (option) {
+      return String(option.value) === String(this.value)
     }
   }
 }

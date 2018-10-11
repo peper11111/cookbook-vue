@@ -19,7 +19,7 @@ export default {
   props: {
     disabled: Boolean,
     placeholder: String,
-    value: String,
+    value: [ String, Number ],
     rows: {
       default: 3,
       type: Number
