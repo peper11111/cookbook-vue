@@ -1,7 +1,7 @@
 <template>
 <div class="c-recipe-content">
   <div
-    v-if="!createMode"
+    v-if="displayMode || previewMode"
     class="c-recipe-content__row"
   >
     <router-link
@@ -27,7 +27,7 @@
     class="c-recipe-content__description"
   ></form-textarea>
   <div
-    v-if="!createMode"
+    v-if="displayMode || previewMode"
     class="c-recipe-content__summary"
   >
     <i
