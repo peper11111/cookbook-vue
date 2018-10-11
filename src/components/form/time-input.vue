@@ -53,7 +53,7 @@ export default {
         }
         text += `${this.minutes} min`
       }
-      return text || this.$t('no-info')
+      return text
     }
   },
   watch: {
