@@ -120,17 +120,12 @@ export default {
 
   &__author {
     text-decoration: none;
-    font-size: 12px;
     color: $color-text-primary;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    font-weight: bold;
   }
 
   &__time {
-    margin-left: auto;
-    font-size: 12px;
+    margin-left: 8px;
   }
 
   &__title {

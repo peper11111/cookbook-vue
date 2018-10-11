@@ -135,18 +135,14 @@ export default {
   }
 
   &__author {
-    font-size: 12px;
     text-decoration: none;
     color: $color-text-primary;
+    font-weight: bold;
 
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   &__time {
-    font-size: 12px;
-    margin-left: auto;
+    margin-left: 8px;
   }
 
   &__title {
@@ -156,7 +152,6 @@ export default {
 
   &__description {
     margin-top: 16px;
-    color: $color-text-secondary;
   }
 
   &__icons {
