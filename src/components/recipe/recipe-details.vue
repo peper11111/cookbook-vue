@@ -107,13 +107,12 @@ export default {
   &__wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 16px;
+    margin-top: 32px;
     position: relative;
   }
 
   &__row {
     display: flex;
-    margin: 16px 0;
     padding: 0 32px;
   }
 

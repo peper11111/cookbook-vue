@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss">
 .c-recipe-comments {
-  padding: 16px 32px 32px;
+  padding: 0 32px;
 
   &__title {
     font-size: 24px;

@@ -86,9 +86,8 @@ export default {
 
   &__wrapper {
     display: flex;
-    justify-content: space-between;
-    padding: 32px 32px 16px;
-    box-sizing: border-box;
+    margin-top: 32px;
+    padding:  0 32px;
     position: relative;
   }
 
