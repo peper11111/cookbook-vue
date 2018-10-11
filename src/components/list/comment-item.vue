@@ -25,6 +25,7 @@
 
 <script>
 import moment from 'moment'
+import config from '@/config'
 
 export default {
   name: 'CommentItem',
@@ -33,7 +34,7 @@ export default {
   },
   computed: {
     imageSrc () {
-      return this.$helpers.thumbnailSrc(this.comment.author.avatarId) || '/static/blank-avatar.jpg'
+      return this.$helpers.thumbnailSrc(this.comment.author.avatarId) || config.blankAvatar
     },
     creationTime () {
       return moment(this.comment.creationTime).fromNow()
