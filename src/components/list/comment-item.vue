@@ -39,9 +39,6 @@ export default {
     creationTime () {
       return moment(this.comment.creationTime).fromNow()
     }
-  },
-  created () {
-    console.log(this.comment)
   }
 }
 </script>

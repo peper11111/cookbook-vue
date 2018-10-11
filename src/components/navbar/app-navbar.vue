@@ -49,8 +49,8 @@
       {{ authUser.username }}
       </span>
       <img
-        class="c-app-navbar__avatar"
-        :src="avatarSrc"
+        class="c-app-navbar__image"
+        :src="imageSrc"
       >
     </div>
   </div>
@@ -76,7 +76,7 @@ export default {
     }
   },
   computed: {
-    avatarSrc () {
+    imageSrc () {
       return this.$helpers.thumbnailSrc(this.authUser.avatarId) || config.blankAvatar
     },
     authUser () {
@@ -166,7 +166,7 @@ export default {
     box-sizing: border-box;
   }
 
-  &__avatar {
+  &__image {
     width: 28px;
     height: 28px;
     object-fit: contain;
