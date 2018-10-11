@@ -37,7 +37,7 @@
     v-model="model.name"
     :disabled="displayMode || previewMode"
     :placeholder="$t('user.placeholder.name')"
-    class="c-user-content__row"
+    class="c-user-content__row c-user-content__name"
   ></form-input>
   <form-textarea
     v-model="model.biography"
@@ -103,6 +103,10 @@ export default {
 
   &__label {
     padding: 0 32px 0 4px;
+  }
+
+  &__name {
+    font-weight: bold;
   }
 }
 </style>
