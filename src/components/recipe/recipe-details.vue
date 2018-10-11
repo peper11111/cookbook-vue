@@ -7,7 +7,7 @@
   ></detail-actions>
   <image-picker
     v-model="model.bannerId"
-    blank="/static/blank-banner.jpg"
+    :blank="blankBanner"
     :disabled="displayMode || previewMode"
     class="c-recipe-details__banner"
   ></image-picker>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import config from '@/config'
 import detail from '@/mixins/detail'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -68,6 +69,9 @@ export default {
   computed: {
     recipe () {
       return this.$store.state.recipe
+    },
+    blankBanner () {
+      return config.blankBanner
     }
   },
   methods: {

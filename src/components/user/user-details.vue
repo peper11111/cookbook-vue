@@ -7,14 +7,14 @@
   ></detail-actions>
   <image-picker
     v-model="model.bannerId"
-    blank="/static/blank-banner.jpg"
+    :blank="blankBanner"
     :disabled="displayMode || previewMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
       v-model="model.avatarId"
-      blank="/static/blank-avatar.jpg"
+      :blank="blankAvatar"
       :disabled="displayMode || previewMode"
       class="c-user-details__avatar"
     ></image-picker>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import config from '@/config'
 import detail from '@/mixins/detail'
 import { SET_USER } from '@/store/mutation-types'
 
@@ -56,6 +57,12 @@ export default {
     },
     user () {
       return this.$store.state.user
+    },
+    blankAvatar () {
+      return config.blankAvatar
+    },
+    blankBanner () {
+      return config.blankBanner
     }
   },
   methods: {

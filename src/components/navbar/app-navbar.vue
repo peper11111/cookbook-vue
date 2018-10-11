@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import config from '@/config'
+
 export default {
   name: 'AppNavbar',
   components: {
@@ -75,7 +77,7 @@ export default {
   },
   computed: {
     avatarSrc () {
-      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || '/static/blank-avatar.jpg'
+      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || config.blankAvatar
     },
     authUser () {
       return this.$store.state.auth.user

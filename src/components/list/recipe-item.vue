@@ -52,6 +52,7 @@
 
 <script>
 import moment from 'moment'
+import config from '@/config'
 
 export default {
   name: 'RecipeItem',
@@ -61,7 +62,7 @@ export default {
   },
   computed: {
     bannerSrc () {
-      return this.$helpers.thumbnailSrc(this.recipe.bannerId) || '/static/blank-banner.jpg'
+      return this.$helpers.thumbnailSrc(this.recipe.bannerId) || config.blankBanner
     },
     creationTime () {
       return moment(this.recipe.creationTime).fromNow()
