@@ -8,6 +8,10 @@
   class="o-form__select"
 >
   <option
+    value="null"
+    hidden="hidden"
+  ></option>
+  <option
     v-for="option in options"
     :key="option.value"
     :value="option.value"
