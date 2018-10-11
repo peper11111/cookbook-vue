@@ -122,6 +122,10 @@ export default {
     text-decoration: none;
     color: $color-text-primary;
     font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__time {
