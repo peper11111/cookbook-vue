@@ -71,6 +71,20 @@ export default {
     }
   },
   methods: {
+    create (params) {
+      // TODO Temporary solution until ingredients and steps creation is done
+      return this.$api.recipes.create({
+        ...params,
+        ingredients: [ 'składnik' ],
+        steps: [ 'krok' ]
+      }).then((value) => {
+        return this.$api.recipes.read(value.data)
+      }).then((value) => {
+        this.$store.commit(SET_RECIPE, value.data)
+        this.$notify.success('recipe-create-successful')
+        this.$router.push(`/recipe/${this.recipe.id}`)
+      })
+    },
     modify (params) {
       return this.$api.recipes.modify(this.recipe.id, params).then(() => {
         return this.$api.recipes.read(this.recipe.id)

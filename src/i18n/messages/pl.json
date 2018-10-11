@@ -23,6 +23,7 @@
     "password-reset": "Twoje hasło zostało zmienione",
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "recipe-update-successful": "Twój przepis został pomyślnie zaktualizowany",
+    "recipe-create-successful": "Nowy przepis został pomyślnie utworzony",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "image-created": "Nowy obraz został pomyślnie dodany",
     "image-deleted": "Wybrany obraz został pomyślnie usunięty"
