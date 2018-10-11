@@ -5,7 +5,6 @@
 >
   <div class="o-page__wrapper">
     <recipe-details mode="create"></recipe-details>
-    <div class="o-page__separator"></div>
   </div>
 </div>
 </template>
