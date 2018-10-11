@@ -4,7 +4,7 @@
   class="o-page"
 >
   <div class="o-page__wrapper">
-    <recipe-details></recipe-details>
+    <recipe-details mode="create"></recipe-details>
     <div class="o-page__separator"></div>
   </div>
 </div>

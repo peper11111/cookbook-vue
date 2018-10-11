@@ -1,6 +1,9 @@
 <template>
 <div class="c-recipe-content">
-  <div class="c-recipe-content__row">
+  <div
+    v-if="!createMode"
+    class="c-recipe-content__row"
+  >
     <router-link
       :to="`/user/${recipe.author.id}`"
       class="c-recipe-content__author"
@@ -23,7 +26,10 @@
     :placeholder="$t('recipe.placeholder.description')"
     class="c-recipe-content__description"
   ></form-textarea>
-  <div class="c-recipe-content__summary">
+  <div
+    v-if="!createMode"
+    class="c-recipe-content__summary"
+  >
     <i
       :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': displayMode }"
       @click="displayMode ? wrap(like) : null"
