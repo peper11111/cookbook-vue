@@ -94,8 +94,8 @@
   },
   "comment": {
     "response": "Wyświetl {0} odpowiedzi",
-    "comment-delete": "Czy napewno chcesz usunąć ten komentarz?"
-
+    "comment-delete": "Czy napewno chcesz usunąć ten komentarz?",
+    "no-comments": "Brak komenatrzy do wyświetlenia"
   },
   "recipe": {
     "placeholder": {

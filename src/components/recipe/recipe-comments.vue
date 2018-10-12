@@ -3,7 +3,16 @@
   <h1 class="c-recipe-comments__title">
     {{ $t('recipe.comments') }}
   </h1>
-  <comment-list :comments="comments"></comment-list>
+  <comment-list
+    v-if="comments.length !== 0"
+    :comments="comments"
+  ></comment-list>
+  <p
+    v-else
+    class="c-recipe-comments__text"
+  >
+    {{ $t('comment.no-comments') }}
+  </p>
 </div>
 </template>
 
@@ -46,6 +55,10 @@ export default {
   &__title {
     font-size: 24px;
     margin-bottom: 16px;
+  }
+
+  &__text {
+    text-align: center;
   }
 }
 </style>
