@@ -21,7 +21,10 @@
       </i>
     </div>
   </div>
-  <div class="c-recipe-list__wrapper">
+  <div
+    v-if="recipes.length !== 0"
+    class="c-recipe-list__wrapper"
+  >
     <recipe-item
       v-for="recipe in recipes"
       :key="recipe.id"
@@ -30,7 +33,7 @@
     ></recipe-item>
   </div>
   <p
-    v-if="recipes.length === 0"
+    v-else
     class="c-recipe-list__text"
   >
     {{ $t('list.no-recipes') }}
