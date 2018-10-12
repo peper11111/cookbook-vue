@@ -27,7 +27,7 @@ export default {
   mixins: [ requester ],
   data () {
     return {
-      comments: null
+      comments: []
     }
   },
   computed: {
