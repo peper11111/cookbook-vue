@@ -4,7 +4,7 @@
     <h1 class="o-card__header">
       {{ $t('global.app') }}
     </h1>
-    <div class="o-page__separator"></div>
+    <div class="o-page__separator o-page__separator--intro"></div>
     <form
       v-if="!done"
       @submit.prevent="wrap(reset)"
