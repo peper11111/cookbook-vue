@@ -4,7 +4,7 @@
     v-if="previewMode"
     :class="{ 'is-disabled': disabled }"
     @click="emitEvent('edit')"
-    class="o-button o-button--fab o-button__primary"
+    class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
       create
