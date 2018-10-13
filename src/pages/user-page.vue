@@ -6,7 +6,7 @@
   <div class="o-page__wrapper">
     <user-details :mode="mode"></user-details>
     <div class="o-page__separator"></div>
-    <recipe-list type="user-recipes"></recipe-list>
+    <user-recipes></user-recipes>
   </div>
 </div>
 </template>
@@ -19,8 +19,8 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserPage',
   components: {
-    RecipeList: () => import('@/components/list/recipe-list'),
-    UserDetails: () => import('@/components/user/user-details')
+    UserDetails: () => import('@/components/user/user-details'),
+    UserRecipes: () => import('@/components/user/user-recipes')
   },
   mixins: [ requester ],
   computed: {
