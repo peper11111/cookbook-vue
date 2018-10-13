@@ -37,17 +37,21 @@
         {{ $t('global.reply') }}
       </span>
     </div>
-    <p
-      v-if="comment.commentsCount !== 0 && !responses"
-      @click="responses = true"
-      class="c-comment-item__response"
+    <div
+      v-if="comment.commentsCount !== 0"
+      @click="responsesVisible = !responsesVisible"
+      class="c-comment-item__responses"
     >
-      {{ $t('comment.response', [ comment.commentsCount ]) }}
-    </p>
+      <span>
+        {{ responsesVisible ? $t('comment.hide-responses') : $t('comment.show-responses', [ comment.commentsCount ]) }}
+      </span>
+      <i class="material-icons">
+        {{ responsesVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+      </i>
+    </div>
     <comment-list
-      v-if="responses"
+      v-if="responsesVisible"
       :commentId="comment.id"
-      class="c-comment-item__list"
       type="comment-item"
     ></comment-list>
   </div>
@@ -70,7 +74,7 @@ export default {
   },
   data () {
     return {
-      responses: false
+      responsesVisible: false
     }
   },
   computed: {
@@ -156,14 +160,12 @@ export default {
     }
   }
 
-  &__response {
+  &__responses {
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     cursor: pointer;
-  }
-
-  &__list {
-    margin-top: 16px;
+    display: flex;
+    align-items: center;
   }
 }
 </style>

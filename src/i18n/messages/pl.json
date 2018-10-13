@@ -93,7 +93,8 @@
     "unfollow": "Przestań obserwować"
   },
   "comment": {
-    "response": "Wyświetl {0} odpowiedzi",
+    "show-responses": "Wyświetl {0} odpowiedzi",
+    "hide-responses": "Ukryj odpowiedzi",
     "comment-delete": "Czy napewno chcesz usunąć ten komentarz?",
     "no-comments": "Brak komenatrzy do wyświetlenia"
   },
