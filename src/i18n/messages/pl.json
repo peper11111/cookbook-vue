@@ -6,7 +6,8 @@
     "edit": "Edytuj",
     "cancel": "Anuluj",
     "delete": "Usuń",
-    "reply": "Odpowiedz"
+    "reply": "Odpowiedz",
+    "comment": "Skomentuj"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
@@ -96,7 +97,7 @@
     "show-responses": "Wyświetl {0} odpowiedzi",
     "hide-responses": "Ukryj odpowiedzi",
     "comment-delete": "Czy napewno chcesz usunąć ten komentarz?",
-    "no-comments": "Brak komenatrzy do wyświetlenia"
+    "placeholder": "Dodaj nowy komentarz"
   },
   "recipe": {
     "placeholder": {
