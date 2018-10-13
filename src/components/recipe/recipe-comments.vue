@@ -3,7 +3,10 @@
   <h1 class="c-recipe-comments__title">
     {{ $t('recipe.comments') }}
   </h1>
-  <comment-list type="recipe-comments"></comment-list>
+  <comment-list
+    :recipeId="recipe.id"
+    type="recipe-comments"
+  ></comment-list>
 </div>
 </template>
 
@@ -12,6 +15,11 @@ export default {
   name: 'RecipeComments',
   components: {
     CommentList: () => import('@/components/list/comment-list')
+  },
+  computed: {
+    recipe () {
+      return this.$store.state.recipe
+    }
   }
 }
 </script>

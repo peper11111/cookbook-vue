@@ -19,18 +19,14 @@ export default {
   mixins: [ scroll ],
   props: {
     commentId: Number,
+    recipeId: Number,
     type: String
-  },
-  computed: {
-    recipe () {
-      return this.$store.state.recipe
-    }
   },
   methods: {
     getFetchMethod () {
       switch (this.type) {
         case 'recipe-comments':
-          return this.$api.recipes.readComments(this.recipe.id, { page: this.page++ })
+          return this.$api.recipes.readComments(this.recipeId, { page: this.page++ })
         case 'comment-item':
           return this.$api.comments.readComments(this.commentId, { page: this.page++ })
         default:
