@@ -38,11 +38,18 @@
       </span>
     </div>
     <p
-      v-if="comment.commentsCount !== 0"
+      v-if="comment.commentsCount !== 0 && !responses"
+      @click="responses = true"
       class="c-comment-item__response"
     >
       {{ $t('comment.response', [ comment.commentsCount ]) }}
     </p>
+    <comment-list
+      v-if="responses"
+      :commentId="comment.id"
+      class="c-comment-item__list"
+      type="comment-item"
+    ></comment-list>
   </div>
 </div>
 </template>
@@ -54,9 +61,17 @@ import requester from '@/mixins/requester'
 
 export default {
   name: 'CommentItem',
+  components: {
+    CommentList: () => import('@/components/list/comment-list')
+  },
   mixins: [ requester ],
   props: {
     comment: Object
+  },
+  data () {
+    return {
+      responses: false
+    }
   },
   computed: {
     authUser () {
@@ -145,6 +160,10 @@ export default {
     font-weight: bold;
     margin-bottom: 8px;
     cursor: pointer;
+  }
+
+  &__list {
+    margin-top: 16px;
   }
 }
 </style>

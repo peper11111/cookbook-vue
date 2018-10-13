@@ -18,6 +18,7 @@ export default {
   },
   mixins: [ scroll ],
   props: {
+    commentId: Number,
     type: String
   },
   computed: {
@@ -30,6 +31,8 @@ export default {
       switch (this.type) {
         case 'recipe-comments':
           return this.$api.recipes.readComments(this.recipe.id, { page: this.page++ })
+        case 'comment-item':
+          return this.$api.comments.readComments(this.commentId, { page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }
