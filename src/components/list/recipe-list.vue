@@ -22,11 +22,11 @@
     </div>
   </div>
   <div
-    v-if="recipes.length !== 0"
+    v-if="items.length !== 0"
     class="c-recipe-list__wrapper"
   >
     <recipe-item
-      v-for="recipe in recipes"
+      v-for="recipe in items"
       :key="recipe.id"
       :grid="isActiveMode('grid')"
       :recipe="recipe"
@@ -42,43 +42,26 @@
 </template>
 
 <script>
-import config from '@/config'
-import requester from '@/mixins/requester'
-import { ADD_RECIPES, REMOVE_RECIPES } from '@/store/mutation-types'
+import scroll from '@/mixins/scroll'
 
 export default {
   name: 'RecipeList',
   components: {
     RecipeItem: () => import('@/components/list/recipe-item')
   },
-  mixins: [ requester ],
+  mixins: [ scroll ],
   props: {
     type: String
   },
   data () {
     return {
-      done: false,
-      mode: 'grid',
-      page: 1
+      mode: 'grid'
     }
   },
   computed: {
-    recipes () {
-      return this.$store.state.recipes
-    },
     user () {
       return this.$store.state.user
     }
-  },
-  created () {
-    this.$store.commit(REMOVE_RECIPES)
-    this.wrap(this.fetchRecipes)
-  },
-  mounted () {
-    window.addEventListener('scroll', this.onScroll)
-  },
-  beforeDestroy () {
-    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
     isActiveMode (mode) {
@@ -87,23 +70,7 @@ export default {
     setActiveMode (mode) {
       this.mode = mode
     },
-    onScroll () {
-      if (this.pending || this.done) {
-        return
-      }
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
-        this.wrap(this.fetchRecipes)
-      }
-    },
-    fetchRecipes () {
-      return this.getRecipesMethod().then((value) => {
-        this.$store.commit(ADD_RECIPES, value.data)
-        if (value.data.length < config.pageSize) {
-          this.done = true
-        }
-      })
-    },
-    getRecipesMethod () {
+    getFetchMethod () {
       switch (this.type) {
         case 'user-recipes':
           return this.$api.users.readRecipes(this.user.id, { page: this.page++ })
