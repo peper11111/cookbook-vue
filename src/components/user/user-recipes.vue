@@ -23,6 +23,7 @@
   </div>
   <recipe-list
     :mode="mode"
+    :userId="user.id"
     type="user-recipes"
   ></recipe-list>
 </div>
@@ -37,6 +38,11 @@ export default {
   data () {
     return {
       mode: 'grid'
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {

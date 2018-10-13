@@ -30,18 +30,14 @@ export default {
   props: {
     blank: String,
     mode: String,
-    type: String
-  },
-  computed: {
-    user () {
-      return this.$store.state.user
-    }
+    type: String,
+    userId: Number
   },
   methods: {
     getFetchMethod () {
       switch (this.type) {
         case 'user-recipes':
-          return this.$api.users.readRecipes(this.user.id, { page: this.page++ })
+          return this.$api.users.readRecipes(this.userId, { page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }
