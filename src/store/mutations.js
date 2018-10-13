@@ -20,12 +20,6 @@ export default {
   [MutationTypes.SET_USER] (state, payload) {
     state.user = payload
   },
-  [MutationTypes.ADD_RECIPES] (state, payload) {
-    state.recipes.push(...payload)
-  },
-  [MutationTypes.REMOVE_RECIPES] (state) {
-    state.recipes = []
-  },
   [MutationTypes.SET_RECIPE] (state, payload) {
     state.recipe = payload
   },
