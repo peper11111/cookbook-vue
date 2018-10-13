@@ -1,7 +1,7 @@
 <template>
 <div class="c-comment-item">
   <img
-    :src="imageSrc"
+    :src="avatarSrc"
     class="c-comment-item__image"
   />
   <div class="c-comment-item__wrapper">
@@ -81,7 +81,7 @@ export default {
     authUser () {
       return this.$store.state.auth.user
     },
-    imageSrc () {
+    avatarSrc () {
       return this.$helpers.thumbnailSrc(this.comment.author.avatarId) || config.blankAvatar
     },
     creationTime () {
