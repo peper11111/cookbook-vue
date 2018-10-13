@@ -12,12 +12,17 @@
     />
     <div class="c-comment-input__buttons">
       <button
+        :class="{ 'is-disabled': pending }"
         @click="comment = ''"
         class="o-button o-button__primary"
       >
         {{ $t('global.cancel') }}
       </button>
-      <button class="o-button o-button__accent">
+      <button
+        :class="{ 'is-disabled': pending }"
+        @click="wrap(createComment)"
+        class="o-button o-button__accent"
+      >
         {{ $t('global.comment') }}
       </button>
     </div>
@@ -27,9 +32,14 @@
 
 <script>
 import config from '@/config'
+import requester from '@/mixins/requester'
 
 export default {
   name: 'CommentInput',
+  mixins: [ requester ],
+  props: {
+    recipeId: Number
+  },
   data () {
     return {
       comment: ''
@@ -41,6 +51,17 @@ export default {
     },
     avatarSrc () {
       return this.$helpers.thumbnailSrc(this.authUser.avatarId) || config.blankAvatar
+    }
+  },
+  methods: {
+    createComment () {
+      return this.$api.comments.create({
+        content: this.comment,
+        recipeId: this.recipeId
+      }).then(() => {
+        this.comment = ''
+        this.$notify.success('comment-create-successful')
+      })
     }
   }
 }

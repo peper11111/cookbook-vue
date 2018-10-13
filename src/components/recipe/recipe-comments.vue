@@ -3,7 +3,10 @@
   <h1 class="c-recipe-comments__title">
     {{ $t('recipe.comments') }}
   </h1>
-  <comment-input class="c-recipe-comments__input"></comment-input>
+  <comment-input
+    :recipeId="recipe.id"
+    class="c-recipe-comments__input"
+  ></comment-input>
   <comment-list
     :recipeId="recipe.id"
     type="recipe-comments"
