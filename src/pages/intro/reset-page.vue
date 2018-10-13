@@ -13,7 +13,7 @@
       <input
         v-model="login"
         :placeholder="$t('form.login')"
-        class="o-form__input"
+        class="o-form__input o-form__input--full"
         type="text"
       />
       <input

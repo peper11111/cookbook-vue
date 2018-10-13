@@ -14,7 +14,7 @@
           v-model="password"
           :placeholder="$t('form.new-password')"
           :type="getPasswordFieldType()"
-          class="o-form__input"
+          class="o-form__input o-form__input--full"
         />
         <div
           :class="{ 'is-active': passwordVisible }"

@@ -7,7 +7,7 @@
     <input
       v-model="search"
       :placeholder="$t('form.search')"
-      class="c-navbar-search__input o-form__input"
+      class="c-navbar-search__input o-form__input o-form__input--full"
     />
     <div
       @click="submit"

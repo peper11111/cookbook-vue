@@ -12,7 +12,7 @@
       <input
         v-model="login"
         :placeholder="$t('form.login')"
-        class="o-form__input"
+        class="o-form__input o-form__input--full"
         type="text"
       />
       <div class="o-form__wrapper">
@@ -20,7 +20,7 @@
           v-model="password"
           :placeholder="$t('form.password')"
           :type="getPasswordFieldType()"
-          class="o-form__input"
+          class="o-form__input o-form__input--full"
         />
         <div
           :class="{ 'is-active': passwordVisible }"
