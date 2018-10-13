@@ -17,6 +17,9 @@ export default {
     CommentItem: () => import('@/components/list/comment-item')
   },
   mixins: [ scroll ],
+  props: {
+    type: String
+  },
   computed: {
     recipe () {
       return this.$store.state.recipe
@@ -24,7 +27,12 @@ export default {
   },
   methods: {
     getFetchMethod () {
-      return this.$api.recipes.readComments(this.recipe.id, { page: this.page })
+      switch (this.type) {
+        case 'recipe-comments':
+          return this.$api.recipes.readComments(this.recipe.id, { page: this.page++ })
+        default:
+          return Promise.resolve({ data: [] })
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
   <h1 class="c-recipe-comments__title">
     {{ $t('recipe.comments') }}
   </h1>
-  <comment-list class="c-recipe-comments__list"></comment-list>
+  <comment-list type="recipe-comments"></comment-list>
 </div>
 </template>
 
