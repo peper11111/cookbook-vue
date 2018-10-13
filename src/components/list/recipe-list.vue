@@ -1,11 +1,20 @@
 <template>
-<div class="c-recipe-list">
+<div
+  v-if="items.length !== 0"
+  class="c-recipe-list"
+>
   <recipe-item
     v-for="recipe in items"
     :key="recipe.id"
     :mode="mode"
     :recipe="recipe"
   ></recipe-item>
+</div>
+<div
+  v-else
+  class="c-recipe-list__text"
+>
+  {{ $t('list.no-recipes') }}
 </div>
 </template>
 
@@ -19,6 +28,7 @@ export default {
   },
   mixins: [ scroll ],
   props: {
+    blank: String,
     mode: String,
     type: String
   },
@@ -44,5 +54,10 @@ export default {
 .c-recipe-list {
   display: flex;
   flex-wrap: wrap;
+
+  &__text {
+    margin-top: 16px;
+    text-align: center;
+  }
 }
 </style>
