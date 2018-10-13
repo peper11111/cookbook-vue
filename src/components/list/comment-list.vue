@@ -1,7 +1,7 @@
 <template>
 <div class="c-comment-list">
   <comment-item
-    v-for="comment in comments"
+    v-for="comment in items"
     :key="comment.id"
     :comment="comment"
   ></comment-item>
@@ -9,18 +9,30 @@
 </template>
 
 <script>
+import scroll from '@/mixins/scroll'
+
 export default {
   name: 'CommentList',
   components: {
     CommentItem: () => import('@/components/list/comment-item')
   },
-  props: {
-    comments: Array
+  mixins: [ scroll ],
+  computed: {
+    recipe () {
+      return this.$store.state.recipe
+    }
+  },
+  methods: {
+    getFetchMethod () {
+      return this.$api.recipes.readComments(this.recipe.id, { page: this.page })
+    }
   }
 }
 </script>
 
 <style lang="scss">
 .c-comment-list {
+  display: flex;
+  flex-direction: column;
 }
 </style>
