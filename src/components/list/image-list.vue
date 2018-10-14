@@ -121,17 +121,16 @@ export default {
       this.current = id !== this.current ? id : null
     },
     deleteImage (id) {
-      if (confirm(this.$t('list.image-delete'))) {
-        if (this.current === id) {
-          this.current = null
-        }
-        return this.$api.uploads.delete(id).then(() => {
-          this.$notify.success('image-deleted')
-          return this.init()
-        })
-      } else {
+      if (!confirm(this.$t('list.image-delete'))) {
         return Promise.resolve()
       }
+      if (this.current === id) {
+        this.current = null
+      }
+      return this.$api.uploads.delete(id).then(() => {
+        this.$notify.success('image-deleted')
+        return this.init()
+      })
     },
     onInput (file) {
       if (file && file.size > config.maxFileSize) {

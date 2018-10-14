@@ -27,6 +27,7 @@
     "user-verified": "Aktywacja przebiegła pomyślnie",
     "recipe-update-successful": "Twój przepis został pomyślnie zaktualizowany",
     "recipe-create-successful": "Nowy przepis został pomyślnie utworzony",
+    "recipe-delete-successful": "Twój przepis został usunięty",
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "image-created": "Nowy obraz został pomyślnie dodany",
     "image-deleted": "Wybrany obraz został pomyślnie usunięty",
@@ -105,6 +106,7 @@
       "title": "Podaj tytuł twojego przepisu",
       "description": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
+    "recipe-delete": "Czy napewno chcesz usunąć ten przepis?",
     "cuisine-type": "Typ kuchni",
     "category-type": "Kategoria",
     "difficulty": "Poziom trudności",

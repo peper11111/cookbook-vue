@@ -94,6 +94,15 @@ export default {
         this.$store.commit(SET_RECIPE, value.data)
         this.$notify.success('recipe-update-successful')
       })
+    },
+    delete () {
+      if (!confirm(this.$t('recipe.recipe-delete'))) {
+        return Promise.resolve()
+      }
+      return this.$api.recipes.delete(this.recipe.id).then(() => {
+        this.$notify.success('recipe-delete-successful')
+        this.$router.push('/')
+      })
     }
   }
 }
