@@ -1,9 +1,9 @@
 <template>
 <div class="c-ingredient-list">
   <ingredient-item
-    v-for="(item, index) in models.ingredients"
+    v-for="(ingredient, index) in models.ingredients"
     :key="index"
-    :item="item"
+    :ingredient="ingredient"
   ></ingredient-item>
 </div>
 </template>

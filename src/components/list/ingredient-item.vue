@@ -11,7 +11,7 @@
     :class="{ 'is-checked': checked }"
     class="c-ingredient-item__label"
   >
-    {{ item }}
+    {{ ingredient }}
   </span>
 </div>
 </template>
@@ -20,7 +20,7 @@
 export default {
   name: 'IngredientItem',
   props: {
-    item: String
+    ingredient: String
   },
   data () {
     return {
