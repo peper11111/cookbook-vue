@@ -9,7 +9,7 @@
   <image-picker
     v-model="model.bannerId"
     :blank="blankBanner"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     class="c-recipe-details__banner"
   ></image-picker>
   <div class="c-recipe-details__wrapper">

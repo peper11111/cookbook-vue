@@ -8,9 +8,6 @@ export default {
     createMode () {
       return this.mode === ModeTypes.CREATE
     },
-    displayMode () {
-      return this.mode === ModeTypes.DISPLAY
-    },
     editMode () {
       return this.mode === ModeTypes.EDIT
     },

@@ -9,14 +9,14 @@
   <image-picker
     v-model="model.bannerId"
     :blank="blankBanner"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
       v-model="model.avatarId"
       :blank="blankAvatar"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
       class="c-user-details__avatar"
     ></image-picker>
     <user-content
