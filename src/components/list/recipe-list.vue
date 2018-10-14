@@ -36,6 +36,8 @@ export default {
   methods: {
     getFetchMethod () {
       switch (this.type) {
+        case 'recipes':
+          return this.$api.recipes.readAll({ page: this.page++ })
         case 'user-recipes':
           return this.$api.users.readRecipes(this.userId, { page: this.page++ })
         default:
