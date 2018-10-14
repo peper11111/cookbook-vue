@@ -33,8 +33,8 @@
         :key="image.id"
         :image="image"
         :selected="current === image.id"
-        @delete="onDelete(image.id)"
-        @select="onSelect(image.id)"
+        @delete="wrap(deleteImage(image.id))"
+        @select="selectImage(image.id)"
       ></image-item>
     </div>
     <div class="c-image-list__buttons">
@@ -117,22 +117,21 @@ export default {
         }
       })
     },
-    onSelect (id) {
+    selectImage (id) {
       this.current = id !== this.current ? id : null
     },
-    onDelete (id) {
+    deleteImage (id) {
       if (confirm(this.$t('list.image-delete'))) {
         if (this.current === id) {
           this.current = null
         }
-        this.wrap(this.deleteImage(id))
+        return this.$api.uploads.delete(id).then(() => {
+          this.$notify.success('image-deleted')
+          return this.init()
+        })
+      } else {
+        return Promise.resolve()
       }
-    },
-    deleteImage (id) {
-      return this.$api.uploads.delete(id).then(() => {
-        this.$notify.success('image-deleted')
-        return this.init()
-      })
     },
     onInput (file) {
       if (file && file.size > config.maxFileSize) {
