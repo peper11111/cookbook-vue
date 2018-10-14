@@ -19,13 +19,18 @@ export default {
   components: {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
+  computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    }
+  },
   created () {
     this.wrap(this.fetchRecipe())
   },
   methods: {
     fetchRecipe () {
       return new Promise((resolve) => {
-        this.$store.commit(SET_RECIPE, {})
+        this.$store.commit(SET_RECIPE, { author: this.authUser })
         resolve()
       })
     }

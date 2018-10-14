@@ -19,9 +19,17 @@ export default {
   },
   [MutationTypes.SET_USER] (state, payload) {
     state.user = payload
+    state.user.permissions = {
+      canDelete: false,
+      canEdit: state.user.id === state.auth.user.id
+    }
   },
   [MutationTypes.SET_RECIPE] (state, payload) {
     state.recipe = payload
+    state.recipe.permissions = {
+      canDelete: state.recipe.author.id === state.auth.user.id,
+      canEdit: state.recipe.author.id === state.auth.user.id
+    }
   },
   [MutationTypes.ADD_IMAGES] (state, payload) {
     state.images.push(...payload)

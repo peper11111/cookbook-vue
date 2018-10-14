@@ -3,6 +3,7 @@
   <detail-actions
     :disabled="pending"
     :mode="localMode"
+    :permissions="user.permissions"
     @action="onAction"
   ></detail-actions>
   <image-picker

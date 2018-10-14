@@ -1,19 +1,29 @@
 <template>
 <div class="c-detail-actions">
   <button
-    v-if="previewMode"
+    v-if="previewMode && permissions.canDelete"
+    :class="{ 'is-disabled': disabled }"
+    @click="emitEvent('delete')"
+    class="o-button o-button--fab o-button__primary"
+  >
+    <i class="material-icons">
+      delete
+    </i>
+  </button>
+  <button
+    v-if="previewMode && permissions.canEdit"
     :class="{ 'is-disabled': disabled }"
     @click="emitEvent('edit')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
-      create
+      edit
     </i>
   </button>
   <button
     v-if="editMode"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('cancel')"
+    @click="emitEvent('clear')"
     class="o-button o-button--fab o-button__primary"
   >
     <i class="material-icons">
@@ -21,13 +31,23 @@
     </i>
   </button>
   <button
-    v-if="createMode || editMode"
+    v-if="editMode"
     :class="{ 'is-disabled': disabled }"
     @click="emitEvent('save')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
       save
+    </i>
+  </button>
+  <button
+    v-if="createMode"
+    :class="{ 'is-disabled': disabled }"
+    @click="emitEvent('add')"
+    class="o-button o-button--fab o-button__accent"
+  >
+    <i class="material-icons">
+      add
     </i>
   </button>
 </div>
@@ -40,7 +60,8 @@ export default {
   name: 'DetailActions',
   mixins: [ modeContext ],
   props: {
-    disabled: Boolean
+    disabled: Boolean,
+    permissions: Object
   },
   methods: {
     emitEvent (action) {

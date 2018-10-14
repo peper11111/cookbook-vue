@@ -51,15 +51,21 @@ export default {
         case 'edit':
           this.localMode = ModeTypes.EDIT
           break
-        case 'cancel':
+        case 'clear':
           this.init()
           this.localMode = ModeTypes.PREVIEW
           break
+        case 'add':
+          this.wrap(this.create(this.getParams()))
+          break
         case 'save':
-          const params = this.getParams()
-          this.wrap(this.createMode ? this.create(params) : this.modify(params).then(() => {
+          this.wrap(this.modify(this.getParams()).then(() => {
             this.localMode = ModeTypes.PREVIEW
           }))
+          break
+        case 'delete':
+          this.wrap(this.delete())
+          break
       }
     }
   }
