@@ -31,7 +31,7 @@ export default {
 <style lang="scss">
 .c-home-page {
   &__buttons {
-    margin-top: 16px;
+    padding-top: 16px;
   }
 }
 </style>

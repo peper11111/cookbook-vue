@@ -40,6 +40,8 @@ export default {
           return this.$api.recipes.readAll({ page: this.page++ })
         case 'user-recipes':
           return this.$api.users.readRecipes(this.userId, { page: this.page++ })
+        case 'user-favourites':
+          return this.$api.users.readFavourites(this.userId, { page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }
