@@ -4,6 +4,7 @@
 </div>
 <input
   v-else
+  :maxlength="maxlength"
   :placeholder="placeholder"
   :value="value"
   @input="onInput"
@@ -17,7 +18,11 @@ export default {
   props: {
     disabled: Boolean,
     placeholder: String,
-    value: [ String, Number ]
+    value: [ String, Number ],
+    maxlength: {
+      default: 255,
+      type: Number
+    }
   },
   methods: {
     onInput (event) {
