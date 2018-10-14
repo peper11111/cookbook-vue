@@ -7,21 +7,21 @@
     @action="onAction"
   ></detail-actions>
   <image-picker
-    v-model="model.bannerId"
+    v-model="models.bannerId"
     :blank="blankBanner"
     :disabled="previewMode"
     class="c-user-details__banner"
   ></image-picker>
   <div class="c-user-details__wrapper">
     <image-picker
-      v-model="model.avatarId"
+      v-model="models.avatarId"
       :blank="blankAvatar"
       :disabled="previewMode"
       class="c-user-details__avatar"
     ></image-picker>
     <user-content
       :mode="mode"
-      :model="model"
+      :models="models"
       class="c-user-details__content"
     ></user-content>
   </div>
@@ -44,7 +44,7 @@ export default {
   data () {
     return {
       modelSrc: 'user',
-      model: {
+      models: {
         avatarId: null,
         bannerId: null,
         name: null,

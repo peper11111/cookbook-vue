@@ -5,7 +5,7 @@
       {{ $t('recipe.cuisine-type') }}
     </span>
     <form-select
-      v-model="model.cuisineId"
+      v-model="models.cuisineId"
       :disabled="previewMode"
       :options="cuisines"
       class="c-recipe-info__value"
@@ -16,7 +16,7 @@
       {{ $t('recipe.category-type') }}
     </span>
     <form-select
-      v-model="model.categoryId"
+      v-model="models.categoryId"
       :disabled="previewMode"
       :options="categories"
       class="c-recipe-info__value"
@@ -27,7 +27,7 @@
       {{ $t('recipe.difficulty') }}
     </span>
     <rating-bar
-      v-model="model.difficulty"
+      v-model="models.difficulty"
       :disabled="previewMode"
       class="c-recipe-info__value"
     ></rating-bar>
@@ -37,7 +37,7 @@
       {{ $t('recipe.plates') }}
     </span>
     <form-input
-      v-model="model.plates"
+      v-model="models.plates"
       :disabled="previewMode"
       class="c-recipe-info__value"
     ></form-input>
@@ -47,7 +47,7 @@
       {{ $t('recipe.preparation-time') }}
     </span>
     <time-input
-      v-model="model.preparationTime"
+      v-model="models.preparationTime"
       :disabled="previewMode"
     ></time-input>
   </div>
@@ -68,7 +68,7 @@ export default {
   },
   mixins: [ modeContext ],
   props: {
-    model: Object
+    models: Object
   },
   computed: {
     cuisines () {

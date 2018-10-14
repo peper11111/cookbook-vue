@@ -8,7 +8,7 @@
     @action="onAction"
   ></detail-actions>
   <image-picker
-    v-model="model.bannerId"
+    v-model="models.bannerId"
     :blank="blankBanner"
     :disabled="previewMode"
     class="c-recipe-details__banner"
@@ -17,12 +17,12 @@
     <div class="c-recipe-details__row">
       <recipe-content
         :mode="mode"
-        :model="model"
+        :models="models"
         class="c-recipe-details__content"
       ></recipe-content>
       <recipe-info
         :mode="mode"
-        :model="model"
+        :models="models"
         class="c-recipe-details__info"
       ></recipe-info>
     </div>
@@ -30,7 +30,7 @@
     <div class="c-recipe-details__row">
       <ingredient-list
         :mode="mode"
-        :model="model"
+        :models="models"
       ></ingredient-list>
     </div>
   </div>
@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       modelSrc: 'recipe',
-      model: {
+      models: {
         bannerId: null,
         title: null,
         description: null,

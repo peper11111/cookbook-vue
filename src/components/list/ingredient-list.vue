@@ -5,7 +5,7 @@
   </h1>
   <div class="c-ingredient-list__wrapper">
     <ingredient-item
-      v-for="(item, index) in model.ingredients"
+      v-for="(item, index) in models.ingredients"
       :key="index"
       :item="item"
     ></ingredient-item>
@@ -23,7 +23,7 @@ export default {
   },
   mixins: [ modeContext ],
   props: {
-    model: Object
+    models: Object
   }
 }
 </script>

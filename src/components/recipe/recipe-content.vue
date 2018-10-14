@@ -15,13 +15,13 @@
     </span>
   </div>
   <form-input
-    v-model="model.title"
+    v-model="models.title"
     :disabled="previewMode"
     :placeholder="$t('recipe.placeholder.title')"
     class="c-recipe-content__title"
   ></form-input>
   <form-textarea
-    v-model="model.description"
+    v-model="models.description"
     :disabled="previewMode"
     :placeholder="$t('recipe.placeholder.description')"
     class="c-recipe-content__description"
@@ -74,7 +74,7 @@ export default {
   },
   mixins: [ modeContext, requester ],
   props: {
-    model: Object
+    models: Object
   },
   computed: {
     authUser () {

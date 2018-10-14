@@ -12,21 +12,21 @@ export default {
   },
   methods: {
     init () {
-      for (const key in this.model) {
-        if (!this.model.hasOwnProperty(key)) {
+      for (const key in this.models) {
+        if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        this.model[key] = this[this.modelSrc][key]
+        this.models[key] = this[this.modelSrc][key]
       }
     },
     getParams () {
       const params = {}
-      for (const key in this.model) {
-        if (!this.model.hasOwnProperty(key)) {
+      for (const key in this.models) {
+        if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        if (this.model[key] !== this[this.modelSrc][key]) {
-          params[key] = this.model[key]
+        if (this.models[key] !== this[this.modelSrc][key]) {
+          params[key] = this.models[key]
         }
       }
       return params

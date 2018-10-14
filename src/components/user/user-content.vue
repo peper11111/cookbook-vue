@@ -34,13 +34,13 @@
     </span>
   </div>
   <form-input
-    v-model="model.name"
+    v-model="models.name"
     :disabled="previewMode"
     :placeholder="$t('user.placeholder.name')"
     class="c-user-content__row c-user-content__name"
   ></form-input>
   <form-textarea
-    v-model="model.biography"
+    v-model="models.biography"
     :disabled="previewMode"
     :placeholder="$t('user.placeholder.biography')"
     class="c-user-content__row"
@@ -61,7 +61,7 @@ export default {
   },
   mixins: [ modeContext, requester ],
   props: {
-    model: Object
+    models: Object
   },
   computed: {
     authUser () {
