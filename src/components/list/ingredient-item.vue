@@ -13,15 +13,16 @@
   </i>
   <i
     v-else
-    @click="$emit('delete')"
+    @click="$emit('delete', index)"
     class="material-icons c-ingredient-item__remove"
   >
     remove
   </i>
   <form-input
-    v-model="ingredient"
     :class="{ 'is-checked': checked && previewMode }"
     :disabled="previewMode"
+    :value="ingredient"
+    @input="$emit('input', index, $event)"
     class="c-ingredient-item__label"
   ></form-input>
 </div>
@@ -37,7 +38,8 @@ export default {
   },
   mixins: [ modeContext ],
   props: {
-    ingredient: String
+    ingredient: String,
+    index: Number
   },
   data () {
     return {

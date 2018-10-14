@@ -4,8 +4,10 @@
     v-for="(ingredient, index) in value"
     :key="index"
     :ingredient="ingredient"
+    :index="index"
     :mode="mode"
-    @delete="deleteIngredient(index)"
+    @delete="deleteIngredient"
+    @input="modifyIngredient"
   ></ingredient-item>
   <div
     v-if="!previewMode"
@@ -36,10 +38,19 @@ export default {
   },
   methods: {
     addIngredient () {
-      this.$emit('input', [...this.value, ''])
+      const ingredients = this.value.slice(0)
+      ingredients.push('')
+      this.$emit('input', ingredients)
     },
     deleteIngredient (index) {
-      this.$emit('input', this.value.filter((ingredient, idx) => idx !== index))
+      const ingredients = this.value.slice(0)
+      ingredients.splice(index, 1)
+      this.$emit('input', ingredients)
+    },
+    modifyIngredient (index, content) {
+      const ingredients = this.value.slice(0)
+      ingredients[index] = content
+      this.$emit('input', ingredients)
     }
   }
 }
