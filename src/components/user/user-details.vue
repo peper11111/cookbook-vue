@@ -3,7 +3,7 @@
   <detail-actions
     :disabled="pending"
     :mode="mode"
-    :permissions="user.permissions"
+    :canEdit="isAuthUser"
     @action="onAction"
   ></detail-actions>
   <image-picker
@@ -64,6 +64,9 @@ export default {
     },
     blankBanner () {
       return config.blankBanner
+    },
+    isAuthUser () {
+      return this.user.id === this.authUser.id
     }
   },
   methods: {

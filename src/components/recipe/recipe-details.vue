@@ -3,7 +3,8 @@
   <detail-actions
     :disabled="pending"
     :mode="mode"
-    :permissions="recipe.permissions"
+    :canEdit="isAuthor"
+    :canDelete="isAuthor"
     @action="onAction"
   ></detail-actions>
   <image-picker
@@ -68,11 +69,17 @@ export default {
     }
   },
   computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    },
     recipe () {
       return this.$store.state.recipe
     },
     blankBanner () {
       return config.blankBanner
+    },
+    isAuthor () {
+      return this.recipe.author.id === this.authUser.id
     }
   },
   methods: {
