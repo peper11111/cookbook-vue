@@ -89,7 +89,7 @@ export default {
     }
   },
   created () {
-    this.wrap(this.init)
+    this.wrap(this.init())
   },
   methods: {
     init () {
@@ -106,7 +106,7 @@ export default {
         return
       }
       if (this.$refs.wrapper.offsetHeight + this.$refs.wrapper.scrollTop >= this.$refs.wrapper.scrollHeight - 300) {
-        this.wrap(this.fetchImages)
+        this.wrap(this.fetchImages())
       }
     },
     fetchImages () {
@@ -125,7 +125,7 @@ export default {
         if (this.current === id) {
           this.current = null
         }
-        this.wrap(this.deleteImage, id)
+        this.wrap(this.deleteImage(id))
       }
     },
     deleteImage (id) {
@@ -140,7 +140,7 @@ export default {
         return
       }
       this.$refs.input.value = null
-      this.wrap(this.uploadImage, file)
+      this.wrap(this.uploadImage(file))
     },
     uploadImage (file) {
       const formData = new FormData()

@@ -32,7 +32,7 @@
   >
     <i
       :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': displayMode }"
-      @click="displayMode ? wrap(like) : null"
+      @click="displayMode ? wrap(like()) : null"
       class="material-icons"
     >
       thumb_up
@@ -42,7 +42,7 @@
   </span>
     <i
       :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': displayMode }"
-      @click="displayMode ? wrap(favourite) : null"
+      @click="displayMode ? wrap(favourite()) : null"
       class="material-icons"
     >
       book

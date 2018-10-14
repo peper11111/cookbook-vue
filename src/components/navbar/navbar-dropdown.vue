@@ -16,7 +16,7 @@
   </router-link>
   <li class="c-navbar-dropdown__separator"></li>
   <li
-    @click="wrap(signOut)"
+    @click="wrap(signOut())"
     class="c-navbar-dropdown__item"
   >
     {{ $t('navbar.sign-out') }}

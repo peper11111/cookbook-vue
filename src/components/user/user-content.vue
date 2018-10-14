@@ -7,7 +7,7 @@
     <button
       v-if="displayMode"
       :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
-      @click="wrap(follow)"
+      @click="wrap(follow())"
       class="o-button"
     >
       {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}

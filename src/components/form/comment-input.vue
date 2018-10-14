@@ -20,7 +20,7 @@
       </button>
       <button
         :class="{ 'is-disabled': pending }"
-        @click="wrap(createComment)"
+        @click="wrap(createComment())"
         class="o-button o-button__accent"
       >
         {{ $t('global.comment') }}

@@ -24,7 +24,7 @@ export default {
   },
   created () {
     if (this.loggedIn) {
-      this.wrap(this.$helpers.fetchGlobalData)
+      this.wrap(this.$helpers.fetchGlobalData())
     }
   }
 }

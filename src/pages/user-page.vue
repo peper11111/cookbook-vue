@@ -35,7 +35,7 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchUser)
+    this.wrap(this.fetchUser())
   },
   methods: {
     fetchUser () {

@@ -5,12 +5,12 @@ export default {
     }
   },
   methods: {
-    wrap (request, params) {
+    wrap (request) {
       if (this.pending) {
         return
       }
       this.pending = true
-      return request(params).finally(() => {
+      return request.finally(() => {
         this.pending = false
       })
     }

@@ -20,7 +20,7 @@ export default {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   created () {
-    this.wrap(this.fetchRecipe)
+    this.wrap(this.fetchRecipe())
   },
   methods: {
     fetchRecipe () {

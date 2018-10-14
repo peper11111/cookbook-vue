@@ -7,7 +7,7 @@
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
       v-if="!done"
-      @submit.prevent="wrap(register)"
+      @submit.prevent="wrap(register())"
       class="o-form"
     >
       <input
@@ -70,7 +70,7 @@
       </p>
       <div
         :class="{ 'is-disabled': pending }"
-        @click="wrap(registerResend)"
+        @click="wrap(registerResend())"
         class="o-button o-button__accent o-button--full"
       >
         {{ $t('form.resend-email') }}

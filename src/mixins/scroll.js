@@ -11,7 +11,7 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchItems)
+    this.wrap(this.fetchItems())
   },
   mounted () {
     window.addEventListener('scroll', this.onScroll)
@@ -33,7 +33,7 @@ export default {
         return
       }
       if (this.$el.getBoundingClientRect().bottom <= window.innerHeight + 300) {
-        this.wrap(this.fetchItems)
+        this.wrap(this.fetchItems())
       }
     }
   }

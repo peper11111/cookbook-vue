@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
-      @submit.prevent="wrap(signIn)"
+      @submit.prevent="wrap(signIn())"
       class="o-form"
     >
       <input

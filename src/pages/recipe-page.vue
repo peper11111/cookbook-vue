@@ -35,7 +35,7 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchRecipe)
+    this.wrap(this.fetchRecipe())
   },
   methods: {
     fetchRecipe () {

@@ -94,7 +94,7 @@ export default {
   methods: {
     onDelete () {
       if (confirm(this.$t('comment.comment-delete'))) {
-        this.wrap(this.deleteComment)
+        this.wrap(this.deleteComment())
       }
     },
     deleteComment () {

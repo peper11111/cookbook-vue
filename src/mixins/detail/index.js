@@ -56,9 +56,10 @@ export default {
           this.localMode = ModeTypes.PREVIEW
           break
         case 'save':
-          this.wrap(this.createMode ? this.create : this.modify, this.getParams()).finally(() => {
+          const params = this.getParams()
+          this.wrap(this.createMode ? this.create(params) : this.modify(params).then(() => {
             this.localMode = ModeTypes.PREVIEW
-          })
+          }))
       }
     }
   }

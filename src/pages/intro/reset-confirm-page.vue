@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
-      @submit.prevent="wrap(resetConfirm)"
+      @submit.prevent="wrap(resetConfirm())"
       class="o-form"
     >
       <div class="o-form__wrapper">
