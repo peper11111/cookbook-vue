@@ -127,8 +127,12 @@ export default {
       })
     },
     removeEmptyValues (params) {
-      params.ingredients = params.ingredients.filter((ingredient) => ingredient !== '')
-      params.steps = params.steps.filter((step) => step !== '')
+      if (params.ingredients) {
+        params.ingredients = params.ingredients.filter((ingredient) => ingredient !== '')
+      }
+      if (params.steps) {
+        params.steps = params.steps.filter((step) => step !== '')
+      }
     }
   }
 }
