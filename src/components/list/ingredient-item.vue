@@ -13,12 +13,22 @@
   >
     {{ ingredient }}
   </span>
+  <i
+    v-if="!previewMode"
+    @click="$emit('delete')"
+    class="material-icons c-ingredient-item__remove"
+  >
+    remove
+  </i>
 </div>
 </template>
 
 <script>
+import modeContext from '@/mixins/detail/mode-context'
+
 export default {
   name: 'IngredientItem',
+  mixins: [ modeContext ],
   props: {
     ingredient: String
   },
@@ -47,11 +57,20 @@ export default {
   }
 
   &__label {
-    margin-left: 8px;
+    margin: 0 8px;
 
     &.is-checked {
-      color: $color-gray-400;
+      color: $color-text-secondary;
       text-decoration: line-through;
+    }
+  }
+
+  &__remove {
+    margin-left: auto;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-accent;
     }
   }
 }

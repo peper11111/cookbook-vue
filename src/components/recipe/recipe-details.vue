@@ -39,8 +39,8 @@
           {{ $t('recipe.ingredients') }}
         </h1>
         <ingredient-list
+          v-model="models.ingredients"
           :mode="mode"
-          :models="models"
         ></ingredient-list>
       </div>
     </div>
