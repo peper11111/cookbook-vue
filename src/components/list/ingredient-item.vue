@@ -35,8 +35,8 @@ export default {
 
 .c-ingredient-item {
   display: flex;
-  align-items: center;
   margin-bottom: 8px;
+  line-height: 24px;
 
   &__icon {
     cursor: pointer;
