@@ -1,7 +1,7 @@
 <template>
 <div class="c-ingredient-list">
   <ingredient-item
-    v-for="(ingredient, index) in value"
+    v-for="(ingredient, index) in ingredients"
     :key="index"
     :ingredient="ingredient"
     :index="index"
@@ -33,22 +33,25 @@ export default {
     IngredientItem: () => import('@/components/list/ingredient-item')
   },
   mixins: [ modeContext ],
+  model: {
+    prop: 'ingredients'
+  },
   props: {
-    value: Array
+    ingredients: Array
   },
   methods: {
     addIngredient () {
-      const ingredients = this.value.slice(0)
+      const ingredients = this.ingredients.slice(0)
       ingredients.push('')
       this.$emit('input', ingredients)
     },
     deleteIngredient (index) {
-      const ingredients = this.value.slice(0)
+      const ingredients = this.ingredients.slice(0)
       ingredients.splice(index, 1)
       this.$emit('input', ingredients)
     },
     modifyIngredient (index, content) {
-      const ingredients = this.value.slice(0)
+      const ingredients = this.ingredients.slice(0)
       ingredients[index] = content
       this.$emit('input', ingredients)
     }

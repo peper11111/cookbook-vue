@@ -32,7 +32,10 @@
         <h1 class="c-recipe-details__title">
           {{ $t('recipe.steps') }}
         </h1>
-        <step-list :models="models"></step-list>
+        <step-list
+          v-model="models.steps"
+          :mode="mode"
+        ></step-list>
       </div>
       <div class="c-recipe-details__info">
         <h1 class="c-recipe-details__title">
