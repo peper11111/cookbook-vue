@@ -102,12 +102,7 @@ export default {
   },
   methods: {
     create (params) {
-      // TODO Temporary solution until ingredients and steps creation is done
-      return this.$api.recipes.create({
-        ...params,
-        ingredients: [ 'składnik' ],
-        steps: [ 'krok' ]
-      }).then((value) => {
+      return this.$api.recipes.create(params).then((value) => {
         this.$notify.success('recipe-create-successful')
         this.$router.push(`/recipe/${value.data}`)
       })
