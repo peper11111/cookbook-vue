@@ -43,7 +43,6 @@ export default {
   mixins: [ detail ],
   data () {
     return {
-      modelSrc: 'user',
       models: {
         avatarId: null,
         bannerId: null,
@@ -53,6 +52,9 @@ export default {
     }
   },
   computed: {
+    model () {
+      return this.user
+    },
     authUser () {
       return this.$store.state.auth.user
     },

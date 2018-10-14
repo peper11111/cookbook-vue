@@ -16,7 +16,7 @@ export default {
         if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        this.models[key] = this[this.modelSrc][key]
+        this.models[key] = this.model[key]
       }
     },
     getParams () {
@@ -25,7 +25,7 @@ export default {
         if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        if (this.models[key] !== this[this.modelSrc][key]) {
+        if (this.models[key] !== this.model[key]) {
           params[key] = this.models[key]
         }
       }

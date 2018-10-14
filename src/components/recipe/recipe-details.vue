@@ -54,7 +54,6 @@ export default {
   mixins: [ detail ],
   data () {
     return {
-      modelSrc: 'recipe',
       models: {
         bannerId: null,
         title: null,
@@ -69,6 +68,9 @@ export default {
     }
   },
   computed: {
+    model () {
+      return this.recipe
+    },
     authUser () {
       return this.$store.state.auth.user
     },
