@@ -36,7 +36,7 @@ export default {
   methods: {
     fetchRecipe () {
       return new Promise((resolve) => {
-        this.$store.commit(SET_RECIPE, { author: this.authUser })
+        this.$store.commit(SET_RECIPE, { author: this.authUser, ingredients: [], steps: [] })
         resolve()
       })
     }
