@@ -28,6 +28,11 @@
     </div>
     <div class="o-page__separator"></div>
     <div class="c-recipe-details__row">
+      <div class="c-recipe-details__content">
+        <h1 class="c-recipe-details__title">
+          {{ $t('recipe.steps') }}
+        </h1>
+      </div>
       <div class="c-recipe-details__info">
         <h1 class="c-recipe-details__title">
           {{ $t('recipe.ingredients') }}

@@ -106,6 +106,7 @@
       "description": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
     "ingredients": "Składniki",
+    "steps": "Sposób przygotowania",
     "recipe-delete": "Czy napewno chcesz usunąć ten przepis?",
     "cuisine-type": "Typ kuchni",
     "category-type": "Kategoria",
