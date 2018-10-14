@@ -1,15 +1,10 @@
 <template>
 <div class="c-ingredient-list">
-  <h1 class="c-ingredient-list__title">
-    {{ $t('list.ingredients') }}
-  </h1>
-  <div class="c-ingredient-list__wrapper">
-    <ingredient-item
-      v-for="(item, index) in models.ingredients"
-      :key="index"
-      :item="item"
-    ></ingredient-item>
-  </div>
+  <ingredient-item
+    v-for="(item, index) in models.ingredients"
+    :key="index"
+    :item="item"
+  ></ingredient-item>
 </div>
 </template>
 
@@ -34,15 +29,5 @@ export default {
 .c-ingredient-list {
   display: flex;
   flex-direction: column;
-
-  &__title {
-    font-size: 24px;
-    margin-bottom: 16px;
-  }
-
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-  }
 }
 </style>

@@ -28,10 +28,15 @@
     </div>
     <div class="o-page__separator"></div>
     <div class="c-recipe-details__row">
-      <ingredient-list
-        :mode="mode"
-        :models="models"
-      ></ingredient-list>
+      <div class="c-recipe-details__info">
+        <h1 class="c-recipe-details__title">
+          {{ $t('recipe.ingredients') }}
+        </h1>
+        <ingredient-list
+          :mode="mode"
+          :models="models"
+        ></ingredient-list>
+      </div>
     </div>
   </div>
 </div>
@@ -146,6 +151,11 @@ export default {
 
   &__info {
     width: 300px;
+  }
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 16px;
   }
 }
 </style>
