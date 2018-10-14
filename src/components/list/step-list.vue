@@ -70,6 +70,7 @@ export default {
     display: flex;
     line-height: 24px;
     cursor: pointer;
+    color: $color-text-secondary;
 
     &:hover {
       color: $color-accent;
