@@ -4,7 +4,7 @@
   class="o-page"
 >
   <div class="o-page__wrapper">
-    <recipe-details :mode="mode"></recipe-details>
+    <recipe-details v-model="mode"></recipe-details>
     <div class="o-page__separator"></div>
     <recipe-comments></recipe-comments>
   </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
+import { PREVIEW } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -23,15 +23,9 @@ export default {
     RecipeComments: () => import('@/components/recipe/recipe-comments'),
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
-  computed: {
-    authUser () {
-      return this.$store.state.auth.user
-    },
-    recipe () {
-      return this.$store.state.recipe
-    },
-    mode () {
-      return this.recipe.author.id === this.authUser.id ? PREVIEW : DISPLAY
+  data () {
+    return {
+      mode: PREVIEW
     }
   },
   created () {

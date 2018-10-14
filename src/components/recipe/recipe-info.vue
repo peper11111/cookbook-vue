@@ -6,7 +6,7 @@
     </span>
     <form-select
       v-model="model.cuisineId"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
       :options="cuisines"
       class="c-recipe-info__value"
     ></form-select>
@@ -17,7 +17,7 @@
     </span>
     <form-select
       v-model="model.categoryId"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
       :options="categories"
       class="c-recipe-info__value"
     ></form-select>
@@ -28,7 +28,7 @@
     </span>
     <rating-bar
       v-model="model.difficulty"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
       class="c-recipe-info__value"
     ></rating-bar>
   </div>
@@ -38,7 +38,7 @@
     </span>
     <form-input
       v-model="model.plates"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
       class="c-recipe-info__value"
     ></form-input>
   </div>
@@ -48,7 +48,7 @@
     </span>
     <time-input
       v-model="model.preparationTime"
-      :disabled="displayMode || previewMode"
+      :disabled="previewMode"
     ></time-input>
   </div>
 </div>

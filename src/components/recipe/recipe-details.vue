@@ -2,7 +2,7 @@
 <div class="c-recipe-details">
   <detail-actions
     :disabled="pending"
-    :mode="localMode"
+    :mode="mode"
     :permissions="recipe.permissions"
     @action="onAction"
   ></detail-actions>
@@ -15,12 +15,12 @@
   <div class="c-recipe-details__wrapper">
     <div class="c-recipe-details__row">
       <recipe-content
-        :mode="localMode"
+        :mode="mode"
         :model="model"
         class="c-recipe-details__content"
       ></recipe-content>
       <recipe-info
-        :mode="localMode"
+        :mode="mode"
         :model="model"
         class="c-recipe-details__info"
       ></recipe-info>
@@ -28,7 +28,7 @@
     <div class="o-page__separator"></div>
     <div class="c-recipe-details__row">
       <ingredient-list
-        :mode="localMode"
+        :mode="mode"
         :model="model"
       ></ingredient-list>
     </div>

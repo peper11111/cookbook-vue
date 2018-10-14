@@ -31,23 +31,13 @@
     </i>
   </button>
   <button
-    v-if="editMode"
+    v-if="editMode || createMode"
     :class="{ 'is-disabled': disabled }"
     @click="emitEvent('save')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
       save
-    </i>
-  </button>
-  <button
-    v-if="createMode"
-    :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('add')"
-    class="o-button o-button--fab o-button__accent"
-  >
-    <i class="material-icons">
-      add
     </i>
   </button>
 </div>

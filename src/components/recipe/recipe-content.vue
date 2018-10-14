@@ -1,7 +1,7 @@
 <template>
 <div class="c-recipe-content">
   <div
-    v-if="displayMode || previewMode"
+    v-if="!createMode"
     class="c-recipe-content__row"
   >
     <router-link
@@ -16,23 +16,23 @@
   </div>
   <form-input
     v-model="model.title"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     :placeholder="$t('recipe.placeholder.title')"
     class="c-recipe-content__title"
   ></form-input>
   <form-textarea
     v-model="model.description"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     :placeholder="$t('recipe.placeholder.description')"
     class="c-recipe-content__description"
   ></form-textarea>
   <div
-    v-if="displayMode || previewMode"
+    v-if="!createMode"
     class="c-recipe-content__summary"
   >
     <i
-      :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': displayMode }"
-      @click="displayMode ? wrap(like()) : null"
+      :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': canPerformAction }"
+      @click="canPerformAction ? wrap(like()) : null"
       class="material-icons"
     >
       thumb_up
@@ -41,8 +41,8 @@
     {{ recipe.likesCount || 0 }}
   </span>
     <i
-      :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': displayMode }"
-      @click="displayMode ? wrap(favourite()) : null"
+      :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': canPerformAction }"
+      @click="canPerformAction ? wrap(favourite()) : null"
       class="material-icons"
     >
       book
@@ -77,11 +77,17 @@ export default {
     model: Object
   },
   computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    },
     recipe () {
       return this.$store.state.recipe
     },
     creationTime () {
       return moment(this.recipe.creationTime).fromNow()
+    },
+    canPerformAction () {
+      return this.previewMode && this.recipe.author.id !== this.authUser.id
     }
   },
   methods: {

@@ -4,7 +4,7 @@
   class="o-page"
 >
   <div class="o-page__wrapper">
-    <user-details :mode="mode"></user-details>
+    <user-details v-model="mode"></user-details>
     <div class="o-page__separator"></div>
     <user-recipes></user-recipes>
   </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { DISPLAY, PREVIEW } from '@/mixins/detail/mode-types'
+import { PREVIEW } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 
@@ -23,15 +23,9 @@ export default {
     UserRecipes: () => import('@/components/user/user-recipes')
   },
   mixins: [ requester ],
-  computed: {
-    authUser () {
-      return this.$store.state.auth.user
-    },
-    user () {
-      return this.$store.state.user
-    },
-    mode () {
-      return this.user.id === this.authUser.id ? PREVIEW : DISPLAY
+  data () {
+    return {
+      mode: PREVIEW
     }
   },
   created () {

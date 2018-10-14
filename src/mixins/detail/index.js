@@ -1,26 +1,11 @@
 import requester from '@/mixins/requester'
+import modeContext from '@/mixins/detail/mode-context'
 import * as ModeTypes from '@/mixins/detail/mode-types'
 
 export default {
-  mixins: [ requester ],
-  props: {
-    mode: String
-  },
-  data () {
-    return {
-      localMode: this.mode || ModeTypes.DISPLAY
-    }
-  },
-  computed: {
-    createMode () {
-      return this.localMode === ModeTypes.CREATE
-    },
-    displayMode () {
-      return this.localMode === ModeTypes.DISPLAY
-    },
-    previewMode () {
-      return this.localMode === ModeTypes.PREVIEW
-    }
+  mixins: [ modeContext, requester ],
+  model: {
+    prop: 'mode'
   },
   created () {
     this.init()
@@ -49,18 +34,16 @@ export default {
     onAction (action) {
       switch (action) {
         case 'edit':
-          this.localMode = ModeTypes.EDIT
+          this.$emit('input', ModeTypes.EDIT)
           break
         case 'clear':
           this.init()
-          this.localMode = ModeTypes.PREVIEW
-          break
-        case 'add':
-          this.wrap(this.create(this.getParams()))
+          this.$emit('input', ModeTypes.PREVIEW)
           break
         case 'save':
-          this.wrap(this.modify(this.getParams()).then(() => {
-            this.localMode = ModeTypes.PREVIEW
+          const params = this.getParams()
+          this.wrap(this.mode === ModeTypes.CREATE ? this.create(params) : this.modify(params).then(() => {
+            this.$emit('input', ModeTypes.PREVIEW)
           }))
           break
         case 'delete':

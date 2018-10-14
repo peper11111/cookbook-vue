@@ -5,7 +5,7 @@
       {{ user.username }}
     </h1>
     <button
-      v-if="displayMode"
+      v-if="canPerformAction"
       :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
       @click="wrap(follow())"
       class="o-button"
@@ -35,13 +35,13 @@
   </div>
   <form-input
     v-model="model.name"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     :placeholder="$t('user.placeholder.name')"
     class="c-user-content__row c-user-content__name"
   ></form-input>
   <form-textarea
     v-model="model.biography"
-    :disabled="displayMode || previewMode"
+    :disabled="previewMode"
     :placeholder="$t('user.placeholder.biography')"
     class="c-user-content__row"
   ></form-textarea>
@@ -64,8 +64,14 @@ export default {
     model: Object
   },
   computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    },
     user () {
       return this.$store.state.user
+    },
+    canPerformAction () {
+      return this.previewMode && this.authUser.id !== this.user.id
     }
   },
   methods: {

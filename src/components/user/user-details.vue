@@ -2,7 +2,7 @@
 <div class="c-user-details">
   <detail-actions
     :disabled="pending"
-    :mode="localMode"
+    :mode="mode"
     :permissions="user.permissions"
     @action="onAction"
   ></detail-actions>
@@ -20,7 +20,7 @@
       class="c-user-details__avatar"
     ></image-picker>
     <user-content
-      :mode="localMode"
+      :mode="mode"
       :model="model"
       class="c-user-details__content"
     ></user-content>
