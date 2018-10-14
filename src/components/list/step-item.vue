@@ -22,7 +22,6 @@ export default {
 <style lang="scss">
 .c-step-item {
   display: flex;
-  align-items: center;
   margin-bottom: 8px;
 
   &__index {
