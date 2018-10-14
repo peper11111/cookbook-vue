@@ -110,7 +110,7 @@ export default {
       }
       return this.$api.recipes.delete(this.recipe.id).then(() => {
         this.$notify.success('recipe-delete-successful')
-        this.$router.push('/')
+        this.$router.push(`/user/${this.recipe.author.id}`)
       })
     }
   }
