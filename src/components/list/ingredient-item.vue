@@ -40,7 +40,6 @@ export default {
 
   &__icon {
     cursor: pointer;
-    color: $color-text-primary;
 
     &.is-checked {
       color: $color-accent;
@@ -49,7 +48,6 @@ export default {
 
   &__label {
     margin-left: 8px;
-    color: $color-text-primary;
 
     &.is-checked {
       color: $color-gray-400;

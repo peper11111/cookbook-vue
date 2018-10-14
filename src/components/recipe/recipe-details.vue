@@ -32,6 +32,7 @@
         <h1 class="c-recipe-details__title">
           {{ $t('recipe.steps') }}
         </h1>
+        <step-list :models="models"></step-list>
       </div>
       <div class="c-recipe-details__info">
         <h1 class="c-recipe-details__title">
@@ -59,7 +60,8 @@ export default {
     ImagePicker: () => import('@/components/form/image-picker'),
     IngredientList: () => import('@/components/list/ingredient-list'),
     RecipeInfo: () => import('@/components/recipe/recipe-info'),
-    RecipeContent: () => import('@/components/recipe/recipe-content')
+    RecipeContent: () => import('@/components/recipe/recipe-content'),
+    StepList: () => import('@/components/list/step-list')
   },
   mixins: [ detail ],
   data () {
@@ -73,7 +75,8 @@ export default {
         difficulty: null,
         plates: null,
         preparationTime: null,
-        ingredients: null
+        ingredients: null,
+        steps: null
       }
     }
   },
