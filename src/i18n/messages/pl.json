@@ -82,7 +82,8 @@
     "no-recipes": "Brak przepisów do wyświetlenia",
     "images": "Obrazy",
     "image-delete": "Czy napewno chcesz usunąć ten obrazek?",
-    "add-ingredient": "Dodaj nowy składnik"
+    "add-ingredient": "Dodaj nowy składnik",
+    "add-step": "Dodaj nowy krok"
   },
   "user": {
     "placeholder": {

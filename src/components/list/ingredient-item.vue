@@ -70,7 +70,7 @@ export default {
   }
 
   &__label {
-    margin: 0 8px;
+    margin-left: 8px;
     flex-grow: 1;
 
     &.is-checked {
@@ -80,7 +80,6 @@ export default {
   }
 
   &__remove {
-    margin-left: auto;
     cursor: pointer;
 
     &:hover {
