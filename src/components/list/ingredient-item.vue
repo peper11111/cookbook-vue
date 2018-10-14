@@ -5,7 +5,7 @@
 >
   <i
     v-if="previewMode"
-    :class="{ 'is-checked': checked }"
+    :class="{ 'is-checked': checked && previewMode }"
     @click="checked = !checked"
     class="material-icons c-ingredient-item__icon"
   >
@@ -20,7 +20,7 @@
   </i>
   <form-input
     v-model="ingredient"
-    :class="{ 'is-checked': checked }"
+    :class="{ 'is-checked': checked && previewMode }"
     :disabled="previewMode"
     class="c-ingredient-item__label"
   ></form-input>
