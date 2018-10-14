@@ -6,7 +6,15 @@
   <div class="o-page__wrapper">
     <user-details v-model="mode"></user-details>
     <div class="o-page__separator"></div>
-    <user-recipes></user-recipes>
+    <recipe-buttons
+      v-model="layout"
+      :title="$t('list.recipes')"
+    ></recipe-buttons>
+    <recipe-list
+      :layout="layout"
+      :userId="user.id"
+      type="user-recipes"
+    ></recipe-list>
   </div>
 </div>
 </template>
@@ -19,13 +27,20 @@ import { SET_USER } from '@/store/mutation-types'
 export default {
   name: 'UserPage',
   components: {
-    UserDetails: () => import('@/components/user/user-details'),
-    UserRecipes: () => import('@/components/user/user-recipes')
+    RecipeButtons: () => import('@/components/list/recipe-buttons'),
+    RecipeList: () => import('@/components/list/recipe-list'),
+    UserDetails: () => import('@/components/user/user-details')
   },
   mixins: [ requester ],
   data () {
     return {
-      mode: PREVIEW
+      mode: PREVIEW,
+      layout: 'grid'
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   created () {

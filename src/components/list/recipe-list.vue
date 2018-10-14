@@ -6,7 +6,7 @@
   <recipe-item
     v-for="recipe in items"
     :key="recipe.id"
-    :mode="mode"
+    :layout="layout"
     :recipe="recipe"
   ></recipe-item>
 </div>
@@ -29,7 +29,7 @@ export default {
   mixins: [ scroll ],
   props: {
     blank: String,
-    mode: String,
+    layout: String,
     type: String,
     userId: Number
   },

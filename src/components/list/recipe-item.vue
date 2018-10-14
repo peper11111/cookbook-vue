@@ -1,6 +1,6 @@
 <template>
 <router-link
-  :class="{ 'c-recipe-item--grid': mode === 'grid' }"
+  :class="{ 'c-recipe-item--grid': layout === 'grid' }"
   :to="`/recipe/${recipe.id}`"
   class="c-recipe-item"
 >
@@ -57,7 +57,7 @@ import config from '@/config'
 export default {
   name: 'RecipeItem',
   props: {
-    mode: String,
+    layout: String,
     recipe: Object
   },
   computed: {
