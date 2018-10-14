@@ -23,6 +23,7 @@ export default {
 .c-step-item {
   display: flex;
   margin-bottom: 8px;
+  line-height: 24px;
 
   &__index {
     font-weight: bold;

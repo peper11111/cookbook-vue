@@ -159,6 +159,7 @@ export default {
 
   &__info {
     width: 300px;
+    flex-shrink: 0;
   }
 
   &__title {
