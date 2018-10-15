@@ -3,7 +3,6 @@
 
 .o-page {
   padding-top: $navbar-height;
-  padding-bottom: 50px;
   color: $color-text-primary;
   background-color: $color-white;
   font-family: 'Roboto', sans-serif;
@@ -21,7 +20,11 @@
 
   &__wrapper {
     width: 1000px;
-    margin: 0 auto;
+    margin: 16px auto 64px auto;
+
+    &--top {
+      margin-top: 0;
+    }
   }
 
   &__separator {

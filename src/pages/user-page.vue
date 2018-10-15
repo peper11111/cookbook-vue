@@ -3,7 +3,7 @@
   v-if="!pending"
   class="o-page"
 >
-  <div class="o-page__wrapper">
+  <div class="o-page__wrapper o-page__wrapper--top">
     <user-details v-model="mode"></user-details>
     <div class="o-page__separator"></div>
     <recipe-buttons
