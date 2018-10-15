@@ -28,16 +28,18 @@ export default {
   },
   mixins: [ scroll ],
   props: {
-    blank: String,
     layout: String,
     type: String,
-    userId: Number
+    userId: Number,
+    query: String
   },
   methods: {
     getFetchMethod () {
       switch (this.type) {
         case 'recipes':
           return this.$api.recipes.readAll({ page: this.page++ })
+        case 'recipes-search':
+          return this.$api.recipes.search({ query: this.query, page: this.page++ })
         case 'user-recipes':
           return this.$api.users.readRecipes(this.userId, { page: this.page++ })
         case 'user-favourites':

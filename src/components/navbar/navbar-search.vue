@@ -26,7 +26,7 @@ export default {
   name: 'NavbarSearch',
   data () {
     return {
-      query: ''
+      query: this.$route.query.query
     }
   },
   methods: {
