@@ -5,13 +5,13 @@ export default [
     meta: { requiresAuth: true }
   },
   {
-    path: '/favorite',
-    component: () => import('@/pages/favorite-page'),
+    path: '/explore',
+    component: () => import('@/pages/explore-page'),
     meta: { requiresAuth: true }
   },
   {
-    path: '/cookbook',
-    component: () => import('@/pages/cookbook-page'),
+    path: '/favourite',
+    component: () => import('@/pages/favourite-page'),
     meta: { requiresAuth: true }
   },
   {

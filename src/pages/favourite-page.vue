@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'CookbookPage',
+  name: 'FavouritePage',
   components: {
     RecipeButtons: () => import('@/components/list/recipe-buttons'),
     RecipeList: () => import('@/components/list/recipe-list')

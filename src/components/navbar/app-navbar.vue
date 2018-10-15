@@ -21,19 +21,19 @@
       class="c-app-navbar__item"
     >
       <i class="material-icons">
-        explore
-      </i>
-    </router-link>
-    <router-link
-      to="/favorite"
-      class="c-app-navbar__item"
-    >
-      <i class="material-icons">
         favorite
       </i>
     </router-link>
     <router-link
-      to="/cookbook"
+      to="/explore"
+      class="c-app-navbar__item"
+    >
+      <i class="material-icons">
+        explore
+      </i>
+    </router-link>
+    <router-link
+      to="/favourite"
       class="c-app-navbar__item"
     >
       <i class="material-icons">
