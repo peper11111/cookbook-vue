@@ -5,7 +5,7 @@
 >
   <div class="o-form__wrapper">
     <input
-      v-model="search"
+      v-model="query"
       :placeholder="$t('form.search')"
       class="c-navbar-search__input o-form__input o-form__input--full"
     />
@@ -26,12 +26,15 @@ export default {
   name: 'NavbarSearch',
   data () {
     return {
-      search: ''
+      query: ''
     }
   },
   methods: {
     submit () {
-      console.log(this.search)
+      this.$router.push({
+        path: '/search',
+        query: { query: this.query }
+      })
     }
   }
 }

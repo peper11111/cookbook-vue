@@ -15,6 +15,11 @@ export default [
     meta: { requiresAuth: true }
   },
   {
+    path: '/search',
+    component: () => import('@/pages/search-page'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/user/:id',
     component: () => import('@/pages/user-page'),
     meta: { requiresAuth: true }
