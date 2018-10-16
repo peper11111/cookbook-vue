@@ -30,8 +30,17 @@ export default {
   props: {
     layout: String,
     type: String,
-    userId: Number,
-    query: String
+    userId: Number
+  },
+  watch: {
+    query () {
+      this.init()
+    }
+  },
+  computed: {
+    query () {
+      return this.$route.query.query
+    }
   },
   methods: {
     getFetchMethod () {

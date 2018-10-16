@@ -5,13 +5,13 @@ export default {
   mixins: [ requester ],
   data () {
     return {
-      done: false,
-      items: [],
-      page: 1
+      done: null,
+      items: null,
+      page: null
     }
   },
   created () {
-    this.wrap(this.fetchItems())
+    this.init()
   },
   mounted () {
     window.addEventListener('scroll', this.onScroll)
@@ -20,6 +20,12 @@ export default {
     window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
+    init () {
+      this.done = false
+      this.items = []
+      this.page = 1
+      this.wrap(this.fetchItems())
+    },
     fetchItems () {
       return this.getFetchMethod().then((value) => {
         this.items.push(...value.data)

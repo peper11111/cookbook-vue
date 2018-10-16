@@ -4,7 +4,6 @@
     <recipe-buttons v-model="layout"></recipe-buttons>
     <recipe-list
       :layout="layout"
-      :query="query"
       type="recipes-search"
     ></recipe-list>
   </div>
@@ -20,8 +19,7 @@ export default {
   },
   data () {
     return {
-      layout: 'list',
-      query: this.$route.query.query
+      layout: 'list'
     }
   }
 }
