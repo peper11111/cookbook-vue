@@ -29,11 +29,15 @@ export default {
   mixins: [ scroll ],
   props: {
     layout: String,
+    filtering: Object,
     type: String,
     userId: Number
   },
   watch: {
     query () {
+      this.init()
+    },
+    filtering () {
       this.init()
     }
   },
@@ -46,7 +50,7 @@ export default {
     getFetchMethod () {
       switch (this.type) {
         case 'recipes':
-          return this.$api.recipes.readAll({ page: this.page++ })
+          return this.$api.recipes.readAll({ ...this.filtering, page: this.page++ })
         case 'recipes-search':
           return this.$api.recipes.search({ query: this.query, page: this.page++ })
         case 'user-recipes':
