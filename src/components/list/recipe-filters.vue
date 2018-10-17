@@ -162,6 +162,7 @@ export default {
 
 <style lang="scss">
 @import "../../assets/styles/mixins";
+@import "../../assets/styles/variables";
 
 .c-recipe-filters {
   @include box-elevation;
@@ -170,6 +171,7 @@ export default {
   width: 300px;
   padding: 16px;
   border-radius: 2px;
+  background-color: $color-white;
 
   &__title {
     font-size: 24px;
