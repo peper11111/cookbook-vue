@@ -9,7 +9,6 @@
 >
   <option
     value="null"
-    hidden="hidden"
   ></option>
   <option
     v-for="option in options"
