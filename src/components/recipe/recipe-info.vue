@@ -103,7 +103,7 @@ export default {
   }
 
   &__label {
-    text-align: left;
+    font-weight: bold;
     white-space: nowrap;
     width: 140px;
   }
