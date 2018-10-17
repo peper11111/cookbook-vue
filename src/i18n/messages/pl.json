@@ -7,7 +7,10 @@
     "cancel": "Anuluj",
     "delete": "Usuń",
     "reply": "Odpowiedz",
-    "comment": "Skomentuj"
+    "comment": "Skomentuj",
+    "clear": "Wyczyść",
+    "from": "Od",
+    "to": "Do"
   },
   "info": {
     "session-timeout": "Twoja sesja wygasła. Zaloguj się ponownie",
@@ -107,6 +110,8 @@
       "title": "Podaj tytuł twojego przepisu",
       "description": "Krótko podsumuj czego dotyczyć będzie przepis"
     },
+    "filtering": "Filtrowanie",
+    "filter": "Filtruj",
     "ingredients": "Składniki",
     "steps": "Sposób przygotowania",
     "recipe-delete": "Czy napewno chcesz usunąć ten przepis?",
