@@ -8,7 +8,7 @@
   class="o-form__select"
 >
   <option
-    value="null"
+    value=""
   ></option>
   <option
     v-for="option in options"
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onChange (event) {
-      this.$emit('input', event.target.value)
+      this.$emit('input', event.target.value || null)
     },
     isSelected (option) {
       return String(option.value) === String(this.value)
