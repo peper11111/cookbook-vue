@@ -35,6 +35,11 @@ export default {
       visibleValue: this.value
     }
   },
+  watch: {
+    value () {
+      this.visibleValue = this.value
+    }
+  },
   methods: {
     isActive (val) {
       return val <= this.visibleValue
