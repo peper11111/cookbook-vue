@@ -62,8 +62,11 @@ export default {
 .c-rating-bar {
   display: flex;
   align-items: center;
+  height: 34px;
 
   &.is-disabled {
+    height: auto;
+
     .c-rating-bar__item {
       cursor: default;
     }
