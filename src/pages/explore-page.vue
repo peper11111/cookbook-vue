@@ -43,7 +43,7 @@ export default {
 .c-explore-page {
   &__filtering {
     position: fixed;
-    top: 106px;
+    top: 56px;
     left: calc(50% - 484px);
   }
 

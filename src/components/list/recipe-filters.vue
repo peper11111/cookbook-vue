@@ -175,7 +175,6 @@ export default {
 
   &__title {
     font-size: 24px;
-    margin-bottom: 16px;
   }
 
   &__header {
@@ -194,7 +193,7 @@ export default {
   }
 
   &__buttons {
-    margin-top: 32px;
+    margin-top: 16px;
   }
 }
 </style>
