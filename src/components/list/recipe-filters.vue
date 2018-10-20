@@ -134,14 +134,12 @@ export default {
   },
   methods: {
     clearFiltering () {
-      this.models.cuisineId = null
-      this.models.categoryId = null
-      this.models.minDifficulty = null
-      this.models.maxDifficulty = null
-      this.models.minPlates = null
-      this.models.maxPlates = null
-      this.models.minPreparationTime = null
-      this.models.maxPreparationTime = null
+      for (const key in this.models) {
+        if (!this.models.hasOwnProperty(key)) {
+          continue
+        }
+        this.models[key] = null
+      }
       this.$emit('input', {})
     },
     updateFiltering () {
