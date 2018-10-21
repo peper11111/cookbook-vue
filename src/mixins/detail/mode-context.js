@@ -2,7 +2,10 @@ import * as ModeTypes from '@/mixins/detail/mode-types'
 
 export default {
   props: {
-    mode: String
+    mode: {
+      default: ModeTypes.PREVIEW,
+      type: String,
+    }
   },
   computed: {
     createMode () {

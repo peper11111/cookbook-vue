@@ -4,7 +4,7 @@
   class="o-page"
 >
   <div class="o-page__wrapper o-page__wrapper--top">
-    <user-details v-model="mode"></user-details>
+    <user-details></user-details>
     <div class="o-page__separator"></div>
     <recipe-buttons
       v-model="layout"
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { PREVIEW } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
 import { SET_USER } from '@/store/mutation-types'
 
@@ -34,7 +33,6 @@ export default {
   mixins: [ requester ],
   data () {
     return {
-      mode: PREVIEW,
       layout: 'grid'
     }
   },

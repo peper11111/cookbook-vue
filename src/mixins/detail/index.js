@@ -42,7 +42,7 @@ export default {
           break
         case 'save':
           const params = this.getParams()
-          this.wrap(this.mode === ModeTypes.CREATE ? this.create(params) : this.modify(params).then(() => {
+          this.wrap(this.createMode ? this.create(params) : this.modify(params).then(() => {
             this.$emit('input', ModeTypes.PREVIEW)
           }))
           break
