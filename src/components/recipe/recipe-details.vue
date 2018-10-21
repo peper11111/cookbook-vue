@@ -56,7 +56,7 @@
 
 <script>
 import config from '@/config'
-import detail from '@/mixins/detail'
+import editor from '@/mixins/editor'
 import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
@@ -69,7 +69,7 @@ export default {
     RecipeContent: () => import('@/components/recipe/recipe-content'),
     StepList: () => import('@/components/list/step-list')
   },
-  mixins: [ detail ],
+  mixins: [ editor ],
   data () {
     return {
       models: {

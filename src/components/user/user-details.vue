@@ -32,7 +32,7 @@
 
 <script>
 import config from '@/config'
-import detail from '@/mixins/detail'
+import editor from '@/mixins/editor'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
@@ -42,7 +42,7 @@ export default {
     ImagePicker: () => import('@/components/form/image-picker'),
     UserContent: () => import('@/components/user/user-content')
   },
-  mixins: [ detail ],
+  mixins: [ editor ],
   data () {
     return {
       models: {
