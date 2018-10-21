@@ -55,8 +55,6 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'RecipeInfo',
   components: {
@@ -66,9 +64,9 @@ export default {
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
   },
-  mixins: [ modeContext ],
   props: {
-    models: Object
+    models: Object,
+    previewMode: Boolean
   },
   computed: {
     cuisines () {

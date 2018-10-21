@@ -50,7 +50,6 @@
 
 <script>
 import requester from '@/mixins/requester'
-import modeContext from '@/mixins/detail/mode-context'
 import { SET_USER } from '@/store/mutation-types'
 
 export default {
@@ -59,9 +58,10 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
   },
-  mixins: [ modeContext, requester ],
+  mixins: [ requester ],
   props: {
-    models: Object
+    models: Object,
+    previewMode: Boolean
   },
   computed: {
     authUser () {

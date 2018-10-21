@@ -2,9 +2,11 @@
 <div class="c-recipe-details">
   <detail-actions
     :disabled="pending"
-    :mode="mode"
     :canEdit="isAuthor"
     :canDelete="isAuthor"
+    :editMode="editMode"
+    :createMode="createMode"
+    :previewMode="previewMode"
     @action="onAction"
   ></detail-actions>
   <image-picker
@@ -16,13 +18,14 @@
   <div class="c-recipe-details__wrapper">
     <div class="c-recipe-details__row">
       <recipe-content
-        :mode="mode"
         :models="models"
+        :createMode="createMode"
+        :previewMode="previewMode"
         class="c-recipe-details__content"
       ></recipe-content>
       <recipe-info
-        :mode="mode"
         :models="models"
+        :previewMode="previewMode"
         class="c-recipe-details__info"
       ></recipe-info>
     </div>
@@ -34,7 +37,7 @@
         </h1>
         <step-list
           v-model="models.steps"
-          :mode="mode"
+          :disabled="previewMode"
         ></step-list>
       </div>
       <div class="c-recipe-details__info">
@@ -43,7 +46,7 @@
         </h1>
         <ingredient-list
           v-model="models.ingredients"
-          :mode="mode"
+          :disabled="previewMode"
         ></ingredient-list>
       </div>
     </div>

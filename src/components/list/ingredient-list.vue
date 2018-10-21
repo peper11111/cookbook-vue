@@ -5,12 +5,12 @@
     :key="index"
     :ingredient="ingredient"
     :index="index"
-    :mode="mode"
+    :disabled="disabled"
     @delete="deleteIngredient"
     @input="modifyIngredient"
   ></ingredient-item>
   <div
-    v-if="!previewMode"
+    v-if="!disabled"
     @click="addIngredient"
     class="c-ingredient-list__add"
   >
@@ -25,18 +25,16 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'IngredientList',
   components: {
     IngredientItem: () => import('@/components/list/ingredient-item')
   },
-  mixins: [ modeContext ],
   model: {
     prop: 'ingredients'
   },
   props: {
+    disabled: Boolean,
     ingredients: Array
   },
   methods: {

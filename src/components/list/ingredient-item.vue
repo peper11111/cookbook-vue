@@ -1,11 +1,11 @@
 <template>
 <div
-  :class="{ 'c-ingredient-item--center': !previewMode }"
+  :class="{ 'c-ingredient-item--center': !disabled }"
   class="c-ingredient-item"
 >
   <i
-    v-if="previewMode"
-    :class="{ 'is-checked': checked && previewMode }"
+    v-if="disabled"
+    :class="{ 'is-checked': checked && disabled }"
     @click="checked = !checked"
     class="material-icons c-ingredient-item__icon"
   >
@@ -19,8 +19,8 @@
     remove
   </i>
   <form-input
-    :class="{ 'is-checked': checked && previewMode }"
-    :disabled="previewMode"
+    :class="{ 'is-checked': checked && disabled }"
+    :disabled="disabled"
     :value="ingredient"
     @input="$emit('input', index, $event)"
     class="c-ingredient-item__label"
@@ -29,15 +29,13 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'IngredientItem',
   components: {
     FormInput: () => import('@/components/form/form-input')
   },
-  mixins: [ modeContext ],
   props: {
+    disabled: Boolean,
     ingredient: String,
     index: Number
   },

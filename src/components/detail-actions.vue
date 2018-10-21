@@ -44,15 +44,15 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'DetailActions',
-  mixins: [ modeContext ],
   props: {
     canDelete: Boolean,
     canEdit: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
+    editMode: Boolean,
+    previewMode: Boolean,
+    createMode: Boolean
   },
   methods: {
     emitEvent (action) {

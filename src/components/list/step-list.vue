@@ -5,12 +5,12 @@
     :key="index"
     :step="step"
     :index="index"
-    :mode="mode"
+    :disabled="disabled"
     @delete="deleteStep"
     @input="modifyStep"
   ></step-item>
   <div
-    v-if="!previewMode"
+    v-if="!disabled"
     @click="addStep"
     class="c-step-list__add"
   >
@@ -25,18 +25,16 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'StepList',
   components: {
     StepItem: () => import('@/components/list/step-item')
   },
-  mixins: [ modeContext ],
   model: {
     prop: 'steps'
   },
   props: {
+    disabled: Boolean,
     steps: Array
   },
   methods: {

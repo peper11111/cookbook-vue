@@ -2,8 +2,10 @@
 <div class="c-user-details">
   <detail-actions
     :disabled="pending"
-    :mode="mode"
     :canEdit="isAuthUser"
+    :editMode="editMode"
+    :createMode="createMode"
+    :previewMode="previewMode"
     @action="onAction"
   ></detail-actions>
   <image-picker
@@ -20,8 +22,8 @@
       class="c-user-details__avatar"
     ></image-picker>
     <user-content
-      :mode="mode"
       :models="models"
+      :previewMode="previewMode"
       class="c-user-details__content"
     ></user-content>
   </div>

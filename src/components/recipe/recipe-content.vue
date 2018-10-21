@@ -62,7 +62,6 @@
 
 <script>
 import moment from 'moment'
-import modeContext from '@/mixins/detail/mode-context'
 import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -72,9 +71,11 @@ export default {
     FormInput: () => import('@/components/form/form-input'),
     FormTextarea: () => import('@/components/form/form-textarea')
   },
-  mixins: [ modeContext, requester ],
+  mixins: [ requester ],
   props: {
-    models: Object
+    models: Object,
+    createMode: Boolean,
+    previewMode: Boolean
   },
   computed: {
     authUser () {

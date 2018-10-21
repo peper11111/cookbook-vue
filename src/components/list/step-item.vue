@@ -1,10 +1,10 @@
 <template>
 <div
-  :class="{ 'c-step-item--center': !previewMode }"
+  :class="{ 'c-step-item--center': !disabled }"
   class="c-step-item"
 >
   <span
-    v-if="previewMode"
+    v-if="disabled"
     class="c-step-item__index"
   >
     {{ `${index + 1}.` }}
@@ -17,7 +17,7 @@
     remove
   </i>
   <form-input
-    :disabled="previewMode"
+    :disabled="disabled"
     :value="step"
     @input="$emit('input', index, $event)"
     class="c-step-item__label"
@@ -26,17 +26,15 @@
 </template>
 
 <script>
-import modeContext from '@/mixins/detail/mode-context'
-
 export default {
   name: 'StepItem',
   components: {
     FormInput: () => import('@/components/form/form-input')
   },
-  mixins: [ modeContext ],
   props: {
     index: Number,
-    step: String
+    step: String,
+    disabled: Boolean
   }
 }
 </script>

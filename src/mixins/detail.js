@@ -1,11 +1,34 @@
 import requester from '@/mixins/requester'
-import modeContext from '@/mixins/detail/mode-context'
-import * as ModeTypes from '@/mixins/detail/mode-types'
+
+const Mode = {
+  CREATE: 'create',
+  EDIT: 'edit',
+  PREVIEW: 'preview'
+}
 
 export default {
-  mixins: [ modeContext, requester ],
-  model: {
-    prop: 'mode'
+  mixins: [ requester ],
+  props: {
+    initialMode: {
+      default: Mode.PREVIEW,
+      type: String
+    }
+  },
+  data () {
+    return {
+      mode: this.initialMode
+    }
+  },
+  computed: {
+    createMode () {
+      return this.mode === Mode.CREATE
+    },
+    editMode () {
+      return this.mode === Mode.EDIT
+    },
+    previewMode () {
+      return this.mode === Mode.PREVIEW
+    }
   },
   created () {
     this.init()
@@ -34,16 +57,16 @@ export default {
     onAction (action) {
       switch (action) {
         case 'edit':
-          this.$emit('input', ModeTypes.EDIT)
+          this.mode = Mode.EDIT
           break
         case 'clear':
           this.init()
-          this.$emit('input', ModeTypes.PREVIEW)
+          this.mode = Mode.PREVIEW
           break
         case 'save':
           const params = this.getParams()
           this.wrap(this.createMode ? this.create(params) : this.modify(params).then(() => {
-            this.$emit('input', ModeTypes.PREVIEW)
+            this.mode = Mode.PREVIEW
           }))
           break
         case 'delete':

@@ -4,13 +4,12 @@
   class="o-page"
 >
   <div class="o-page__wrapper o-page__wrapper--top">
-    <recipe-details v-model="mode"></recipe-details>
+    <recipe-details initialMode="create"></recipe-details>
   </div>
 </div>
 </template>
 
 <script>
-import { CREATE } from '@/mixins/detail/mode-types'
 import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
@@ -19,11 +18,6 @@ export default {
   mixins: [ requester ],
   components: {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
-  },
-  data () {
-    return {
-      mode: CREATE
-    }
   },
   computed: {
     authUser () {
