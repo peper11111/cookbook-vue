@@ -34,6 +34,7 @@
     "profile-update-successful": "Twój profil został pomyślnie zaktualizowany",
     "image-created": "Nowy obraz został pomyślnie dodany",
     "image-deleted": "Wybrany obraz został pomyślnie usunięty",
+    "comment-update-successful": "Twój komentarz został pomyślnie zaktualizowany",
     "comment-create-successful": "Twój komentarz został pomyślnie dodany",
     "comment-delete-successful": "Twój komentarz został usunięty"
   },

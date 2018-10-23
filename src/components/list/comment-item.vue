@@ -23,18 +23,20 @@
     ></form-input>
     <div
       v-if="!previewMode"
-      class="c-comment-item__row"
+      class="c-comment-item__row c-comment-item__row--right"
     >
-      <span
-        class="c-comment-item__action"
-      >
-        {{ $t('global.save') }}
-      </span>
-      <span
-        class="c-comment-item__action"
+      <button
+        @click="onAction('clear')"
+        class="o-button o-button__primary"
       >
         {{ $t('global.cancel') }}
-      </span>
+      </button>
+      <button
+        @click="onAction('save')"
+        class="o-button o-button__accent"
+      >
+        {{ $t('global.save') }}
+      </button>
     </div>
     <div
       v-else
@@ -42,13 +44,14 @@
     >
       <span
         v-if="isAuthor"
+        @click="onAction('edit')"
         class="c-comment-item__action"
       >
         {{ $t('global.edit') }}
       </span>
       <span
         v-if="isAuthor"
-        @click="deleteComment"
+        @click="onAction('delete')"
         class="c-comment-item__action"
       >
         {{ $t('global.delete') }}
@@ -119,9 +122,15 @@ export default {
     }
   },
   methods: {
-    deleteComment () {
+    modify (params) {
+      return this.$api.comments.modify(this.comment.id, params).then(() => {
+        this.$notify.success('comment-update-successful')
+        this.$emit('refresh')
+      })
+    },
+    delete () {
       if (!confirm(this.$t('comment.comment-delete'))) {
-        Promise.resolve()
+        return Promise.resolve()
       }
       return this.$api.comments.delete(this.comment.id).then(() => {
         this.$notify.success('comment-delete-successful')
@@ -155,6 +164,10 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+
+    &--right {
+      justify-content: flex-end;
+    }
   }
 
   &__author {
