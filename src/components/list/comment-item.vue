@@ -56,24 +56,34 @@
       >
         {{ $t('global.delete') }}
       </span>
-      <span class="c-comment-item__action">
+      <span
+        @click="responseVisible = true"
+        class="c-comment-item__action"
+      >
         {{ $t('global.reply') }}
       </span>
     </div>
+    <comment-input
+      v-if="responseVisible"
+      :parentId="comment.id"
+      :recipeId="recipeId"
+      @refresh="$emit('refresh')"
+      @cancel="responseVisible = false"
+    ></comment-input>
     <div
       v-if="comment.commentsCount !== 0"
-      @click="responsesVisible = !responsesVisible"
+      @click="commentsVisible = !commentsVisible"
       class="c-comment-item__responses"
     >
       <span>
-        {{ responsesVisible ? $t('comment.hide-responses') : $t('comment.show-responses', [ comment.commentsCount ]) }}
+        {{ commentsVisible ? $t('comment.hide-responses') : $t('comment.show-responses', [ comment.commentsCount ]) }}
       </span>
       <i class="material-icons">
-        {{ responsesVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
+        {{ commentsVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
       </i>
     </div>
     <comment-list
-      v-if="responsesVisible"
+      v-if="commentsVisible"
       :commentId="comment.id"
       type="comment-item"
     ></comment-list>
@@ -89,16 +99,19 @@ import editor from '@/mixins/editor'
 export default {
   name: 'CommentItem',
   components: {
+    CommentInput: () => import('@/components/form/comment-input'),
     CommentList: () => import('@/components/list/comment-list'),
     FormInput: () => import('@/components/form/form-input')
   },
   mixins: [ editor ],
   props: {
-    comment: Object
+    comment: Object,
+    recipeId: Number
   },
   data () {
     return {
-      responsesVisible: false,
+      responseVisible: false,
+      commentsVisible: false,
       models: {
         content: null
       }
@@ -146,7 +159,6 @@ export default {
 
 .c-comment-item {
   display: flex;
-  margin-bottom: 8px;
 
   &__image {
     width: 50px;
@@ -163,7 +175,7 @@ export default {
   &__row {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    margin: 8px 0;
 
     &--right {
       justify-content: flex-end;
@@ -192,7 +204,6 @@ export default {
     color: $color-text-secondary;
     cursor: pointer;
     margin-right: 8px;
-    margin-top: 8px;
 
     &:hover {
       text-decoration: underline;

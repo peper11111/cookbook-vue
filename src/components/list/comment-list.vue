@@ -4,6 +4,7 @@
     v-for="comment in items"
     :key="comment.id"
     :comment="comment"
+    :recipeId="recipeId"
     @refresh="init"
   ></comment-item>
 </div>

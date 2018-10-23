@@ -13,7 +13,7 @@
     <div class="c-comment-input__buttons">
       <button
         :class="{ 'is-disabled': pending }"
-        @click="comment = ''"
+        @click="cancel"
         class="o-button o-button__primary"
       >
         {{ $t('global.cancel') }}
@@ -38,7 +38,8 @@ export default {
   name: 'CommentInput',
   mixins: [ requester ],
   props: {
-    recipeId: Number
+    recipeId: Number,
+    parentId: Number
   },
   data () {
     return {
@@ -57,12 +58,17 @@ export default {
     createComment () {
       return this.$api.comments.create({
         content: this.comment,
-        recipeId: this.recipeId
+        recipeId: this.recipeId,
+        parentId: this.parentId
       }).then(() => {
         this.comment = ''
         this.$notify.success('comment-create-successful')
         this.$emit('refresh')
       })
+    },
+    cancel () {
+      this.comment = ''
+      this.$emit('cancel')
     }
   }
 }
