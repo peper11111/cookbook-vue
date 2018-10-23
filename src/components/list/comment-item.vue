@@ -16,19 +16,42 @@
       {{ creationTime }}
     </span>
     </div>
-    <div class="c-comment-item__row c-comment-item__content">
-      {{ comment.content }}
+    <form-input
+      v-model="models.content"
+      :disabled="previewMode"
+      class="c-comment-item__content"
+    ></form-input>
+    <div
+      v-if="!previewMode"
+      class="c-comment-item__row"
+    >
+      <span
+        @click="save"
+        class="c-comment-item__action"
+      >
+        {{ $t('global.save') }}
+      </span>
+      <span
+        @click="cancel"
+        class="c-comment-item__action"
+      >
+        {{ $t('global.cancel') }}
+      </span>
     </div>
-    <div class="c-comment-item__row">
+    <div
+      v-else
+      class="c-comment-item__row"
+    >
       <span
         v-if="isAuthor"
+        @click="edit"
         class="c-comment-item__action"
       >
         {{ $t('global.edit') }}
       </span>
       <span
         v-if="isAuthor"
-        @click="onDelete"
+        @click="deleteComment"
         class="c-comment-item__action"
       >
         {{ $t('global.delete') }}
@@ -61,23 +84,30 @@
 <script>
 import moment from 'moment'
 import config from '@/config'
-import requester from '@/mixins/requester'
+import editor from '@/mixins/editor'
 
 export default {
   name: 'CommentItem',
   components: {
-    CommentList: () => import('@/components/list/comment-list')
+    CommentList: () => import('@/components/list/comment-list'),
+    FormInput: () => import('@/components/form/form-input')
   },
-  mixins: [ requester ],
+  mixins: [ editor ],
   props: {
     comment: Object
   },
   data () {
     return {
-      responsesVisible: false
+      responsesVisible: false,
+      models: {
+        content: null
+      }
     }
   },
   computed: {
+    model () {
+      return this.comment
+    },
     authUser () {
       return this.$store.state.auth.user
     },
@@ -92,12 +122,10 @@ export default {
     }
   },
   methods: {
-    onDelete () {
-      if (confirm(this.$t('comment.comment-delete'))) {
-        this.wrap(this.deleteComment())
-      }
-    },
     deleteComment () {
+      if (!confirm(this.$t('comment.comment-delete'))) {
+        Promise.resolve()
+      }
       return this.$api.comments.delete(this.comment.id).then(() => {
         this.$notify.success('comment-delete-successful')
       })
@@ -146,7 +174,7 @@ export default {
   }
 
   &__content {
-    text-align: justify;
+    width: 100%;
   }
 
   &__action {
