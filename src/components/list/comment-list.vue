@@ -4,6 +4,7 @@
     v-for="comment in items"
     :key="comment.id"
     :comment="comment"
+    @refresh="init"
   ></comment-item>
 </div>
 </template>
@@ -21,6 +22,12 @@ export default {
     commentId: Number,
     recipeId: Number,
     type: String
+  },
+  mounted () {
+    this.$parent.$on('refresh', this.init)
+  },
+  beforeDestroy () {
+    this.$parent.$off('refresh', this.init)
   },
   methods: {
     getFetchMethod () {

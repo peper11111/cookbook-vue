@@ -26,13 +26,11 @@
       class="c-comment-item__row"
     >
       <span
-        @click="save"
         class="c-comment-item__action"
       >
         {{ $t('global.save') }}
       </span>
       <span
-        @click="cancel"
         class="c-comment-item__action"
       >
         {{ $t('global.cancel') }}
@@ -44,7 +42,6 @@
     >
       <span
         v-if="isAuthor"
-        @click="edit"
         class="c-comment-item__action"
       >
         {{ $t('global.edit') }}
@@ -128,6 +125,7 @@ export default {
       }
       return this.$api.comments.delete(this.comment.id).then(() => {
         this.$notify.success('comment-delete-successful')
+        this.$emit('refresh')
       })
     }
   }

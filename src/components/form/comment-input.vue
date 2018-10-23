@@ -61,6 +61,7 @@ export default {
       }).then(() => {
         this.comment = ''
         this.$notify.success('comment-create-successful')
+        this.$emit('refresh')
       })
     }
   }

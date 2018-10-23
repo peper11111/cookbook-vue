@@ -5,6 +5,7 @@
   </h1>
   <comment-input
     :recipeId="recipe.id"
+    @refresh="$emit('refresh')"
     class="c-recipe-comments__input"
   ></comment-input>
   <comment-list
