@@ -49,7 +49,7 @@ export default {
 .c-favourite-page {
   &__filtering {
     position: fixed;
-    top: 56px;
+    top: 66px;
     left: calc(50% - 484px);
   }
 

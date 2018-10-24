@@ -55,6 +55,8 @@ export default {
           return this.$api.recipes.search({ query: this.query, page: this.page++ })
         case 'user-recipes':
           return this.$api.users.readRecipes(this.userId, { page: this.page++ })
+        case 'user-recommended':
+          return this.$api.users.readRecommended(this.userId, { ...this.filtering, page: this.page++ })
         case 'user-favourites':
           return this.$api.users.readFavourites(this.userId, { ...this.filtering, page: this.page++ })
         default:

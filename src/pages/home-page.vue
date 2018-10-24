@@ -1,11 +1,60 @@
 <template>
 <div class="o-page">
-  Home Page
+  <div class="o-page__wrapper">
+    <recipe-filters
+      @input="updateFiltering"
+      class="c-home-page__filtering"
+    ></recipe-filters>
+    <div class="c-home-page__wrapper">
+      <recipe-buttons v-model="layout"></recipe-buttons>
+      <recipe-list
+        :filtering="filtering"
+        :layout="layout"
+        :userId="authUser.id"
+        type="user-recommended"
+      ></recipe-list>
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  components: {
+    RecipeFilters: () => import('@/components/list/recipe-filters'),
+    RecipeButtons: () => import('@/components/list/recipe-buttons'),
+    RecipeList: () => import('@/components/list/recipe-list')
+  },
+  data () {
+    return {
+      layout: 'list',
+      filtering: {}
+    }
+  },
+  computed: {
+    authUser () {
+      return this.$store.state.auth.user
+    }
+  },
+  methods: {
+    updateFiltering (filtering) {
+      this.filtering = filtering
+    }
+  }
 }
 </script>
+
+<style lang="scss">
+.c-home-page {
+  &__filtering {
+    position: fixed;
+    top: 66px;
+    left: calc(50% - 484px);
+  }
+
+  &__wrapper {
+    margin-left: 332px;
+  }
+}
+</style>
