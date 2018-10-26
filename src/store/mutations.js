@@ -3,13 +3,17 @@ import * as MutationTypes from '@/store/mutation-types'
 export default {
   [MutationTypes.SIGN_IN] (state, payload) {
     localStorage.setItem('loggedIn', 'true')
-    state.auth.loggedIn = true
-    state.auth.user = payload
+    state.auth = {
+      loggedIn: true,
+      user: payload
+    }
   },
   [MutationTypes.SIGN_OUT] (state) {
     localStorage.setItem('loggedIn', 'false')
-    state.auth.loggedIn = false
-    state.auth.user = {}
+    state.auth = {
+      loggedIn: false,
+      user: {}
+    }
   },
   [MutationTypes.SET_CATEGORIES] (state, payload) {
     state.categories = payload
@@ -23,10 +27,10 @@ export default {
   [MutationTypes.SET_RECIPE] (state, payload) {
     state.recipe = payload
   },
+  [MutationTypes.SET_IMAGES] (state, payload) {
+    state.images = payload
+  },
   [MutationTypes.ADD_IMAGES] (state, payload) {
     state.images.push(...payload)
-  },
-  [MutationTypes.REMOVE_IMAGES] (state) {
-    state.images = []
   }
 }

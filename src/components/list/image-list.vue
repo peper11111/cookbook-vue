@@ -59,7 +59,7 @@
 <script>
 import config from '@/config'
 import requester from '@/mixins/requester'
-import { ADD_IMAGES, REMOVE_IMAGES } from '@/store/mutation-types'
+import { ADD_IMAGES, SET_IMAGES } from '@/store/mutation-types'
 
 export default {
   name: 'ImageList',
@@ -95,7 +95,7 @@ export default {
     init () {
       this.page = 1
       this.done = false
-      this.$store.commit(REMOVE_IMAGES)
+      this.$store.commit(SET_IMAGES, [])
       return this.fetchImages()
     },
     triggerInput () {
