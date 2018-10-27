@@ -7,7 +7,7 @@
   >
     <input
       ref="input"
-      @input="onInput($event.target.files[0])"
+      @input="wrap(uploadImage($event))"
       accept="image/*"
       class="u-hide"
       type="file"
@@ -101,23 +101,24 @@ export default {
       }
       return this.$api.uploads.delete(id).then(() => {
         this.$notify.success('image-deleted')
-        return this.init()
+        this.init()
       })
     },
-    onInput (file) {
-      if (file && file.size > config.maxFileSize) {
-        this.$notify.error('file-exceeds-limit')
-        return
+    uploadImage (event) {
+      const file = event.target.files[0]
+      if (!file) {
+        return Promise.resolve()
       }
-      this.$refs.input.value = null
-      this.wrap(this.uploadImage(file))
-    },
-    uploadImage (file) {
+      if (file.size > config.maxFileSize) {
+        this.$notify.error('file-exceeds-limit')
+        return Promise.resolve()
+      }
+      event.target.value = null
       const formData = new FormData()
       formData.set('file', file)
       return this.$api.uploads.create(formData).then(() => {
         this.$notify.success('image-created')
-        return this.init()
+        this.init()
       })
     }
   }
