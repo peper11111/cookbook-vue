@@ -1,57 +1,33 @@
 <template>
 <div class="c-image-list">
   <div
-    @click="$emit('close')"
-    class="c-image-list__overlay"
-  ></div>
-  <div class="c-image-list__body">
-    <h1 class="c-image-list__title">
-      {{ $t('list.images') }}
-    </h1>
+    @scroll="onScroll"
+    ref="wrapper"
+    class="c-image-list__wrapper"
+  >
+    <input
+      ref="input"
+      @input="onInput($event.target.files[0])"
+      accept="image/*"
+      class="u-hide"
+      type="file"
+    />
     <div
-      @scroll="onScroll"
-      ref="wrapper"
-      class="c-image-list__wrapper"
+      @click="triggerInput"
+      class="c-image-list__new"
     >
-      <input
-        ref="input"
-        @input="onInput($event.target.files[0])"
-        accept="image/*"
-        class="u-hide"
-        type="file"
-      />
-      <div
-        @click="triggerInput"
-        class="c-image-list__new"
-      >
-        <i class="material-icons">
-          add_circle_outline
-        </i>
-      </div>
-      <image-item
-        v-for="image in images"
-        :key="image.id"
-        :image="image"
-        :selected="current === image.id"
-        @delete="wrap(deleteImage(image.id))"
-        @select="selectImage(image.id)"
-      ></image-item>
+      <i class="material-icons">
+        add_circle_outline
+      </i>
     </div>
-    <div class="c-image-list__buttons">
-      <div
-        :class="{ 'is-disabled': isDisabled }"
-        @click="$emit('select', current)"
-        class="o-button o-button__accent"
-      >
-        {{ $t('global.select') }}
-      </div>
-      <div
-        @click="$emit('close')"
-        class="o-button o-button__primary"
-      >
-        {{ $t('global.cancel') }}
-      </div>
-    </div>
+    <image-item
+      v-for="image in images"
+      :key="image.id"
+      :image="image"
+      :selected="value === image.id"
+      @delete="wrap(deleteImage(image.id))"
+      @select="selectImage(image.id)"
+    ></image-item>
   </div>
 </div>
 </template>
@@ -68,13 +44,12 @@ export default {
   },
   mixins: [ requester ],
   props: {
-    selected: Number
+    value: Number
   },
   data () {
     return {
       done: false,
-      page: 1,
-      current: this.selected
+      page: 1
     }
   },
   computed: {
@@ -83,9 +58,6 @@ export default {
     },
     images () {
       return this.$store.state.images
-    },
-    isDisabled () {
-      return !this.current || this.current === this.selected
     }
   },
   created () {
@@ -118,14 +90,14 @@ export default {
       })
     },
     selectImage (id) {
-      this.current = id !== this.current ? id : null
+      this.$emit('input', id)
     },
     deleteImage (id) {
       if (!confirm(this.$t('list.image-delete'))) {
         return Promise.resolve()
       }
-      if (this.current === id) {
-        this.current = null
+      if (this.value === id) {
+        this.$emit('input', null)
       }
       return this.$api.uploads.delete(id).then(() => {
         this.$notify.success('image-deleted')
@@ -157,42 +129,6 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-image-list {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 1001;
-
-  &__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.25);
-  }
-
-  &__body {
-    @include box-elevation;
-    position: absolute;
-    width: 1000px;
-    left: 0;
-    right: 0;
-    top: 5%;
-    bottom: 5%;
-    margin: auto;
-    background-color: $color-white;
-    border-radius: 2px;
-    padding: 32px 16px 16px;
-  }
-
-  &__title {
-    font-size: 24px;
-    margin-left: 16px;
-    margin-bottom: 16px;
-  }
-
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -216,13 +152,6 @@ export default {
       font-size: 64px;
       color: $color-text-primary;
     }
-  }
-
-  &__buttons {
-    margin-top: 16px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
   }
 }
 </style>

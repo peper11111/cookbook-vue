@@ -15,19 +15,39 @@
   </div>
   <div
     v-if="!disabled && value"
-    @click="onSelect(null)"
+    @click="$emit('input')"
     class="c-image-picker__clear"
   >
     <i class="material-icons">
       clear
     </i>
   </div>
-  <image-list
+  <app-modal
     v-if="modalVisible"
-    :selected="value"
     @close="hideModal"
-    @select="onSelect"
-  ></image-list>
+  >
+    <h1 slot="header">
+      {{ $t('list.images') }}
+    </h1>
+    <image-list
+      slot="body"
+      v-model="selected"
+    ></image-list>
+    <div slot="footer">
+      <div
+        @click="hideModal"
+        class="o-button o-button__primary"
+      >
+        {{ $t('global.cancel') }}
+      </div>
+      <div
+        @click="onInput"
+        class="o-button o-button__accent"
+      >
+        {{ $t('global.select') }}
+      </div>
+    </div>
+  </app-modal>
 </div>
 </template>
 
@@ -35,6 +55,7 @@
 export default {
   name: 'ImagePicker',
   components: {
+    AppModal: () => import('@/components/app-modal'),
     ImageList: () => import('@/components/list/image-list')
   },
   props: {
@@ -44,6 +65,7 @@ export default {
   },
   data () {
     return {
+      selected: this.value,
       modalVisible: false
     }
   },
@@ -52,10 +74,15 @@ export default {
       return this.$helpers.imageSrc(this.value) || this.blank
     }
   },
+  watch: {
+    value (val) {
+      this.selected = val
+    }
+  },
   methods: {
-    onSelect (id) {
+    onInput () {
       this.hideModal()
-      this.$emit('input', id)
+      this.$emit('input', this.selected)
     },
     showModal () {
       this.modalVisible = true

@@ -1,0 +1,86 @@
+<template>
+<div class="c-app-modal">
+  <div
+    @click="close"
+    class="c-app-modal__mask"
+  ></div>
+  <div class="c-app-modal__content">
+    <div class="c-app-modal__header">
+      <slot name="header"></slot>
+    </div>
+    <div class="c-app-modal__body">
+      <slot name="body"></slot>
+    </div>
+    <div class="c-app-modal__footer">
+      <slot name="footer"></slot>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'AppModal',
+  methods: {
+    close () {
+      this.$emit('close')
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import '../assets/styles/mixins';
+@import '../assets/styles/variables';
+
+.c-app-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &__content {
+    @include box-elevation;
+    position: relative;
+    padding: 16px;
+    border-radius: 2px;
+    background-color: $color-white;
+    width: 80vw;
+    height: 80vh;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    font-size: 24px;
+  }
+
+  &__body {
+    height: calc(100% - 96px);
+    margin: 16px 0;
+    overflow: auto;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 40px;
+  }
+}
+</style>
