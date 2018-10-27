@@ -59,7 +59,7 @@ export default {
     padding: 16px;
     border-radius: 2px;
     background-color: $color-white;
-    width: 80vw;
+    width: 1000px;
     height: 80vh;
   }
 
