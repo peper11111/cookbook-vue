@@ -55,7 +55,7 @@
 export default {
   name: 'ImagePicker',
   components: {
-    AppModal: () => import('@/components/app-modal'),
+    AppModal: () => import('@/components/modal/app-modal'),
     ImageList: () => import('@/components/list/image-list')
   },
   props: {
