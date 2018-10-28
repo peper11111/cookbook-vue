@@ -1,93 +1,55 @@
 <template>
 <div class="c-image-list">
+  <input
+    ref="input"
+    @input="wrap(uploadImage($event))"
+    accept="image/*"
+    class="u-hide"
+    type="file"
+  />
   <div
-    @scroll="onScroll"
-    ref="wrapper"
-    class="c-image-list__wrapper"
+    @click="triggerInput"
+    class="c-image-list__new"
   >
-    <input
-      ref="input"
-      @input="wrap(uploadImage($event))"
-      accept="image/*"
-      class="u-hide"
-      type="file"
-    />
-    <div
-      @click="triggerInput"
-      class="c-image-list__new"
-    >
-      <i class="material-icons">
-        add_circle_outline
-      </i>
-    </div>
-    <image-item
-      v-for="image in images"
-      :key="image.id"
-      :image="image"
-      :selected="value === image.id"
-      @delete="wrap(deleteImage(image.id))"
-      @select="selectImage(image.id)"
-    ></image-item>
+    <i class="material-icons">
+      add_circle_outline
+    </i>
   </div>
+  <image-item
+    v-for="image in items"
+    :key="image.id"
+    :image="image"
+    :selected="value === image.id"
+    @delete="wrap(deleteImage(image.id))"
+    @select="selectImage(image.id)"
+  ></image-item>
 </div>
 </template>
 
 <script>
 import config from '@/config'
-import requester from '@/mixins/requester'
-import { ADD_IMAGES, SET_IMAGES } from '@/store/mutation-types'
+import scroll from '@/mixins/scroll'
 
 export default {
   name: 'ImageList',
   components: {
     ImageItem: () => import('@/components/list/image-item')
   },
-  mixins: [ requester ],
+  mixins: [ scroll ],
   props: {
     value: Number
-  },
-  data () {
-    return {
-      done: false,
-      page: 1
-    }
   },
   computed: {
     authUser () {
       return this.$store.state.auth.user
-    },
-    images () {
-      return this.$store.state.images
     }
   },
-  created () {
-    this.wrap(this.init())
-  },
   methods: {
-    init () {
-      this.page = 1
-      this.done = false
-      this.$store.commit(SET_IMAGES, [])
-      return this.fetchImages()
+    getFetchMethod () {
+      return this.$api.users.readImages(this.authUser.id, { page: this.page++ })
     },
     triggerInput () {
       this.$refs.input.click()
-    },
-    onScroll () {
-      if (this.pending || this.done) {
-        return
-      }
-      if (this.$refs.wrapper.offsetHeight + this.$refs.wrapper.scrollTop >= this.$refs.wrapper.scrollHeight - 300) {
-        this.wrap(this.fetchImages())
-      }
-    },
-    fetchImages () {
-      return this.$api.users.readImages(this.authUser.id, { page: this.page++ }).then((value) => {
-        this.$store.commit(ADD_IMAGES, value.data)
-        if (value.data.length < config.pageSize) {
-          this.done = true
-        }
-      })
     },
     selectImage (id) {
       this.$emit('input', id)
@@ -130,13 +92,9 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-image-list {
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    height: calc(100% - 88px);
-    overflow-y: auto;
-    align-content: flex-start;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
 
   &__new {
     @include box-elevation;
