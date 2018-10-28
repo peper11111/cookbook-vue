@@ -2,7 +2,8 @@
 @import './mixins';
 
 .o-page {
-  height: 100%;
+  height: calc(100vh - #{$navbar-height});
+  margin-top: $navbar-height;
   box-sizing: border-box;
   color: $color-text-primary;
   background-color: $color-white;
@@ -11,8 +12,8 @@
   overflow: auto;
 
   &--intro {
-    margin-top: 0;
     height: 100vh;
+    margin-top: 0;
     display: flex;
     justify-content: center;
     align-items: center;

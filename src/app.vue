@@ -1,8 +1,5 @@
 <template>
-<div
-  v-if="!pending"
-  class="c-app"
->
+<div v-if="!pending">
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>
@@ -32,13 +29,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import './assets/styles/variables';
-
-.c-app {
-  height: 100vh;
-  overflow: hidden;
-  padding-top: $navbar-height;
-}
-</style>
