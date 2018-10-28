@@ -80,14 +80,14 @@ export default {
   @include box-elevation-hover;
   display: flex;
   width: 100%;
-  height: 300px;
+  height: 290px;
   box-sizing: border-box;
   margin: 16px;
   text-decoration: none;
   color: $color-text-primary;
 
   &--grid {
-    width: 300px;
+    width: 290px;
     position: relative;
     color: $color-text;
 

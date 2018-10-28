@@ -6,15 +6,17 @@
   <div class="o-page__wrapper o-page__wrapper--top">
     <user-details></user-details>
     <div class="o-page__separator"></div>
-    <recipe-buttons
-      v-model="layout"
-      :title="$t('list.recipes')"
-    ></recipe-buttons>
-    <recipe-list
-      :layout="layout"
-      :userId="user.id"
-      type="user-recipes"
-    ></recipe-list>
+    <div class="c-user-page__wrapper">
+      <recipe-buttons
+        v-model="layout"
+        :title="$t('list.recipes')"
+      ></recipe-buttons>
+      <recipe-list
+        :layout="layout"
+        :userId="user.id"
+        type="user-recipes"
+      ></recipe-list>
+    </div>
   </div>
 </div>
 </template>
@@ -53,3 +55,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.c-user-page {
+  &__wrapper {
+    padding: 0 16px;
+  }
+}
+</style>

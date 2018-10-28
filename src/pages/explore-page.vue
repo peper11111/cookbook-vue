@@ -48,7 +48,7 @@ export default {
   }
 
   &__wrapper {
-    margin-left: 332px;
+    margin-left: 354px;
   }
 }
 </style>
