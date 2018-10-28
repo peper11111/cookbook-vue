@@ -14,7 +14,7 @@ import requester from '@/mixins/requester'
 export default {
   name: 'App',
   components: {
-    AppNavbar: () => import('@/components/navbar/app-navbar')
+    AppNavbar: () => import('@/components/app-navbar')
   },
   mixins: [ requester ],
   computed: {

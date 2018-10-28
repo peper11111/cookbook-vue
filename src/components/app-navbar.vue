@@ -41,68 +41,24 @@
       </i>
     </router-link>
     <div class="c-app-navbar__separator"></div>
-    <div
-      @click.stop="toggleDropdown"
-      class="c-app-navbar__row c-app-navbar__row--clickable"
-    >
-      <span class="c-app-navbar__username">
-      {{ authUser.username }}
-      </span>
-      <img
-        class="c-app-navbar__image"
-        :src="imageSrc"
-      >
-    </div>
+    <navbar-user></navbar-user>
   </div>
-  <navbar-dropdown
-    v-if="dropdownVisible"
-    class="c-app-navbar__dropdown"
-  ></navbar-dropdown>
 </nav>
 </template>
 
 <script>
-import config from '@/config'
-
 export default {
   name: 'AppNavbar',
   components: {
     NavbarSearch: () => import('@/components/navbar/navbar-search'),
-    NavbarDropdown: () => import('@/components/navbar/navbar-dropdown')
-  },
-  data () {
-    return {
-      dropdownVisible: false
-    }
-  },
-  computed: {
-    imageSrc () {
-      return this.$helpers.thumbnailSrc(this.authUser.avatarId) || config.blankAvatar
-    },
-    authUser () {
-      return this.$store.state.auth.user
-    }
-  },
-  mounted () {
-    window.addEventListener('click', this.hideDropdown)
-  },
-  beforeDestroy () {
-    window.removeEventListener('click', this.hideDropdown)
-  },
-  methods: {
-    toggleDropdown () {
-      this.dropdownVisible = !this.dropdownVisible
-    },
-    hideDropdown () {
-      this.dropdownVisible = false
-    }
+    NavbarUser: () => import('@/components/navbar/navbar-user')
   }
 }
 </script>
 
 <style lang="scss">
-@import '../../assets/styles/mixins';
-@import '../../assets/styles/variables';
+@import '../assets/styles/mixins';
+@import '../assets/styles/variables';
 
 .c-app-navbar {
   @include box-elevation;
@@ -164,26 +120,6 @@ export default {
     margin: 0 10px;
     background-color: $color-primary-light;
     box-sizing: border-box;
-  }
-
-  &__image {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    border-radius: 50%;
-    margin-left: 8px;
-  }
-
-  &__username {
-    font-family: 'Roboto', sans-serif;
-    color: $color-text;
-    font-size: 14px;
-  }
-
-  &__dropdown {
-    position: absolute;
-    top: 50px;
-    right: 96px;
   }
 }
 </style>
