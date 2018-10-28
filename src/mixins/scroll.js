@@ -7,19 +7,34 @@ export default {
     return {
       done: null,
       items: null,
-      page: null
+      page: null,
+      scrollParent: null
     }
   },
   created () {
     this.init()
   },
   mounted () {
-    window.addEventListener('scroll', this.onScroll)
+    this.scrollParent = this.getScrollParent(this.$el)
+    this.scrollParent.addEventListener('scroll', this.onScroll)
   },
   beforeDestroy () {
-    window.removeEventListener('scroll', this.onScroll)
+    this.scrollParent.removeEventListener('scroll', this.onScroll)
   },
   methods: {
+    getScrollParent (element) {
+      if (!element || element === document.body) {
+        return document.body
+      }
+      return this.isScrollable(element) ? element : this.getScrollParent(element.parentElement)
+    },
+    isScrollable (element) {
+      const regex = /(auto|scroll)/
+      const elementStyle = getComputedStyle(element)
+      return regex.test(elementStyle.getPropertyValue('overflow')) ||
+        regex.test(elementStyle.getPropertyValue('overflow-y')) ||
+        regex.test(elementStyle.getPropertyValue('overflow-x'))
+    },
     init () {
       this.done = false
       this.items = []
@@ -38,7 +53,9 @@ export default {
       if (this.pending || this.done) {
         return
       }
-      if (this.$el.getBoundingClientRect().bottom <= window.innerHeight + 300) {
+      const elRect = this.$el.getBoundingClientRect()
+      const scrollParentRect = this.scrollParent.getBoundingClientRect()
+      if (elRect.top + elRect.height <= scrollParentRect.top + scrollParentRect.height + 300) {
         this.wrap(this.fetchItems())
       }
     }
