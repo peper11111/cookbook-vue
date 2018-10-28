@@ -2,8 +2,7 @@
 @import './mixins';
 
 .o-page {
-  height: calc(100vh - #{$navbar-height});
-  margin-top: $navbar-height;
+  height: 100%;
   box-sizing: border-box;
   color: $color-text-primary;
   background-color: $color-white;
