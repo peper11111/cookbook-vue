@@ -1,5 +1,8 @@
 <template>
-<div v-if="!pending">
+<div
+  v-if="!pending"
+  class="o-typography"
+>
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>

@@ -4,11 +4,7 @@
 .o-page {
   height: calc(100vh - #{$navbar-height});
   margin-top: $navbar-height;
-  box-sizing: border-box;
-  color: $color-text-primary;
   background-color: $color-white;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
   overflow: auto;
 
   &--intro {
