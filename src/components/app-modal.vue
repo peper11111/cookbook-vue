@@ -1,10 +1,9 @@
 <template>
 <div class="c-app-modal">
   <div
-    @click="close"
-    class="c-app-modal__mask"
-  ></div>
-  <div class="c-app-modal__content">
+    @click.stop
+    class="c-app-modal__content"
+  >
     <div class="c-app-modal__header">
       <slot name="header"></slot>
     </div>
@@ -21,6 +20,12 @@
 <script>
 export default {
   name: 'AppModal',
+  mounted () {
+    window.addEventListener('click', this.close)
+  },
+  beforeDestroy () {
+    window.removeEventListener('click', this.close)
+  },
   methods: {
     close () {
       this.$emit('close')
@@ -43,15 +48,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &__mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
+  background-color: rgba(0, 0, 0, 0.3);
 
   &__content {
     @include box-elevation;
