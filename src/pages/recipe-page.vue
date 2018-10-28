@@ -6,7 +6,9 @@
   <div class="o-page__wrapper o-page__wrapper--top">
     <recipe-details></recipe-details>
     <div class="o-page__separator"></div>
-    <recipe-comments></recipe-comments>
+    <div class="c-recipe-page__wrapper">
+      <recipe-comments></recipe-comments>
+    </div>
   </div>
 </div>
 </template>
@@ -34,3 +36,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.c-recipe-page {
+  &__wrapper {
+    padding: 0 32px;
+  }
+}
+</style>
