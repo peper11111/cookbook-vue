@@ -6,7 +6,5 @@ export default {
   categories: [],
   cuisines: [],
   user: {},
-  recipe: {},
-  recipes: [],
-  images: []
+  recipe: {}
 }

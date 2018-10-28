@@ -26,11 +26,5 @@ export default {
   },
   [MutationTypes.SET_RECIPE] (state, payload) {
     state.recipe = payload
-  },
-  [MutationTypes.SET_IMAGES] (state, payload) {
-    state.images = payload
-  },
-  [MutationTypes.ADD_IMAGES] (state, payload) {
-    state.images.push(...payload)
   }
 }
