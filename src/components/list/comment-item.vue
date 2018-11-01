@@ -13,8 +13,8 @@
         {{ comment.author.username }}
       </router-link>
       <span class="c-comment-item__time">
-      {{ creationTime }}
-    </span>
+        {{ creationTime }}
+      </span>
     </div>
     <form-input
       v-model="models.content"
