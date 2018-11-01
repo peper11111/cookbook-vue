@@ -20,7 +20,7 @@ export default {
   },
   mixins: [ scroll ],
   props: {
-    commentId: Number,
+    parentId: Number,
     recipeId: Number,
     type: String
   },
@@ -36,7 +36,7 @@ export default {
         case 'recipe-comments':
           return this.$api.recipes.readComments(this.recipeId, { page: this.page++ })
         case 'comment-item':
-          return this.$api.comments.readComments(this.commentId, { page: this.page++ })
+          return this.$api.comments.readComments(this.parentId, { page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }

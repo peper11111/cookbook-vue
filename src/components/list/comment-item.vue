@@ -84,7 +84,7 @@
     </div>
     <comment-list
       v-if="commentsVisible"
-      :commentId="comment.id"
+      :parentId="comment.id"
       type="comment-item"
     ></comment-list>
   </div>
