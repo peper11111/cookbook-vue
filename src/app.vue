@@ -6,6 +6,10 @@
   <app-navbar v-if="requiresAuth"></app-navbar>
   <router-view :key="$route.path"></router-view>
 </div>
+<div
+  v-else
+  class="o-page__loader"
+></div>
 </template>
 
 <script>
