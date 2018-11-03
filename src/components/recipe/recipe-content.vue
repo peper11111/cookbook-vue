@@ -32,30 +32,30 @@
   >
     <i
       :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': canPerformAction }"
-      @click="canPerformAction ? like : null"
+      @click="like"
       class="material-icons"
     >
       thumb_up
     </i>
     <span class="c-recipe-content__value">
-    {{ recipe.likesCount || 0 }}
-  </span>
+      {{ recipe.likesCount || 0 }}
+    </span>
     <i
       :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': canPerformAction }"
-      @click="canPerformAction ? favourite : null"
+      @click="favourite"
       class="material-icons"
     >
       book
     </i>
     <span class="c-recipe-content__value">
-    {{ recipe.favouritesCount || 0 }}
-  </span>
+      {{ recipe.favouritesCount || 0 }}
+    </span>
     <i class="material-icons">
       chat_bubble
     </i>
     <span class="c-recipe-content__value">
-    {{ recipe.commentsCount || 0 }}
-  </span>
+      {{ recipe.commentsCount || 0 }}
+    </span>
   </div>
 </div>
 </template>
@@ -93,6 +93,9 @@ export default {
   },
   methods: {
     like () {
+      if (!this.canPerformAction) {
+        return
+      }
       this.wrap(() => {
         return this.$api.recipes.like(this.recipe.id).then(() => {
           return this.$api.recipes.read(this.recipe.id)
@@ -103,6 +106,9 @@ export default {
       })
     },
     favourite () {
+      if (!this.canPerformAction) {
+        return
+      }
       this.wrap(() => {
         return this.$api.recipes.favourite(this.recipe.id).then(() => {
           return this.$api.recipes.read(this.recipe.id)
