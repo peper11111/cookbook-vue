@@ -7,7 +7,7 @@
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
       v-if="!done"
-      @submit.prevent="wrap(register())"
+      @submit.prevent="register"
       class="o-form"
     >
       <input
@@ -70,7 +70,7 @@
       </p>
       <div
         :class="{ 'is-disabled': pending }"
-        @click="wrap(registerResend())"
+        @click="registerResend"
         class="o-button o-button__accent o-button--full"
       >
         {{ $t('form.resend-email') }}
@@ -82,11 +82,10 @@
 
 <script>
 import form from '@/mixins/form'
-import requester from '@/mixins/requester'
 
 export default {
   name: 'RegisterPage',
-  mixins: [ form, requester ],
+  mixins: [ form ],
   data () {
     return {
       done: false
@@ -94,19 +93,23 @@ export default {
   },
   methods: {
     register () {
-      return this.$api.auth.register({
-        email: this.email,
-        username: this.username,
-        password: this.password
-      }).then(() => {
-        this.done = true
+      this.wrap(() => {
+        return this.$api.auth.register({
+          email: this.email,
+          username: this.username,
+          password: this.password
+        }).then(() => {
+          this.done = true
+        })
       })
     },
     registerResend () {
-      return this.$api.auth.registerResend({
-        login: this.username
-      }).then(() => {
-        this.$notify.info('message-resend')
+      this.wrap(() => {
+        return this.$api.auth.registerResend({
+          login: this.username
+        }).then(() => {
+          this.$notify.info('message-resend')
+        })
       })
     }
   }

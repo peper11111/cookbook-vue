@@ -2,7 +2,7 @@
 <div class="c-image-list">
   <input
     ref="input"
-    @input="wrap(uploadImage($event))"
+    @input="uploadImage"
     accept="image/*"
     class="u-hide"
     type="file"
@@ -20,7 +20,7 @@
     :key="image.id"
     :image="image"
     :selected="value === image.id"
-    @delete="wrap(deleteImage(image.id))"
+    @delete="deleteImage(image.id)"
     @select="selectImage(image.id)"
   ></image-item>
 </div>
@@ -55,31 +55,37 @@ export default {
       this.$emit('input', id)
     },
     deleteImage (id) {
-      if (!confirm(this.$t('list.image-delete'))) {
-        return Promise.resolve()
-      }
-      if (this.value === id) {
-        this.$emit('input', null)
-      }
-      return this.$api.uploads.delete(id).then(() => {
-        this.$notify.success('image-deleted')
+      this.wrap(() => {
+        if (!confirm(this.$t('list.image-delete'))) {
+          return Promise.resolve()
+        }
+        if (this.value === id) {
+          this.$emit('input', null)
+        }
+        return this.$api.uploads.delete(id).then(() => {
+          this.$notify.success('image-deleted')
+        })
+      }).then(() => {
         this.init()
       })
     },
     uploadImage (event) {
-      const file = event.target.files[0]
-      if (!file) {
-        return Promise.resolve()
-      }
-      if (file.size > config.maxFileSize) {
-        this.$notify.error('file-exceeds-limit')
-        return Promise.resolve()
-      }
-      event.target.value = null
-      const formData = new FormData()
-      formData.set('file', file)
-      return this.$api.uploads.create(formData).then(() => {
-        this.$notify.success('image-created')
+      this.wrap(() => {
+        const file = event.target.files[0]
+        if (!file) {
+          return Promise.resolve()
+        }
+        if (file.size > config.maxFileSize) {
+          this.$notify.error('file-exceeds-limit')
+          return Promise.resolve()
+        }
+        event.target.value = null
+        const formData = new FormData()
+        formData.set('file', file)
+        return this.$api.uploads.create(formData).then(() => {
+          this.$notify.success('image-created')
+        })
+      }).then(() => {
         this.init()
       })
     }

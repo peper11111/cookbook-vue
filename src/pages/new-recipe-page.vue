@@ -25,13 +25,15 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchRecipe())
+    this.fetchRecipe()
   },
   methods: {
     fetchRecipe () {
-      return new Promise((resolve) => {
-        this.$store.commit(SET_RECIPE, { author: this.authUser, ingredients: [], steps: [] })
-        resolve()
+      this.wrap(() => {
+        return new Promise((resolve) => {
+          this.$store.commit(SET_RECIPE, { author: this.authUser, ingredients: [], steps: [] })
+          resolve()
+        })
       })
     }
   }

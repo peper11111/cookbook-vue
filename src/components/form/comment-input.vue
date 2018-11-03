@@ -20,7 +20,7 @@
       </button>
       <button
         :class="{ 'is-disabled': pending }"
-        @click="wrap(createComment())"
+        @click="createComment"
         class="o-button o-button__accent"
       >
         {{ $t('global.comment') }}
@@ -56,14 +56,16 @@ export default {
   },
   methods: {
     createComment () {
-      return this.$api.comments.create({
-        content: this.comment,
-        recipeId: this.recipeId,
-        parentId: this.parentId
-      }).then(() => {
-        this.comment = ''
-        this.$notify.success('comment-create-successful')
-        this.$emit('refresh')
+      this.wrap(() => {
+        return this.$api.comments.create({
+          content: this.comment,
+          recipeId: this.recipeId,
+          parentId: this.parentId
+        }).then(() => {
+          this.comment = ''
+          this.$notify.success('comment-create-successful')
+          this.$emit('refresh')
+        })
       })
     },
     cancel () {

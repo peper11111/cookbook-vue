@@ -35,7 +35,7 @@
       </router-link>
       <li class="c-navbar-user__separator"></li>
       <li
-        @click="wrap(signOut())"
+        @click="signOut"
         class="c-navbar-user__item"
       >
         {{ $t('navbar.sign-out') }}
@@ -77,9 +77,12 @@ export default {
       this.dropdownVisible = false
     },
     signOut () {
-      return this.$api.auth.logout().then(() => {
-        this.$store.commit(SIGN_OUT)
-        this.$notify.success('sign-out-successful')
+      this.wrap(() => {
+        return this.$api.auth.logout().then(() => {
+          this.$store.commit(SIGN_OUT)
+          this.$notify.success('sign-out-successful')
+        })
+      }).then(() => {
         this.$router.push('/sign-in')
       })
     }

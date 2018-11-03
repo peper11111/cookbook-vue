@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
-      @submit.prevent="wrap(signIn())"
+      @submit.prevent="signIn"
       class="o-form"
     >
       <input
@@ -60,21 +60,23 @@
 
 <script>
 import form from '@/mixins/form'
-import requester from '@/mixins/requester'
 
 export default {
   name: 'SignInPage',
-  mixins: [ form, requester ],
+  mixins: [ form ],
   methods: {
     signIn () {
-      const formData = new FormData()
-      formData.set('login', this.login)
-      formData.set('password', this.password)
+      this.wrap(() => {
+        const formData = new FormData()
+        formData.set('login', this.login)
+        formData.set('password', this.password)
 
-      return this.$api.auth.login(formData).then(() => {
-        return this.$helpers.fetchGlobalData()
+        return this.$api.auth.login(formData).then(() => {
+          return this.$helpers.fetchGlobalData()
+        }).then(() => {
+          this.$notify.success('sign-in-successful')
+        })
       }).then(() => {
-        this.$notify.success('sign-in-successful')
         this.$router.push(this.$route.query.redirect || '/')
       })
     }

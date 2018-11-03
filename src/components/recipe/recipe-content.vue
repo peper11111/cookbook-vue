@@ -32,7 +32,7 @@
   >
     <i
       :class="{ 'is-active': recipe.isLiked, 'c-recipe-content__action': canPerformAction }"
-      @click="canPerformAction ? wrap(like()) : null"
+      @click="canPerformAction ? like : null"
       class="material-icons"
     >
       thumb_up
@@ -42,7 +42,7 @@
   </span>
     <i
       :class="{ 'is-active': recipe.isFavourite, 'c-recipe-content__action': canPerformAction }"
-      @click="canPerformAction ? wrap(favourite()) : null"
+      @click="canPerformAction ? favourite : null"
       class="material-icons"
     >
       book
@@ -93,19 +93,23 @@ export default {
   },
   methods: {
     like () {
-      return this.$api.recipes.like(this.recipe.id).then(() => {
-        return this.$api.recipes.read(this.recipe.id)
-      }).then((value) => {
-        this.$store.commit(SET_RECIPE, value.data)
-        this.$notify.info(this.recipe.isLiked ? 'recipe-like' : 'recipe-unlike')
+      this.wrap(() => {
+        return this.$api.recipes.like(this.recipe.id).then(() => {
+          return this.$api.recipes.read(this.recipe.id)
+        }).then((value) => {
+          this.$store.commit(SET_RECIPE, value.data)
+          this.$notify.info(this.recipe.isLiked ? 'recipe-like' : 'recipe-unlike')
+        })
       })
     },
     favourite () {
-      return this.$api.recipes.favourite(this.recipe.id).then(() => {
-        return this.$api.recipes.read(this.recipe.id)
-      }).then((value) => {
-        this.$store.commit(SET_RECIPE, value.data)
-        this.$notify.info(this.recipe.isFavourite ? 'recipe-favourite' : 'recipe-unfavourite')
+      this.wrap(() => {
+        return this.$api.recipes.favourite(this.recipe.id).then(() => {
+          return this.$api.recipes.read(this.recipe.id)
+        }).then((value) => {
+          this.$store.commit(SET_RECIPE, value.data)
+          this.$notify.info(this.recipe.isFavourite ? 'recipe-favourite' : 'recipe-unfavourite')
+        })
       })
     }
   }

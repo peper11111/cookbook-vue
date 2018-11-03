@@ -44,12 +44,14 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchUser())
+    this.fetchUser()
   },
   methods: {
     fetchUser () {
-      return this.$api.users.read(this.$route.params.id).then((value) => {
-        this.$store.commit(SET_USER, value.data)
+      this.wrap(() => {
+        return this.$api.users.read(this.$route.params.id).then((value) => {
+          this.$store.commit(SET_USER, value.data)
+        })
       })
     }
   }

@@ -7,10 +7,10 @@ export default {
   methods: {
     wrap (request) {
       if (this.pending) {
-        return
+        return Promise.reject(new Error('Request already pending'))
       }
       this.pending = true
-      return request.finally(() => {
+      return request().finally(() => {
         this.pending = false
       })
     }

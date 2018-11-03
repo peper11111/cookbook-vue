@@ -64,15 +64,15 @@ export default {
           this.mode = Mode.PREVIEW
           break
         case 'create':
-          this.wrap(this.create(this.getParams()))
+          this.create(this.getParams())
           break
         case 'save':
-          this.wrap(this.modify(this.getParams())).then(() => {
+          this.modify(this.getParams()).then(() => {
             this.mode = Mode.PREVIEW
           })
           break
         case 'delete':
-          this.wrap(this.delete())
+          this.delete()
           break
       }
     }

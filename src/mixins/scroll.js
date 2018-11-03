@@ -39,14 +39,16 @@ export default {
       this.done = false
       this.items = []
       this.page = 1
-      this.wrap(this.fetchItems())
+      this.fetchItems()
     },
     fetchItems () {
-      return this.getFetchMethod().then((value) => {
-        this.items.push(...value.data)
-        if (value.data.length < config.pageSize) {
-          this.done = true
-        }
+      this.wrap(() => {
+        return this.getFetchMethod().then((value) => {
+          this.items.push(...value.data)
+          if (value.data.length < config.pageSize) {
+            this.done = true
+          }
+        })
       })
     },
     onScroll () {
@@ -56,7 +58,7 @@ export default {
       const elRect = this.$el.getBoundingClientRect()
       const scrollParentRect = this.scrollParent.getBoundingClientRect()
       if (elRect.top + elRect.height <= scrollParentRect.top + scrollParentRect.height + 300) {
-        this.wrap(this.fetchItems())
+        this.fetchItems()
       }
     }
   }

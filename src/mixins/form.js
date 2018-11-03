@@ -1,4 +1,7 @@
+import requester from '@/mixins/requester'
+
 export default {
+  mixins: [ requester ],
   data () {
     return {
       email: '',

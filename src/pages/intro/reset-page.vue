@@ -7,7 +7,7 @@
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
       v-if="!done"
-      @submit.prevent="wrap(reset())"
+      @submit.prevent="reset"
       class="o-form"
     >
       <input
@@ -41,7 +41,7 @@
       </div>
       <div
         :class="{ 'is-disabled': pending }"
-        @click="wrap(resetResend())"
+        @click="resetResend"
         class="o-button o-button__accent o-button--full"
       >
         {{ $t('form.resend-email') }}
@@ -53,11 +53,10 @@
 
 <script>
 import form from '@/mixins/form'
-import requester from '@/mixins/requester'
 
 export default {
   name: 'ResetPage',
-  mixins: [ form, requester ],
+  mixins: [ form ],
   data () {
     return {
       done: false
@@ -65,17 +64,21 @@ export default {
   },
   methods: {
     reset () {
-      return this.$api.auth.reset({
-        login: this.login
-      }).then(() => {
-        this.done = true
+      this.wrap(() => {
+        return this.$api.auth.reset({
+          login: this.login
+        }).then(() => {
+          this.done = true
+        })
       })
     },
     resetResend () {
-      return this.$api.auth.resetResend({
-        login: this.login
-      }).then(() => {
-        this.$notify.info('message-resend')
+      this.wrap(() => {
+        return this.$api.auth.resetResend({
+          login: this.login
+        }).then(() => {
+          this.$notify.info('message-resend')
+        })
       })
     }
   }

@@ -31,7 +31,14 @@ export default {
   },
   created () {
     if (this.loggedIn) {
-      this.wrap(this.$helpers.fetchGlobalData())
+      this.fetchGlobalData()
+    }
+  },
+  methods: {
+    fetchGlobalData () {
+      this.wrap(() => {
+        return this.$helpers.fetchGlobalData()
+      })
     }
   }
 }

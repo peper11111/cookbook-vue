@@ -42,12 +42,14 @@ export default {
     }
   },
   created () {
-    this.wrap(this.fetchRecipe())
+    this.fetchRecipe()
   },
   methods: {
     fetchRecipe () {
-      return this.$api.recipes.read(this.$route.params.id).then((value) => {
-        this.$store.commit(SET_RECIPE, value.data)
+      this.wrap(() => {
+        return this.$api.recipes.read(this.$route.params.id).then((value) => {
+          this.$store.commit(SET_RECIPE, value.data)
+        })
       })
     }
   }

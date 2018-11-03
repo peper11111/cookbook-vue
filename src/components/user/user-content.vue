@@ -7,7 +7,7 @@
     <button
       v-if="canPerformAction"
       :class="{ 'o-button__primary': user.isFollowed, 'o-button__accent': !user.isFollowed, 'is-disabled': pending }"
-      @click="wrap(follow())"
+      @click="follow"
       class="o-button"
     >
       {{ user.isFollowed ? $t('user.unfollow') : $t('user.follow') }}
@@ -76,11 +76,13 @@ export default {
   },
   methods: {
     follow () {
-      return this.$api.users.follow(this.user.id).then(() => {
-        return this.$api.users.read(this.user.id)
-      }).then((value) => {
-        this.$store.commit(SET_USER, value.data)
-        this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
+      this.wrap(() => {
+        return this.$api.users.follow(this.user.id).then(() => {
+          return this.$api.users.read(this.user.id)
+        }).then((value) => {
+          this.$store.commit(SET_USER, value.data)
+          this.$notify.info(this.user.isFollowed ? 'user-follow' : 'user-unfollow')
+        })
       })
     }
   }

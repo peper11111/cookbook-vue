@@ -6,7 +6,7 @@
     </h1>
     <div class="o-page__separator o-page__separator--intro"></div>
     <form
-      @submit.prevent="wrap(resetConfirm())"
+      @submit.prevent="resetConfirm"
       class="o-form"
     >
       <div class="o-form__wrapper">
@@ -53,19 +53,21 @@
 </template>
 
 <script>
-import requester from '@/mixins/requester'
 import form from '@/mixins/form'
 
 export default {
   name: 'ResetConfirmPage',
-  mixins: [ form, requester ],
+  mixins: [ form ],
   methods: {
     resetConfirm () {
-      return this.$api.auth.resetConfirm({
-        password: this.password,
-        uuid: this.$route.query.uuid
+      this.wrap(() => {
+        return this.$api.auth.resetConfirm({
+          password: this.password,
+          uuid: this.$route.query.uuid
+        }).then(() => {
+          this.$notify.success('password-reset')
+        })
       }).then(() => {
-        this.$notify.success('password-reset')
         this.$router.push('/sign-in')
       })
     }

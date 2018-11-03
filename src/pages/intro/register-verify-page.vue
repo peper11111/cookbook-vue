@@ -9,15 +9,17 @@ export default {
   name: 'RegisterVerifyPage',
   mixins: [ requester ],
   created () {
-    this.wrap(this.registerVerify())
+    this.registerVerify()
   },
   methods: {
     registerVerify () {
-      return this.$api.auth.registerVerify({
-        uuid: this.$route.query.uuid
+      this.wrap(() => {
+        return this.$api.auth.registerVerify({
+          uuid: this.$route.query.uuid
+        }).then(() => {
+          this.$notify.success('user-verified')
+        })
       }).then(() => {
-        this.$notify.success('user-verified')
-      }).finally(() => {
         this.$router.push('/sign-in')
       })
     }
