@@ -32,7 +32,7 @@
         </router-link>
       </p>
     </form>
-    <div v-if="done">
+    <div v-else>
       <div class="o-card__message">
         <i class="o-card__check material-icons">
           check_circle_outline
