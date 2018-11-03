@@ -31,9 +31,9 @@
     </i>
   </button>
   <button
-    v-if="editMode || createMode"
+    v-if="createMode || editMode"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('save')"
+    @click="emitEvent(createMode ? 'create' : 'save')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">

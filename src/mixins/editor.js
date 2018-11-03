@@ -63,11 +63,13 @@ export default {
           this.init()
           this.mode = Mode.PREVIEW
           break
+        case 'create':
+          this.wrap(this.create(this.getParams()))
+          break
         case 'save':
-          const params = this.getParams()
-          this.wrap(this.createMode ? this.create(params) : this.modify(params).then(() => {
+          this.wrap(this.modify(this.getParams())).then(() => {
             this.mode = Mode.PREVIEW
-          }))
+          })
           break
         case 'delete':
           this.wrap(this.delete())
