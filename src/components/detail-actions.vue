@@ -3,7 +3,7 @@
   <button
     v-if="previewMode && canDelete"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('delete')"
+    @click="emitAction('delete')"
     class="o-button o-button--fab o-button__primary"
   >
     <i class="material-icons">
@@ -13,7 +13,7 @@
   <button
     v-if="previewMode && canEdit"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('edit')"
+    @click="emitAction('edit')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
@@ -23,7 +23,7 @@
   <button
     v-if="editMode"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent('clear')"
+    @click="emitAction('clear')"
     class="o-button o-button--fab o-button__primary"
   >
     <i class="material-icons">
@@ -33,7 +33,7 @@
   <button
     v-if="createMode || editMode"
     :class="{ 'is-disabled': disabled }"
-    @click="emitEvent(createMode ? 'create' : 'save')"
+    @click="emitAction(createMode ? 'create' : 'save')"
     class="o-button o-button--fab o-button__accent"
   >
     <i class="material-icons">
@@ -55,7 +55,7 @@ export default {
     createMode: Boolean
   },
   methods: {
-    emitEvent (action) {
+    emitAction (action) {
       if (this.disabled) {
         return
       }

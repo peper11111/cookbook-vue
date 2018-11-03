@@ -21,48 +21,15 @@
       :disabled="previewMode"
       class="c-comment-item__content"
     ></form-input>
-    <div
-      v-if="!previewMode"
-      class="c-comment-item__row c-comment-item__row--right"
-    >
-      <button
-        @click="onAction('clear')"
-        class="o-button o-button__primary"
-      >
-        {{ $t('global.cancel') }}
-      </button>
-      <button
-        @click="onAction('save')"
-        class="o-button o-button__accent"
-      >
-        {{ $t('global.save') }}
-      </button>
-    </div>
-    <div
-      v-else
-      class="c-comment-item__row"
-    >
-      <span
-        v-if="isAuthor"
-        @click="onAction('edit')"
-        class="c-comment-item__action"
-      >
-        {{ $t('global.edit') }}
-      </span>
-      <span
-        v-if="isAuthor"
-        @click="onAction('delete')"
-        class="c-comment-item__action"
-      >
-        {{ $t('global.delete') }}
-      </span>
-      <span
-        @click="responseVisible = true"
-        class="c-comment-item__action"
-      >
-        {{ $t('global.reply') }}
-      </span>
-    </div>
+    <comment-actions
+      :disabled="pending"
+      :canEdit="isAuthor"
+      :canDelete="isAuthor"
+      :editMode="editMode"
+      :previewMode="previewMode"
+      @action="onAction"
+      @reply="responseVisible = true"
+    ></comment-actions>
     <comment-input
       v-if="responseVisible"
       :parentId="comment.id"
@@ -99,6 +66,7 @@ import editor from '@/mixins/editor'
 export default {
   name: 'CommentItem',
   components: {
+    CommentActions: () => import('@/components/comment/comment-actions'),
     CommentList: () => import('@/components/comment/comment-list'),
     CommentInput: () => import('@/components/form/comment-input'),
     FormInput: () => import('@/components/form/form-input')
@@ -200,19 +168,9 @@ export default {
     width: 100%;
   }
 
-  &__action {
-    color: $color-text-secondary;
-    cursor: pointer;
-    margin-right: 8px;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
   &__responses {
     font-weight: bold;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     cursor: pointer;
     display: flex;
     align-items: center;
