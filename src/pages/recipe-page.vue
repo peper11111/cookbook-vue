@@ -33,7 +33,7 @@ export default {
   mixins: [ requester ],
   components: {
     CommentInput: () => import('@/components/form/comment-input'),
-    CommentList: () => import('@/components/list/comment-list'),
+    CommentList: () => import('@/components/comment/comment-list'),
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   computed: {

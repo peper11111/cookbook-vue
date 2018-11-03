@@ -99,8 +99,8 @@ import editor from '@/mixins/editor'
 export default {
   name: 'CommentItem',
   components: {
+    CommentList: () => import('@/components/comment/comment-list'),
     CommentInput: () => import('@/components/form/comment-input'),
-    CommentList: () => import('@/components/list/comment-list'),
     FormInput: () => import('@/components/form/form-input')
   },
   mixins: [ editor ],

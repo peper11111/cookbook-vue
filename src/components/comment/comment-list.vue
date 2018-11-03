@@ -16,7 +16,7 @@ import scroll from '@/mixins/scroll'
 export default {
   name: 'CommentList',
   components: {
-    CommentItem: () => import('@/components/list/comment-item')
+    CommentItem: () => import('@/components/comment/comment-item')
   },
   mixins: [ scroll ],
   props: {
