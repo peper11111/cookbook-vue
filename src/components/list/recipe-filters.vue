@@ -148,7 +148,7 @@ export default {
         if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        if (this.models[key] !== null) {
+        if (this.models[key]) {
           filtering[key] = this.models[key]
         }
       }
