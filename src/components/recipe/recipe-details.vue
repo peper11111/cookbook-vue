@@ -105,27 +105,37 @@ export default {
   },
   methods: {
     create (params) {
-      this.removeEmptyValues(params)
-      return this.$api.recipes.create(params).then((value) => {
-        this.$notify.success('recipe-create-successful')
-        this.$router.push(`/recipe/${value.data}`)
+      let recipeId
+      this.wrap(() => {
+        this.removeEmptyValues(params)
+        return this.$api.recipes.create(params).then((value) => {
+          this.$notify.success('recipe-create-successful')
+          recipeId = value.data
+        })
+      }).then(() => {
+        this.$router.push(`/recipe/${recipeId}`)
       })
     },
     modify (params) {
-      this.removeEmptyValues(params)
-      return this.$api.recipes.modify(this.recipe.id, params).then(() => {
-        return this.$api.recipes.read(this.recipe.id)
-      }).then((value) => {
-        this.$store.commit(SET_RECIPE, value.data)
-        this.$notify.success('recipe-update-successful')
+      this.wrap(() => {
+        this.removeEmptyValues(params)
+        return this.$api.recipes.modify(this.recipe.id, params).then(() => {
+          return this.$api.recipes.read(this.recipe.id)
+        }).then((value) => {
+          this.$store.commit(SET_RECIPE, value.data)
+          this.$notify.success('recipe-update-successful')
+        })
       })
     },
     delete () {
-      if (!confirm(this.$t('recipe.recipe-delete'))) {
-        return Promise.resolve()
-      }
-      return this.$api.recipes.delete(this.recipe.id).then(() => {
-        this.$notify.success('recipe-delete-successful')
+      this.wrap(() => {
+        if (!confirm(this.$t('recipe.recipe-delete'))) {
+          return Promise.resolve()
+        }
+        return this.$api.recipes.delete(this.recipe.id).then(() => {
+          this.$notify.success('recipe-delete-successful')
+        })
+      }).then(() => {
         this.$router.push(`/user/${this.recipe.author.id}`)
       })
     },

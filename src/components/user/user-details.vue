@@ -75,15 +75,17 @@ export default {
   },
   methods: {
     modify (params) {
-      return this.$api.users.modify(this.user.id, params).then(() => {
-        return this.$api.users.read(this.user.id)
-      }).then((value) => {
-        this.$store.commit(SET_USER, value.data)
-        return this.authUser.id === this.user.id
-          ? this.$helpers.fetchCurrentUser()
-          : Promise.resolve()
-      }).then(() => {
-        this.$notify.success('profile-update-successful')
+      this.wrap(() => {
+        return this.$api.users.modify(this.user.id, params).then(() => {
+          return this.$api.users.read(this.user.id)
+        }).then((value) => {
+          this.$store.commit(SET_USER, value.data)
+          return this.authUser.id === this.user.id
+            ? this.$helpers.fetchCurrentUser()
+            : Promise.resolve()
+        }).then(() => {
+          this.$notify.success('profile-update-successful')
+        })
       })
     }
   }
