@@ -18,7 +18,10 @@
     @click.native="hideDropdown"
     class="c-navbar-user__dropdown"
   >
-    <ul slot="body">
+    <ul
+      slot="body"
+      class="c-navbar-user__list"
+    >
       <router-link
         tag="li"
         :to="`/user/${authUser.id}`"
@@ -123,12 +126,19 @@ export default {
     right: 96px;
   }
 
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__item {
     padding: 8px 16px;
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
     white-space: nowrap;
+    color: $color-text-primary;
+    text-decoration: none;
 
     &:hover {
       background-color: $color-primary-light;
