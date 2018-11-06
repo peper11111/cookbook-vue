@@ -113,10 +113,10 @@ export default {
       })
     },
     delete () {
+      if (!confirm(this.$t('comment.comment-delete'))) {
+        return
+      }
       this.wrap(() => {
-        if (!confirm(this.$t('comment.comment-delete'))) {
-          return Promise.resolve()
-        }
         return this.$api.comments.delete(this.comment.id).then(() => {
           this.$notify.success('comment-delete-successful')
         })

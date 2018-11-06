@@ -84,9 +84,8 @@ export default {
         return this.$api.auth.logout().then(() => {
           this.$store.commit(SIGN_OUT)
           this.$notify.success('sign-out-successful')
+          this.$router.push('/sign-in')
         })
-      }).then(() => {
-        this.$router.push('/sign-in')
       })
     }
   }

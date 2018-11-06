@@ -75,9 +75,8 @@ export default {
           return this.$helpers.fetchGlobalData()
         }).then(() => {
           this.$notify.success('sign-in-successful')
+          this.$router.push(this.$route.query.redirect || '/')
         })
-      }).then(() => {
-        this.$router.push(this.$route.query.redirect || '/')
       })
     }
   }

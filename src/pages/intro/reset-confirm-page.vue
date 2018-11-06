@@ -66,9 +66,8 @@ export default {
           uuid: this.$route.query.uuid
         }).then(() => {
           this.$notify.success('password-reset')
+          this.$router.push('/sign-in')
         })
-      }).then(() => {
-        this.$router.push('/sign-in')
       })
     }
   }

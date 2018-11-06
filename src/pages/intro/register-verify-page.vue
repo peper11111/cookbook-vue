@@ -18,9 +18,8 @@ export default {
           uuid: this.$route.query.uuid
         }).then(() => {
           this.$notify.success('user-verified')
+          this.$router.push('/sign-in')
         })
-      }).then(() => {
-        this.$router.push('/sign-in')
       })
     }
   }
