@@ -35,12 +35,14 @@ export default {
   },
   methods: {
     init () {
+      const models = {}
       for (const key in this.models) {
         if (!this.models.hasOwnProperty(key)) {
           continue
         }
-        this.models[key] = this.model[key]
+        models[key] = this.model[key]
       }
+      this.models = models
     },
     getParams () {
       const params = {}
