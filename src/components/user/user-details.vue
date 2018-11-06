@@ -80,7 +80,7 @@ export default {
           return this.$api.users.read(this.user.id)
         }).then((value) => {
           this.$store.commit(SET_USER, value.data)
-          return this.authUser.id === this.user.id
+          return this.isAuthUser
             ? this.$helpers.fetchCurrentUser()
             : Promise.resolve()
         }).then(() => {
