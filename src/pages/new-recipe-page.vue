@@ -10,12 +10,10 @@
 </template>
 
 <script>
-import requester from '@/mixins/requester'
 import { SET_RECIPE } from '@/store/mutation-types'
 
 export default {
   name: 'NewRecipeView',
-  mixins: [ requester ],
   components: {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
@@ -25,16 +23,11 @@ export default {
     }
   },
   created () {
-    this.fetchRecipe()
+    this.init()
   },
   methods: {
-    fetchRecipe () {
-      this.wrap(() => {
-        return new Promise((resolve) => {
-          this.$store.commit(SET_RECIPE, { author: this.authUser, ingredients: [], steps: [] })
-          resolve()
-        })
-      })
+    init () {
+      this.$store.commit(SET_RECIPE, { author: this.authUser, ingredients: [], steps: [] })
     }
   }
 }
