@@ -55,10 +55,10 @@ export default {
       this.$emit('input', id)
     },
     deleteImage (id) {
-      if (!confirm(this.$t('list.image-delete'))) {
-        return
-      }
       this.wrap(() => {
+        if (!confirm(this.$t('list.image-delete'))) {
+          return Promise.resolve()
+        }
         if (this.value === id) {
           this.$emit('input', null)
         }

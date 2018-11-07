@@ -104,23 +104,17 @@ export default {
   },
   methods: {
     modify (params) {
-      this.wrap(() => {
-        return this.$api.comments.modify(this.comment.id, params).then(() => {
-          this.$notify.success('comment-update-successful')
-        })
-      }).then(() => {
+      return this.$api.comments.modify(this.comment.id, params).then(() => {
+        this.$notify.success('comment-update-successful')
         this.$emit('refresh')
       })
     },
     delete () {
       if (!confirm(this.$t('comment.comment-delete'))) {
-        return
+        return Promise.resolve()
       }
-      this.wrap(() => {
-        return this.$api.comments.delete(this.comment.id).then(() => {
-          this.$notify.success('comment-delete-successful')
-        })
-      }).then(() => {
+      return this.$api.comments.delete(this.comment.id).then(() => {
+        this.$notify.success('comment-delete-successful')
         this.$emit('refresh')
       })
     }
