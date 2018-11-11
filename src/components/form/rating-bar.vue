@@ -28,16 +28,16 @@ export default {
       type: Number,
       default: 5
     },
-    value: Number
+    value: [ String, Number ]
   },
   data () {
     return {
-      visibleValue: this.value
+      visibleValue: Number(this.value)
     }
   },
   watch: {
     value () {
-      this.visibleValue = this.value
+      this.visibleValue = Number(this.value)
     }
   },
   methods: {
