@@ -1,3 +1,4 @@
+import model from '@/mixins/model'
 import requester from '@/mixins/requester'
 
 const Mode = {
@@ -7,7 +8,7 @@ const Mode = {
 }
 
 export default {
-  mixins: [ requester ],
+  mixins: [ model, requester ],
   props: {
     initialMode: {
       default: Mode.PREVIEW,
@@ -30,32 +31,7 @@ export default {
       return this.mode === Mode.PREVIEW
     }
   },
-  created () {
-    this.init()
-  },
   methods: {
-    init () {
-      const models = {}
-      for (const key in this.models) {
-        if (!this.models.hasOwnProperty(key)) {
-          continue
-        }
-        models[key] = this.model[key]
-      }
-      this.models = models
-    },
-    getParams () {
-      const params = {}
-      for (const key in this.models) {
-        if (!this.models.hasOwnProperty(key)) {
-          continue
-        }
-        if (this.models[key] !== this.model[key]) {
-          params[key] = this.models[key]
-        }
-      }
-      return params
-    },
     onAction (action) {
       switch (action) {
         case 'edit':
@@ -67,12 +43,12 @@ export default {
           break
         case 'create':
           this.wrap(() => {
-            return this.create(this.getParams())
+            return this.create(this.getUpdatedParams())
           })
           break
         case 'save':
           this.wrap(() => {
-            return this.modify(this.getParams())
+            return this.modify(this.getUpdatedParams())
           }).then(() => {
             this.mode = Mode.PREVIEW
           })

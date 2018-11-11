@@ -1,14 +1,10 @@
 <template>
 <div class="o-page">
   <div class="o-page__wrapper">
-    <recipe-filters
-      @input="updateFiltering"
-      class="c-home-page__filtering"
-    ></recipe-filters>
+    <recipe-filters class="c-home-page__filtering"></recipe-filters>
     <div class="c-home-page__wrapper">
       <recipe-buttons v-model="layout"></recipe-buttons>
       <recipe-list
-        :filtering="filtering"
         :layout="layout"
         :userId="authUser.id"
         type="user-recommended"
@@ -28,18 +24,12 @@ export default {
   },
   data () {
     return {
-      layout: 'list',
-      filtering: {}
+      layout: 'list'
     }
   },
   computed: {
     authUser () {
       return this.$store.state.auth.user
-    }
-  },
-  methods: {
-    updateFiltering (filtering) {
-      this.filtering = filtering
     }
   }
 }

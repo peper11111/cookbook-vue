@@ -5,7 +5,7 @@
 >
   <div class="o-form__wrapper">
     <input
-      v-model="search"
+      v-model="models.query"
       :placeholder="$t('form.search')"
       class="c-navbar-search__input o-form__input o-form__input--full"
     />
@@ -22,34 +22,28 @@
 </template>
 
 <script>
+import model from '@/mixins/model'
+
 export default {
   name: 'NavbarSearch',
+  mixins: [ model ],
   data () {
     return {
-      search: ''
+      models: {
+        query: null
+      }
     }
   },
   computed: {
-    query () {
-      return this.$route.query.query
+    model () {
+      return this.$route.query
     }
-  },
-  watch: {
-    query () {
-      this.init()
-    }
-  },
-  created () {
-    this.init()
   },
   methods: {
-    init () {
-      this.search = this.query
-    },
     submit () {
       this.$router.push({
         path: '/search',
-        query: { query: this.search }
+        query: this.getParams()
       })
     }
   }

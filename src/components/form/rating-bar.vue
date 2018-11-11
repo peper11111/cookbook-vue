@@ -28,7 +28,7 @@ export default {
       type: Number,
       default: 5
     },
-    value: Number
+    value: [ String, Number ]
   },
   data () {
     return {

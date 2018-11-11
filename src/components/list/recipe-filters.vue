@@ -92,6 +92,8 @@
 </template>
 
 <script>
+import model from '@/mixins/model'
+
 export default {
   name: 'RecipeFilters',
   components: {
@@ -100,6 +102,7 @@ export default {
     RatingBar: () => import('@/components/form/rating-bar'),
     TimeInput: () => import('@/components/form/time-input')
   },
+  mixins: [ model ],
   data () {
     return {
       models: {
@@ -115,6 +118,9 @@ export default {
     }
   },
   computed: {
+    model () {
+      return this.$route.query
+    },
     cuisines () {
       return this.$store.state.cuisines.map((cuisine) => {
         return {
@@ -134,25 +140,16 @@ export default {
   },
   methods: {
     clearFiltering () {
-      for (const key in this.models) {
-        if (!this.models.hasOwnProperty(key)) {
-          continue
-        }
-        this.models[key] = null
-      }
-      this.$emit('input', {})
+      this.$router.push({
+        path: this.$route.path,
+        query: {}
+      })
     },
     updateFiltering () {
-      const filtering = {}
-      for (const key in this.models) {
-        if (!this.models.hasOwnProperty(key)) {
-          continue
-        }
-        if (this.models[key]) {
-          filtering[key] = this.models[key]
-        }
-      }
-      this.$emit('input', filtering)
+      this.$router.push({
+        path: this.$route.path,
+        query: this.getParams()
+      })
     }
   }
 }

@@ -27,14 +27,14 @@ export default {
   },
   computed: {
     query () {
-      return this.$route.query.query
+      return this.$route.query
     }
   },
   methods: {
     getFetchMethod () {
       switch (this.type) {
         case 'users-search':
-          return this.$api.users.search({ query: this.query, page: this.page++ })
+          return this.$api.users.search({ ...this.query, page: this.page++ })
         default:
           return Promise.resolve({ data: [] })
       }
