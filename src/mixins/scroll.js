@@ -5,9 +5,9 @@ export default {
   mixins: [ requester ],
   data () {
     return {
-      done: null,
-      items: null,
-      page: null,
+      done: false,
+      items: [],
+      page: 1,
       scrollParent: null
     }
   },
