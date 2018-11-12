@@ -3,7 +3,7 @@
   v-if="!pending"
   class="o-page"
 >
-  <div class="o-page__wrapper o-page__wrapper--top">
+  <div class="o-page__wrapper">
     <recipe-details></recipe-details>
     <div class="o-page__separator"></div>
     <div class="c-recipe-page__wrapper">

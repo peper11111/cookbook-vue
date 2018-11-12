@@ -1,8 +1,10 @@
 <template>
 <div class="o-page">
-  <div class="o-page__wrapper">
-    <recipe-filters class="c-favourite-page__filtering"></recipe-filters>
-    <div class="c-favourite-page__wrapper">
+  <div class="o-page__wrapper o-page__wrapper--list">
+    <div class="o-page__sidebar">
+      <recipe-filters></recipe-filters>
+    </div>
+    <div class="o-page__container">
       <recipe-list
         :userId="authUser.id"
         type="user-favourites"
@@ -26,17 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.c-favourite-page {
-  &__filtering {
-    position: fixed;
-    top: 66px;
-    left: calc(50% - 484px);
-  }
-
-  &__wrapper {
-    margin-left: 354px;
-  }
-}
-</style>

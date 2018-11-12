@@ -76,6 +76,7 @@ export default {
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -16px;
   }
 
   &__text {

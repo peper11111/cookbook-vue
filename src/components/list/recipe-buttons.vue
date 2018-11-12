@@ -1,8 +1,5 @@
 <template>
 <div class="c-recipe-buttons">
-  <h1 class="c-recipe-buttons__title">
-    {{ title }}
-  </h1>
   <div class="c-recipe-buttons__icons">
     <i
       :class="{ 'is-active': isActiveLayout('list') }"
@@ -29,8 +26,7 @@ export default {
     prop: 'layout'
   },
   props: {
-    layout: String,
-    title: String
+    layout: String
   },
   methods: {
     isActiveLayout (layout) {
@@ -47,14 +43,9 @@ export default {
 @import "../../assets/styles/variables";
 
 .c-recipe-buttons {
-  margin: 0 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  &__title {
-    font-size: 24px;
-  }
+  justify-content: flex-end;
 
   &__icons {
     display: flex;

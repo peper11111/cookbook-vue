@@ -3,11 +3,11 @@
   v-if="!pending"
   class="o-page"
 >
-  <div class="o-page__wrapper o-page__wrapper--top">
+  <div class="o-page__wrapper">
     <user-details></user-details>
     <div class="o-page__separator"></div>
-    <div class="c-user-page__wrapper">
-      <h1 class="c-user-page__header">
+    <div class="o-page__container">
+      <h1 class="o-typography__header o-typography__header--list">
         {{ $t('list.recipes') }}
       </h1>
       <recipe-list
@@ -49,17 +49,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.c-user-page {
-  &__wrapper {
-    padding: 0 16px;
-  }
-
-  &__header {
-    font-size: 24px;
-    margin-bottom: -24px;
-    padding: 0 16px;
-  }
-}
-</style>
