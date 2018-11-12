@@ -80,7 +80,7 @@ export default {
   }
 
   &__text {
-    margin-top: 16px;
+    margin-top: 24px;
     text-align: center;
   }
 }
