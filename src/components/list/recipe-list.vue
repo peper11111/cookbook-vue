@@ -3,12 +3,15 @@
   v-if="items.length !== 0"
   class="c-recipe-list"
 >
-  <recipe-item
-    v-for="recipe in items"
-    :key="recipe.id"
-    :layout="layout"
-    :recipe="recipe"
-  ></recipe-item>
+  <recipe-buttons v-model="layout"></recipe-buttons>
+  <div class="c-recipe-list__wrapper">
+    <recipe-item
+      v-for="recipe in items"
+      :key="recipe.id"
+      :layout="layout"
+      :recipe="recipe"
+    ></recipe-item>
+  </div>
 </div>
 <div
   v-else
@@ -24,22 +27,27 @@ import scroll from '@/mixins/scroll'
 export default {
   name: 'RecipeList',
   components: {
+    RecipeButtons: () => import('@/components/list/recipe-buttons'),
     RecipeItem: () => import('@/components/list/recipe-item')
   },
   mixins: [ scroll ],
   props: {
-    layout: String,
     type: String,
     userId: Number
   },
-  watch: {
-    query () {
-      this.init()
+  data () {
+    return {
+      layout: 'grid'
     }
   },
   computed: {
     query () {
       return this.$route.query
+    }
+  },
+  watch: {
+    query () {
+      this.init()
     }
   },
   methods: {
@@ -65,8 +73,10 @@ export default {
 
 <style lang="scss">
 .c-recipe-list {
-  display: flex;
-  flex-wrap: wrap;
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   &__text {
     margin-top: 16px;

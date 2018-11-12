@@ -3,9 +3,7 @@
   <div class="o-page__wrapper">
     <recipe-filters class="c-favourite-page__filtering"></recipe-filters>
     <div class="c-favourite-page__wrapper">
-      <recipe-buttons v-model="layout"></recipe-buttons>
       <recipe-list
-        :layout="layout"
         :userId="authUser.id"
         type="user-favourites"
       ></recipe-list>
@@ -19,13 +17,7 @@ export default {
   name: 'FavouritePage',
   components: {
     RecipeFilters: () => import('@/components/list/recipe-filters'),
-    RecipeButtons: () => import('@/components/list/recipe-buttons'),
     RecipeList: () => import('@/components/list/recipe-list')
-  },
-  data () {
-    return {
-      layout: 'list'
-    }
   },
   computed: {
     authUser () {
