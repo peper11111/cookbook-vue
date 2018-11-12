@@ -34,7 +34,7 @@ export default {
     getFetchMethod () {
       switch (this.type) {
         case 'users-search':
-          return this.$api.users.search({ ...this.query, page: this.page++ })
+          return this.$api.users.search({ ...this.query, page: this.page })
         default:
           return Promise.resolve({ data: [] })
       }

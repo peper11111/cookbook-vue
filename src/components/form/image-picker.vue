@@ -32,6 +32,7 @@
     <image-list
       slot="body"
       v-model="selected"
+      type="user-images"
     ></image-list>
     <div slot="footer">
       <div

@@ -44,10 +44,9 @@ export default {
     fetchItems () {
       this.wrap(() => {
         return this.getFetchMethod().then((value) => {
+          this.done = value.data.length < config.pageSize
           this.items.push(...value.data)
-          if (value.data.length < config.pageSize) {
-            this.done = true
-          }
+          this.page++
         })
       })
     },

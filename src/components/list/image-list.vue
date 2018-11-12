@@ -37,6 +37,7 @@ export default {
   },
   mixins: [ scroll ],
   props: {
+    type: String,
     value: Number
   },
   computed: {
@@ -46,7 +47,12 @@ export default {
   },
   methods: {
     getFetchMethod () {
-      return this.$api.users.readImages(this.authUser.id, { page: this.page++ })
+      switch (this.type) {
+        case 'user-images':
+          return this.$api.users.readImages(this.authUser.id, { page: this.page })
+        default:
+          return Promise.resolve({data: []})
+      }
     },
     triggerInput () {
       this.$refs.input.click()

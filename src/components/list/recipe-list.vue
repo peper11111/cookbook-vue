@@ -54,15 +54,15 @@ export default {
     getFetchMethod () {
       switch (this.type) {
         case 'recipes':
-          return this.$api.recipes.readAll({ ...this.query, page: this.page++ })
+          return this.$api.recipes.readAll({ ...this.query, page: this.page })
         case 'recipes-search':
-          return this.$api.recipes.search({ ...this.query, page: this.page++ })
+          return this.$api.recipes.search({ ...this.query, page: this.page })
         case 'user-recipes':
-          return this.$api.users.readRecipes(this.userId, { page: this.page++ })
+          return this.$api.users.readRecipes(this.userId, { page: this.page })
         case 'user-recommended':
-          return this.$api.users.readRecommended(this.userId, { ...this.query, page: this.page++ })
+          return this.$api.users.readRecommended(this.userId, { ...this.query, page: this.page })
         case 'user-favourites':
-          return this.$api.users.readFavourites(this.userId, { ...this.query, page: this.page++ })
+          return this.$api.users.readFavourites(this.userId, { ...this.query, page: this.page })
         default:
           return Promise.resolve({ data: [] })
       }
