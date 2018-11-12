@@ -1,11 +1,14 @@
+import requester from '@/mixins/requester'
+
 export default {
-  created () {
-    this.init()
-  },
+  mixins: [ requester ],
   watch: {
     model () {
       this.init()
     }
+  },
+  created () {
+    this.init()
   },
   methods: {
     init () {

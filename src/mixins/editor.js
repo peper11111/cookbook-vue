@@ -1,5 +1,4 @@
 import model from '@/mixins/model'
-import requester from '@/mixins/requester'
 
 const Mode = {
   CREATE: 'create',
@@ -8,7 +7,7 @@ const Mode = {
 }
 
 export default {
-  mixins: [ model, requester ],
+  mixins: [ model ],
   props: {
     initialMode: {
       default: Mode.PREVIEW,
