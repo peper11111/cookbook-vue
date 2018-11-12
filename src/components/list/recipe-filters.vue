@@ -1,6 +1,6 @@
 <template>
 <div class="c-recipe-filters">
-  <h1 class="c-recipe-filters__title">
+  <h1 class="o-typography__header">
     {{ $t('recipe.filtering') }}
   </h1>
   <div class="c-recipe-filters__header">
@@ -167,10 +167,6 @@ export default {
   padding: 16px;
   border-radius: 2px;
   background-color: $color-white;
-
-  &__title {
-    font-size: 24px;
-  }
 
   &__header {
     font-weight: bold;
