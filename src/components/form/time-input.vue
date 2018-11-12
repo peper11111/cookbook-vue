@@ -47,10 +47,10 @@ export default {
       if (this.hours) {
         text += `${this.hours} h`
       }
+      if (this.hours && this.minutes) {
+        text += ' '
+      }
       if (this.minutes) {
-        if (this.hours) {
-          text += ' '
-        }
         text += `${this.minutes} min`
       }
       return text
