@@ -85,6 +85,7 @@ export default {
   margin: 16px;
   text-decoration: none;
   color: $color-text-primary;
+  cursor: pointer;
 
   &--grid {
     width: 290px;
@@ -139,6 +140,7 @@ export default {
     text-decoration: none;
     color: $color-text-primary;
     font-weight: bold;
+    cursor: pointer;
 
     &:hover {
       text-decoration: underline;
