@@ -7,22 +7,24 @@
     class="u-hide"
     type="file"
   />
-  <div
-    @click="triggerInput"
-    class="c-image-list__new"
-  >
-    <i class="material-icons">
-      add_circle_outline
-    </i>
+  <div class="c-image-list__wrapper">
+    <div
+      @click="triggerInput"
+      class="c-image-list__new"
+    >
+      <i class="material-icons">
+        add_circle_outline
+      </i>
+    </div>
+    <image-item
+      v-for="image in items"
+      :key="image.id"
+      :image="image"
+      :selected="value === image.id"
+      @delete="deleteImage(image.id)"
+      @select="selectImage(image.id)"
+    ></image-item>
   </div>
-  <image-item
-    v-for="image in items"
-    :key="image.id"
-    :image="image"
-    :selected="value === image.id"
-    @delete="deleteImage(image.id)"
-    @select="selectImage(image.id)"
-  ></image-item>
 </div>
 </template>
 
@@ -104,9 +106,11 @@ export default {
 @import '../../assets/styles/variables';
 
 .c-image-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  }
 
   &__new {
     @include box-elevation;

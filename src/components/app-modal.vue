@@ -53,7 +53,7 @@ export default {
   &__content {
     @include box-elevation;
     position: relative;
-    padding: 16px;
+    padding: 16px 32px;
     border-radius: 2px;
     background-color: $color-white;
     width: 1000px;
@@ -70,7 +70,8 @@ export default {
   &__body {
     height: calc(100% - 96px);
     margin: 16px 0;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &__footer {
