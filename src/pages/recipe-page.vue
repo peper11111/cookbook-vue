@@ -11,11 +11,11 @@
         {{ $t('recipe.comments') }}
       </h1>
       <comment-input
-        :recipeId="recipe.id"
+        :recipeId="recipeId"
         @refresh="$emit('refresh')"
       ></comment-input>
       <comment-list
-        :recipeId="recipe.id"
+        :recipeId="recipeId"
         type="recipe-comments"
       ></comment-list>
     </div>
@@ -36,8 +36,8 @@ export default {
     RecipeDetails: () => import('@/components/recipe/recipe-details')
   },
   computed: {
-    recipe () {
-      return this.$store.state.recipe
+    recipeId () {
+      return this.$route.params.id
     }
   },
   created () {
@@ -46,7 +46,7 @@ export default {
   methods: {
     fetchRecipe () {
       this.wrap(() => {
-        return this.$api.recipes.read(this.$route.params.id).then((value) => {
+        return this.$api.recipes.read(this.recipeId).then((value) => {
           this.$store.commit(SET_RECIPE, value.data)
         })
       })

@@ -11,7 +11,7 @@
         {{ $t('list.recipes') }}
       </h1>
       <recipe-list
-        :userId="user.id"
+        :userId="userId"
         type="user-recipes"
       ></recipe-list>
     </div>
@@ -31,8 +31,8 @@ export default {
   },
   mixins: [ requester ],
   computed: {
-    user () {
-      return this.$store.state.user
+    userId () {
+      return this.$route.params.id
     }
   },
   created () {
@@ -41,7 +41,7 @@ export default {
   methods: {
     fetchUser () {
       this.wrap(() => {
-        return this.$api.users.read(this.$route.params.id).then((value) => {
+        return this.$api.users.read(this.userId).then((value) => {
           this.$store.commit(SET_USER, value.data)
         })
       })
