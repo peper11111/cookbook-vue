@@ -6,14 +6,13 @@
   <div class="o-page__wrapper">
     <recipe-details></recipe-details>
     <div class="o-page__separator"></div>
-    <div class="c-recipe-page__wrapper">
+    <div class="o-page__container">
       <h1 class="o-typography__header">
         {{ $t('recipe.comments') }}
       </h1>
       <comment-input
         :recipeId="recipe.id"
         @refresh="$emit('refresh')"
-        class="c-recipe-page__input"
       ></comment-input>
       <comment-list
         :recipeId="recipe.id"
@@ -55,15 +54,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.c-recipe-page {
-  &__wrapper {
-    padding: 0 32px;
-  }
-
-  &__input {
-    margin-bottom: 16px;
-  }
-}
-</style>
