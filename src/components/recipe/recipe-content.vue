@@ -88,7 +88,7 @@ export default {
       return moment(this.recipe.creationTime).fromNow()
     },
     canPerformAction () {
-      return this.previewMode && this.recipe.author.id !== this.authUser.id
+      return this.recipe.author.id !== this.authUser.id
     }
   },
   methods: {
