@@ -45,7 +45,7 @@ export default {
   align-items: center;
   margin: 16px;
   padding: 16px;
-  width: 300px;
+  width: 290px;
   height: 150px;
   text-decoration: none;
   color: $color-text-primary;

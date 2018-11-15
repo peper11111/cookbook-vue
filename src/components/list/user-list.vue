@@ -1,10 +1,19 @@
 <template>
-<div class="c-user-list">
+<div
+  v-if="items.length !== 0"
+  class="c-user-list"
+>
   <user-item
     v-for="user in items"
     :key="user.id"
     :user="user"
   ></user-item>
+</div>
+<div
+  v-else
+  class="c-user-list__text"
+>
+  {{ $t('list.no-users') }}
 </div>
 </template>
 
@@ -45,7 +54,15 @@ export default {
 
 <style lang="scss">
 .c-user-list {
-  display: flex;
-  flex-wrap: wrap;
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  }
+
+  &__text {
+    margin-top: 24px;
+    text-align: center;
+  }
 }
 </style>
