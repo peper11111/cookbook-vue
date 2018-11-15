@@ -77,9 +77,9 @@ export default {
         this.init()
       })
     },
-    uploadImage (event) {
+    uploadImage () {
       this.wrap(() => {
-        const file = event.target.files[0]
+        const file = this.$refs.input.files[0]
         if (!file) {
           return Promise.resolve()
         }
@@ -87,7 +87,7 @@ export default {
           this.$notify.error('file-exceeds-limit')
           return Promise.resolve()
         }
-        event.target.value = null
+        this.$refs.input.value = null
         const formData = new FormData()
         formData.set('file', file)
         return this.$api.uploads.create(formData).then(() => {
