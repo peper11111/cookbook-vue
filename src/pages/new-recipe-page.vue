@@ -1,8 +1,5 @@
 <template>
-<div
-  v-if="!pending"
-  class="o-page"
->
+<div class="o-page">
   <div class="o-page__wrapper">
     <recipe-details initialMode="create"></recipe-details>
   </div>
