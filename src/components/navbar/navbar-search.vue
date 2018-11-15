@@ -41,6 +41,11 @@ export default {
   },
   methods: {
     submit () {
+      const query = this.models.query || ''
+      if (!query || query.length < 3) {
+        this.$notify.error('query-too-short')
+        return
+      }
       this.$router.push({
         path: '/search',
         query: this.getParams()
