@@ -3,11 +3,13 @@
   v-if="items.length !== 0"
   class="c-user-list"
 >
-  <user-item
-    v-for="user in items"
-    :key="user.id"
-    :user="user"
-  ></user-item>
+  <div class="c-user-list__wrapper">
+    <user-item
+      v-for="user in items"
+      :key="user.id"
+      :user="user"
+    ></user-item>
+  </div>
 </div>
 <div
   v-else
