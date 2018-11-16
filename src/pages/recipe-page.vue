@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     recipeId () {
-      return this.$route.params.id
+      return Number(this.$route.params.id)
     }
   },
   created () {
