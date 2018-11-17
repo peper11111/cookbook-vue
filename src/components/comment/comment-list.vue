@@ -1,21 +1,22 @@
 <template>
 <div class="c-comment-list">
+  <comment-input
+    v-if="inputVisible"
+    :parentId="parentId"
+    :recipeId="recipeId"
+    @refresh="refreshComments"
+    @cancel="$emit('cancel')"
+  ></comment-input>
   <div
-    v-if="!autoInit && commentsCount !== 0"
-    @click="toggleComments"
+    v-if="toggleVisible"
+    @click="loadComments"
     class="c-comment-list__responses"
   >
     <span>
-      {{ commentsVisible ? $t('comment.hide-responses') : $t('comment.show-responses', [ commentsCount ]) }}
+      {{ $t('comment.load-responses', [ commentsCount ]) }}
     </span>
-    <i class="material-icons">
-      {{ commentsVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
-    </i>
   </div>
-  <div
-    v-if="commentsVisible"
-    class="c-comment-list__wrapper"
-  >
+  <div class="c-comment-list__wrapper">
     <comment-item
       v-for="comment in items"
       :key="comment.id"
@@ -33,34 +34,30 @@ import scroll from '@/mixins/scroll'
 export default {
   name: 'CommentList',
   components: {
-    CommentItem: () => import('@/components/comment/comment-item')
+    CommentItem: () => import('@/components/comment/comment-item'),
+    CommentInput: () => import('@/components/form/comment-input')
   },
   mixins: [ scroll ],
   props: {
-    commentsCount: Number,
+    showToggle: Boolean,
+    inputVisible: Boolean,
     parentId: Number,
+    commentsCount: Number,
     recipeId: Number,
     type: String
   },
   data () {
     return {
-      commentsVisible: this.autoInit
+      toggleVisible: this.showToggle
     }
   },
-  mounted () {
-    this.$parent.$on('refresh', this.init)
-  },
-  beforeDestroy () {
-    this.$parent.$off('refresh', this.init)
-  },
   methods: {
-    toggleComments () {
-      if (this.commentsVisible) {
-        this.commentsVisible = false
-        this.done = true
-        return
-      }
-      this.commentsVisible = true
+    refreshComments () {
+      this.$emit('cancel')
+      this.init()
+    },
+    loadComments () {
+      this.toggleVisible = false
       this.init()
     },
     getFetchMethod () {
@@ -86,7 +83,7 @@ export default {
 
   &__responses {
     font-weight: bold;
-    margin-bottom: 8px;
+    padding: 8px 0;
     cursor: pointer;
     display: flex;
     align-items: center;

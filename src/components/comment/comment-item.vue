@@ -28,19 +28,16 @@
       :editMode="editMode"
       :previewMode="previewMode"
       @action="onAction"
-      @reply="responseVisible = true"
+      @reply="inputVisible = true"
     ></comment-actions>
-    <comment-input
-      v-if="responseVisible"
-      :parentId="comment.id"
-      :recipeId="recipeId"
-      @refresh="$emit('refresh')"
-      @cancel="responseVisible = false"
-    ></comment-input>
     <comment-list
       :autoInit="false"
-      :commentsCount="comment.commentsCount"
+      :inputVisible="inputVisible"
+      :showToggle="comment.commentsCount !== 0"
       :parentId="comment.id"
+      :commentsCount="comment.commentsCount"
+      :recipeId="recipeId"
+      @cancel="inputVisible = false"
       type="comment-item"
     ></comment-list>
   </div>
@@ -67,8 +64,7 @@ export default {
   },
   data () {
     return {
-      responseVisible: false,
-      commentsVisible: false,
+      inputVisible: false,
       models: {
         content: null
       }
@@ -120,6 +116,7 @@ export default {
   &__image {
     width: 50px;
     height: 50px;
+    margin-top: 8px;
     object-fit: cover;
     border-radius: 50%;
   }

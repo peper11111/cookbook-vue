@@ -83,6 +83,7 @@ export default {
   &__image {
     width: 50px;
     height: 50px;
+    margin-top: 8px;
     object-fit: cover;
     border-radius: 50%;
   }

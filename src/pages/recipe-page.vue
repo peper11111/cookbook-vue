@@ -10,11 +10,8 @@
       <h1 class="o-typography__header">
         {{ $t('recipe.comments') }}
       </h1>
-      <comment-input
-        :recipeId="recipeId"
-        @refresh="$emit('refresh')"
-      ></comment-input>
       <comment-list
+        :inputVisible="true"
         :recipeId="recipeId"
         type="recipe-comments"
       ></comment-list>
