@@ -37,20 +37,9 @@
       @refresh="$emit('refresh')"
       @cancel="responseVisible = false"
     ></comment-input>
-    <div
-      v-if="comment.commentsCount !== 0"
-      @click="commentsVisible = !commentsVisible"
-      class="c-comment-item__responses"
-    >
-      <span>
-        {{ commentsVisible ? $t('comment.hide-responses') : $t('comment.show-responses', [ comment.commentsCount ]) }}
-      </span>
-      <i class="material-icons">
-        {{ commentsVisible ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}
-      </i>
-    </div>
     <comment-list
-      v-if="commentsVisible"
+      :autoInit="false"
+      :commentsCount="comment.commentsCount"
       :parentId="comment.id"
       type="comment-item"
     ></comment-list>
@@ -166,14 +155,6 @@ export default {
 
   &__content {
     width: 100%;
-  }
-
-  &__responses {
-    font-weight: bold;
-    margin-bottom: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
   }
 }
 </style>

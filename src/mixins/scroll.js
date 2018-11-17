@@ -3,16 +3,24 @@ import requester from '@/mixins/requester'
 
 export default {
   mixins: [ requester ],
+  props: {
+    autoInit: {
+      default: true,
+      type: Boolean
+    }
+  },
   data () {
     return {
-      done: false,
+      done: true,
       items: [],
       page: 1,
       scrollParent: null
     }
   },
   created () {
-    this.init()
+    if (this.autoInit) {
+      this.init()
+    }
   },
   mounted () {
     this.scrollParent = this.getScrollParent(this.$el)
