@@ -1,12 +1,14 @@
 <template>
 <div class="c-comment-list">
-  <comment-item
-    v-for="comment in items"
-    :key="comment.id"
-    :comment="comment"
-    :recipeId="recipeId"
-    @refresh="init"
-  ></comment-item>
+  <div class="c-comment-list__wrapper">
+    <comment-item
+      v-for="comment in items"
+      :key="comment.id"
+      :comment="comment"
+      :recipeId="recipeId"
+      @refresh="init"
+    ></comment-item>
+  </div>
 </div>
 </template>
 
@@ -47,7 +49,9 @@ export default {
 
 <style lang="scss">
 .c-comment-list {
-  display: flex;
-  flex-direction: column;
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 }
 </style>
