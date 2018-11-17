@@ -36,9 +36,9 @@ export default {
     getFetchMethod () {
       switch (this.type) {
         case 'recipe-comments':
-          return this.$api.recipes.readComments(this.recipeId, { page: this.page++ })
+          return this.$api.recipes.readComments(this.recipeId, { page: this.page })
         case 'comment-item':
-          return this.$api.comments.readComments(this.parentId, { page: this.page++ })
+          return this.$api.comments.readComments(this.parentId, { page: this.page })
         default:
           return Promise.resolve({ data: [] })
       }
