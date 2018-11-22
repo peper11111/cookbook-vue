@@ -55,6 +55,7 @@ export default {
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   &__content {

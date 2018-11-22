@@ -86,6 +86,7 @@ export default {
     margin-top: 8px;
     object-fit: cover;
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   &__wrapper {
